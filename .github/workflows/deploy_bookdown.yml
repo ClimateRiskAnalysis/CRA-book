@@ -27,7 +27,7 @@ jobs:
       - name: Install other dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y libgobject-2.0
+          sudo apt-get install -y libgtk2.0-0 libsm6
       - name: Render Book
         run: Rscript -e 'bookdown::render_book("index.Rmd")'
       - uses: actions/upload-artifact@v1
