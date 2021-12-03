@@ -1,0 +1,47 @@
+.csl-entry {
+    padding-bottom: 1em;
+}
+
+.code-out {
+    background-color: linen !important;
+}
+
+p.caption {
+    color: #777;
+    margin-bottom: 10px;
+    width: 75%;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+caption {
+    color: #777;
+    margin-bottom: 10px;
+    width: 75%;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.info {
+    padding: 15px;
+    margin-bottom: 21px;
+    border-left: 10px solid transparent;
+    border-color: blue;
+    background-color: #e7feff;
+}
+
+.warning {
+    padding: 15px;
+    margin-bottom: 21px;
+    border-left: 10px solid transparent;
+    border-color: red;
+    background-color: #ffccbb;
+}
+
+.center {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+    vertical-align: middle;
+}

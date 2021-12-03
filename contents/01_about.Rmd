@@ -1,0 +1,66 @@
+# About This Book {-}
+
+This textbook presents a series of chapters that introduce students to the statistical aspects of risk analysis in the Earth sciences using Julia.  Most of these chapters have to do with sea-level rise, which is a major focus of the authors' research activities.
+
+The exercises are intended for upper-level undergraduates, beginning graduate students, and professionals in other areas who wish to gain insight into academic climate risk analysis.  Previous programming experience is helpful, but not required; the first exercise explains how to learn the basics of Julia.
+
+Each chapter begins with a description of the Earth science and/or statistical concepts that the chapter teaches.  Next, each chapter presents a detailed explanation of a piece of existing Julia code.  Finally, students are asked to either modify the existing code or write their own code to produce a well-defined outcome.  Each chapter also includes questions to encourage classroom discussion and reflection on the part of individual students.
+
+A few chapters contain appendices that present additional discussion of the topics raised in the preceding parts of those chapters.  These appendices are intended for graduate students or researchers who have additional background in programming or the Earth sciences.  They can be skipped by other readers with no loss in comprehension.
+
+The book is designed to be modular.  The first eight chapters (0-7) were written by Patrick Applegate, with contributions by others as noted in the individual chapters.  Chapter 8 was written by Vivek Srikrishnan, and Chapter 9 by Tony Wong. Other chapters may be added by members of the Keller research group in the future.
+
+:::: {.center data-latex=""}
+
+::: {.warning data-latex=""}
+Completing the chapters in this textbook will not teach you to perform publication-quality or consulting-grade
+risk analyses. This textbook is intended primarily for advanced undergraduates, and the material presented
+here should only be applied to “real” problems after additional training. The authors and editors of this
+textbook specifically disclaim any liability for damages associated with the use of the material presented in
+this textbook.
+:::
+
+::::
+
+## Contributor Bios {-}
+
+**Vivek Srikrishnan** is an Assistant Professor in the Department of Biological & Environmental Engineering at Cornell University. He studies decision-making under uncertain climate risks and feedbacks between natural and human systems. His research combines model development, uncertainty quantification, complex systems dynamics, and decision-making under uncertainty. He has a Ph.D. in Energy & Mineral Engineering from Penn State. Vivek's email address is <viveks@cornell.edu>, and his website is <http://www.viveks.me>.
+
+**Patrick J. Applegate** is an Academic Editor at Research Square. In this role, Patrick helps researchers communicate their science and works on data science projects in Python. Patrick earned his Ph.D. in Geosciences at Penn State and is first author or co-author of 20 peer-reviewed scientific papers.  His research treats topics including ice sheets and their contributions to sea level rise, methods for estimating the ages of glacial deposits, and the application of statistical methods to problems in the geosciences.
+
+**Tony E. Wong** is an Assistant Professor in the School of Mathematical & Statistical Sciences at the Rochester Institute of Technology. He received his PhD in Applied Mathematics from CU Boulder in 2016, and later was a Postdoctoral Scholar at Penn State's Earth and Environmental Systems Institute. Prior to joining RIT, Tony returned to CU as an Instructor in the Department of Computer Science to pursue his love of teaching. His current research focuses on uncertainty quantification and model calibration in sea level and coastal storm surge projections. Tony's email address is <aeswma@rit.edu> and his website is <https://tonyewong.github.io>.
+
+**Ryan L. Sriver** is an Associate Professor of Atmospheric Sciences at the University of Illinois at Urbana-Champaign (UIUC).  Prior to joining UIUC in the fall of 2012, he worked as a research associate in Penn State’s Department of Geosciences and as a NOAA Climate and Global Change postdoctoral fellow in Penn State’s Department of Meteorology.  He graduated from Purdue University with a Ph.D. in Earth and Atmospheric Sciences.  His research seeks to develop a deeper understanding about the physical processes influencing variability within Earth’s climate system, and to quantify climate change uncertainties relevant to adaptation planning and decision-making.  Ryan's email address is <rsriver@illinois.edu>, and his website is at <https://www.atmos.illinois.edu/~rsriver/index.html>.
+
+**Alexander Bakker** is a senior advisor at Rijkswaterstraat. He received a Masters in Civil Engineering from the Delft University of Technology and obtained a PhD in Regional climate change scenarios at VU University of Amsterdam.
+
+**Kelsey L. Ruckert** is a geologist by training. She is a Coastal Extension Specialist for the Earth and Environmental Systems Institute at Penn State. She specializes in geology, flood hazards, water quality, and climate change impacts where she excels in GIS, statistical analysis, modeling, and fieldwork. Her research focuses on understanding sea-level rise, storm surge, and water resources, and their implications to vulnerability and the design of risk management strategies. Her email address is <klr324@psu.edu> and her website is <http://klr324.github.io>.
+
+**Klaus Keller** is a Professor of Geosciences at Penn State and a Visiting Professor at the Thayer School of Engineering at Dartmouth University. Keller directs the Center for Climate Risk Management as well as the research network for [Sustainable Climate Risk Management](https://scrimhub.org).  Before joining Penn State, he worked as a research scientist and lecturer at Princeton University and as an engineer in Germany.  Professor Keller graduated from Princeton with a Ph.D. in civil and environmental engineering.  He received master’s degrees from M.I.T. and Princeton as well as an engineer’s degree from the Technische Universität Berlin.  His research addresses two interrelated questions.  First, how can we mechanistically understand past and potentially predict future changes in the climate system? Second, how can we use this information to design sustainable, scientifically sound, technologically feasible, economically efficient, and ethically defensible climate risk management strategies?  He analyzes these questions by mission-oriented basic research covering a wide range of disciplines such as Earth system science, economics, engineering, philosophy, decision science, and statistics.  Klaus' email address is <klaus@psu.edu>, and website is at <http://www3.geosc.psu.edu/~kzk10/>.
+
+## Acknowledgements {-}
+
+This work was supported by the National Science Foundation through the Network for Sustainable Climate Risk Management (SCRiM) under NSF cooperative agreement GEO-1240507.  Any opinions, findings, and conclusions or recommendations expressed in this material are those of the author(s) and do not necessarily reflect the views of the National Science Foundation.  Other support was provided by the [Center for Climate Risk Management](http://www.clima.psu.edu/index.php) and the [Rock Ethics Institute](http://rockethics.psu.edu).
+
+Most of these exercises were originally developed as part of a course titled [Risk Analysis in the Earth Sciences](http://bulletins.psu.edu/undergrad/courses/G/GEOSC/450/200910SP), developed and taught by Klaus Keller in the [Department of Geosciences](http://www.geosc.psu.edu) at the [Pennsylvania State University](http://www.psu.edu).  The exercises discussed in this lab manual were co-developed by a large group (see the individual chapters).
+
+Katerina Kostadinova designed the cover using a photograph provided by Frank Erickson.
+
+Randy Miller created the Github repository.
+
+Thomas Patrick Walsh and Naomi Radke made suggestions for improving the text and lab exercises.
+
+**Vivek Srikrishnan** thanks his colleagues in the Keller research group and beyond for being willing and able to work on this textbook. Special thanks go to Patrick Applegate for leading the development of an excellent first edition of this book.
+
+**Klaus Keller** thanks all the students from the Risk Analysis course, the members of the Keller research group, and his SCRiM collaborators for invaluable inputs. Special thanks go to his family, many mentors, and friends for support.
+
+## Book Source and Scripts {-}
+
+As noted above, most of the exercises presented in this e-textbook ask students to modify existing R scripts.  These R scripts can be downloaded as a `.zip` file from <https://www.scrimhub.org/raes>.
+
+The source files for the book are stored in a Github repository at <https://github.com/scrim-network/raes>.
+
+## Comments and Questions {-}
+
+We'd like to make *Risk Analysis in the Earth Sciences* as useful as possible.  If you have a comment about the book or a question about one of the chapters, please post an issue to the [Github repository](https://github.com/scrim-network/raes) mentioned above.  If we make a change to the book based on your comments, we will be sure to add your name to the Acknowledgements section in future versions.
+

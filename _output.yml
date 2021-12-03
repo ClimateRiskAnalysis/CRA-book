@@ -1,0 +1,27 @@
+bookdown::pdf_book:
+  keep_tex: yes
+  latex_engine: xelatex
+  citation_package: biblatex
+  template: null
+  pandoc_args: [--top-level-division=chapter, --wrap=none]
+  toc_depth: 3
+  toc_unnumbered: no
+  toc_appendix: yes
+  highlight_bw: yes
+  quote_footer: ["\\VA{", "}{}"]
+  includes:
+    in_header: latex/preamble.tex
+
+bookdown::gitbook:
+  highlight: tango
+  css: css/style.css
+  split_by: section
+  config:
+    download: [pdf]
+    sharing:
+      github: yes
+      facebook: no
+    toc:
+      collapse: none
+      before: |
+        <li><a href="./">Risk Analysis in the Earth Sciencese</a></li>
