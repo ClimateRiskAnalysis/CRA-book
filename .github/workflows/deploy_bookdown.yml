@@ -33,7 +33,7 @@ jobs:
         run: |
           cd /Users/runner/hostedtoolcache/julia/1.6.4/x64/lib/
           Rscript -e 'library(JuliaCall); julia_setup(); bookdown::render_book(Sys.getenv("GITHUB_WORKSPACE"))'
-      - uses: actions/upload-artifact@v1
+      - uses: actions/upload-artifact@v2
         with:
           name: _book
           path: _book/
@@ -50,7 +50,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@master
       - name: Download artifact
-        uses: actions/download-artifact@v1.0.0
+        uses: actions/download-artifact@v2
         with:
           # Artifact name
           name: _book # optional
