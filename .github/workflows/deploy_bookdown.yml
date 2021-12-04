@@ -27,7 +27,8 @@ jobs:
       - name: Render Book
         run: |
           cd /Applications/Julia-1.6.app/Contents/Resources/julia/lib/
-          Rscript -e 'bookdown::render_book("/Users/runner/work/RAES/RAES/index.Rmd")'
+          ls /Users/runner/work/RAES/RAES/
+          Rscript -e 'bookdown::render_book("input=/Users/runner/work/RAES/RAES/index.Rmd")'
       - uses: actions/upload-artifact@v1
         with:
           name: _book
