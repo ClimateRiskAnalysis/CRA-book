@@ -1,4 +1,5 @@
 bookdown::pdf_book:
+  dev: tikz
   keep_tex: yes
   documentclass: memoir
   classoptions: openany
@@ -16,11 +17,12 @@ bookdown::pdf_book:
     in_header: latex/preamble.tex
     before_body: latex/cover.tex
 bookdown::gitbook:
+  dev: svglite
   highlight: tango
   css: css/style.css
   split_by: section
   config:
-    download: [pdf]
+    download: [pdf, epub, mobi]
     sharing:
       github: yes
       facebook: no
@@ -28,3 +30,8 @@ bookdown::gitbook:
       collapse: none
       before: |
         <li><a href="./">Risk Analysis in the Earth Sciencese</a></li>
+  search:
+    engine: fuse
+bookdown::epub_book:
+  dev: svglite
+  stylesheet: css/style.css
