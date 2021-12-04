@@ -26,7 +26,7 @@ jobs:
         run: Rscript -e 'install.packages("JuliaCall")'
       - name: Render Book
         run: |
-          cd /Applications/Julia-1.7-app/Contents/Resources/julia/lib/
+          cd /Applications/Julia-1.7.app/Contents/Resources/julia/lib/
           Rscript -e 'JuliaCall::julia_setup(); bookdown::render_book("~/Users/RAES/RAES/index.Rmd")'
       - uses: actions/upload-artifact@v1
         with:
