@@ -1,7 +1,7 @@
 book_filename: raes
 delete_merged_file: true
 rmd_subdir: "contents"
-repo: https://github.com/scrim-network/raes/
+repo: https://github.com/vsrikrish/RAES
 output_dir: _book
 language:
   label:

@@ -1,5 +1,4 @@
 bookdown::gitbook:
-  dev: svglite
   highlight: tango
   css: css/style.css
   split_by: section
@@ -32,5 +31,4 @@ bookdown::pdf_book:
     in_header: latex/preamble.tex
     before_body: latex/cover.tex
 bookdown::epub_book:
-  dev: svglite
   stylesheet: css/style.css

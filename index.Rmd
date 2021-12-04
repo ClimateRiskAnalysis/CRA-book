@@ -20,6 +20,7 @@ github-repo: scrim-network/raes
 cover-image: images/cover_with_alexander.png
 resource_files:
     - images/cover_with_alexander.png
+    - fonts/*
 ---
 
 ```{r, include=FALSE}
