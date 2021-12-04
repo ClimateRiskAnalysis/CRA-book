@@ -34,6 +34,7 @@ knitr::opts_chunk$set(class.output = "code-out")
 using Pkg
 Pkg.activate(".")
 Pkg.instantiate()
+Pkg.update()
 ```
 
 # Preface {-} 

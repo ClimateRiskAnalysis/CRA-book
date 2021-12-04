@@ -9,7 +9,7 @@ name: renderbook
 jobs:
   bookdown:
     name: Render-Book
-    runs-on: macOS-latest
+    runs-on: ubuntu-latest
     env:
       JULIA_GR_PROVIDER: GR
     steps:
@@ -24,11 +24,12 @@ jobs:
         run: Rscript -e 'install.packages(c("rmarkdown","bookdown"))'
       - name: Install JuliaCall
         run: Rscript -e 'install.packages("JuliaCall")'
-      - name: Render Book
+      - name: Install other dependencies
         run: |
-          cd /Applications/Julia-1.6.app/Contents/Resources/julia/lib/
-          ls /Users/runner/work/RAES/RAES/
-          Rscript -e 'bookdown::render_book(input="/Users/runner/work/RAES/RAES/index.Rmd")'
+          sudo apt-get update
+          sudo apt-get install -y libgtk2.0-0
+      - name: Render Book
+        run: Rscript -e 'bookdown::render_book("index.Rmd")'
       - uses: actions/upload-artifact@v1
         with:
           name: _book
