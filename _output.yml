@@ -1,9 +1,11 @@
 bookdown::pdf_book:
   keep_tex: yes
-  documentclass: article
-  latex_engine: xelatex
+  documentclass: memoir
+  classoptions: openany
+  fontfamily: mlmodern
   citation_package: natbib
-  template: null
+  latex_engine: xelatex
+  template: raes.template
   pandoc_args: [--top-level-division=chapter, --wrap=none]
   toc_depth: 3
   toc_unnumbered: no
@@ -12,10 +14,7 @@ bookdown::pdf_book:
   quote_footer: ["\\VA{", "}{}"]
   includes:
     in_header: latex/preamble.tex
-  header-includes: 
-    - \usepackage{titlepic}
-    - \titlepic{\includegraphics[width=\textwidth]{images/cover_with_alexander.pdf}}
-  classoption: titlepage
+    before_body: latex/cover.tex
 bookdown::gitbook:
   highlight: tango
   css: css/style.css
