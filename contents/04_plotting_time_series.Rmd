@@ -107,18 +107,24 @@ Click on the links in the right-hand column of Table \@ref(tab:climatedata) and 
 Let's step through how to make the first two panels of the plot above. Notice the liberal use of comments throughout the code; using comments like this is a good way to document your code and help yourself (and others!) interpret it.
 
 ```{julia, eval=FALSE}
-isdir("data") || mkdir("data"); # if "data/" does not exist, create it
+# if "data/" does not exist, create it
+isdir("data") || mkdir("data"); 
 # download files and save in "data"
-download("ftp://aftp.cmdl.noaa.gov/products/trends/co2/co2_mm_mlo.txt", "data/co2_mm_mlo.txt");
-download("ftp://ftp.ncdc.noaa.gov/pub/data/paleo/icecore/antarctica/law/law2006.txt", "data/law2006.txt");
-download("https://data.giss.nasa.gov/gistemp/tabledata_v3/GLB.Ts+dSST.txt", "data/GLB.Ts+dSST.txt");
+download("ftp://aftp.cmdl.noaa.gov/products/trends/co2/co2_mm_mlo.txt", 
+    "data/co2_mm_mlo.txt");
+download("ftp://ftp.ncdc.noaa.gov/pub/data/paleo/icecore/antarctica/law/law2006.txt", 
+    "data/law2006.txt");
+download("https://data.giss.nasa.gov/gistemp/tabledata_v3/GLB.Ts+dSST.txt", 
+    "data/GLB.Ts+dSST.txt");
 ```
 
 The first line creates a `data/` directory if one does not already exist. It actually contains a compound command. As discussed in Section \@ref(boolean-operators), `||` is a *short-circuit* or operator. In this context, it first evaluates `isdir("data")`, which is `true` if `data/` exists and is a directory and `false` if not. If `isdir("data")` is `true`, there is no need to continue. If `data/` does not exist and `isdir("data")` is `false`, then it evaluates `mkdir("data")`, which makes the `data/` directory. This is a useful alternative in Julia to the following code:
 
 ```{julia, eval=FALSE}
-if ! isdir("data") # if "data/" is not a directory, evaluate the rest
-    mkdir("data") # make the "data/" directory
+# if "data/" is not a directory, evaluate the rest
+if ! isdir("data") 
+    # make the "data/" directory
+    mkdir("data") 
 end
 ```
 
@@ -134,8 +140,12 @@ You may notice that these files are *tab-delimited*, which means that columns ar
 using DelimitedFiles # load DelimitedFiles.jl
 
 # begin reading in the data
-loa_co2data = readdlm("data/co2_mm_mlo.txt", skipstart=57, header=false); # read Mauna Loa CO2 Data
-law_co2data = readdlm("data/law2006.txt", skipstart = 183, header = false)[1:2004, :]; # read Law Dome CO2 Data
+#  read Mauna Loa CO2 Data
+loa_co2data = readdlm("data/co2_mm_mlo.txt", skipstart=57, 
+    header=false);
+# read Law Dome CO2 Data
+law_co2data = readdlm("data/law2006.txt", skipstart = 183, 
+    header = false)[1:2004, :]; 
 ```
 
 In each of the `readdlm()` commands, the first argument is the file to open.  Look at [the documentation for `readdlm()`](https://docs.julialang.org/en/v1/stdlib/DelimitedFiles/#Delimited-Files). We also use two other options:
@@ -146,15 +156,25 @@ We also tell Julia to only keep the first 2004 rows of the Law Dome data (after 
 The temperature data file is formatted in blocks, each of which contains about 20 years of data.  For that reason, it is much more complicated to read into Julia.  The code block below accomplishes this task using a `for` loop. 
 
 ```{julia, eval=FALSE}
-# read in temperature data; this requires reading in sections of the file one at a time
-start_rows = [9, 31, 53, 75, 97, 119, 141]; # specify the row numbers where each chunk of data begins
-num_rows = [19, 20, 20, 20, 20, 20, 18]; # how many rows are in each chunk
-cum_num_rows = cumsum(num_rows); # this computes the total amount of data before reading in each chunk, which we need to index the resulting array
-temp_data = zeros(sum(num_rows), 20); # initialize the storage for the temperature data array
-temp_data[1:num_rows[1], :] = readdlm("data/GLB.Ts+dSST.txt", skipstart = start_rows[1], header = false)[1:num_rows[1], :]; # read in the first chunk
+# read in temperature data; this requires reading in sections 
+# of the file one at a time
+# specify the row numbers where each chunk of data begins
+start_rows = [9, 31, 53, 75, 97, 119, 141]; 
+# how many rows are in each chunk
+num_rows = [19, 20, 20, 20, 20, 20, 18]; 
+# this computes the total amount of data before reading in 
+# each chunk, which we need to index the resulting array
+cum_num_rows = cumsum(num_rows); 
+# initialize the storage for the temperature data array
+temp_data = zeros(sum(num_rows), 20); 
+# read in the first chunk
+temp_data[1:num_rows[1], :] = readdlm("data/GLB.Ts+dSST.txt", 
+    skipstart = start_rows[1], header = false)[1:num_rows[1], :]; 
 # loop over the remaining chunks and read them in
 for i = 2:length(start_rows)
-    temp_data[(cum_num_rows[i-1] + 1):cum_num_rows[i], :] = readdlm("data/GLB.Ts+dSST.txt", skipstart = start_rows[i], header = false)[1:num_rows[i], :];
+    temp_data[(cum_num_rows[i-1] + 1):cum_num_rows[i], :] = 
+        readdlm("data/GLB.Ts+dSST.txt", skipstart = start_rows[i], 
+            header = false)[1:num_rows[i], :];
 end
 ```
 
@@ -164,11 +184,14 @@ Finally, we make the figure. This requires loading the `Plots.jl` package (see [
 
 ```{julia, label="co2temp", echo=TRUE, results="hold", collapse=TRUE, fig.keep="last", fig.align="center", out.width="75%", cache=TRUE, fig.cap = "Plot results after running the code in this chapter. See text for discussion."}
 ## install and load relevant packages
-# these two lines are commented out as we already have the `Plots` library installed; if we did not, we would need to include them
+# these two lines are commented out as we already have the 
+# `Plots` library installed; if we did not, we would need to 
+# include them
 # using Pkg
 # Pkg.add("Plots")
 
-# now we load `Plots.jl` as well as the `Plots.Measures` subpackage, which lets us refer to units like "in" and "mm"
+# now we load `Plots.jl` as well as the `Plots.Measures` 
+# subpackage, which lets us refer to units like "in" and "mm"
 using Plots
 using Plots.Measures
 # use GR backend; see text discussion
@@ -176,27 +199,33 @@ gr();
 
 ## first plot CO2 data
 # save the base Law Dome data plot as `p1`
-p1 = plot(law_co2data[:, 1], law_co2data[:, 6], color="black", label="Law Dome Ice Core Record", legend=:top, grid=false);
+p1 = plot(law_co2data[:, 1], law_co2data[:, 6], color="black", 
+    label="Law Dome Ice Core Record", legend=:top, grid=false);
 # add the Mauna Loa data on top of the Law Dome data
-plot!(loa_co2data[:, 3], loa_co2data[:, 5], color="blue", label="Mauna Loa Measurements"); 
+plot!(loa_co2data[:, 3], loa_co2data[:, 5], color="blue", 
+    label="Mauna Loa Measurements"); 
 # label the x-axis
 xlabel!("Year"); 
-# we only want to plot data after 1900 even though we have more from Law Dome
+# we only want to plot data after 1900 even though we have 
+# more from Law Dome
 xlims!((1900, 2020)); 
 # label the y-axis
 ylabel!("Atmospheric CO₂ (ppm)"); 
 
 ## then plot temperature data
 # save the base temperature data plot as `p2`
-p2 = plot(temp_data[:, 1], temp_data[:, 14] / 100, color="black", legend=false, grid=false); 
+p2 = plot(temp_data[:, 1], temp_data[:, 14] / 100, 
+    color="black", legend=false, grid=false); 
 xlabel!("Year");
 xlims!((1900, 2020));
 ylabel!("Global Mean Temperature Anomaly (K)");
 
 ## combine plots
 # finally, combine the two plots as two subplot rows
-plot(p1, p2, layout= (2, 1), left_margin=20mm, right_margin=20mm); 
-# adjust the size so the final combined plot isn't squished together
+plot(p1, p2, layout= (2, 1), left_margin=20mm, 
+    right_margin=20mm); 
+# adjust the size so the final combined plot isn't squished 
+# together
 plot!(size=(800, 600)) 
 ```
 Let's walk through the code preceding Figure \@ref(fig:co2temp). First, `Plots` [uses various backends](http://docs.juliaplots.org/latest/backends/) to provide varying capabilities. We will use the basic `GR` backend, so we call `gr()` after loading `Plots` to set this up. Next, we plot the Law Dome data using the `plot()` function. The first argument to `plot()` contains the x-coordinates of the data; this is the column specifying the year. The second argument are the y-coordinates, which is the sixth column in the data. We can also set the color (`color=black`) and the legend label (`label="Law Dome Ice Core Record"`), since the atmospheric CO~2~ plot will also include the Mauna Loa data. Finally, we set the legend position to be top-center with `legend=:top` (there are lots of options for legend placement), and turn off the grid corresponding to the axis tick marks with `grid=false`. Notice that by default, `plots()` will plot this data as a line, though we could also [set it to plot the data as points](http://docs.juliaplots.org/latest/tutorial/#Changing-the-Plotting-Series) if desired.

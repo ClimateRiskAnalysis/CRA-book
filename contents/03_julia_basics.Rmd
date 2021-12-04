@@ -86,15 +86,21 @@ Comments hide statements from the interpreter or compiler. It's a good idea to l
 Single-line comments in Julia are preceded with a `#`. Multi-line comments are preceded with `#=` and ended with `=#`
 
 ```{julia}
-# This is a single-line comment. Everything after the "#" is not evaluated.
+# This is a single-line comment. Everything after the "#"
+#   is not evaluated.
 
 #=
 This is a multi-line comment.
 
-We might want to really organize our thoughts on what a function is doing in this space. We can take as much room as we want, with as many paragraphs.
+We might want to really organize our thoughts on what a 
+function is doing in this space. We can take as much room 
+as we want, with as many paragraphs.
 =#
 
-3+5 # now that we've exited the multi-line comment, subsequent expressions are evaluated
+# now that we've exited the multi-line comment, 
+#subsequent expressions are evaluated
+
+3+5 
 ```
 
 ### Variables

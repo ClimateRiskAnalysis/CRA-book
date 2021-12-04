@@ -6,6 +6,10 @@
     background-color: linen !important;
 }
 
+pre code {
+    white-space: pre-wrap;
+}
+
 p.caption {
     color: #777;
     margin-bottom: 10px;

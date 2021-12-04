@@ -4,7 +4,6 @@ author:
     - Vivek Srikrishnan^[Department of Biological & Environmental Engineering, Cornell University, viveks@cornell.edu]
     - Klaus Keller^[Thayer School of Engineering, Dartmouth University, klaus.keller@dartmouth.edu]
 date: "`r Sys.Date()`"
-documentclass: book
 bibliography: bibliography/bibliography.bib
 csl: bibliography/american-geophysical-union.csl
 link-citations: yes
@@ -16,11 +15,6 @@ monofont: "Source Code Pro"
 monofontoptions: "Scale=0.8"
 github-repo: scrim-network/raes
 cover-image: images/cover_with_alexander.png
-output:
-  pdf_document:
-    citation_package: biblatex
-  bookdown::pdf_book:
-    citation_package: biblatex
 resource_files:
     - images/cover_with_alexander.png
 ---

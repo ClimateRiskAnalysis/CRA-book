@@ -101,13 +101,15 @@ The commands above tell us about the path that any single ball takes through the
 Most, perhaps all, programming languages include a method for carrying out a set of instructions a fixed number of times.  In most programming languages, including Julia, this method is called a `for` loop.  The syntax of `for` loops in Julia looks like this:
 
 ```{julia}
-# set the number of times the loop should be evaluated; this is not part of the for loop syntax
+# set the number of times the loop should be evaluated; 
+# this is not part of the for loop syntax
 neval = 3; 
 for i = 1:neval
   # instructions to be repeated go here 
   println(i^2)
 end 
-# note the end; this is required to tell Julia where the loop instructions end!
+# note the end; this is required to tell Julia where the 
+# loop instructions end!
 ```
 
 This sample `for` loop is not very exciting: it simply `println()`s the square of the *index variable* `i` during each iteration of the indented commands (between `for` and `end`).
@@ -120,7 +122,8 @@ neval = 5
  # make a vector of `neval` zeroes, which will store the output
 fibonacci = zeros(neval)
 for i = 3:neval
-  # stores the sum of the preceding two elements of `fibonacci` in the ith element of `fibonacci`
+  # stores the sum of the preceding two elements of `fibonacci` 
+  # in the ith element of `fibonacci`
   fibonacci[i] = sum(fibonacci[i-2:i-1])
 end
 println(fibonacci)
@@ -146,7 +149,8 @@ using Distributions
 using Random
 using StatsPlots
 
-# specify the normal distribution with mean = 0 and standard deviation = 1, which are the default choices
+# specify the normal distribution with mean = 0 
+# snd standard deviation = 1, which are the default choices
 normal_distribution = Normal();
 # draw 100 samples
 normal_samples = rand(normal_distribution, 100);
@@ -187,7 +191,8 @@ Based on the information presented in this chapter, write a Julia script that
 # Make a histogram of the results.
 using Plots
 gr();
-histogram(output, xlabel = "Bin", ylabel = "Count", legend=:false)
+histogram(output, xlabel = "Bin", ylabel = "Count", 
+  legend=:false)
 ```
 
 Set the number of rows of pins in your Galton board R script to 10.  Also set the number of balls to drop to a low value, say 10 to begin.

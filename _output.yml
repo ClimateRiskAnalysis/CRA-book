@@ -1,7 +1,8 @@
 bookdown::pdf_book:
   keep_tex: yes
+  documentclass: article
   latex_engine: xelatex
-  citation_package: biblatex
+  citation_package: natbib
   template: null
   pandoc_args: [--top-level-division=chapter, --wrap=none]
   toc_depth: 3
@@ -11,7 +12,10 @@ bookdown::pdf_book:
   quote_footer: ["\\VA{", "}{}"]
   includes:
     in_header: latex/preamble.tex
-
+  header-includes: 
+    - \usepackage{titlepic}
+    - \titlepic{\includegraphics[width=\textwidth]{images/cover_with_alexander.pdf}}
+  classoption: titlepage
 bookdown::gitbook:
   highlight: tango
   css: css/style.css
