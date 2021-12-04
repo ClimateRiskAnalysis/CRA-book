@@ -7,7 +7,21 @@
 \usepackage{geometry}
 \usepackage{csquotes}
 
+\usepackage{FiraMono}
+\usepackage{FiraSans}
 \usepackage[T1]{fontenc}
-\setmonofont[Path = fonts/, Scale=0.8]{Fira Code}
+
+\setmonofont[
+    Extension   = .otf,
+    UprightFont = *-Regular,
+    BoldFont    = *-Medium
+]{FiraMono}
+\setsansfont[
+    Extension      = .otf,
+    UprightFont    = *-Light,
+    ItalicFont     = *-LightItalic,
+    BoldFont       = *-Regular,
+    BoldItalicFont = *-RegularItalic
+]{FiraSans}
 
 \frontmatter
