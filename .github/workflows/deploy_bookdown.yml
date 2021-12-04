@@ -13,7 +13,7 @@ jobs:
     env:
       JULIA_GR_PROVIDER: GR
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
       - uses: r-lib/actions/setup-r@v1
       - uses: r-lib/actions/setup-pandoc@v1
       - name: Install Julia
@@ -27,7 +27,7 @@ jobs:
       - name: Render Book
         run: |
           cd /Users/runner/hostedtoolcache/julia/1.6.4/x64/lib/
-          Rscript -e 'library(JuliaCall); julia_setup(); bookdown::render_book("~/work/RAES/RAES/index.Rmd")'
+          Rscript -e 'library(JuliaCall); julia_setup(); bookdown::render_book(Sys.getenv("GITHUB_WORKSPACE"))'
       - uses: actions/upload-artifact@v1
         with:
           name: _book
