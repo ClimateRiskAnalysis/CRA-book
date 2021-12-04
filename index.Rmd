@@ -33,7 +33,7 @@ knitr::opts_chunk$set(class.output = "code-out")
 ```{julia, include=FALSE}
 using Pkg
 Pkg.activate(".")
-Pkg.update()
+Pkg.instantiate()
 ```
 
 # Preface {-} 

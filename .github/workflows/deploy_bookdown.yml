@@ -19,15 +19,15 @@ jobs:
       - name: Install Julia
         uses: julia-actions/setup-julia@v1
         with:
-          version: 1.7
+          version: 1.6
       - name: Install rmarkdown
         run: Rscript -e 'install.packages(c("rmarkdown","bookdown"))'
       - name: Install JuliaCall
         run: Rscript -e 'install.packages("JuliaCall")'
       - name: Render Book
         run: |
-          cd /Applications/Julia-1.7.app/Contents/Resources/julia/lib/
-          Rscript -e 'JuliaCall::julia_setup(); bookdown::render_book("~/Users/RAES/RAES/index.Rmd")'
+          cd /Applications/Julia-1.6.app/Contents/Resources/julia/lib/
+          Rscript -e 'library(JuliaCall); julia_setup(); bookdown::render_book("~/Users/RAES/RAES/index.Rmd")'
       - uses: actions/upload-artifact@v1
         with:
           name: _book
