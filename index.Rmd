@@ -15,7 +15,6 @@ link-citations: yes
 colorlinks: yes
 graphics: yes
 fontsize: 11pt
-monofont: "Fira Code"
 monofontoptions: "Scale=0.8"
 github-repo: scrim-network/raes
 cover-image: images/cover_with_alexander.png
