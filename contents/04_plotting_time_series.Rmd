@@ -27,10 +27,10 @@ using DelimitedFiles
 
 # download files
 isdir("data") || mkdir("data");
-download("ftp://aftp.cmdl.noaa.gov/products/trends/co2/co2_mm_mlo.txt", "data/co2_mm_mlo.txt");
-download("ftp://ftp.ncdc.noaa.gov/pub/data/paleo/icecore/antarctica/law/law2006.txt", "data/law2006.txt");
-download("http://data.giss.nasa.gov/gistemp/tabledata_v3/GLB.Ts+dSST.txt", "data/GLB.Ts+dSST.txt");
-download("http://www.psmsl.org/products/reconstructions/gslGRL2008.txt", "data/gslGRL2008.txt");
+# download("ftp://aftp.cmdl.noaa.gov/products/trends/co2/co2_mm_mlo.txt", "data/co2_mm_mlo.txt");
+# download("ftp://ftp.ncdc.noaa.gov/pub/data/paleo/icecore/antarctica/law/law2006.txt", "data/law2006.txt");
+# download("http://data.giss.nasa.gov/gistemp/tabledata_v3/GLB.Ts+dSST.txt", "data/GLB.Ts+dSST.txt");
+# download("http://www.psmsl.org/products/reconstructions/gslGRL2008.txt", "data/gslGRL2008.txt");
 # read in CO2 data
 loa_co2data = readdlm("data/co2_mm_mlo.txt", skipstart=57, header=false);
 law_co2data = readdlm("data/law2006.txt", skipstart = 183, header = false)[1:2004, :];
