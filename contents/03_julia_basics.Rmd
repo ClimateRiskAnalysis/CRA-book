@@ -1,4 +1,4 @@
-# Learning the basics of Julia {#sec:julia}
+# Learning the basics of Julia {#julia-syntax}
 
 This chapter was written by Vivek Srikrishnan and Patrick J. Applegate.
 
