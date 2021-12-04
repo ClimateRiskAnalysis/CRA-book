@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>4.2 Tutorial | Risk Analysis in the Earth Sciences</title>
+  <meta name="description" content="4.2 Tutorial | Risk Analysis in the Earth Sciences" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="4.2 Tutorial | Risk Analysis in the Earth Sciences" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:image" content="/images/cover_with_alexander.png" />
+  
+  <meta name="github-repo" content="scrim-network/raes" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="4.2 Tutorial | Risk Analysis in the Earth Sciences" />
+  
+  
+  <meta name="twitter:image" content="/images/cover_with_alexander.png" />
+
+<meta name="author" content="Vivek Srikrishnan" />
+<meta name="author" content="Klaus Keller" />
+
+
+<meta name="date" content="2021-12-04" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="introduction-3.html"/>
+<link rel="next" href="exercises-1.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  background-color: #f8f8f8; }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #c4a000; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #000000; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #000000; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #000000; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Risk Analysis in the Earth Sciencese</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="" data-path="about-this-book.html"><a href="about-this-book.html"><i class="fa fa-check"></i>About This Book</a><ul>
+<li class="chapter" data-level="" data-path="contributor-bios.html"><a href="contributor-bios.html"><i class="fa fa-check"></i>Contributor Bios</a></li>
+<li class="chapter" data-level="" data-path="acknowledgements.html"><a href="acknowledgements.html"><i class="fa fa-check"></i>Acknowledgements</a></li>
+<li class="chapter" data-level="" data-path="book-source-and-scripts.html"><a href="book-source-and-scripts.html"><i class="fa fa-check"></i>Book Source and Scripts</a></li>
+<li class="chapter" data-level="" data-path="comments-and-questions.html"><a href="comments-and-questions.html"><i class="fa fa-check"></i>Comments and Questions</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1.1" data-path="climate-risks.html"><a href="climate-risks.html"><i class="fa fa-check"></i><b>1.1</b> Climate Risks</a></li>
+<li class="chapter" data-level="1.2" data-path="some-questions.html"><a href="some-questions.html"><i class="fa fa-check"></i><b>1.2</b> Some Questions</a></li>
+<li class="chapter" data-level="1.3" data-path="types-of-uncertainty.html"><a href="types-of-uncertainty.html"><i class="fa fa-check"></i><b>1.3</b> Types of (Un)certainty</a></li>
+<li class="chapter" data-level="1.4" data-path="what-is-risk.html"><a href="what-is-risk.html"><i class="fa fa-check"></i><b>1.4</b> What is Risk?</a></li>
+<li class="chapter" data-level="1.5" data-path="uncertainty-vs.-risk.html"><a href="uncertainty-vs.-risk.html"><i class="fa fa-check"></i><b>1.5</b> “Uncertainty” vs. “Risk”</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="julia-syntax.html"><a href="julia-syntax.html"><i class="fa fa-check"></i><b>2</b> Learning the basics of Julia</a><ul>
+<li class="chapter" data-level="" data-path="julia-syntax.html"><a href="julia-syntax.html#learning-objectives"><i class="fa fa-check"></i>Learning objectives</a></li>
+<li class="chapter" data-level="2.1" data-path="introduction-1.html"><a href="introduction-1.html"><i class="fa fa-check"></i><b>2.1</b> Introduction</a></li>
+<li class="chapter" data-level="2.2" data-path="getting-started.html"><a href="getting-started.html"><i class="fa fa-check"></i><b>2.2</b> Getting Started</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="getting-started.html"><a href="getting-started.html#why-julia"><i class="fa fa-check"></i><b>2.2.1</b> Why Julia?</a></li>
+<li class="chapter" data-level="2.2.2" data-path="getting-started.html"><a href="getting-started.html#installing-julia"><i class="fa fa-check"></i><b>2.2.2</b> Installing Julia</a></li>
+<li class="chapter" data-level="2.2.3" data-path="getting-started.html"><a href="getting-started.html#why-write-scripts"><i class="fa fa-check"></i><b>2.2.3</b> Why write scripts?</a></li>
+<li class="chapter" data-level="2.2.4" data-path="getting-started.html"><a href="getting-started.html#package-and-environment-management"><i class="fa fa-check"></i><b>2.2.4</b> Package and environment management</a></li>
+<li class="chapter" data-level="2.2.5" data-path="getting-started.html"><a href="getting-started.html#getting-help"><i class="fa fa-check"></i><b>2.2.5</b> Getting help</a></li>
+<li class="chapter" data-level="2.2.6" data-path="getting-started.html"><a href="getting-started.html#when-the-documentation-and-searching-the-internet-dont-help"><i class="fa fa-check"></i><b>2.2.6</b> When the documentation and searching the Internet don’t help</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="julia-syntax-1.html"><a href="julia-syntax-1.html"><i class="fa fa-check"></i><b>2.3</b> Julia Syntax</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="julia-syntax-1.html"><a href="julia-syntax-1.html#comments"><i class="fa fa-check"></i><b>2.3.1</b> Comments</a></li>
+<li class="chapter" data-level="2.3.2" data-path="julia-syntax-1.html"><a href="julia-syntax-1.html#variables"><i class="fa fa-check"></i><b>2.3.2</b> Variables</a></li>
+<li class="chapter" data-level="2.3.3" data-path="julia-syntax-1.html"><a href="julia-syntax-1.html#data-types"><i class="fa fa-check"></i><b>2.3.3</b> Data Types</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="data-structures.html"><a href="data-structures.html"><i class="fa fa-check"></i><b>2.4</b> Data Structures</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="plotting-time-series-data.html"><a href="plotting-time-series-data.html"><i class="fa fa-check"></i><b>3</b> Plotting Time Series Data</a><ul>
+<li class="chapter" data-level="" data-path="plotting-time-series-data.html"><a href="plotting-time-series-data.html#learning-objectives-1"><i class="fa fa-check"></i>Learning Objectives</a></li>
+<li class="chapter" data-level="3.1" data-path="introduction-2.html"><a href="introduction-2.html"><i class="fa fa-check"></i><b>3.1</b> Introduction</a></li>
+<li class="chapter" data-level="3.2" data-path="tutorial.html"><a href="tutorial.html"><i class="fa fa-check"></i><b>3.2</b> Tutorial</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="tutorial.html"><a href="tutorial.html#downloading-the-data"><i class="fa fa-check"></i><b>3.2.1</b> Downloading the Data</a></li>
+<li class="chapter" data-level="3.2.2" data-path="tutorial.html"><a href="tutorial.html#reading-the-data"><i class="fa fa-check"></i><b>3.2.2</b> Reading the Data</a></li>
+<li class="chapter" data-level="3.2.3" data-path="tutorial.html"><a href="tutorial.html#plotting-the-data"><i class="fa fa-check"></i><b>3.2.3</b> Plotting the Data</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="exercises.html"><a href="exercises.html"><i class="fa fa-check"></i><b>3.3</b> Exercises</a><ul>
+<li class="chapter" data-level="" data-path="exercises.html"><a href="exercises.html#part-1"><i class="fa fa-check"></i>Part 1</a></li>
+<li class="chapter" data-level="" data-path="exercises.html"><a href="exercises.html#part-2"><i class="fa fa-check"></i>Part 2</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="normal-distributions-and-the-galton-board.html"><a href="normal-distributions-and-the-galton-board.html"><i class="fa fa-check"></i><b>4</b> Normal distributions and the Galton board</a><ul>
+<li class="chapter" data-level="" data-path="normal-distributions-and-the-galton-board.html"><a href="normal-distributions-and-the-galton-board.html#learning-objectives-2"><i class="fa fa-check"></i>Learning objectives</a></li>
+<li class="chapter" data-level="4.1" data-path="introduction-3.html"><a href="introduction-3.html"><i class="fa fa-check"></i><b>4.1</b> Introduction</a></li>
+<li class="chapter" data-level="4.2" data-path="tutorial-1.html"><a href="tutorial-1.html"><i class="fa fa-check"></i><b>4.2</b> Tutorial</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="tutorial-1.html"><a href="tutorial-1.html#writing-our-own-simple-galton-board-script"><i class="fa fa-check"></i><b>4.2.1</b> Writing our own simple Galton board script</a></li>
+<li class="chapter" data-level="4.2.2" data-path="tutorial-1.html"><a href="tutorial-1.html#doing-things-over-and-over-again-for-loops"><i class="fa fa-check"></i><b>4.2.2</b> Doing things over and over again: <code>for</code> loops</a></li>
+<li class="chapter" data-level="4.2.3" data-path="tutorial-1.html"><a href="tutorial-1.html#normal-or-not-normal-generating-and-interpreting-quantile-quantile-plots"><i class="fa fa-check"></i><b>4.2.3</b> Normal or not normal?: Generating and interpreting quantile-quantile plots</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="exercises-1.html"><a href="exercises-1.html"><i class="fa fa-check"></i><b>4.3</b> Exercises</a><ul>
+<li class="chapter" data-level="" data-path="exercises-1.html"><a href="exercises-1.html#part-1-1"><i class="fa fa-check"></i>Part 1</a></li>
+<li class="chapter" data-level="" data-path="exercises-1.html"><a href="exercises-1.html#part-2-1"><i class="fa fa-check"></i>Part 2</a></li>
+<li class="chapter" data-level="" data-path="exercises-1.html"><a href="exercises-1.html#part-3"><i class="fa fa-check"></i>Part 3</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Risk Analysis in the Earth Sciences</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="tutorial-1" class="section level2">
+<h2><span class="header-section-number">4.2</span> Tutorial</h2>
+<div id="writing-our-own-simple-galton-board-script" class="section level3">
+<h3><span class="header-section-number">4.2.1</span> Writing our own simple Galton board script</h3>
+<p>Building computer models involves thinking about how to represent the behavior of physical (or chemical, or social) systems in a form that can be understood by a computer. In thinking about how we could represent the Galton board in terms of Julia code, we might start by looking at the diagram of the Galton board in the top part of Figure <a href="#fig:galton"><strong>??</strong></a>. The horizontal spacing between the pins is always the same, but the rows are offset relative to one another; that is, none of the pins in any given row are immediately above or below the pins in the adjacent rows. This offset is exactly half of the horizontal spacing between pins in the same row. Thus, we can imagine that the ball bounces 0.5 distance units to one side whenever it hits a pin.</p>
+<p>We first need to specify the number of levels in the Galton board.</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb18-1"><a href="tutorial-1.html#cb18-1"></a>levels = <span class="fl">15</span></span></code></pre></div>
+<pre class="code-out"><code>15</code></pre>
+<p>We can then represent the path that a single ball takes through the Galton board by randomly sampling how an individual ball bounces as it hits each pin. The Julia package which allows us to do random sampling is <code>Random.jl</code>, which is built into Julia’s basic distribution. The function which we call is <code>rand()</code>:</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb20-1"><a href="tutorial-1.html#cb20-1"></a><span class="co"># load the `Random` package</span></span>
+<span id="cb20-2"><a href="tutorial-1.html#cb20-2"></a>using Random</span>
+<span id="cb20-3"><a href="tutorial-1.html#cb20-3"></a></span>
+<span id="cb20-4"><a href="tutorial-1.html#cb20-4"></a><span class="co"># sample</span></span>
+<span id="cb20-5"><a href="tutorial-1.html#cb20-5"></a>path = rand([-<span class="fl">0.5</span>, <span class="fl">0.5</span>], levels)</span></code></pre></div>
+<pre class="code-out"><code>15-element Vector{Float64}:
+  0.5
+  0.5
+ -0.5
+  0.5
+ -0.5
+  0.5
+  0.5
+  0.5
+ -0.5
+ -0.5
+ -0.5
+ -0.5
+  0.5
+ -0.5
+  0.5</code></pre>
+<p>Positive values indicates that the ball bounces to the right; negative values indicate that the ball bounces to the left.</p>
+<p>The <code>rand()</code> command generates sequences of values that come from a vector of possibilities supplied in the first argument. The second argument is <code>dims</code>, the dimension of the final sample set. In this case, we are just sampling a single trajectory, so we just need a number of samples equal to <code>levels</code>, which will return a 1-dimensional array.</p>
+<p>The bin that the ball lands in is then just</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb22-1"><a href="tutorial-1.html#cb22-1"></a>sum(path)</span></code></pre></div>
+<pre class="code-out"><code>0.5</code></pre>
+</div>
+<div id="doing-things-over-and-over-again-for-loops" class="section level3">
+<h3><span class="header-section-number">4.2.2</span> Doing things over and over again: <code>for</code> loops</h3>
+<p>The commands above tell us about the path that any single ball takes through the Galton board, as well as the bin it finally lands in. But, suppose we want to write a piece of R code that performs this calculation for many balls and gives us a histogram of the bins that they land in. How could we do that?</p>
+<p>Most, perhaps all, programming languages include a method for carrying out a set of instructions a fixed number of times. In most programming languages, including Julia, this method is called a <code>for</code> loop. The syntax of <code>for</code> loops in Julia looks like this:</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb24-1"><a href="tutorial-1.html#cb24-1"></a><span class="co"># set the number of times the loop should be evaluated; </span></span>
+<span id="cb24-2"><a href="tutorial-1.html#cb24-2"></a><span class="co"># this is not part of the for loop syntax</span></span>
+<span id="cb24-3"><a href="tutorial-1.html#cb24-3"></a>neval = <span class="fl">3</span>; </span>
+<span id="cb24-4"><a href="tutorial-1.html#cb24-4"></a><span class="kw">for</span> i = <span class="fl">1</span>:neval</span>
+<span id="cb24-5"><a href="tutorial-1.html#cb24-5"></a>  <span class="co"># instructions to be repeated go here </span></span>
+<span id="cb24-6"><a href="tutorial-1.html#cb24-6"></a>  println(i^<span class="fl">2</span>)</span>
+<span id="cb24-7"><a href="tutorial-1.html#cb24-7"></a><span class="kw">end</span> </span></code></pre></div>
+<pre class="code-out"><code>1
+4
+9</code></pre>
+<div class="sourceCode" id="cb26"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb26-1"><a href="tutorial-1.html#cb26-1"></a><span class="co"># note the end; this is required to tell Julia where the </span></span>
+<span id="cb26-2"><a href="tutorial-1.html#cb26-2"></a><span class="co"># loop instructions end!</span></span></code></pre></div>
+<p>This sample <code>for</code> loop is not very exciting: it simply <code>println()</code>s the square of the <em>index variable</em> <code>i</code> during each iteration of the indented commands (between <code>for</code> and <code>end</code>).</p>
+<p>In “real” <code>for</code> loops, the name of the index variable, the vector of values that the index variable can take (here <code>1:neval</code>), and the evaluated instructions can be more complex. In particular, there can be more than one line of instructions evaluated. In Julia, you can also iterate over arbitrary collections, such as arrays, not just sequences of index variables.</p>
+<p>We usually will want to create a variable that will store the results from the commands carried out within the <code>for</code> loop. The following block of code generates and <code>print()</code>s the first five <a href="https://en.wikipedia.org/wiki/Fibonacci_number">Fibonacci numbers</a>:</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb27-1"><a href="tutorial-1.html#cb27-1"></a>neval = <span class="fl">5</span> </span></code></pre></div>
+<pre class="code-out"><code>5</code></pre>
+<div class="sourceCode" id="cb29"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb29-1"><a href="tutorial-1.html#cb29-1"></a> <span class="co"># make a vector of `neval` zeroes, which will store the output</span></span>
+<span id="cb29-2"><a href="tutorial-1.html#cb29-2"></a>fibonacci = zeros(neval)</span></code></pre></div>
+<pre class="code-out"><code>5-element Vector{Float64}:
+ 0.0
+ 0.0
+ 0.0
+ 0.0
+ 0.0</code></pre>
+<div class="sourceCode" id="cb31"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb31-1"><a href="tutorial-1.html#cb31-1"></a><span class="kw">for</span> i = <span class="fl">3</span>:neval</span>
+<span id="cb31-2"><a href="tutorial-1.html#cb31-2"></a>  <span class="co"># stores the sum of the preceding two elements of `fibonacci` </span></span>
+<span id="cb31-3"><a href="tutorial-1.html#cb31-3"></a>  <span class="co"># in the ith element of `fibonacci`</span></span>
+<span id="cb31-4"><a href="tutorial-1.html#cb31-4"></a>  fibonacci[i] = sum(fibonacci[i-<span class="fl">2</span>:i-<span class="fl">1</span>])</span>
+<span id="cb31-5"><a href="tutorial-1.html#cb31-5"></a><span class="kw">end</span></span>
+<span id="cb31-6"><a href="tutorial-1.html#cb31-6"></a>println(fibonacci)</span></code></pre></div>
+<pre class="code-out"><code>[0.0, 0.0, 0.0, 0.0, 0.0]</code></pre>
+<p>In general, it’s good practice to pre-allocate storage for the output of <code>for</code> loops as we did by defining the <code>fibonacci</code> array. If we were to just start with the initial two Fibonacci numbers and add to the length of the array at each iteration, this would slow down the program’s execution due to the need to assign new memory to the resulting array every time it grew. This might not be noticeable for the code block above due to the small number of evaluations, but it will be for more complex code.</p>
+<p>In the Exercise below, you’ll put together the information above to write your own script for making histograms of the outcomes from a Galton board. First, though, let’s examine how we determine whether a particular data set is normal or not.</p>
+</div>
+<div id="normal-or-not-normal-generating-and-interpreting-quantile-quantile-plots" class="section level3">
+<h3><span class="header-section-number">4.2.3</span> Normal or not normal?: Generating and interpreting quantile-quantile plots</h3>
+<p>It can be tempting to assume that a particular process gives normally-distributed output, or that data are normally distributed; however, assuming normality when it isn’t present can lead to large errors. How can we check individual data sets for normality?</p>
+<p>One robust and simple, but approximate, test for normality involves making a <a href="https://en.wikipedia.org/wiki/Q-Q_plot">quantile-quantile (Q-Q) plot</a>. The details of how Q-Q plots work aren’t important for our purposes here. However, if data are drawn from a normal distribution, they will lie on a line connecting the first and third quartiles of the data when drawn on an appropriately-constructed Q-Q plot. The <a href="https://github.com/JuliaPlots/StatsPlots.jl"><code>StatsPlots.jl</code> package</a> makes drawing Q-Q plots easy.</p>
+<p>To see how this looks, let’s examine samples from different distributions. We can do this using the <code>Distributions.jl</code> package, which lets us specify distributions to sample from. We can then use <code>rand()</code> from the</p>
+<p>For example, the following block of code generates 100 random numbers from a normal distribution, makes a Q-Q plot from them, and draws a 1:1 line on the plot:</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb33-1"><a href="tutorial-1.html#cb33-1"></a><span class="co"># load the packages we will use</span></span>
+<span id="cb33-2"><a href="tutorial-1.html#cb33-2"></a>using Distributions</span>
+<span id="cb33-3"><a href="tutorial-1.html#cb33-3"></a>using Random</span>
+<span id="cb33-4"><a href="tutorial-1.html#cb33-4"></a>using StatsPlots</span>
+<span id="cb33-5"><a href="tutorial-1.html#cb33-5"></a></span>
+<span id="cb33-6"><a href="tutorial-1.html#cb33-6"></a><span class="co"># specify the normal distribution with mean = 0 </span></span>
+<span id="cb33-7"><a href="tutorial-1.html#cb33-7"></a><span class="co"># snd standard deviation = 1, which are the default choices</span></span>
+<span id="cb33-8"><a href="tutorial-1.html#cb33-8"></a>normal_distribution = Normal();</span>
+<span id="cb33-9"><a href="tutorial-1.html#cb33-9"></a><span class="co"># draw 100 samples</span></span>
+<span id="cb33-10"><a href="tutorial-1.html#cb33-10"></a>normal_samples = rand(normal_distribution, <span class="fl">100</span>);</span>
+<span id="cb33-11"><a href="tutorial-1.html#cb33-11"></a><span class="co"># make the Q-Q plot</span></span>
+<span id="cb33-12"><a href="tutorial-1.html#cb33-12"></a>qqplot(Normal(), normal_samples) </span></code></pre></div>
+<pre class="code-out"><code>Plot{Plots.GRBackend() n=2}</code></pre>
+<p>If we have a data set, we might not know what the parameters of the normal distribution are for the comparison (in this case, they were just the defaults). One strategy is to use the sample mean and standard deviation, which can be obtained with <code>mean()</code> and <code>std()</code> (this is justified by the Central Limit Theorem).</p>
+<p>Let’s see what a Q-Q plot might look like if we draw samples from a distribution that isn’t normal. We will sample from a <a href="https://en.wikipedia.org/wiki/Cauchy_distribution">Cauchy distribution</a>, which is a distribution which has a higher probability of extreme values than a normal distribution.</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb35-1"><a href="tutorial-1.html#cb35-1"></a><span class="co"># specify the default Cauchy distribution </span></span>
+<span id="cb35-2"><a href="tutorial-1.html#cb35-2"></a>cauchy_distribution = Cauchy();</span>
+<span id="cb35-3"><a href="tutorial-1.html#cb35-3"></a><span class="co"># draw 100 samples</span></span>
+<span id="cb35-4"><a href="tutorial-1.html#cb35-4"></a>cauchy_samples = rand(cauchy_distribution, <span class="fl">100</span>);</span>
+<span id="cb35-5"><a href="tutorial-1.html#cb35-5"></a><span class="co"># make the Q-Q plot</span></span>
+<span id="cb35-6"><a href="tutorial-1.html#cb35-6"></a>qqplot(Normal(), cauchy_samples) </span></code></pre></div>
+<pre class="code-out"><code>Plot{Plots.GRBackend() n=2}</code></pre>
+<p>Unlike in Figure <a href="#fig:qqnormal"><strong>??</strong></a>, the points in Figure <a href="#fig:qqcauchy"><strong>??</strong></a> are generally not along the line, which should suggest to use that the data are not normally distributed. On the left side of the Q-Q plot, the points are well below the line, and on the right side, they are well above it. This actually gives us more information about how the sample deviates from being normally distributed! The fact that the left side is below the line shows us that the distribution is “fatter” below the mean than a normal distribution, or that its left tail is heavier than that of a normal distribution. This is because a normal distribution’s samples are more limited in range than the samples from the Cauchy distribution. This means that it is more likely to see large negative values in this sample than we would expect from a normal sample. Similarly, the right side being above the line shows us that large positive values are more present than we would expect from a normal sample, and the right tail is fatter than a normal distribution’s. If the points and the line had the opposite relationship, we could conclude that the sample had thinner tails, and was more concentrated, than would be expected from a normal distribution. And if we had a mixed situation, that would suggest to us that our sample was more skewed to one side or the other.</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="introduction-3.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="exercises-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["raes.pdf", "raes.epub", "raes.mobi"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "none"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
