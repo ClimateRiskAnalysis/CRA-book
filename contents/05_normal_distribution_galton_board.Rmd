@@ -170,6 +170,7 @@ cauchy_samples = rand(cauchy_distribution, 100);
 # make the Q-Q plot
 qqplot(Normal(), cauchy_samples) 
 ```
+
 Unlike in Figure \@ref(fig:qqnormal), the points in Figure \@ref(fig:qqcauchy) are generally not along the line, which should suggest to use that the data are not normally distributed. On the left side of the Q-Q plot, the points are well below the line, and on the right side, they are well above it. This actually gives us more information about how the sample deviates from being normally distributed! The fact that the left side is below the line shows us that the distribution is "fatter" below the mean than a normal distribution, or that its left tail is heavier than that of a normal distribution. This is because a normal distribution's samples are more limited in range than the samples from the Cauchy distribution. This means that it is more likely to see large negative values in this sample than we would expect from a normal sample. Similarly, the right side being above the line shows us that large positive values are more present than we would expect from a normal sample, and the right tail is fatter than a normal distribution's. If the points and the line had the opposite relationship, we could conclude that the sample had thinner tails, and was more concentrated, than would be expected from a normal distribution. And if we had a mixed situation, that would suggest to us that our sample was more skewed to one side or the other.
 
 
