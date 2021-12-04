@@ -1,5 +1,4 @@
 bookdown::pdf_book:
-  dev: tikz
   keep_tex: yes
   documentclass: memoir
   classoptions: openany
