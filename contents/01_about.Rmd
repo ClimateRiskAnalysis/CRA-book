@@ -13,6 +13,8 @@ The book is designed to be modular.  The first eight chapters (0-7) were written
 :::: {.center data-latex=""}
 
 ::: {.warning data-latex=""}
+
+
 Completing the chapters in this textbook will not teach you to perform publication-quality or consulting-grade
 risk analyses. This textbook is intended primarily for advanced undergraduates, and the material presented
 here should only be applied to “real” problems after additional training. The authors and editors of this
