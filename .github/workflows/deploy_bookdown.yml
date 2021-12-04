@@ -24,6 +24,7 @@ jobs:
         run: Rscript -e 'install.packages(c("rmarkdown","bookdown"))'
       - name: Install JuliaCall
         run: Rscript -e 'install.packages("JuliaCall")'
+      - run: 'cd /Applications/Julia-1.6.app/Contents/Resources/julia/lib/'
       - name: Render Book
         run: Rscript -e 'bookdown::render_book("index.Rmd")'
       - uses: actions/upload-artifact@v1
