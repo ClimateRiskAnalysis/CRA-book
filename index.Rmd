@@ -3,15 +3,19 @@ title: "Risk Analysis in the Earth Sciences"
 author: 
     - Vivek Srikrishnan^[Department of Biological & Environmental Engineering, Cornell University, viveks@cornell.edu]
     - Klaus Keller^[Thayer School of Engineering, Dartmouth University, klaus.keller@dartmouth.edu]
+contributor:
+    - Patrick J. Applegate
+    - Tony E. Wong
+    - Ryan L. Sriver
 date: "`r Sys.Date()`"
 bibliography: bibliography/bibliography.bib
 csl: bibliography/american-geophysical-union.csl
+biblio-title: References
 link-citations: yes
 colorlinks: yes
 graphics: yes
 fontsize: 11pt
-mainfont: Palatino
-monofont: "Source Code Pro"
+monofont: "Fira Mono"
 monofontoptions: "Scale=0.8"
 github-repo: scrim-network/raes
 cover-image: images/cover_with_alexander.png
