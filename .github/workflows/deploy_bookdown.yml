@@ -24,6 +24,11 @@ jobs:
         run: Rscript -e 'install.packages(c("rmarkdown","bookdown"))'
       - name: Install JuliaCall
         run: Rscript -e 'install.packages("JuliaCall")'
+      - name: Install TinyTeX
+        uses: r-lib/actions/setup-tinytex@v1
+        env:
+          # install full prebuilt version
+          TINYTEX_INSTALLER: TinyTeX
       - name: Render Book
         run: |
           cd /Users/runner/hostedtoolcache/julia/1.6.4/x64/lib/
