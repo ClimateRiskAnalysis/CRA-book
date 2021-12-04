@@ -29,6 +29,10 @@ jobs:
         env:
           # install full prebuilt version
           TINYTEX_INSTALLER: TinyTeX
+      - run: |
+          mkdir _book
+          mkdir _book/fonts
+          cp -r fonts/* _book/fonts/
       - name: Render Book
         run: |
           cd /Users/runner/hostedtoolcache/julia/1.6.4/x64/lib/
