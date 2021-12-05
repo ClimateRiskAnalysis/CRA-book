@@ -1,7 +1,7 @@
 on:
   push:
     branches:
-      - 2d-julia
+      - main
 
 
 name: renderbook
