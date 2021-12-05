@@ -32,7 +32,7 @@ jobs:
       - name: Render Book
         run: |
           cd /Users/runner/hostedtoolcache/julia/1.6.4/x64/lib/
-          Rscript -e 'library(JuliaCall); julia_setup(); bookdown::render_book(Sys.getenv("GITHUB_WORKSPACE"), "bookdown::gitbook"); bookdown::render_book(Sys.getenv("GITHUB_WORKSPACE"), "bookdown::pdf_book"); bookdown::render_book(Sys.getenv("GITHUB_WORKSPACE"), "bookdown::epub_book"); bookdown::calibre("_book/raes.epub", "mobi")'
+          Rscript -e 'library(JuliaCall); julia_setup(); bookdown::render_book(Sys.getenv("GITHUB_WORKSPACE"), "bookdown::gitbook"); bookdown::render_book(Sys.getenv("GITHUB_WORKSPACE"), "bookdown::pdf_book"); bookdown::render_book(Sys.getenv("GITHUB_WORKSPACE"), "bookdown::epub_book")'
       - uses: actions/upload-artifact@v2
         with:
           name: _book
