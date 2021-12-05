@@ -122,6 +122,9 @@ neval = 5
  # make a vector of `neval` zeroes, which will store the output
 fibonacci = zeros(neval)
 for i = 3:neval
+  # initialize first two Fibonacci numbers; the first element is zero 
+  # and the second element is one
+  fibonacci[2] = 1
   # stores the sum of the preceding two elements of `fibonacci` 
   # in the ith element of `fibonacci`
   fibonacci[i] = sum(fibonacci[i-2:i-1])
