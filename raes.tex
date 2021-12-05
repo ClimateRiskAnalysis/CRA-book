@@ -1010,6 +1010,9 @@ We usually will want to create a variable that will store the results from the c
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{for}\NormalTok{ i = }\FloatTok{3}\NormalTok{:neval}
+  \CommentTok{# initialize first two Fibonacci numbers; the first element is zero }
+  \CommentTok{# and the second element is one}
+\NormalTok{  fibonacci[}\FloatTok{2}\NormalTok{] = }\FloatTok{1}
   \CommentTok{# stores the sum of the preceding two elements of `fibonacci` }
   \CommentTok{# in the ith element of `fibonacci`}
 \NormalTok{  fibonacci[i] = sum(fibonacci[i-}\FloatTok{2}\NormalTok{:i-}\FloatTok{1}\NormalTok{])}
@@ -1019,7 +1022,7 @@ We usually will want to create a variable that will store the results from the c
 \end{Shaded}
 
 \begin{verbatim}
-[0.0, 0.0, 0.0, 0.0, 0.0]
+[0.0, 1.0, 1.0, 2.0, 3.0]
 \end{verbatim}
 
 In general, it's good practice to pre-allocate storage for the output of \texttt{for} loops as we did by defining the \texttt{fibonacci} array. If we were to just start with the initial two Fibonacci numbers and add to the length of the array at each iteration, this would slow down the program's execution due to the need to assign new memory to the resulting array every time it grew. This might not be noticeable for the code block above due to the small number of evaluations, but it will be for more complex code.

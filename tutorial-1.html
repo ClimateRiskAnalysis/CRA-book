@@ -280,12 +280,15 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
  0.0
  0.0</code></pre>
 <div class="sourceCode" id="cb29"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb29-1"><a href="tutorial-1.html#cb29-1"></a><span class="kw">for</span> i = <span class="fl">3</span>:neval</span>
-<span id="cb29-2"><a href="tutorial-1.html#cb29-2"></a>  <span class="co"># stores the sum of the preceding two elements of `fibonacci` </span></span>
-<span id="cb29-3"><a href="tutorial-1.html#cb29-3"></a>  <span class="co"># in the ith element of `fibonacci`</span></span>
-<span id="cb29-4"><a href="tutorial-1.html#cb29-4"></a>  fibonacci[i] = sum(fibonacci[i-<span class="fl">2</span>:i-<span class="fl">1</span>])</span>
-<span id="cb29-5"><a href="tutorial-1.html#cb29-5"></a><span class="kw">end</span></span>
-<span id="cb29-6"><a href="tutorial-1.html#cb29-6"></a>println(fibonacci)</span></code></pre></div>
-<pre class="code-out"><code>[0.0, 0.0, 0.0, 0.0, 0.0]</code></pre>
+<span id="cb29-2"><a href="tutorial-1.html#cb29-2"></a>  <span class="co"># initialize first two Fibonacci numbers; the first element is zero </span></span>
+<span id="cb29-3"><a href="tutorial-1.html#cb29-3"></a>  <span class="co"># and the second element is one</span></span>
+<span id="cb29-4"><a href="tutorial-1.html#cb29-4"></a>  fibonacci[<span class="fl">2</span>] = <span class="fl">1</span></span>
+<span id="cb29-5"><a href="tutorial-1.html#cb29-5"></a>  <span class="co"># stores the sum of the preceding two elements of `fibonacci` </span></span>
+<span id="cb29-6"><a href="tutorial-1.html#cb29-6"></a>  <span class="co"># in the ith element of `fibonacci`</span></span>
+<span id="cb29-7"><a href="tutorial-1.html#cb29-7"></a>  fibonacci[i] = sum(fibonacci[i-<span class="fl">2</span>:i-<span class="fl">1</span>])</span>
+<span id="cb29-8"><a href="tutorial-1.html#cb29-8"></a><span class="kw">end</span></span>
+<span id="cb29-9"><a href="tutorial-1.html#cb29-9"></a>println(fibonacci)</span></code></pre></div>
+<pre class="code-out"><code>[0.0, 1.0, 1.0, 2.0, 3.0]</code></pre>
 <p>In general, it’s good practice to pre-allocate storage for the output of <code>for</code> loops as we did by defining the <code>fibonacci</code> array. If we were to just start with the initial two Fibonacci numbers and add to the length of the array at each iteration, this would slow down the program’s execution due to the need to assign new memory to the resulting array every time it grew. This might not be noticeable for the code block above due to the small number of evaluations, but it will be for more complex code.</p>
 <p>In the Exercise below, you’ll put together the information above to write your own script for making histograms of the outcomes from a Galton board. First, though, let’s examine how we determine whether a particular data set is normal or not.</p>
 </div>
