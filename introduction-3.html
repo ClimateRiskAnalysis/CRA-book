@@ -25,7 +25,7 @@
 <meta name="author" content="Klaus Keller" />
 
 
-<meta name="date" content="2021-12-04" />
+<meta name="date" content="2021-12-05" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -218,9 +218,14 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">4.1</span> Introduction</h2>
 <p>Suppose that we ask a class of students to walk individually from one end of a field to the other and count the number of steps that they take in order to cover the distance. More than likely, each student will get a somewhat different answer. After each student has paced off the field, we then make a histogram of the number of steps taken by the individual students.</p>
 <p>If we were to perform this experiment with a large number of students, the histogram would likely resemble a normal distribution. Normal distributions arise when a large number of measurements are taken of a single quantity, and the individual measurements are affected by random processes that are additive and that can be either positive or negative. The general property that a sufficiently large random sample will be well-described by a normal distribution is called the <a href="https://en.wikipedia.org/wiki/Central_limit_theorem">Central Limit Theorem</a>, which is foundational in statistics (the details of the Central Limit Theorem are not essential for this book). In our example, the random processes have to do with the varying stride lengths of the students (some take longer strides and some shorter), and counting errors (which are likely to be small and can cause any given student to either over- or underestimate the actual number of paces they took).</p>
-<p>A <a href="http://mathworld.wolfram.com/GaltonBoard.html">Galton board</a> is a physical device that demonstrates this concept (Fig. <a href="#fig:galton"><strong>??</strong></a>). A Galton board has rows of pins arranged in a triangular shape, with each row of pins offset horizontally relative to the rows above and below it. The top row has one pin, the second row has two pins, and so forth.</p>
-<p>If a ball is dropped into the Galton board, it falls either to the right or the left when it bounces off the top pin. The ball then falls all the way to the bottom of the board, moving slightly to the right or left as it passes through each row of pins. Bins at the bottom of the board capture the ball and record its final position. If this experiment is repeated with many balls, and if the Galton board includes many rows of pins, the number of balls in each bin resembles a normal distribution (Fig. <a href="#fig:galton"><strong>??</strong></a>).</p>
-<pre class="code-out"><code>Plot{Plots.GRBackend() n=5}</code></pre>
+<p>A <a href="http://mathworld.wolfram.com/GaltonBoard.html">Galton board</a> is a physical device that demonstrates this concept (Fig. <a href="introduction-3.html#fig:galton">4.1</a>). A Galton board has rows of pins arranged in a triangular shape, with each row of pins offset horizontally relative to the rows above and below it. The top row has one pin, the second row has two pins, and so forth.</p>
+<p>If a ball is dropped into the Galton board, it falls either to the right or the left when it bounces off the top pin. The ball then falls all the way to the bottom of the board, moving slightly to the right or left as it passes through each row of pins. Bins at the bottom of the board capture the ball and record its final position. If this experiment is repeated with many balls, and if the Galton board includes many rows of pins, the number of balls in each bin resembles a normal distribution (Fig. <a href="introduction-3.html#fig:galton">4.1</a>).</p>
+<div class="figure"><span style="display:block;" id="fig:galton"></span>
+<img src="raes_files/figure-html/galton-J1.png" alt="A Galton board simulation with 15 rows of pins. The top panel shows the board and one sample ball trajectory. The bottom panel shows one possible distribution of final ball positions resulting from dropping 1000 balls through the board."  />
+<p class="caption">
+Figure 4.1: A Galton board simulation with 15 rows of pins. The top panel shows the board and one sample ball trajectory. The bottom panel shows one possible distribution of final ball positions resulting from dropping 1000 balls through the board.
+</p>
+</div>
 <p>In this exercise, you’ll experiment with a simple representation of a Galton board in Julia and examine the distributions of final ball positions that it produces. You’ll also examine two data sets that can easily be loaded into Julia and see whether they are well described by a normal distribution or not.</p>
 </div>
             </section>
@@ -271,7 +276,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["raes.pdf", "raes.epub", "raes.mobi"],
+"download": ["raes.pdf", "raes.epub"],
 "search": {
 "engine": "fuse",
 "options": null

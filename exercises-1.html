@@ -25,7 +25,7 @@
 <meta name="author" content="Klaus Keller" />
 
 
-<meta name="date" content="2021-12-04" />
+<meta name="date" content="2021-12-05" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -232,11 +232,11 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <ol start="4" style="list-style-type: decimal">
 <li>makes a histogram of <code>output</code>. The code block below shows one way of carrying out this step.</li>
 </ol>
-<div class="sourceCode" id="cb37"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb37-1"><a href="exercises-1.html#cb37-1"></a><span class="co"># Make a histogram of the results.</span></span>
-<span id="cb37-2"><a href="exercises-1.html#cb37-2"></a>using Plots</span>
-<span id="cb37-3"><a href="exercises-1.html#cb37-3"></a>gr();</span>
-<span id="cb37-4"><a href="exercises-1.html#cb37-4"></a>histogram(output, xlabel = <span class="st">&quot;Bin&quot;</span>, ylabel = <span class="st">&quot;Count&quot;</span>, </span>
-<span id="cb37-5"><a href="exercises-1.html#cb37-5"></a>  legend=:false)</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb33-1"><a href="exercises-1.html#cb33-1"></a><span class="co"># Make a histogram of the results.</span></span>
+<span id="cb33-2"><a href="exercises-1.html#cb33-2"></a>using Plots</span>
+<span id="cb33-3"><a href="exercises-1.html#cb33-3"></a>gr();</span>
+<span id="cb33-4"><a href="exercises-1.html#cb33-4"></a>histogram(output, xlabel = <span class="st">&quot;Bin&quot;</span>, ylabel = <span class="st">&quot;Count&quot;</span>, </span>
+<span id="cb33-5"><a href="exercises-1.html#cb33-5"></a>  legend=:false)</span></code></pre></div>
 <p>Set the number of rows of pins in your Galton board R script to 10. Also set the number of balls to drop to a low value, say 10 to begin.
 + How does the histogram change as you repeatedly run the script?
 + What is the smallest number of balls that you can drop that gives more or less the same histogram each time you run the script, for 10 rows of pins?</p>
@@ -317,7 +317,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["raes.pdf", "raes.epub", "raes.mobi"],
+"download": ["raes.pdf", "raes.epub"],
 "search": {
 "engine": "fuse",
 "options": null

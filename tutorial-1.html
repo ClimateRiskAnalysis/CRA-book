@@ -25,7 +25,7 @@
 <meta name="author" content="Klaus Keller" />
 
 
-<meta name="date" content="2021-12-04" />
+<meta name="date" content="2021-12-05" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -218,16 +218,16 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">4.2</span> Tutorial</h2>
 <div id="writing-our-own-simple-galton-board-script" class="section level3">
 <h3><span class="header-section-number">4.2.1</span> Writing our own simple Galton board script</h3>
-<p>Building computer models involves thinking about how to represent the behavior of physical (or chemical, or social) systems in a form that can be understood by a computer. In thinking about how we could represent the Galton board in terms of Julia code, we might start by looking at the diagram of the Galton board in the top part of Figure <a href="#fig:galton"><strong>??</strong></a>. The horizontal spacing between the pins is always the same, but the rows are offset relative to one another; that is, none of the pins in any given row are immediately above or below the pins in the adjacent rows. This offset is exactly half of the horizontal spacing between pins in the same row. Thus, we can imagine that the ball bounces 0.5 distance units to one side whenever it hits a pin.</p>
+<p>Building computer models involves thinking about how to represent the behavior of physical (or chemical, or social) systems in a form that can be understood by a computer. In thinking about how we could represent the Galton board in terms of Julia code, we might start by looking at the diagram of the Galton board in the top part of Figure <a href="introduction-3.html#fig:galton">4.1</a>. The horizontal spacing between the pins is always the same, but the rows are offset relative to one another; that is, none of the pins in any given row are immediately above or below the pins in the adjacent rows. This offset is exactly half of the horizontal spacing between pins in the same row. Thus, we can imagine that the ball bounces 0.5 distance units to one side whenever it hits a pin.</p>
 <p>We first need to specify the number of levels in the Galton board.</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb18-1"><a href="tutorial-1.html#cb18-1"></a>levels = <span class="fl">15</span></span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb16-1"><a href="tutorial-1.html#cb16-1"></a>levels = <span class="fl">15</span></span></code></pre></div>
 <pre class="code-out"><code>15</code></pre>
 <p>We can then represent the path that a single ball takes through the Galton board by randomly sampling how an individual ball bounces as it hits each pin. The Julia package which allows us to do random sampling is <code>Random.jl</code>, which is built into Julia’s basic distribution. The function which we call is <code>rand()</code>:</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb20-1"><a href="tutorial-1.html#cb20-1"></a><span class="co"># load the `Random` package</span></span>
-<span id="cb20-2"><a href="tutorial-1.html#cb20-2"></a>using Random</span>
-<span id="cb20-3"><a href="tutorial-1.html#cb20-3"></a></span>
-<span id="cb20-4"><a href="tutorial-1.html#cb20-4"></a><span class="co"># sample</span></span>
-<span id="cb20-5"><a href="tutorial-1.html#cb20-5"></a>path = rand([-<span class="fl">0.5</span>, <span class="fl">0.5</span>], levels)</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb18-1"><a href="tutorial-1.html#cb18-1"></a><span class="co"># load the `Random` package</span></span>
+<span id="cb18-2"><a href="tutorial-1.html#cb18-2"></a>using Random</span>
+<span id="cb18-3"><a href="tutorial-1.html#cb18-3"></a></span>
+<span id="cb18-4"><a href="tutorial-1.html#cb18-4"></a><span class="co"># sample</span></span>
+<span id="cb18-5"><a href="tutorial-1.html#cb18-5"></a>path = rand([-<span class="fl">0.5</span>, <span class="fl">0.5</span>], levels)</span></code></pre></div>
 <pre class="code-out"><code>15-element Vector{Float64}:
   0.5
   0.5
@@ -247,44 +247,44 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>Positive values indicates that the ball bounces to the right; negative values indicate that the ball bounces to the left.</p>
 <p>The <code>rand()</code> command generates sequences of values that come from a vector of possibilities supplied in the first argument. The second argument is <code>dims</code>, the dimension of the final sample set. In this case, we are just sampling a single trajectory, so we just need a number of samples equal to <code>levels</code>, which will return a 1-dimensional array.</p>
 <p>The bin that the ball lands in is then just</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb22-1"><a href="tutorial-1.html#cb22-1"></a>sum(path)</span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb20-1"><a href="tutorial-1.html#cb20-1"></a>sum(path)</span></code></pre></div>
 <pre class="code-out"><code>0.5</code></pre>
 </div>
 <div id="doing-things-over-and-over-again-for-loops" class="section level3">
 <h3><span class="header-section-number">4.2.2</span> Doing things over and over again: <code>for</code> loops</h3>
 <p>The commands above tell us about the path that any single ball takes through the Galton board, as well as the bin it finally lands in. But, suppose we want to write a piece of R code that performs this calculation for many balls and gives us a histogram of the bins that they land in. How could we do that?</p>
 <p>Most, perhaps all, programming languages include a method for carrying out a set of instructions a fixed number of times. In most programming languages, including Julia, this method is called a <code>for</code> loop. The syntax of <code>for</code> loops in Julia looks like this:</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb24-1"><a href="tutorial-1.html#cb24-1"></a><span class="co"># set the number of times the loop should be evaluated; </span></span>
-<span id="cb24-2"><a href="tutorial-1.html#cb24-2"></a><span class="co"># this is not part of the for loop syntax</span></span>
-<span id="cb24-3"><a href="tutorial-1.html#cb24-3"></a>neval = <span class="fl">3</span>; </span>
-<span id="cb24-4"><a href="tutorial-1.html#cb24-4"></a><span class="kw">for</span> i = <span class="fl">1</span>:neval</span>
-<span id="cb24-5"><a href="tutorial-1.html#cb24-5"></a>  <span class="co"># instructions to be repeated go here </span></span>
-<span id="cb24-6"><a href="tutorial-1.html#cb24-6"></a>  println(i^<span class="fl">2</span>)</span>
-<span id="cb24-7"><a href="tutorial-1.html#cb24-7"></a><span class="kw">end</span> </span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb22-1"><a href="tutorial-1.html#cb22-1"></a><span class="co"># set the number of times the loop should be evaluated; </span></span>
+<span id="cb22-2"><a href="tutorial-1.html#cb22-2"></a><span class="co"># this is not part of the for loop syntax</span></span>
+<span id="cb22-3"><a href="tutorial-1.html#cb22-3"></a>neval = <span class="fl">3</span>; </span>
+<span id="cb22-4"><a href="tutorial-1.html#cb22-4"></a><span class="kw">for</span> i = <span class="fl">1</span>:neval</span>
+<span id="cb22-5"><a href="tutorial-1.html#cb22-5"></a>  <span class="co"># instructions to be repeated go here </span></span>
+<span id="cb22-6"><a href="tutorial-1.html#cb22-6"></a>  println(i^<span class="fl">2</span>)</span>
+<span id="cb22-7"><a href="tutorial-1.html#cb22-7"></a><span class="kw">end</span> </span></code></pre></div>
 <pre class="code-out"><code>1
 4
 9</code></pre>
-<div class="sourceCode" id="cb26"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb26-1"><a href="tutorial-1.html#cb26-1"></a><span class="co"># note the end; this is required to tell Julia where the </span></span>
-<span id="cb26-2"><a href="tutorial-1.html#cb26-2"></a><span class="co"># loop instructions end!</span></span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb24-1"><a href="tutorial-1.html#cb24-1"></a><span class="co"># note the end; this is required to tell Julia where the </span></span>
+<span id="cb24-2"><a href="tutorial-1.html#cb24-2"></a><span class="co"># loop instructions end!</span></span></code></pre></div>
 <p>This sample <code>for</code> loop is not very exciting: it simply <code>println()</code>s the square of the <em>index variable</em> <code>i</code> during each iteration of the indented commands (between <code>for</code> and <code>end</code>).</p>
 <p>In “real” <code>for</code> loops, the name of the index variable, the vector of values that the index variable can take (here <code>1:neval</code>), and the evaluated instructions can be more complex. In particular, there can be more than one line of instructions evaluated. In Julia, you can also iterate over arbitrary collections, such as arrays, not just sequences of index variables.</p>
 <p>We usually will want to create a variable that will store the results from the commands carried out within the <code>for</code> loop. The following block of code generates and <code>print()</code>s the first five <a href="https://en.wikipedia.org/wiki/Fibonacci_number">Fibonacci numbers</a>:</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb27-1"><a href="tutorial-1.html#cb27-1"></a>neval = <span class="fl">5</span> </span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb25-1"><a href="tutorial-1.html#cb25-1"></a>neval = <span class="fl">5</span> </span></code></pre></div>
 <pre class="code-out"><code>5</code></pre>
-<div class="sourceCode" id="cb29"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb29-1"><a href="tutorial-1.html#cb29-1"></a> <span class="co"># make a vector of `neval` zeroes, which will store the output</span></span>
-<span id="cb29-2"><a href="tutorial-1.html#cb29-2"></a>fibonacci = zeros(neval)</span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb27-1"><a href="tutorial-1.html#cb27-1"></a> <span class="co"># make a vector of `neval` zeroes, which will store the output</span></span>
+<span id="cb27-2"><a href="tutorial-1.html#cb27-2"></a>fibonacci = zeros(neval)</span></code></pre></div>
 <pre class="code-out"><code>5-element Vector{Float64}:
  0.0
  0.0
  0.0
  0.0
  0.0</code></pre>
-<div class="sourceCode" id="cb31"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb31-1"><a href="tutorial-1.html#cb31-1"></a><span class="kw">for</span> i = <span class="fl">3</span>:neval</span>
-<span id="cb31-2"><a href="tutorial-1.html#cb31-2"></a>  <span class="co"># stores the sum of the preceding two elements of `fibonacci` </span></span>
-<span id="cb31-3"><a href="tutorial-1.html#cb31-3"></a>  <span class="co"># in the ith element of `fibonacci`</span></span>
-<span id="cb31-4"><a href="tutorial-1.html#cb31-4"></a>  fibonacci[i] = sum(fibonacci[i-<span class="fl">2</span>:i-<span class="fl">1</span>])</span>
-<span id="cb31-5"><a href="tutorial-1.html#cb31-5"></a><span class="kw">end</span></span>
-<span id="cb31-6"><a href="tutorial-1.html#cb31-6"></a>println(fibonacci)</span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb29-1"><a href="tutorial-1.html#cb29-1"></a><span class="kw">for</span> i = <span class="fl">3</span>:neval</span>
+<span id="cb29-2"><a href="tutorial-1.html#cb29-2"></a>  <span class="co"># stores the sum of the preceding two elements of `fibonacci` </span></span>
+<span id="cb29-3"><a href="tutorial-1.html#cb29-3"></a>  <span class="co"># in the ith element of `fibonacci`</span></span>
+<span id="cb29-4"><a href="tutorial-1.html#cb29-4"></a>  fibonacci[i] = sum(fibonacci[i-<span class="fl">2</span>:i-<span class="fl">1</span>])</span>
+<span id="cb29-5"><a href="tutorial-1.html#cb29-5"></a><span class="kw">end</span></span>
+<span id="cb29-6"><a href="tutorial-1.html#cb29-6"></a>println(fibonacci)</span></code></pre></div>
 <pre class="code-out"><code>[0.0, 0.0, 0.0, 0.0, 0.0]</code></pre>
 <p>In general, it’s good practice to pre-allocate storage for the output of <code>for</code> loops as we did by defining the <code>fibonacci</code> array. If we were to just start with the initial two Fibonacci numbers and add to the length of the array at each iteration, this would slow down the program’s execution due to the need to assign new memory to the resulting array every time it grew. This might not be noticeable for the code block above due to the small number of evaluations, but it will be for more complex code.</p>
 <p>In the Exercise below, you’ll put together the information above to write your own script for making histograms of the outcomes from a Galton board. First, though, let’s examine how we determine whether a particular data set is normal or not.</p>
@@ -295,29 +295,39 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>One robust and simple, but approximate, test for normality involves making a <a href="https://en.wikipedia.org/wiki/Q-Q_plot">quantile-quantile (Q-Q) plot</a>. The details of how Q-Q plots work aren’t important for our purposes here. However, if data are drawn from a normal distribution, they will lie on a line connecting the first and third quartiles of the data when drawn on an appropriately-constructed Q-Q plot. The <a href="https://github.com/JuliaPlots/StatsPlots.jl"><code>StatsPlots.jl</code> package</a> makes drawing Q-Q plots easy.</p>
 <p>To see how this looks, let’s examine samples from different distributions. We can do this using the <code>Distributions.jl</code> package, which lets us specify distributions to sample from. We can then use <code>rand()</code> from the</p>
 <p>For example, the following block of code generates 100 random numbers from a normal distribution, makes a Q-Q plot from them, and draws a 1:1 line on the plot:</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb33-1"><a href="tutorial-1.html#cb33-1"></a><span class="co"># load the packages we will use</span></span>
-<span id="cb33-2"><a href="tutorial-1.html#cb33-2"></a>using Distributions</span>
-<span id="cb33-3"><a href="tutorial-1.html#cb33-3"></a>using Random</span>
-<span id="cb33-4"><a href="tutorial-1.html#cb33-4"></a>using StatsPlots</span>
-<span id="cb33-5"><a href="tutorial-1.html#cb33-5"></a></span>
-<span id="cb33-6"><a href="tutorial-1.html#cb33-6"></a><span class="co"># specify the normal distribution with mean = 0 </span></span>
-<span id="cb33-7"><a href="tutorial-1.html#cb33-7"></a><span class="co"># snd standard deviation = 1, which are the default choices</span></span>
-<span id="cb33-8"><a href="tutorial-1.html#cb33-8"></a>normal_distribution = Normal();</span>
-<span id="cb33-9"><a href="tutorial-1.html#cb33-9"></a><span class="co"># draw 100 samples</span></span>
-<span id="cb33-10"><a href="tutorial-1.html#cb33-10"></a>normal_samples = rand(normal_distribution, <span class="fl">100</span>);</span>
-<span id="cb33-11"><a href="tutorial-1.html#cb33-11"></a><span class="co"># make the Q-Q plot</span></span>
-<span id="cb33-12"><a href="tutorial-1.html#cb33-12"></a>qqplot(Normal(), normal_samples) </span></code></pre></div>
-<pre class="code-out"><code>Plot{Plots.GRBackend() n=2}</code></pre>
+<div class="sourceCode" id="cb31"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb31-1"><a href="tutorial-1.html#cb31-1"></a><span class="co"># load the packages we will use</span></span>
+<span id="cb31-2"><a href="tutorial-1.html#cb31-2"></a>using Distributions</span>
+<span id="cb31-3"><a href="tutorial-1.html#cb31-3"></a>using Random</span>
+<span id="cb31-4"><a href="tutorial-1.html#cb31-4"></a>using StatsPlots</span>
+<span id="cb31-5"><a href="tutorial-1.html#cb31-5"></a></span>
+<span id="cb31-6"><a href="tutorial-1.html#cb31-6"></a><span class="co"># specify the normal distribution with mean = 0 </span></span>
+<span id="cb31-7"><a href="tutorial-1.html#cb31-7"></a><span class="co"># snd standard deviation = 1, which are the default choices</span></span>
+<span id="cb31-8"><a href="tutorial-1.html#cb31-8"></a>normal_distribution = Normal();</span>
+<span id="cb31-9"><a href="tutorial-1.html#cb31-9"></a><span class="co"># draw 100 samples</span></span>
+<span id="cb31-10"><a href="tutorial-1.html#cb31-10"></a>normal_samples = rand(normal_distribution, <span class="fl">100</span>);</span>
+<span id="cb31-11"><a href="tutorial-1.html#cb31-11"></a><span class="co"># make the Q-Q plot</span></span>
+<span id="cb31-12"><a href="tutorial-1.html#cb31-12"></a>qqplot(Normal(), normal_samples) </span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:qqnormal"></span>
+<img src="raes_files/figure-html/qqnormal-J1.png" alt="A Q-Q plot showing 100 normally-distributed random values.  The points, which represent the random values, lie approximately on the line, showing that their distribution could be treated as a normal distribution."  />
+<p class="caption">
+Figure 4.2: A Q-Q plot showing 100 normally-distributed random values. The points, which represent the random values, lie approximately on the line, showing that their distribution could be treated as a normal distribution.
+</p>
+</div>
 <p>If we have a data set, we might not know what the parameters of the normal distribution are for the comparison (in this case, they were just the defaults). One strategy is to use the sample mean and standard deviation, which can be obtained with <code>mean()</code> and <code>std()</code> (this is justified by the Central Limit Theorem).</p>
 <p>Let’s see what a Q-Q plot might look like if we draw samples from a distribution that isn’t normal. We will sample from a <a href="https://en.wikipedia.org/wiki/Cauchy_distribution">Cauchy distribution</a>, which is a distribution which has a higher probability of extreme values than a normal distribution.</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb35-1"><a href="tutorial-1.html#cb35-1"></a><span class="co"># specify the default Cauchy distribution </span></span>
-<span id="cb35-2"><a href="tutorial-1.html#cb35-2"></a>cauchy_distribution = Cauchy();</span>
-<span id="cb35-3"><a href="tutorial-1.html#cb35-3"></a><span class="co"># draw 100 samples</span></span>
-<span id="cb35-4"><a href="tutorial-1.html#cb35-4"></a>cauchy_samples = rand(cauchy_distribution, <span class="fl">100</span>);</span>
-<span id="cb35-5"><a href="tutorial-1.html#cb35-5"></a><span class="co"># make the Q-Q plot</span></span>
-<span id="cb35-6"><a href="tutorial-1.html#cb35-6"></a>qqplot(Normal(), cauchy_samples) </span></code></pre></div>
-<pre class="code-out"><code>Plot{Plots.GRBackend() n=2}</code></pre>
-<p>Unlike in Figure <a href="#fig:qqnormal"><strong>??</strong></a>, the points in Figure <a href="#fig:qqcauchy"><strong>??</strong></a> are generally not along the line, which should suggest to use that the data are not normally distributed. On the left side of the Q-Q plot, the points are well below the line, and on the right side, they are well above it. This actually gives us more information about how the sample deviates from being normally distributed! The fact that the left side is below the line shows us that the distribution is “fatter” below the mean than a normal distribution, or that its left tail is heavier than that of a normal distribution. This is because a normal distribution’s samples are more limited in range than the samples from the Cauchy distribution. This means that it is more likely to see large negative values in this sample than we would expect from a normal sample. Similarly, the right side being above the line shows us that large positive values are more present than we would expect from a normal sample, and the right tail is fatter than a normal distribution’s. If the points and the line had the opposite relationship, we could conclude that the sample had thinner tails, and was more concentrated, than would be expected from a normal distribution. And if we had a mixed situation, that would suggest to us that our sample was more skewed to one side or the other.</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb32-1"><a href="tutorial-1.html#cb32-1"></a><span class="co"># specify the default Cauchy distribution </span></span>
+<span id="cb32-2"><a href="tutorial-1.html#cb32-2"></a>cauchy_distribution = Cauchy();</span>
+<span id="cb32-3"><a href="tutorial-1.html#cb32-3"></a><span class="co"># draw 100 samples</span></span>
+<span id="cb32-4"><a href="tutorial-1.html#cb32-4"></a>cauchy_samples = rand(cauchy_distribution, <span class="fl">100</span>);</span>
+<span id="cb32-5"><a href="tutorial-1.html#cb32-5"></a><span class="co"># make the Q-Q plot</span></span>
+<span id="cb32-6"><a href="tutorial-1.html#cb32-6"></a>qqplot(Normal(), cauchy_samples) </span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:qqcauchy"></span>
+<img src="raes_files/figure-html/qqcauchy-J1.png" alt="A Q-Q plot showing 100 Cauchy-distributed random values.  The points, which represent the random values, do not lie on the line for the majority of the plot. In this case, it could be dangerous to assume that the data were normally-distributed."  />
+<p class="caption">
+Figure 4.3: A Q-Q plot showing 100 Cauchy-distributed random values. The points, which represent the random values, do not lie on the line for the majority of the plot. In this case, it could be dangerous to assume that the data were normally-distributed.
+</p>
+</div>
+<p>Unlike in Figure <a href="tutorial-1.html#fig:qqnormal">4.2</a>, the points in Figure <a href="tutorial-1.html#fig:qqcauchy">4.3</a> are generally not along the line, which should suggest to use that the data are not normally distributed. On the left side of the Q-Q plot, the points are well below the line, and on the right side, they are well above it. This actually gives us more information about how the sample deviates from being normally distributed! The fact that the left side is below the line shows us that the distribution is “fatter” below the mean than a normal distribution, or that its left tail is heavier than that of a normal distribution. This is because a normal distribution’s samples are more limited in range than the samples from the Cauchy distribution. This means that it is more likely to see large negative values in this sample than we would expect from a normal sample. Similarly, the right side being above the line shows us that large positive values are more present than we would expect from a normal sample, and the right tail is fatter than a normal distribution’s. If the points and the line had the opposite relationship, we could conclude that the sample had thinner tails, and was more concentrated, than would be expected from a normal distribution. And if we had a mixed situation, that would suggest to us that our sample was more skewed to one side or the other.</p>
 </div>
 </div>
             </section>
@@ -368,7 +378,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["raes.pdf", "raes.epub", "raes.mobi"],
+"download": ["raes.pdf", "raes.epub"],
 "search": {
 "engine": "fuse",
 "options": null

@@ -25,7 +25,7 @@
 <meta name="author" content="Klaus Keller" />
 
 
-<meta name="date" content="2021-12-04" />
+<meta name="date" content="2021-12-05" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -216,7 +216,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="tutorial" class="section level2">
 <h2><span class="header-section-number">3.2</span> Tutorial</h2>
-<p>We’ll start by looking at several Web pages that describe the data we’ll be using in this exercise. As of May 2015, the various data sets displayed in Figure <a href="#fig:co2tempslr"><strong>??</strong></a> are archived in the following places:</p>
+<p>We’ll start by looking at several Web pages that describe the data we’ll be using in this exercise. As of May 2015, the various data sets displayed in Figure <a href="introduction-2.html#fig:co2tempslr">3.1</a> are archived in the following places:</p>
 <table>
 <caption><span id="tab:climatedata">Table 3.1: </span> Internet sources of data used in Exercise #1 and associated references. NOAA, National Oceanic and Atmospheric Administration; DOE CDIAC, United States Department of Energy – Carbon Dioxide Analysis Center; NASA GISS, National Aeronautics and Space Administration – Goddard Institute for Space Studies; PSMSL, Permanent Service for Mean Sea Level.</caption>
 <thead>
@@ -253,111 +253,116 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <div id="downloading-the-data" class="section level3">
 <h3><span class="header-section-number">3.2.1</span> Downloading the Data</h3>
 <p>Let’s step through how to make the first two panels of the plot above. Notice the liberal use of comments throughout the code; using comments like this is a good way to document your code and help yourself (and others!) interpret it.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb12-1"><a href="tutorial.html#cb12-1"></a><span class="co"># if &quot;data/&quot; does not exist, create it</span></span>
-<span id="cb12-2"><a href="tutorial.html#cb12-2"></a>isdir(<span class="st">&quot;data&quot;</span>) || mkdir(<span class="st">&quot;data&quot;</span>); </span>
-<span id="cb12-3"><a href="tutorial.html#cb12-3"></a><span class="co"># download files and save in &quot;data&quot;</span></span>
-<span id="cb12-4"><a href="tutorial.html#cb12-4"></a>download(<span class="st">&quot;ftp://aftp.cmdl.noaa.gov/products/trends/co2/co2_mm_mlo.txt&quot;</span>, </span>
-<span id="cb12-5"><a href="tutorial.html#cb12-5"></a>    <span class="st">&quot;data/co2_mm_mlo.txt&quot;</span>);</span>
-<span id="cb12-6"><a href="tutorial.html#cb12-6"></a>download(<span class="st">&quot;ftp://ftp.ncdc.noaa.gov/pub/data/paleo/icecore/antarctica/law/law2006.txt&quot;</span>, </span>
-<span id="cb12-7"><a href="tutorial.html#cb12-7"></a>    <span class="st">&quot;data/law2006.txt&quot;</span>);</span>
-<span id="cb12-8"><a href="tutorial.html#cb12-8"></a>download(<span class="st">&quot;https://data.giss.nasa.gov/gistemp/tabledata_v3/GLB.Ts+dSST.txt&quot;</span>, </span>
-<span id="cb12-9"><a href="tutorial.html#cb12-9"></a>    <span class="st">&quot;data/GLB.Ts+dSST.txt&quot;</span>);</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb11-1"><a href="tutorial.html#cb11-1"></a><span class="co"># if &quot;data/&quot; does not exist, create it</span></span>
+<span id="cb11-2"><a href="tutorial.html#cb11-2"></a>isdir(<span class="st">&quot;data&quot;</span>) || mkdir(<span class="st">&quot;data&quot;</span>); </span>
+<span id="cb11-3"><a href="tutorial.html#cb11-3"></a><span class="co"># download files and save in &quot;data&quot;</span></span>
+<span id="cb11-4"><a href="tutorial.html#cb11-4"></a>download(<span class="st">&quot;ftp://aftp.cmdl.noaa.gov/products/trends/co2/co2_mm_mlo.txt&quot;</span>, </span>
+<span id="cb11-5"><a href="tutorial.html#cb11-5"></a>    <span class="st">&quot;data/co2_mm_mlo.txt&quot;</span>);</span>
+<span id="cb11-6"><a href="tutorial.html#cb11-6"></a>download(<span class="st">&quot;ftp://ftp.ncdc.noaa.gov/pub/data/paleo/icecore/antarctica/law/law2006.txt&quot;</span>, </span>
+<span id="cb11-7"><a href="tutorial.html#cb11-7"></a>    <span class="st">&quot;data/law2006.txt&quot;</span>);</span>
+<span id="cb11-8"><a href="tutorial.html#cb11-8"></a>download(<span class="st">&quot;https://data.giss.nasa.gov/gistemp/tabledata_v3/GLB.Ts+dSST.txt&quot;</span>, </span>
+<span id="cb11-9"><a href="tutorial.html#cb11-9"></a>    <span class="st">&quot;data/GLB.Ts+dSST.txt&quot;</span>);</span></code></pre></div>
 <p>The first line creates a <code>data/</code> directory if one does not already exist. It actually contains a compound command. As discussed in Section <a href="#boolean-operators"><strong>??</strong></a>, <code>||</code> is a <em>short-circuit</em> or operator. In this context, it first evaluates <code>isdir("data")</code>, which is <code>true</code> if <code>data/</code> exists and is a directory and <code>false</code> if not. If <code>isdir("data")</code> is <code>true</code>, there is no need to continue. If <code>data/</code> does not exist and <code>isdir("data")</code> is <code>false</code>, then it evaluates <code>mkdir("data")</code>, which makes the <code>data/</code> directory. This is a useful alternative in Julia to the following code:</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb13-1"><a href="tutorial.html#cb13-1"></a><span class="co"># if &quot;data/&quot; is not a directory, evaluate the rest</span></span>
-<span id="cb13-2"><a href="tutorial.html#cb13-2"></a><span class="kw">if</span> ! isdir(<span class="st">&quot;data&quot;</span>) </span>
-<span id="cb13-3"><a href="tutorial.html#cb13-3"></a>    <span class="co"># make the &quot;data/&quot; directory</span></span>
-<span id="cb13-4"><a href="tutorial.html#cb13-4"></a>    mkdir(<span class="st">&quot;data&quot;</span>) </span>
-<span id="cb13-5"><a href="tutorial.html#cb13-5"></a><span class="kw">end</span></span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb12-1"><a href="tutorial.html#cb12-1"></a><span class="co"># if &quot;data/&quot; is not a directory, evaluate the rest</span></span>
+<span id="cb12-2"><a href="tutorial.html#cb12-2"></a><span class="kw">if</span> ! isdir(<span class="st">&quot;data&quot;</span>) </span>
+<span id="cb12-3"><a href="tutorial.html#cb12-3"></a>    <span class="co"># make the &quot;data/&quot; directory</span></span>
+<span id="cb12-4"><a href="tutorial.html#cb12-4"></a>    mkdir(<span class="st">&quot;data&quot;</span>) </span>
+<span id="cb12-5"><a href="tutorial.html#cb12-5"></a><span class="kw">end</span></span></code></pre></div>
 <p>The <code>download(url, location)</code> commands download files and save them. The <code>url</code> argument is the source for the data, while <code>location</code> is the local path where the file should be saved.</p>
 </div>
 <div id="reading-the-data" class="section level3">
 <h3><span class="header-section-number">3.2.2</span> Reading the Data</h3>
 <p>Now that we have the files, we need to read the information that they contain into Julia. One of the tricky things with reading files is that you have to know something about how the file is formatted to specify how the code should read it. Open each of the data files using a text editor and examine them. Which files contain “extra” information at the top or bottom of the file? In each file, which columns contain the information we need?</p>
 <p>You may notice that these files are <em>tab-delimited</em>, which means that columns are separated using tabs. Ither files may be space-delimited or comma-delimited, also known as comma-separated or CSV files. With this sort of structure, we can read in the files using the <code>readdlm()</code> command, which is short for “read delimited.” <code>readdlm()</code> is from the <code>DelimitedFiles.jl</code> package, which means we need to load it. <code>DelimitedFiles.jl</code> comes with base Julia, so there’s no installation required:</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb14-1"><a href="tutorial.html#cb14-1"></a>using DelimitedFiles <span class="co"># load DelimitedFiles.jl</span></span>
-<span id="cb14-2"><a href="tutorial.html#cb14-2"></a></span>
-<span id="cb14-3"><a href="tutorial.html#cb14-3"></a><span class="co"># begin reading in the data</span></span>
-<span id="cb14-4"><a href="tutorial.html#cb14-4"></a><span class="co">#  read Mauna Loa CO2 Data</span></span>
-<span id="cb14-5"><a href="tutorial.html#cb14-5"></a>loa_co2data = readdlm(<span class="st">&quot;data/co2_mm_mlo.txt&quot;</span>, skipstart=<span class="fl">57</span>, </span>
-<span id="cb14-6"><a href="tutorial.html#cb14-6"></a>    header=false);</span>
-<span id="cb14-7"><a href="tutorial.html#cb14-7"></a><span class="co"># read Law Dome CO2 Data</span></span>
-<span id="cb14-8"><a href="tutorial.html#cb14-8"></a>law_co2data = readdlm(<span class="st">&quot;data/law2006.txt&quot;</span>, skipstart = <span class="fl">183</span>, </span>
-<span id="cb14-9"><a href="tutorial.html#cb14-9"></a>    header = false)[<span class="fl">1</span>:<span class="fl">2004</span>, :]; </span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb13-1"><a href="tutorial.html#cb13-1"></a>using DelimitedFiles <span class="co"># load DelimitedFiles.jl</span></span>
+<span id="cb13-2"><a href="tutorial.html#cb13-2"></a></span>
+<span id="cb13-3"><a href="tutorial.html#cb13-3"></a><span class="co"># begin reading in the data</span></span>
+<span id="cb13-4"><a href="tutorial.html#cb13-4"></a><span class="co">#  read Mauna Loa CO2 Data</span></span>
+<span id="cb13-5"><a href="tutorial.html#cb13-5"></a>loa_co2data = readdlm(<span class="st">&quot;data/co2_mm_mlo.txt&quot;</span>, skipstart=<span class="fl">57</span>, </span>
+<span id="cb13-6"><a href="tutorial.html#cb13-6"></a>    header=false);</span>
+<span id="cb13-7"><a href="tutorial.html#cb13-7"></a><span class="co"># read Law Dome CO2 Data</span></span>
+<span id="cb13-8"><a href="tutorial.html#cb13-8"></a>law_co2data = readdlm(<span class="st">&quot;data/law2006.txt&quot;</span>, skipstart = <span class="fl">183</span>, </span>
+<span id="cb13-9"><a href="tutorial.html#cb13-9"></a>    header = false)[<span class="fl">1</span>:<span class="fl">2004</span>, :]; </span></code></pre></div>
 <p>In each of the <code>readdlm()</code> commands, the first argument is the file to open. Look at <a href="https://docs.julialang.org/en/v1/stdlib/DelimitedFiles/#Delimited-Files">the documentation for <code>readdlm()</code></a>. We also use two other options:
 * <code>skipstart</code> skips the specified number of lines from the beginning of the file, which allows us to ignore headings and comments at the beginning of the file;
 * <code>header = false</code> tells <code>readdlm()</code> not to interpret the first read line (after the skipped lines) as column headers for the resulting array.
 We also tell Julia to only keep the first 2004 rows of the Law Dome data (after skipping the first 183 lines of the file). We do this because there is additional information at the bottom of the file that we do not need to keep.</p>
 <p>The temperature data file is formatted in blocks, each of which contains about 20 years of data. For that reason, it is much more complicated to read into Julia. The code block below accomplishes this task using a <code>for</code> loop.</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb15-1"><a href="tutorial.html#cb15-1"></a><span class="co"># read in temperature data; this requires reading in sections </span></span>
-<span id="cb15-2"><a href="tutorial.html#cb15-2"></a><span class="co"># of the file one at a time</span></span>
-<span id="cb15-3"><a href="tutorial.html#cb15-3"></a><span class="co"># specify the row numbers where each chunk of data begins</span></span>
-<span id="cb15-4"><a href="tutorial.html#cb15-4"></a>start_rows = [<span class="fl">9</span>, <span class="fl">31</span>, <span class="fl">53</span>, <span class="fl">75</span>, <span class="fl">97</span>, <span class="fl">119</span>, <span class="fl">141</span>]; </span>
-<span id="cb15-5"><a href="tutorial.html#cb15-5"></a><span class="co"># how many rows are in each chunk</span></span>
-<span id="cb15-6"><a href="tutorial.html#cb15-6"></a>num_rows = [<span class="fl">19</span>, <span class="fl">20</span>, <span class="fl">20</span>, <span class="fl">20</span>, <span class="fl">20</span>, <span class="fl">20</span>, <span class="fl">18</span>]; </span>
-<span id="cb15-7"><a href="tutorial.html#cb15-7"></a><span class="co"># this computes the total amount of data before reading in </span></span>
-<span id="cb15-8"><a href="tutorial.html#cb15-8"></a><span class="co"># each chunk, which we need to index the resulting array</span></span>
-<span id="cb15-9"><a href="tutorial.html#cb15-9"></a>cum_num_rows = cumsum(num_rows); </span>
-<span id="cb15-10"><a href="tutorial.html#cb15-10"></a><span class="co"># initialize the storage for the temperature data array</span></span>
-<span id="cb15-11"><a href="tutorial.html#cb15-11"></a>temp_data = zeros(sum(num_rows), <span class="fl">20</span>); </span>
-<span id="cb15-12"><a href="tutorial.html#cb15-12"></a><span class="co"># read in the first chunk</span></span>
-<span id="cb15-13"><a href="tutorial.html#cb15-13"></a>temp_data[<span class="fl">1</span>:num_rows[<span class="fl">1</span>], :] = readdlm(<span class="st">&quot;data/GLB.Ts+dSST.txt&quot;</span>, </span>
-<span id="cb15-14"><a href="tutorial.html#cb15-14"></a>    skipstart = start_rows[<span class="fl">1</span>], header = false)[<span class="fl">1</span>:num_rows[<span class="fl">1</span>], :]; </span>
-<span id="cb15-15"><a href="tutorial.html#cb15-15"></a><span class="co"># loop over the remaining chunks and read them in</span></span>
-<span id="cb15-16"><a href="tutorial.html#cb15-16"></a><span class="kw">for</span> i = <span class="fl">2</span>:length(start_rows)</span>
-<span id="cb15-17"><a href="tutorial.html#cb15-17"></a>    temp_data[(cum_num_rows[i-<span class="fl">1</span>] + <span class="fl">1</span>):cum_num_rows[i], :] = </span>
-<span id="cb15-18"><a href="tutorial.html#cb15-18"></a>        readdlm(<span class="st">&quot;data/GLB.Ts+dSST.txt&quot;</span>, skipstart = start_rows[i], </span>
-<span id="cb15-19"><a href="tutorial.html#cb15-19"></a>            header = false)[<span class="fl">1</span>:num_rows[i], :];</span>
-<span id="cb15-20"><a href="tutorial.html#cb15-20"></a><span class="kw">end</span></span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb14-1"><a href="tutorial.html#cb14-1"></a><span class="co"># read in temperature data; this requires reading in sections </span></span>
+<span id="cb14-2"><a href="tutorial.html#cb14-2"></a><span class="co"># of the file one at a time</span></span>
+<span id="cb14-3"><a href="tutorial.html#cb14-3"></a><span class="co"># specify the row numbers where each chunk of data begins</span></span>
+<span id="cb14-4"><a href="tutorial.html#cb14-4"></a>start_rows = [<span class="fl">9</span>, <span class="fl">31</span>, <span class="fl">53</span>, <span class="fl">75</span>, <span class="fl">97</span>, <span class="fl">119</span>, <span class="fl">141</span>]; </span>
+<span id="cb14-5"><a href="tutorial.html#cb14-5"></a><span class="co"># how many rows are in each chunk</span></span>
+<span id="cb14-6"><a href="tutorial.html#cb14-6"></a>num_rows = [<span class="fl">19</span>, <span class="fl">20</span>, <span class="fl">20</span>, <span class="fl">20</span>, <span class="fl">20</span>, <span class="fl">20</span>, <span class="fl">18</span>]; </span>
+<span id="cb14-7"><a href="tutorial.html#cb14-7"></a><span class="co"># this computes the total amount of data before reading in </span></span>
+<span id="cb14-8"><a href="tutorial.html#cb14-8"></a><span class="co"># each chunk, which we need to index the resulting array</span></span>
+<span id="cb14-9"><a href="tutorial.html#cb14-9"></a>cum_num_rows = cumsum(num_rows); </span>
+<span id="cb14-10"><a href="tutorial.html#cb14-10"></a><span class="co"># initialize the storage for the temperature data array</span></span>
+<span id="cb14-11"><a href="tutorial.html#cb14-11"></a>temp_data = zeros(sum(num_rows), <span class="fl">20</span>); </span>
+<span id="cb14-12"><a href="tutorial.html#cb14-12"></a><span class="co"># read in the first chunk</span></span>
+<span id="cb14-13"><a href="tutorial.html#cb14-13"></a>temp_data[<span class="fl">1</span>:num_rows[<span class="fl">1</span>], :] = readdlm(<span class="st">&quot;data/GLB.Ts+dSST.txt&quot;</span>, </span>
+<span id="cb14-14"><a href="tutorial.html#cb14-14"></a>    skipstart = start_rows[<span class="fl">1</span>], header = false)[<span class="fl">1</span>:num_rows[<span class="fl">1</span>], :]; </span>
+<span id="cb14-15"><a href="tutorial.html#cb14-15"></a><span class="co"># loop over the remaining chunks and read them in</span></span>
+<span id="cb14-16"><a href="tutorial.html#cb14-16"></a><span class="kw">for</span> i = <span class="fl">2</span>:length(start_rows)</span>
+<span id="cb14-17"><a href="tutorial.html#cb14-17"></a>    temp_data[(cum_num_rows[i-<span class="fl">1</span>] + <span class="fl">1</span>):cum_num_rows[i], :] = </span>
+<span id="cb14-18"><a href="tutorial.html#cb14-18"></a>        readdlm(<span class="st">&quot;data/GLB.Ts+dSST.txt&quot;</span>, skipstart = start_rows[i], </span>
+<span id="cb14-19"><a href="tutorial.html#cb14-19"></a>            header = false)[<span class="fl">1</span>:num_rows[i], :];</span>
+<span id="cb14-20"><a href="tutorial.html#cb14-20"></a><span class="kw">end</span></span></code></pre></div>
 </div>
 <div id="plotting-the-data" class="section level3">
 <h3><span class="header-section-number">3.2.3</span> Plotting the Data</h3>
 <p>Finally, we make the figure. This requires loading the <code>Plots.jl</code> package (see <a href="http://docs.juliaplots.org/latest/">its documentation</a>), which provides plotting functionality. If this were our first time making plots in Julia, we would need to install <code>Plots</code>, which we would do using <code>Pkg</code>. These lines are commented out in the code below because we’ve already done this for this book.</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb16-1"><a href="tutorial.html#cb16-1"></a><span class="co">## install and load relevant packages</span></span>
-<span id="cb16-2"><a href="tutorial.html#cb16-2"></a><span class="co"># these two lines are commented out as we already have the </span></span>
-<span id="cb16-3"><a href="tutorial.html#cb16-3"></a><span class="co"># `Plots` library installed; if we did not, we would need to </span></span>
-<span id="cb16-4"><a href="tutorial.html#cb16-4"></a><span class="co"># include them</span></span>
-<span id="cb16-5"><a href="tutorial.html#cb16-5"></a><span class="co"># using Pkg</span></span>
-<span id="cb16-6"><a href="tutorial.html#cb16-6"></a><span class="co"># Pkg.add(&quot;Plots&quot;)</span></span>
-<span id="cb16-7"><a href="tutorial.html#cb16-7"></a></span>
-<span id="cb16-8"><a href="tutorial.html#cb16-8"></a><span class="co"># now we load `Plots.jl` as well as the `Plots.Measures` </span></span>
-<span id="cb16-9"><a href="tutorial.html#cb16-9"></a><span class="co"># subpackage, which lets us refer to units like &quot;in&quot; and &quot;mm&quot;</span></span>
-<span id="cb16-10"><a href="tutorial.html#cb16-10"></a>using Plots</span>
-<span id="cb16-11"><a href="tutorial.html#cb16-11"></a>using Plots.Measures</span>
-<span id="cb16-12"><a href="tutorial.html#cb16-12"></a><span class="co"># use GR backend; see text discussion</span></span>
-<span id="cb16-13"><a href="tutorial.html#cb16-13"></a>gr(); </span>
-<span id="cb16-14"><a href="tutorial.html#cb16-14"></a></span>
-<span id="cb16-15"><a href="tutorial.html#cb16-15"></a><span class="co">## first plot CO2 data</span></span>
-<span id="cb16-16"><a href="tutorial.html#cb16-16"></a><span class="co"># save the base Law Dome data plot as `p1`</span></span>
-<span id="cb16-17"><a href="tutorial.html#cb16-17"></a>p1 = plot(law_co2data[:, <span class="fl">1</span>], law_co2data[:, <span class="fl">6</span>], color=<span class="st">&quot;black&quot;</span>, </span>
-<span id="cb16-18"><a href="tutorial.html#cb16-18"></a>    label=<span class="st">&quot;Law Dome Ice Core Record&quot;</span>, legend=:top, grid=false);</span>
-<span id="cb16-19"><a href="tutorial.html#cb16-19"></a><span class="co"># add the Mauna Loa data on top of the Law Dome data</span></span>
-<span id="cb16-20"><a href="tutorial.html#cb16-20"></a>plot!(loa_co2data[:, <span class="fl">3</span>], loa_co2data[:, <span class="fl">5</span>], color=<span class="st">&quot;blue&quot;</span>, </span>
-<span id="cb16-21"><a href="tutorial.html#cb16-21"></a>    label=<span class="st">&quot;Mauna Loa Measurements&quot;</span>); </span>
-<span id="cb16-22"><a href="tutorial.html#cb16-22"></a><span class="co"># label the x-axis</span></span>
-<span id="cb16-23"><a href="tutorial.html#cb16-23"></a>xlabel!(<span class="st">&quot;Year&quot;</span>); </span>
-<span id="cb16-24"><a href="tutorial.html#cb16-24"></a><span class="co"># we only want to plot data after 1900 even though we have </span></span>
-<span id="cb16-25"><a href="tutorial.html#cb16-25"></a><span class="co"># more from Law Dome</span></span>
-<span id="cb16-26"><a href="tutorial.html#cb16-26"></a>xlims!((<span class="fl">1900</span>, <span class="fl">2020</span>)); </span>
-<span id="cb16-27"><a href="tutorial.html#cb16-27"></a><span class="co"># label the y-axis</span></span>
-<span id="cb16-28"><a href="tutorial.html#cb16-28"></a>ylabel!(<span class="st">&quot;Atmospheric CO₂ (ppm)&quot;</span>); </span>
-<span id="cb16-29"><a href="tutorial.html#cb16-29"></a></span>
-<span id="cb16-30"><a href="tutorial.html#cb16-30"></a><span class="co">## then plot temperature data</span></span>
-<span id="cb16-31"><a href="tutorial.html#cb16-31"></a><span class="co"># save the base temperature data plot as `p2`</span></span>
-<span id="cb16-32"><a href="tutorial.html#cb16-32"></a>p2 = plot(temp_data[:, <span class="fl">1</span>], temp_data[:, <span class="fl">14</span>] / <span class="fl">100</span>, </span>
-<span id="cb16-33"><a href="tutorial.html#cb16-33"></a>    color=<span class="st">&quot;black&quot;</span>, legend=false, grid=false); </span>
-<span id="cb16-34"><a href="tutorial.html#cb16-34"></a>xlabel!(<span class="st">&quot;Year&quot;</span>);</span>
-<span id="cb16-35"><a href="tutorial.html#cb16-35"></a>xlims!((<span class="fl">1900</span>, <span class="fl">2020</span>));</span>
-<span id="cb16-36"><a href="tutorial.html#cb16-36"></a>ylabel!(<span class="st">&quot;Global Mean Temperature Anomaly (K)&quot;</span>);</span>
-<span id="cb16-37"><a href="tutorial.html#cb16-37"></a></span>
-<span id="cb16-38"><a href="tutorial.html#cb16-38"></a><span class="co">## combine plots</span></span>
-<span id="cb16-39"><a href="tutorial.html#cb16-39"></a><span class="co"># finally, combine the two plots as two subplot rows</span></span>
-<span id="cb16-40"><a href="tutorial.html#cb16-40"></a>plot(p1, p2, layout= (<span class="fl">2</span>, <span class="fl">1</span>), left_margin=<span class="fl">20</span>mm, </span>
-<span id="cb16-41"><a href="tutorial.html#cb16-41"></a>    right_margin=<span class="fl">20</span>mm); </span>
-<span id="cb16-42"><a href="tutorial.html#cb16-42"></a><span class="co"># adjust the size so the final combined plot isn&#39;t squished </span></span>
-<span id="cb16-43"><a href="tutorial.html#cb16-43"></a><span class="co"># together</span></span>
-<span id="cb16-44"><a href="tutorial.html#cb16-44"></a>plot!(size=(<span class="fl">800</span>, <span class="fl">600</span>)) </span>
-<span id="cb16-45"><a href="tutorial.html#cb16-45"></a>Plot{Plots.GRBackend() n=<span class="fl">3</span>}</span></code></pre></div>
-<p>Let’s walk through the code preceding Figure <a href="#fig:co2temp"><strong>??</strong></a>. First, <code>Plots</code> <a href="http://docs.juliaplots.org/latest/backends/">uses various backends</a> to provide varying capabilities. We will use the basic <code>GR</code> backend, so we call <code>gr()</code> after loading <code>Plots</code> to set this up. Next, we plot the Law Dome data using the <code>plot()</code> function. The first argument to <code>plot()</code> contains the x-coordinates of the data; this is the column specifying the year. The second argument are the y-coordinates, which is the sixth column in the data. We can also set the color (<code>color=black</code>) and the legend label (<code>label="Law Dome Ice Core Record"</code>), since the atmospheric CO<sub>2</sub> plot will also include the Mauna Loa data. Finally, we set the legend position to be top-center with <code>legend=:top</code> (there are lots of options for legend placement), and turn off the grid corresponding to the axis tick marks with <code>grid=false</code>. Notice that by default, <code>plots()</code> will plot this data as a line, though we could also <a href="http://docs.juliaplots.org/latest/tutorial/#Changing-the-Plotting-Series">set it to plot the data as points</a> if desired.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb15-1"><a href="tutorial.html#cb15-1"></a><span class="co">## install and load relevant packages</span></span>
+<span id="cb15-2"><a href="tutorial.html#cb15-2"></a><span class="co"># these two lines are commented out as we already have the </span></span>
+<span id="cb15-3"><a href="tutorial.html#cb15-3"></a><span class="co"># `Plots` library installed; if we did not, we would need to </span></span>
+<span id="cb15-4"><a href="tutorial.html#cb15-4"></a><span class="co"># include them</span></span>
+<span id="cb15-5"><a href="tutorial.html#cb15-5"></a><span class="co"># using Pkg</span></span>
+<span id="cb15-6"><a href="tutorial.html#cb15-6"></a><span class="co"># Pkg.add(&quot;Plots&quot;)</span></span>
+<span id="cb15-7"><a href="tutorial.html#cb15-7"></a></span>
+<span id="cb15-8"><a href="tutorial.html#cb15-8"></a><span class="co"># now we load `Plots.jl` as well as the `Plots.Measures` </span></span>
+<span id="cb15-9"><a href="tutorial.html#cb15-9"></a><span class="co"># subpackage, which lets us refer to units like &quot;in&quot; and &quot;mm&quot;</span></span>
+<span id="cb15-10"><a href="tutorial.html#cb15-10"></a>using Plots</span>
+<span id="cb15-11"><a href="tutorial.html#cb15-11"></a>using Plots.Measures</span>
+<span id="cb15-12"><a href="tutorial.html#cb15-12"></a><span class="co"># use GR backend; see text discussion</span></span>
+<span id="cb15-13"><a href="tutorial.html#cb15-13"></a>gr(); </span>
+<span id="cb15-14"><a href="tutorial.html#cb15-14"></a></span>
+<span id="cb15-15"><a href="tutorial.html#cb15-15"></a><span class="co">## first plot CO2 data</span></span>
+<span id="cb15-16"><a href="tutorial.html#cb15-16"></a><span class="co"># save the base Law Dome data plot as `p1`</span></span>
+<span id="cb15-17"><a href="tutorial.html#cb15-17"></a>p1 = plot(law_co2data[:, <span class="fl">1</span>], law_co2data[:, <span class="fl">6</span>], color=<span class="st">&quot;black&quot;</span>, </span>
+<span id="cb15-18"><a href="tutorial.html#cb15-18"></a>    label=<span class="st">&quot;Law Dome Ice Core Record&quot;</span>, legend=:top, grid=false);</span>
+<span id="cb15-19"><a href="tutorial.html#cb15-19"></a><span class="co"># add the Mauna Loa data on top of the Law Dome data</span></span>
+<span id="cb15-20"><a href="tutorial.html#cb15-20"></a>plot!(loa_co2data[:, <span class="fl">3</span>], loa_co2data[:, <span class="fl">5</span>], color=<span class="st">&quot;blue&quot;</span>, </span>
+<span id="cb15-21"><a href="tutorial.html#cb15-21"></a>    label=<span class="st">&quot;Mauna Loa Measurements&quot;</span>); </span>
+<span id="cb15-22"><a href="tutorial.html#cb15-22"></a><span class="co"># label the x-axis</span></span>
+<span id="cb15-23"><a href="tutorial.html#cb15-23"></a>xlabel!(<span class="st">&quot;Year&quot;</span>); </span>
+<span id="cb15-24"><a href="tutorial.html#cb15-24"></a><span class="co"># we only want to plot data after 1900 even though we have </span></span>
+<span id="cb15-25"><a href="tutorial.html#cb15-25"></a><span class="co"># more from Law Dome</span></span>
+<span id="cb15-26"><a href="tutorial.html#cb15-26"></a>xlims!((<span class="fl">1900</span>, <span class="fl">2020</span>)); </span>
+<span id="cb15-27"><a href="tutorial.html#cb15-27"></a><span class="co"># label the y-axis</span></span>
+<span id="cb15-28"><a href="tutorial.html#cb15-28"></a>ylabel!(<span class="st">&quot;Atmospheric CO₂ (ppm)&quot;</span>); </span>
+<span id="cb15-29"><a href="tutorial.html#cb15-29"></a></span>
+<span id="cb15-30"><a href="tutorial.html#cb15-30"></a><span class="co">## then plot temperature data</span></span>
+<span id="cb15-31"><a href="tutorial.html#cb15-31"></a><span class="co"># save the base temperature data plot as `p2`</span></span>
+<span id="cb15-32"><a href="tutorial.html#cb15-32"></a>p2 = plot(temp_data[:, <span class="fl">1</span>], temp_data[:, <span class="fl">14</span>] / <span class="fl">100</span>, </span>
+<span id="cb15-33"><a href="tutorial.html#cb15-33"></a>    color=<span class="st">&quot;black&quot;</span>, legend=false, grid=false); </span>
+<span id="cb15-34"><a href="tutorial.html#cb15-34"></a>xlabel!(<span class="st">&quot;Year&quot;</span>);</span>
+<span id="cb15-35"><a href="tutorial.html#cb15-35"></a>xlims!((<span class="fl">1900</span>, <span class="fl">2020</span>));</span>
+<span id="cb15-36"><a href="tutorial.html#cb15-36"></a>ylabel!(<span class="st">&quot;Global Mean Temperature Anomaly (K)&quot;</span>);</span>
+<span id="cb15-37"><a href="tutorial.html#cb15-37"></a></span>
+<span id="cb15-38"><a href="tutorial.html#cb15-38"></a><span class="co">## combine plots</span></span>
+<span id="cb15-39"><a href="tutorial.html#cb15-39"></a><span class="co"># finally, combine the two plots as two subplot rows</span></span>
+<span id="cb15-40"><a href="tutorial.html#cb15-40"></a>plot(p1, p2, layout= (<span class="fl">2</span>, <span class="fl">1</span>), left_margin=<span class="fl">20</span>mm, </span>
+<span id="cb15-41"><a href="tutorial.html#cb15-41"></a>    right_margin=<span class="fl">20</span>mm); </span>
+<span id="cb15-42"><a href="tutorial.html#cb15-42"></a><span class="co"># adjust the size so the final combined plot isn&#39;t squished </span></span>
+<span id="cb15-43"><a href="tutorial.html#cb15-43"></a><span class="co"># together</span></span>
+<span id="cb15-44"><a href="tutorial.html#cb15-44"></a>plot!(size=(<span class="fl">800</span>, <span class="fl">600</span>)) </span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:co2temp"></span>
+<img src="raes_files/figure-html/co2temp-J1.png" alt="Plot results after running the code in this chapter. See text for discussion." width="75%" />
+<p class="caption">
+Figure 3.2: Plot results after running the code in this chapter. See text for discussion.
+</p>
+</div>
+<p>Let’s walk through the code preceding Figure <a href="tutorial.html#fig:co2temp">3.2</a>. First, <code>Plots</code> <a href="http://docs.juliaplots.org/latest/backends/">uses various backends</a> to provide varying capabilities. We will use the basic <code>GR</code> backend, so we call <code>gr()</code> after loading <code>Plots</code> to set this up. Next, we plot the Law Dome data using the <code>plot()</code> function. The first argument to <code>plot()</code> contains the x-coordinates of the data; this is the column specifying the year. The second argument are the y-coordinates, which is the sixth column in the data. We can also set the color (<code>color=black</code>) and the legend label (<code>label="Law Dome Ice Core Record"</code>), since the atmospheric CO<sub>2</sub> plot will also include the Mauna Loa data. Finally, we set the legend position to be top-center with <code>legend=:top</code> (there are lots of options for legend placement), and turn off the grid corresponding to the axis tick marks with <code>grid=false</code>. Notice that by default, <code>plots()</code> will plot this data as a line, though we could also <a href="http://docs.juliaplots.org/latest/tutorial/#Changing-the-Plotting-Series">set it to plot the data as points</a> if desired.</p>
 <p>Next, we want to overlay the Mauna Loa data. As discussed earlier, the presence of an exclamation mark after a function name (<code>plots!()</code> as opposed to <code>plots()</code>) means that the function will modify its argument in-place, rather than returning a new variable. This allows us to avoid creating a new set of axes. We color this data blue to distinguish it from the Law Dome data series. We then can add axis labels (using <code>xlabel!()</code> and <code>ylabel!()</code>, which once again modify the current plot rather than creating a new plot object) and change the limits (in this case, we only want to change the x-axis limits to crop the data to post-1900).</p>
 <p>Why did we save this plot object in the <code>p1</code> variable? This will allow us to later include it as a subplot in a final combined plot.</p>
 <p>The process of creating the second subplot panel, stored as <code>p2</code>, is similar, only we have just the single temperature series, so we never need to make a call to <code>plot!()</code> or set up a legend. In fact, we turn off the legend with <code>legend=:false</code>.</p>
@@ -428,7 +433,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["raes.pdf", "raes.epub", "raes.mobi"],
+"download": ["raes.pdf", "raes.epub"],
 "search": {
 "engine": "fuse",
 "options": null

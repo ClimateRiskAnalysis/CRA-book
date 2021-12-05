@@ -1,4 +1,9 @@
+fig:co2tempslr
 tab:climatedata
+fig:co2temp
+fig:galton
+fig:qqnormal
+fig:qqcauchy
 introduction
 climate-risks
 some-questions
