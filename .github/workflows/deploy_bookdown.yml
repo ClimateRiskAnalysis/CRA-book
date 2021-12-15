@@ -26,6 +26,8 @@ jobs:
         run: Rscript -e 'install.packages("JuliaCall")'
       - name: Install msmbstyle
         run: Rscript -e 'install.packages("devtools"); devtools::install_github("grimbough/msmbstyle")'
+        with: 
+          GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       - name: Install TinyTeX
         uses: r-lib/actions/setup-tinytex@v1
         env:
