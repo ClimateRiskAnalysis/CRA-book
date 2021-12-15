@@ -665,7 +665,8 @@ chain, accrate, S, lp = RAM_sample(
     theta -> log_posterior(theta, data),
     [10., -0.5, -150, 0.9, 1.],
     0.1,
-    400_000
+    400_000,
+    show_progress = false
 );
 # print out the acceptance rate
 accrate
