@@ -709,7 +709,7 @@ plot(chain[burnin+1:end, :], layout=5, seriestype=:density, label=:false, xlabel
 
 A pairs plot is a useful visual representation of the posterior samples, typically including marginal histograms and pairwise scatterplots^[Sometimes other useful information, such as correlation coefficients or bivariate densities are also included in a pairs plot. `StatsPlots.jl` provides two types of pairs plots. `corrplot()` provides a plot which also includes a color-coded correlation plot (including the best-fit line) for each pair of parameters. An example is shown in Figure \@ref(fig:slr-pairs).^[This may be a bit cramped due to the size of the plotting space, but you get the idea of what's included.]
 
-```{julia, label="slr-pairs", cache=TRUE, fig.cap="Pairs plot for the posterior density for our calibrated sea-level rise model."}
+```{julia, label="slr-pairs", cache=TRUE, fig.fullwidth=TRUE, fig.cap="Pairs plot for the posterior density for our calibrated sea-level rise model."}
 using StatsPlots
 
 corrplot(chain[burnin+1:end, :], label=["alpha" "Teq" "H0" "rho" "sigma"], xrotation=45)
@@ -717,7 +717,7 @@ corrplot(chain[burnin+1:end, :], label=["alpha" "Teq" "H0" "rho" "sigma"], xrota
 
 `cornerplot()` shows the marginal histograms around the edges of the plotting window, and can be used to provide a more compact representation with the flag `compact=true`. An example is shown in Figure \@ref(fig:slr-corner).
 
-```{julia, label="slr-corner", cache=TRUE, fig.cap="Corner plot for the posterior density for our calibrated sea-level rise model."}
+```{julia, label="slr-corner", fig.fullwidth=TRUE, cache=TRUE, fig.cap="Corner plot for the posterior density for our calibrated sea-level rise model."}
 cornerplot(chain[burnin+1:end, :], label=["alpha" "Teq" "H0" "rho" "sigma"], xrotation=45, compact=true)
 ```
 

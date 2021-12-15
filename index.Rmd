@@ -1,5 +1,5 @@
 --- 
-title: "Risk Analysis in the Earth Sciences"
+title: "Climate Risk Analysis"
 author: 
     - Vivek Srikrishnan
     - Klaus Keller
@@ -16,7 +16,7 @@ colorlinks: yes
 graphics: yes
 fontsize: 11pt
 monofontoptions: "Scale=0.8"
-github-repo: vsrikrish/RAES
+github-repo: vsrikrish/CRA-book
 cover-image: images/cover_with_alexander.png
 resource_files:
     - images/cover_with_alexander.png
@@ -45,7 +45,6 @@ MathJax.Hub.Config({
 </script>
 
 ```{r, include=FALSE}
-knitr::opts_chunk$set(comment = '')
 knitr::opts_chunk$set(class.output = "code-out")
 ```
 
