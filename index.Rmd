@@ -22,6 +22,17 @@ resource_files:
     - images/cover_with_alexander.png
 ---
 
+
+# Preface {-} 
+
+Greenhouse gas emissions have caused considerable changes in climate, including increased surface air temperatures and rising sea levels.  Rising sea levels increase the risks of flooding for people living near the world's coastlines.  Managing such risks requires an understanding of many fields, including Earth science, statistics, and economics.  At the same time, the free, open-source programming environment [Julia](http://www.julialang.org) is growing in popularity among statisticians and scientists due to its flexibility and graphics capabilities, as well as its large collection of existing software libraries.
+
+This textbook presents a series of exercises in Julia that teach the Earth science and statistical concepts needed for assessing climate-related risks.  These exercises are intended for upper-level undergraduates, beginning graduate students, and professionals in other areas who wish to gain insight into academic climate risk analysis.  
+
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />
+
+The content of this book is licensed under the [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License](https://creativecommons.org/licenses/by-nc-sa/4.0/).
+
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
   TeX: { 
@@ -43,16 +54,6 @@ using Pkg
 Pkg.activate(".")
 Pkg.instantiate()
 ```
-
-# Preface {-} 
-
-Greenhouse gas emissions have caused considerable changes in climate, including increased surface air temperatures and rising sea levels.  Rising sea levels increase the risks of flooding for people living near the world's coastlines.  Managing such risks requires an understanding of many fields, including Earth science, statistics, and economics.  At the same time, the free, open-source programming environment [Julia](http://www.julialang.org) is growing in popularity among statisticians and scientists due to its flexibility and graphics capabilities, as well as its large collection of existing software libraries.
-
-This textbook presents a series of exercises in Julia that teach the Earth science and statistical concepts needed for assessing climate-related risks.  These exercises are intended for upper-level undergraduates, beginning graduate students, and professionals in other areas who wish to gain insight into academic climate risk analysis.  
-
-<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />
-
-The content of this book is licensed under the [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License](https://creativecommons.org/licenses/by-nc-sa/4.0/).
 
 
 ```{js, echo = FALSE}
