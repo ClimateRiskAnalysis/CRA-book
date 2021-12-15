@@ -24,6 +24,8 @@ jobs:
         run: Rscript -e 'install.packages(c("rmarkdown","bookdown"))'
       - name: Install JuliaCall
         run: Rscript -e 'install.packages("JuliaCall")'
+      - name: Install msmbstyle
+        run: Rscript -e 'install.packages("devtools"); devtools::install_github("grimbough/msmbstyle")'
       - name: Install TinyTeX
         uses: r-lib/actions/setup-tinytex@v1
         env:
@@ -32,7 +34,7 @@ jobs:
       - name: Render Book
         run: |
           cd /Users/runner/hostedtoolcache/julia/1.6.4/x64/lib/
-          Rscript -e 'library(JuliaCall); julia_setup(); bookdown::render_book(Sys.getenv("GITHUB_WORKSPACE"), "bookdown::gitbook"); bookdown::render_book(Sys.getenv("GITHUB_WORKSPACE"), "bookdown::pdf_book"); bookdown::render_book(Sys.getenv("GITHUB_WORKSPACE"), "bookdown::epub_book")'
+          Rscript -e 'library(JuliaCall); julia_setup(); bookdown::render_book(Sys.getenv("GITHUB_WORKSPACE"), "msmbstyle::msmb_html_book")'
       - uses: actions/upload-artifact@v2
         with:
           name: _book
