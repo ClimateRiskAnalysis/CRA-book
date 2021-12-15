@@ -1,3 +1,15 @@
+msmbstyle::msmb_html_book:
+  toc: true
+  toc_depth: 1
+  split_by: chapter
+  margin_references: FALSE
+  highlight: tango
+  css: css/style.css
+  config:
+    download: [pdf, epub]
+    sharing:
+      github: yes
+      facebook: no
 bookdown::gitbook:
   highlight: tango
   css: css/style.css

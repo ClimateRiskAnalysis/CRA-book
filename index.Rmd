@@ -1,8 +1,8 @@
 --- 
 title: "Risk Analysis in the Earth Sciences"
 author: 
-    - Vivek Srikrishnan^[Department of Biological & Environmental Engineering, Cornell University, viveks@cornell.edu]
-    - Klaus Keller^[Thayer School of Engineering, Dartmouth University, klaus.keller@dartmouth.edu]
+    - Vivek Srikrishnan
+    - Klaus Keller
 contributor:
     - Patrick J. Applegate
     - Tony E. Wong
@@ -21,6 +21,17 @@ cover-image: images/cover_with_alexander.png
 resource_files:
     - images/cover_with_alexander.png
 ---
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { 
+      equationNumbers: { 
+            autoNumber: "all",
+            formatNumber: function (n) {return +n}
+      } 
+  }
+});
+</script>
 
 ```{r, include=FALSE}
 knitr::opts_chunk$set(comment = '')
