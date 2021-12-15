@@ -1,8 +1,8 @@
 --- 
-title: "Climate Risk Analysis"
+title: "Risk Analysis in the Earth Sciences"
 author: 
-    - Vivek Srikrishnan
-    - Klaus Keller
+    - Vivek Srikrishnan^[Department of Biological & Environmental Engineering, Cornell University, viveks@cornell.edu]
+    - Klaus Keller^[Thayer School of Engineering, Dartmouth University, klaus.keller@dartmouth.edu]
 contributor:
     - Patrick J. Applegate
     - Tony E. Wong
@@ -16,12 +16,22 @@ colorlinks: yes
 graphics: yes
 fontsize: 11pt
 monofontoptions: "Scale=0.8"
-github-repo: vsrikrish/CRA-book
+github-repo: vsrikrish/RAES
 cover-image: images/cover_with_alexander.png
 resource_files:
     - images/cover_with_alexander.png
 ---
 
+```{r, include=FALSE}
+knitr::opts_chunk$set(comment = '')
+knitr::opts_chunk$set(class.output = "code-out")
+```
+
+```{julia, include=FALSE}
+using Pkg
+Pkg.activate(".")
+Pkg.instantiate()
+```
 
 # Preface {-} 
 
@@ -32,27 +42,6 @@ This textbook presents a series of exercises in Julia that teach the Earth scien
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />
 
 The content of this book is licensed under the [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License](https://creativecommons.org/licenses/by-nc-sa/4.0/).
-
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-  TeX: { 
-      equationNumbers: { 
-            autoNumber: "all",
-            formatNumber: function (n) {return +n}
-      } 
-  }
-});
-</script>
-
-```{r, include=FALSE}
-knitr::opts_chunk$set(class.output = "code-out")
-```
-
-```{julia, include=FALSE}
-using Pkg
-Pkg.activate(".")
-Pkg.instantiate()
-```
 
 
 ```{js, echo = FALSE}

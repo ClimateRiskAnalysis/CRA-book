@@ -1,7 +1,7 @@
 \mainmatter
 
-# What is Climate Risk?
-
+# Introduction
+ 
 This chapter was written by Patrick J. Applegate and Klaus Keller. It briefly discusses climate change, uncertainty, and risk.
 
 ## Climate Risks
