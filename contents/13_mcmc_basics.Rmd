@@ -654,7 +654,7 @@ The other parameters that we will pass to `RAM_sample()` are a starting paramete
 
 For output, we will grab the chains, the final acceptance rate, the final covariance matrix, and the log-posterior (though we don't need all of them for the purposes of this section).
 
-```{julia}
+```{julia, cache=TRUE}
 using RobustAdaptiveMetropolisSampler
 
 # merge the two data sets
@@ -674,7 +674,7 @@ accrate
 
 Let's examine the traceplots.
 
-```{julia, label="slr-traceplot", fig.cap="Traceplots for the Metropolis-Hastings samples for the sea-level rise model."}
+```{julia, label="slr-traceplot", cache=TRUE, fig.cap="Traceplots for the Metropolis-Hastings samples for the sea-level rise model."}
 plot(chain, layout=5, label=:false, ylabel=["alpha" "Teq" "H0" "rho" "sigma"], xlabel="Iteration", xrotation=45, bottom_margin=10mm)
 ```
 
@@ -687,7 +687,7 @@ plot(chain[burnin+1:end, :], layout=5, label=:false, ylabel=["alpha" "Teq" "H0" 
 
 We can compute some quantiative diagnostics using [`MCMCChains.jl`](https://turinglang.github.io/MCMCChains.jl/stable/). To do this, we will need to convert `chains` to a `MCMCChains.Chains` object. We can pass in a vector of parameter names, as well as any additional information such as the starting iteration (if we had already thrown away the burn-in) or thinning frequency.
 
-```{julia}
+```{julia, cache=TRUE}
 using MCMCChains
 
 # convert raw chain output to a Chains object
@@ -701,7 +701,7 @@ For example, we can see that the MCSE for $H_0$ is a bit higher than the others.
 
 We can also look at the quantiles and plot the distribution of our samples.
 
-```{julia, label="slr-density", fig.cap="Marginal posterior densities for the Metropolis-Hastings samples for the sea-level rise model."}
+```{julia, label="slr-density", cache=TRUE, fig.cap="Marginal posterior densities for the Metropolis-Hastings samples for the sea-level rise model."}
 quantile(chn)
 
 plot(chain[burnin+1:end, :], layout=5, seriestype=:density, label=:false, xlabel=["alpha" "Teq" "H0" "rho" "sigma"], grid=:false)
@@ -709,7 +709,7 @@ plot(chain[burnin+1:end, :], layout=5, seriestype=:density, label=:false, xlabel
 
 A pairs plot is a useful visual representation of the posterior samples, typically including marginal histograms and pairwise scatterplots^[Sometimes other useful information, such as correlation coefficients or bivariate densities are also included in a pairs plot. `StatsPlots.jl` provides two types of pairs plots. `corrplot()` provides a plot which also includes a color-coded correlation plot (including the best-fit line) for each pair of parameters. An example is shown in Figure \@ref(fig:slr-pairs).^[This may be a bit cramped due to the size of the plotting space, but you get the idea of what's included.]
 
-```{julia, label="slr-pairs", fig.cap="Pairs plot for the posterior density for our calibrated sea-level rise model."}
+```{julia, label="slr-pairs", cache=TRUE, fig.cap="Pairs plot for the posterior density for our calibrated sea-level rise model."}
 using StatsPlots
 
 corrplot(chain[burnin+1:end, :], label=["alpha" "Teq" "H0" "rho" "sigma"], xrotation=45)
@@ -717,7 +717,7 @@ corrplot(chain[burnin+1:end, :], label=["alpha" "Teq" "H0" "rho" "sigma"], xrota
 
 `cornerplot()` shows the marginal histograms around the edges of the plotting window, and can be used to provide a more compact representation with the flag `compact=true`. An example is shown in Figure \@ref(fig:slr-corner).
 
-```{julia, label="slr-corner", fig.cap="Corner plot for the posterior density for our calibrated sea-level rise model."}
+```{julia, label="slr-corner", cache=TRUE, fig.cap="Corner plot for the posterior density for our calibrated sea-level rise model."}
 cornerplot(chain[burnin+1:end, :], label=["alpha" "Teq" "H0" "rho" "sigma"], xrotation=45, compact=true)
 ```
 
@@ -771,7 +771,7 @@ end
 
 We can see the results of our hindcasting exercise in Figure \@ref(fig:slr-hindcast).
 
-```{julia, label="slr-hindcast", fig.margin=TRUE, fig.cap="Sea-level rise hindcastsfrom 1880--2013 using our calibrated model. Reconstructed data from @Church2011-bj are black dots, the 90% model output credible interval is in blue."}
+```{julia, label="slr-hindcast", cache=TRUE, fig.margin=TRUE, fig.beforecode=TRUE, fig.cap="Sea-level rise hindcastsfrom 1880--2013 using our calibrated model. Reconstructed data from @Church2011-bj are black dots, the 90% model output credible interval is in blue."}
 nsamples = 10000;
 sample_idx = rand(burnin+1:size(chain, 1), nsamples);
 post_samples = chain[sample_idx, :];
@@ -793,7 +793,7 @@ plot!(size=(350, 280))
 
 Visually, the hindcast in Figure \@ref(fig:slr-hindcast) looks pretty good! We see that the uncertainty actually decreases over time, which is the result of the reduced observation error. In general, our data is contained within our credible interval, but we don't actually want all of the data to be contained within a 90% credible interval. The level of the interval (in this case, 90%) suggests that the fraction of data that should be included within the interval if the model is appropriately calibrated. We can calculate this fraction, or its opposite^[The fraction of data located outside of the interval.], which is called the *surprise index*.
 
-```{julia}
+```{julia, cache=TRUE}
 # calculate the surprise index
 surprise_count = sum((data[:, 1] .<= cis[:, 2]) .| (data[:, 1] .>= cis[:, 3]));
 surprise_count / length(yrs)
