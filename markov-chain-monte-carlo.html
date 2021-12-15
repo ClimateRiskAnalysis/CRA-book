@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Chapter 5 Markov Chain Monte Carlo | Risk Analysis in the Earth Sciences" />
+<meta property="og:type" content="book" />
+
+<meta property="og:image" content="/images/cover_with_alexander.png" />
+
+<meta name="github-repo" content="vsrikrish/RAES" />
+
+<meta name="author" content="Vivek Srikrishnan" />
+<meta name="author" content="Klaus Keller" />
+
+<meta name="date" content="2021-12-15" />
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
+
+<meta name="description" content="Chapter 5 Markov Chain Monte Carlo | Risk Analysis in the Earth Sciences">
+
+<title>Chapter 5 Markov Chain Monte Carlo | Risk Analysis in the Earth Sciences</title>
+
+<link href="libs/tufte-css-2015.12.29/tufte.css" rel="stylesheet" />
+<link href="libs/tufte-css-2015.12.29/envisioned.css" rel="stylesheet" />
+<link href="libs/msmb-css-0/msmb.css" rel="stylesheet" />
+<script>
+function toggle_visibility(id1, id2) {
+var e = document.getElementById(id1);
+var f = document.getElementById(id2);
+
+e.style.display = ((e.style.display!='none') ? 'none' : 'block');
+
+if(f.classList.contains('fa-plus-square')) {
+    f.classList.add('fa-minus-square')
+    f.classList.remove('fa-plus-square')
+} else {
+    f.classList.add('fa-plus-square')
+    f.classList.remove('fa-minus-square')
+}
+
+}
+</script>
+<script>
+function copy_link(id) {
+  var dummy = document.createElement('input'),
+  text = window.location.href.split(/[?#]/)[0] + '#' + id;
+  document.body.appendChild(dummy);
+  dummy.value = text;
+  dummy.select();
+  document.execCommand('copy');
+  document.body.removeChild(dummy);
+  
+  var tooltip = document.getElementById(id + '-tooltip');
+  tooltip.innerHTML = 'Copied!';
+}
+
+function reset_tooltip(id) {
+  var tooltip = document.getElementById(id);
+  tooltip.innerHTML = 'Copy link';
+}
+</script>
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  background-color: #f8f8f8; }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #c4a000; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #000000; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #000000; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #000000; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+
+</head>
+
+<body>
+
+
+
+<div class="row">
+<div class="col-sm-12">
+<div id="TOC">
+<ul class="navbar">
+<li class="msmb"><p class="title">Risk Analysis in the Earth Sciences<p><p class="author">Vivek Srikrishnan, Klaus Keller</p>
+<li class="dropdown" style="float:right">
+<a href="javascript:void(0)" class="dropbtn">&#x25BE; Chapters</a>
+<div class="dropdown-content">
+<a href="index.html">Preface</a>
+<a href="about-this-book.html">About This Book</a>
+<a href="what-is-climate-risk.html"><span class="toc-section-number">1</span> What is Climate Risk?</a>
+<a href="julia-syntax.html"><span class="toc-section-number">2</span> Learning the basics of Julia</a>
+<a href="plotting-time-series-data.html"><span class="toc-section-number">3</span> Plotting Time Series Data</a>
+<a href="normal-distributions-and-the-galton-board.html"><span class="toc-section-number">4</span> Normal distributions and the Galton board</a>
+<a id="active-page" href="markov-chain-monte-carlo.html"><span class="toc-section-number">5</span> Markov Chain Monte Carlo</a><ul class="toc-sections">
+<li class="toc"><a href="#introduction-3"> Introduction</a></li>
+<li class="toc"><a href="#markov-chains"> Markov Chains</a></li>
+<li class="toc"><a href="#the-metropolis-hastings-algorithm"> The Metropolis-Hastings Algorithm</a></li>
+<li class="toc"><a href="#lr-calibrate"> Calibrating a Simple Model with MCMC</a></li>
+<li class="toc"><a href="#proposal-distribution"> Finding A Good Proposal Distribution</a></li>
+<li class="toc"><a href="#has-the-chain-converged"> Has The Chain Converged?</a></li>
+<li class="toc"><a href="#calibrating-a-sea-level-rise-model"> Calibrating a Sea-Level Rise Model</a></li>
+<li class="toc"><a href="#detailed-balance"> Why Metropolis-Hastings Works</a></li>
+</ul>
+<a href="references.html">References</a>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body>
+<div id="markov-chain-monte-carlo" class="section level1">
+<h1>
+<span class="header-section-number">Chapter 5</span> Markov Chain Monte Carlo</h1>
+<p>This chapter was written by Kelsey L. Ruckert, Tony E. Wong, Ben S. Lee, Yawen Guan, and Murali Haran. It will introduce you to the basics of Markov Chains, Markov chain Monte Carlo (MCMC), and the Metropolis-Hastings algorithm.</p>
+<div id="learning-objectives-3" class="section level3 unnumbered">
+<h3>Learning Objectives<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('learning-objectives-3')" onmouseout="reset_tooltip('learning-objectives-3-tooltip')"><span class="tooltiptext" id="learning-objectives-3-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
+</h3>
+<p>After completing this chapter, you should be able to:</p>
+<ul>
+<li>Understand the detailed balance equation and why it is important for MCMC;</li>
+<li>Describe the properties of a Markov chain and how they are relevant to MCMC sampling;</li>
+<li>Code a simple Metropolis-Hastings sampler and use it to draw samples from a target distribution.</li>
+</ul>
+</div>
+<div id="introduction-3" class="section level2">
+<h2>
+<span class="header-section-number">5.1</span> Introduction<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('introduction-3')" onmouseout="reset_tooltip('introduction-3-tooltip')"><span class="tooltiptext" id="introduction-3-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
+</h2>
+<p>In earlier chapters, we examined how a statistical technique called the bootstrap can be used to determine
+how confident we are about our estimates of uncertain values. In particular, we looked at how to determine
+whether a coin is fair and how sure we can be about our estimates of future sea-level change.</p>
+<p>The bootstrap is an example of what is called a <em>frequentist</em> statistical technique. Frequentist techniques
+assume that the probability of an event is the proportion of the times the event will occur (if it was an infinite
+number of trials and a probability <span class="math inline">\(0 &lt; p &lt; 1\)</span>, then we would see an infinite number of “successful” outcomes).<label for="tufte-sn-1" class="margin-toggle sidenote-number">1</label><input type="checkbox" id="tufte-sn-1" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">1</span> For example, we know that the probability that a fair coin will come up heads on any individual flip is 0.5. In
+a frequentist interpretation, that probability implies that we can observe a very large number of coin flips, in
+which we count the number of times the coin comes up heads. That number of times, divided by the number
+of flips, is the frequency with which the coin comes up heads.</span></p>
+<p>Of course, in many situations, we cannot perform lots of random trials to determine the probabilities of
+different outcomes. The sea-level rise problem is one example. We want to know how much sea level will rise
+in the future. Because the data and physical models are imperfect, we cannot be sure of the exact answer. In
+a frequentist framework, we would try to ascertain how sea-level rise would vary under multiple hypothetical
+replications of the state of the world (multiple alternative worlds). This is how we would determine the
+probabilities of different outcomes.</p>
+<p><em>Bayesian</em> techniques provide us with an alternative way of viewing this problem. In a Bayesian framework, we
+have a preexisting estimate of the probability of different outcomes that is based on our past experiences and
+our beliefs about the situation in question. We then make observations and update the probability estimates
+based on those observations. This procedure, which is called Bayesian updating, is perhaps similar to how
+people often make decisions. New information leads to changed opinions. The entire process of defining the
+prior probability distribution of different outcomes or physical model parameters and then using Bayesian
+updating to update our beliefs about those values is called <em>Bayesian model calibration</em>.<label for="tufte-sn-2" class="margin-toggle sidenote-number">2</label><input type="checkbox" id="tufte-sn-2" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">2</span> The use of the word “model” can refer to two different things, such as the statistical model (which is Bayesian in our case) and the physical model of the system of interest (<em>e.g.</em>, a
+global sea-level model). For simplicity and ease is understanding, we will use “statistical” or “physical” when
+referring to both kinds of models.</span></p>
+<p>In Bayesian model calibration, physical model parameters are considered to be random variables. Our
+knowledge of the parameters (before any data are observed) is represented by a prior probability distribution.
+Observations may be used to inform estimates of which parameter values are more or less likely. The
+probability model for observations provides a distribution on observations for a particular parameter setting<label for="tufte-sn-3" class="margin-toggle sidenote-number">3</label><input type="checkbox" id="tufte-sn-3" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">3</span> Think of the
+mean and variance parameters of a normal distribution — as we vary the values of the mean and the variance,
+the normal distribution for the observation changes.</span>,
+that is, as we vary the value of the parameters, the probability distribution changes. The probability model therefore provides a probability
+distribution for random variables for a particular parameter value. A <em>likelihood function</em><label for="tufte-sn-4" class="margin-toggle sidenote-number">4</label><input type="checkbox" id="tufte-sn-4" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">4</span> A likelihood function is equivalent to the probability distribution function, only it treats the parameters as uncertain and the observed values as given. The likelihood function is therefore a function of the parameters only, both the statistical and physical model parameters.</span> helps solve the inverse problem — it is useful for providing information about the parameters given the observations.</p>
+<p>Direct sampling from the posterior distribution is typically impossible because the posterior is
+only known up to a constant, and in many cases this distribution does not have a convenient form. In order to obtain samples
+from the posterior, one approach is to employ a <em>Markov chain Monte Carlo</em> (MCMC) sampling technique.</p>
+<p>MCMC is a class of algorithms used to simulate random variables or “draw samples” from a target probability
+distribution by constructing a <em>Markov chain</em> based on the distribution. For Bayesian inference, the distribution
+of interest is the posterior distribution. When the Markov chain satisfies certain properties, elements of the chain can be treated almost as though they were samples taken directly from the posterior distribution.</p>
+</div>
+<div id="markov-chains" class="section level2">
+<h2>
+<span class="header-section-number">5.2</span> Markov Chains<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('markov-chains')" onmouseout="reset_tooltip('markov-chains-tooltip')"><span class="tooltiptext" id="markov-chains-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
+</h2>
+<div id="definition" class="section level3">
+<h3>
+<span class="header-section-number">5.2.1</span> Definition<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('definition')" onmouseout="reset_tooltip('definition-tooltip')"><span class="tooltiptext" id="definition-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
+</h3>
+<p>A Markov chain is a stochastic model representing a sequence of <em>states</em> <span class="math inline">\((X_t)\)</span>. The key property that a Markov chain must satisfy is the <em>Markovian property</em>, which specifies that the probability of the next state depends only on the current state<label for="tufte-sn-5" class="margin-toggle sidenote-number">5</label><input type="checkbox" id="tufte-sn-5" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">5</span> Technically, this is the definition of a <em>discrete-time</em> Markov chain; <a href="https://en.wikipedia.org/wiki/Continuous-time_Markov_chain">Markov chains can also be defined over continuous time</a></span>, so if the history of the chain’s states has been <span class="math inline">\(\{x_1, x_2, \ldots, x_{t-1}\}\)</span>,
+<span class="math display">\[p\left(X_t = x | X_1 = x_1, X_2 = x_2, \ldots, X_{t-1} = x_{t-1}\right) = p\left(X_t = x | X_{t-1} = x_{t-1}\right).\]</span></p>
+<p>A Markov chain specification requires three elements:</p>
+<ul>
+<li>the state space (the space of possible values for each chain element);</li>
+<li>a probability distribution over the states which specifies the probability of starting the chain in that state (the <em>initial distribution</em>);</li>
+<li>and a probability distribution which specifies how the chain transitions from one state to another (the <em>transition distribution</em>).</li>
+</ul>
+</div>
+<div id="a-simple-example" class="section level3">
+<h3>
+<span class="header-section-number">5.2.2</span> A Simple Example<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('a-simple-example')" onmouseout="reset_tooltip('a-simple-example-tooltip')"><span class="tooltiptext" id="a-simple-example-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
+</h3>
+<p>For example, suppose we are interested in the weather on any day<label for="tufte-sn-6" class="margin-toggle sidenote-number">6</label><input type="checkbox" id="tufte-sn-6" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">6</span> This example is adapted from
+Example 11.1 in <span class="citation">Grinstead &amp; Snell (<a href="#ref-grinsteadIntroductionProbability2006" role="doc-biblioref">2006</a>)</span>.</span>. Suppose the weather can be either rainy, foggy, or sunny. The state space for the Markov chain contains three possible values: “rainy,” “foggy,” and “sunny.”</p>
+<p>Based on past experience, we know in this example that there are never two sunny days in a row and only half of the time a sunny day will occur after a foggy or rainy day. We also know there is an even chance of having two foggy days in a row
+and two rainy days in a row. This information specifies the <em>transition probabilities</em> between states:
+<span class="math display">\[
+\begin{alignat*}{3}
+p(\text{FOGGY} \to \text{FOGGY}) &amp;= \frac{1}{2} &amp;\quad p(\text{FOGGY} \to \text{SUNNY}) &amp;= \frac{1}{4} &amp;\quad p(\text{FOGGY} \to \text{RAINY}) &amp;= \frac{1}{4} \\
+p(\text{SUNNY} \to \text{FOGGY}) &amp;= \frac{1}{2} &amp;\quad p(\text{SUNNY} \to \text{SUNNY}) &amp;= 0 &amp;\quad p(\text{SUNNY} \to \text{RAINY} &amp;= \frac{1}{2} \\
+p(\text{RAINY} \to \text{FOGGY}) &amp;= \frac{1}{4} &amp;\quad p(\text{RAINY} \to \text{SUNNY}) &amp;= \frac{1}{4} &amp;\quad p(\text{RAINY} \to \text{RAINY} &amp;= \frac{1}{2}
+\end{alignat*}
+\]</span>
+and can be represented more succintly as a <em>transition matrix</em>,
+<span class="math display">\[P = \begin{pmatrix}
+1/2 &amp; 1/4 &amp; 1/4 \\
+1/2 &amp; 0 &amp; 1/2 \\
+1/4 &amp; 1/4 &amp; 1/2
+\end{pmatrix},\]</span>
+where each row represents the current state of the weather and each column represents the next day’s weather.<label for="tufte-sn-7" class="margin-toggle sidenote-number">7</label><input type="checkbox" id="tufte-sn-7" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">7</span> Note that the sums of the entries of each row in this transition matrix must equal one.</span></p>
+<p>In Julia, we could formalize this transition matrix as follows.</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb34-1"><a href="markov-chain-monte-carlo.html#cb34-1"></a>P = [[<span class="fl">1</span>/<span class="fl">2</span> <span class="fl">1</span>/<span class="fl">4</span> <span class="fl">1</span>/<span class="fl">4</span>] ; [<span class="fl">1</span>/<span class="fl">2</span> <span class="fl">0</span> <span class="fl">1</span>/<span class="fl">2</span>] ; [<span class="fl">1</span>/<span class="fl">4</span> <span class="fl">1</span>/<span class="fl">4</span> <span class="fl">1</span>/<span class="fl">2</span>]]</span></code></pre></div>
+<pre class="code-out"><code>3×3 Matrix{Float64}:
+ 0.5   0.25  0.25
+ 0.5   0.0   0.5
+ 0.25  0.25  0.5</code></pre>
+<p>Using what we already know, we can answer questions about the future weather by calculating probabiltiies based on today’s weather. For example, suppose today is foggy. What is the probability that the weather will be rainy two days from now? There are three possible paths:</p>
+<ol style="list-style-type: decimal">
+<li>Tomorrow is foggy, and two days from now the weather is rainy. Since today is foggy,
+the probability that tomorrow is also foggy is 0.5. And if tomorrow is foggy, then the probability that two days from now is rainy is 0.25. Thus, the probability of it being foggy then rainy is the product of these probabilities, <span class="math inline">\(0.5 \times 0.25 = 0.125\)</span>.</li>
+<li>Tomorrow is rainy (a 0.25 probability) and in two days, it is also rainy (a 0.5 probability), which also has a 0.125 probability of occurring based on the product of the probabilities.</li>
+<li>Tomorrow is sunny, followed by a rainy day. Since today is foggy, the probability of tomorrow being sunny is 0.25. If tomorrow is sunny, then the probability that it will be rainy two days from now is 0.50. Hence, if today is foggy, then the probability of it being sunny then rainy is the product <span class="math inline">\(0.25 \times 0.5 = 0.125\)</span>.</li>
+</ol>
+<p>These three events are independent<label for="tufte-sn-8" class="margin-toggle sidenote-number">8</label><input type="checkbox" id="tufte-sn-8" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">8</span> Tomorrow cannot be foggy, rainy, and sunny all at the same time.</span>, so combining these three probabilities gives a total probability of <span class="math inline">\(0.125 + 0.125 + 0.125 = 0.375\)</span> that it will be rainy two days from now. Thus, there is a 0.375 probability that the weather will be rainy two days from now given today is foggy. We could follow the same procedure to calculate the probabilities of the weather in two days being foggy or sunny. But rather than do this for all individual cases, we can note that, due to the Markovian property, the probabilities of transitioning from <span class="math inline">\(x_t \to x_{t+2}\)</span> are given by <span class="math inline">\(P \times P = P^2\)</span>.</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb36-1"><a href="markov-chain-monte-carlo.html#cb36-1"></a>P^<span class="fl">2</span></span></code></pre></div>
+<pre class="code-out"><code>3×3 Matrix{Float64}:
+ 0.4375  0.1875  0.375
+ 0.375   0.25    0.375
+ 0.375   0.1875  0.4375</code></pre>
+<p>We interpret these values analogous to how we did above: the probability of transitioning after two days from fog to rain is in row 1 (today’s weather), column three (the weather in two days), and this is precisely the 0.375 probability we calculated by considering the different paths.</p>
+<p>In fact, we could keep on going and calculate the probabilities of the weather at any point in the future, conditioned only on today’s weather being foggy. Figure <a href="markov-chain-monte-carlo.html#fig:markovsim">5.1</a> shows the evolution of these probabilities from an initial probability vector of <span class="math inline">\([1 0 0]\)</span>, that is, a known foggy state.</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb38-1"><a href="markov-chain-monte-carlo.html#cb38-1"></a>using Plots</span>
+<span id="cb38-2"><a href="markov-chain-monte-carlo.html#cb38-2"></a></span>
+<span id="cb38-3"><a href="markov-chain-monte-carlo.html#cb38-3"></a><span class="kw">function</span> future_weather_probability(initial_probability, forecast_days_ahead, transition_matrix)</span>
+<span id="cb38-4"><a href="markov-chain-monte-carlo.html#cb38-4"></a>    <span class="co"># initialize storage for probabilities</span></span>
+<span id="cb38-5"><a href="markov-chain-monte-carlo.html#cb38-5"></a>    weather_probability = zeros(forecast_days_ahead + <span class="fl">1</span>, <span class="fl">3</span>)</span>
+<span id="cb38-6"><a href="markov-chain-monte-carlo.html#cb38-6"></a>    <span class="co"># first probability is the initial vector</span></span>
+<span id="cb38-7"><a href="markov-chain-monte-carlo.html#cb38-7"></a>    weather_probability[<span class="fl">1</span>, :] = initial_probability</span>
+<span id="cb38-8"><a href="markov-chain-monte-carlo.html#cb38-8"></a>    <span class="co"># loop over each future day and calculate the probabilities</span></span>
+<span id="cb38-9"><a href="markov-chain-monte-carlo.html#cb38-9"></a>    <span class="kw">for</span> i <span class="kw">in</span> <span class="fl">1</span>:forecast_days_ahead</span>
+<span id="cb38-10"><a href="markov-chain-monte-carlo.html#cb38-10"></a>        <span class="co"># [i] is used as the index to get a row vector</span></span>
+<span id="cb38-11"><a href="markov-chain-monte-carlo.html#cb38-11"></a>        weather_probability[i+<span class="fl">1</span>, :] = weather_probability[[i], :] * P </span>
+<span id="cb38-12"><a href="markov-chain-monte-carlo.html#cb38-12"></a>    <span class="kw">end</span></span>
+<span id="cb38-13"><a href="markov-chain-monte-carlo.html#cb38-13"></a>    <span class="co"># return probabilities</span></span>
+<span id="cb38-14"><a href="markov-chain-monte-carlo.html#cb38-14"></a>    <span class="kw">return</span> weather_probability</span>
+<span id="cb38-15"><a href="markov-chain-monte-carlo.html#cb38-15"></a><span class="kw">end</span></span>
+<span id="cb38-16"><a href="markov-chain-monte-carlo.html#cb38-16"></a>future_weather_probability (generic <span class="kw">function</span> with <span class="fl">1</span> method)</span>
+<span id="cb38-17"><a href="markov-chain-monte-carlo.html#cb38-17"></a></span>
+<span id="cb38-18"><a href="markov-chain-monte-carlo.html#cb38-18"></a>probs = future_weather_probability([<span class="fl">1</span> <span class="fl">0</span> <span class="fl">0</span>], <span class="fl">25</span>, P);</span>
+<span id="cb38-19"><a href="markov-chain-monte-carlo.html#cb38-19"></a></span>
+<span id="cb38-20"><a href="markov-chain-monte-carlo.html#cb38-20"></a>plot(probs, label=[<span class="st">"Foggy"</span> <span class="st">"Sunny"</span> <span class="st">"Rainy"</span>], lw=<span class="fl">3</span>, grid=:off);</span>
+<span id="cb38-21"><a href="markov-chain-monte-carlo.html#cb38-21"></a>plot!(size=(<span class="fl">320</span>, <span class="fl">240</span>))</span></code></pre></div>
+<p>
+<span class="marginnote shownote">
+<!--
+<div class="figure">--><span style="display:block;" id="fig:markovsim"></span>
+<img src="raes_files/figure-html/markovsim-J1.png" alt="Probability of the weather over a 25 day period starting from fog for the stochastic process described above."><!--
+<p class="caption marginnote">-->Figure 5.1: Probability of the weather over a 25 day period starting from fog for the stochastic process described above.<!--</p>-->
+<!--</div>--></span>
+</p>
+<p>Notice how the probabilities in Figure <a href="markov-chain-monte-carlo.html#fig:markovsim">5.1</a> stabilize over time (after about 5 days, in this case)! Certain Markov chains have the interesting property that, eventually, this distribution of future states will be the same <em>no matter what the current state is</em>. In this example, if we go out far enough into the future, it doesn’t matter what today’s weather is — the probability of the weather that far ahead is the same! When this occurs, this distribution is called the <em>stationary</em> or <em>equilibrium distribution</em> of the Markov chain.<label for="tufte-sn-9" class="margin-toggle sidenote-number">9</label><input type="checkbox" id="tufte-sn-9" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">9</span> This probability vector <span class="math inline">\(\pi\)</span> has the property that <span class="math display">\[\pi P = P,\]</span> so that <span class="math inline">\(\pi\)</span> is a normalized eigenvector of <span class="math inline">\(P\)</span> with eigenvalue one.</span> In other words, the Markov chain eventually forgets its initial condition and the probability of being in any state converges to <span class="math inline">\(\pi\)</span>. The state history prior to this convergence are called the <em>transient</em> portion of the Markov chain.</p>
+</div>
+<div id="from-markov-chains-to-monte-carlo" class="section level3">
+<h3>
+<span class="header-section-number">5.2.3</span> From Markov chains to Monte Carlo<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('from-markov-chains-to-monte-carlo')" onmouseout="reset_tooltip('from-markov-chains-to-monte-carlo-tooltip')"><span class="tooltiptext" id="from-markov-chains-to-monte-carlo-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
+</h3>
+<p>The goal of MCMC is to sample from a target distribution, usually the posterior distribution. There are a number of different “families” of MCMC algorithms, but they all work by constructing a Markov chain over the parameter space that has a stationary distribution equal to the target distribution, so that, eventually, the elements of the chain are drawn from the target distribution. Remember about the transient portion of the chain, though — it’ll become relevant later.</p>
+<p>There is another important implication of the use of a Markov chain to sample from the target distribution. Many statistical quantities, such as the mean, are ideally derived from <em>identically and independently distributed</em> samples. Samples drawn using a Markov chain, though, are not independently drawn, as they are dependent on the previous chain element. This means that 1,000,000 MCMC samples are not equivalent to 1,000,000 independent samples, but the precise <em>effective sample size</em> depends on properties of the chain. We will discuss this later.</p>
+</div>
+</div>
+<div id="the-metropolis-hastings-algorithm" class="section level2">
+<h2>
+<span class="header-section-number">5.3</span> The Metropolis-Hastings Algorithm<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('the-metropolis-hastings-algorithm')" onmouseout="reset_tooltip('the-metropolis-hastings-algorithm-tooltip')"><span class="tooltiptext" id="the-metropolis-hastings-algorithm-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
+</h2>
+<p>The Metropolis-Hastings algorithm<label for="tufte-sn-10" class="margin-toggle sidenote-number">10</label><input type="checkbox" id="tufte-sn-10" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">10</span> Which was <a href="https://nhigham.com/2016/03/29/the-top-10-algorithms-in-applied-mathematics/">named one of the top 10 algorithms in applied mathematics in the 20th century in 2000</a>.</span> is the foundation for many “other” MCMC algorithms. In this section, we will only give a brief introduction to the Metropolis-Hastings algorithm and why it works. For interested readers, <span class="citation">Robert (<a href="#ref-robertMetropolisHastingsAlgorithm2015" role="doc-biblioref">2015</a>)</span> provides more details and examples.</p>
+<div id="overview-of-the-algorithm" class="section level3">
+<h3>
+<span class="header-section-number">5.3.1</span> Overview of the Algorithm<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('overview-of-the-algorithm')" onmouseout="reset_tooltip('overview-of-the-algorithm-tooltip')"><span class="tooltiptext" id="overview-of-the-algorithm-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
+</h3>
+<p>Given a current value of the Markov chain <span class="math inline">\(x_t\)</span>, the Metropolis-Hastings algorithm proceeds by proposing a new value <span class="math inline">\(\hat{y}\)</span>, which is then accepted or rejected. If the value is accepted, <span class="math inline">\(x_{t+1} = \hat{y}\)</span>, else <span class="math inline">\(x_{t+1} = x_t\)</span>.</p>
+<p>New values are proposed according to some <em>proposal distribution</em> <span class="math inline">\(q(y | x)\)</span>, so that <span class="math inline">\(y \sim q(\cdot | x)\)</span>. For example, a common default choice for <span class="math inline">\(q(\cdot | x)\)</span> is <span class="math inline">\(\mathcal{N}(x, \sigma^2)\)</span>, a (multi-variate) normal distribution centered at <span class="math inline">\(x\)</span> with some specified variance <span class="math inline">\(\sigma^2\)</span>.<label for="tufte-sn-11" class="margin-toggle sidenote-number">11</label><input type="checkbox" id="tufte-sn-11" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">11</span> Other choices may be used, and this can dramatically affect the efficiency of the sampling algorithm.</span> We will use <span class="math inline">\(q(\cdot | x) = \mathcal{N}(x, \sigma^2)\)</span> in our examples.</p>
+<p>The next question is whether a new proposal <span class="math inline">\(y\)</span> is accepted. If the target distribution is denoted by <span class="math inline">\(\pi(\cdot)\)</span>, the acceptance probability <span class="math inline">\(\alpha(y | x)\)</span> is defined as <span class="math display">\[\alpha(y | x) = \min\left\{1, \frac{\pi(y)q(x | y)}{\pi(x)q(y | x)}\right\}.\]</span> When the proposal distribution <span class="math inline">\(q\)</span> is symmetric, such as when <span class="math inline">\(q\)</span> is normal, the <span class="math inline">\(q\)</span> terms cancel out, and acceptance is based on the ratio of the target distribution probabilities. In this case, when the new proposal has a higher target probability than the current value, <span class="math inline">\(\pi(y) &gt; \pi(x)\)</span>, it is accepted with probability 1.</p>
+<p>To summarize, to run the Metropolis-Hastings algorithm, start with some initial parameter value <span class="math inline">\(x_0\)</span>. Then each iteration from step <span class="math inline">\(t-1\)</span> to <span class="math inline">\(t\)</span> follows these steps:<label for="tufte-sn-12" class="margin-toggle sidenote-number">12</label><input type="checkbox" id="tufte-sn-12" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">12</span> As written, these steps are for the <em>all-in-one</em> Metropolis-Hastings algorithm, where all parameters are updated in a single step. The other extreme is to propose a single parameter at a time, calculate its acceptance probability conditional on the other, currently fixed parameters, and iterate accordingly. You can also split the difference by dividing the parameters into groups and proposing each group at a time. These different variations will have different efficiencies for a given problem based on the structure of the joint posterior.</span></p>
+<ol style="list-style-type: decimal">
+<li>Propose a new value <span class="math inline">\(y \sim q(\cdot | x_{t-1})\)</span>.</li>
+<li>Compute the acceptance probability <span class="math inline">\(\alpha(y | x_{t-1})\)</span>.</li>
+<li>Sample a random uniform value <span class="math inline">\(u \sim \mathcal{U}(0, 1)\)</span>.
+<ul>
+<li>If <span class="math inline">\(u &lt; \alpha(y | x_{t-1})\)</span>, set <span class="math inline">\(x_t = y\)</span>;</li>
+<li>Else <span class="math inline">\(x_t = x_{t-1}\)</span>.</li>
+</ul>
+</li>
+</ol>
+<p>One extremely powerful aspect of this algorithm is that we don’t need to know the target distribution <span class="math inline">\(\pi\)</span> precisely, but only a distribution <span class="math inline">\(g\)</span> that it is proportional to,<label for="tufte-sn-13" class="margin-toggle sidenote-number">13</label><input type="checkbox" id="tufte-sn-13" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">13</span> Since the proportionality coefficient cancels out in the definition of <span class="math inline">\(\alpha(y|x)\)</span>.</span>, so we can completely ignore normalizing constants.<label for="tufte-sn-14" class="margin-toggle sidenote-number">14</label><input type="checkbox" id="tufte-sn-14" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">14</span> Which is great, because the normalizing constant is a pain to compute.</span></p>
+</div>
+</div>
+<div id="lr-calibrate" class="section level2">
+<h2>
+<span class="header-section-number">5.4</span> Calibrating a Simple Model with MCMC<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('lr-calibrate')" onmouseout="reset_tooltip('lr-calibrate-tooltip')"><span class="tooltiptext" id="lr-calibrate-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
+</h2>
+<div id="generate-pseudo-observations" class="section level3">
+<h3>
+<span class="header-section-number">5.4.1</span> Generate Pseudo-Observations<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('generate-pseudo-observations')" onmouseout="reset_tooltip('generate-pseudo-observations-tooltip')"><span class="tooltiptext" id="generate-pseudo-observations-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
+</h3>
+<p>Let’s do an example. Suppose that we have some observations <span class="math inline">\(y_t\)</span> of a linear system<label for="tufte-sn-15" class="margin-toggle sidenote-number">15</label><input type="checkbox" id="tufte-sn-15" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">15</span> Or, in this case, some “pseudo-observations” we will generate.</span> defined by <span class="math display">\[f(\alpha, \beta, t) = \alpha \cdot t + \beta.\]</span> While <span class="math inline">\(f\)</span> is the <em>physical model</em> of the system, observations almost always have some measurement error, which we model by <span class="math inline">\(\varepsilon_t \sim N(0, \sigma^2)\)</span>. Then our observed data <span class="math inline">\(y_t\)</span> is represented by
+<span class="math display">\[y_t = f(\alpha, \beta, t) + \varepsilon_t.\]</span> We can see the pseudo-observations plotted in Figure <a href="markov-chain-monte-carlo.html#fig:mcmc-regress-obs">5.2</a>.</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb39-1"><a href="markov-chain-monte-carlo.html#cb39-1"></a>using Plots</span>
+<span id="cb39-2"><a href="markov-chain-monte-carlo.html#cb39-2"></a>using Random</span>
+<span id="cb39-3"><a href="markov-chain-monte-carlo.html#cb39-3"></a>using Distributions</span>
+<span id="cb39-4"><a href="markov-chain-monte-carlo.html#cb39-4"></a></span>
+<span id="cb39-5"><a href="markov-chain-monte-carlo.html#cb39-5"></a><span class="co"># set the random seed</span></span>
+<span id="cb39-6"><a href="markov-chain-monte-carlo.html#cb39-6"></a>Random.seed!(<span class="fl">1</span>);</span>
+<span id="cb39-7"><a href="markov-chain-monte-carlo.html#cb39-7"></a><span class="co"># define the "true" model parameters</span></span>
+<span id="cb39-8"><a href="markov-chain-monte-carlo.html#cb39-8"></a>alpha_true = <span class="fl">2</span>;</span>
+<span id="cb39-9"><a href="markov-chain-monte-carlo.html#cb39-9"></a>beta_true = -<span class="fl">5</span>;</span>
+<span id="cb39-10"><a href="markov-chain-monte-carlo.html#cb39-10"></a>sigma_true = <span class="fl">5</span>;</span>
+<span id="cb39-11"><a href="markov-chain-monte-carlo.html#cb39-11"></a>sim_time = <span class="dt">Array</span>(<span class="fl">1</span>:<span class="fl">10</span>);</span>
+<span id="cb39-12"><a href="markov-chain-monte-carlo.html#cb39-12"></a><span class="co"># generate observations</span></span>
+<span id="cb39-13"><a href="markov-chain-monte-carlo.html#cb39-13"></a>y_true = (alpha_true .* sim_time) .+ beta_true;</span>
+<span id="cb39-14"><a href="markov-chain-monte-carlo.html#cb39-14"></a>meas_err = rand(Normal(<span class="fl">0</span>, sigma_true), <span class="fl">10</span>);   </span>
+<span id="cb39-15"><a href="markov-chain-monte-carlo.html#cb39-15"></a>y_obs = y_true + meas_err;</span>
+<span id="cb39-16"><a href="markov-chain-monte-carlo.html#cb39-16"></a></span>
+<span id="cb39-17"><a href="markov-chain-monte-carlo.html#cb39-17"></a><span class="co"># plot the true model and observations</span></span>
+<span id="cb39-18"><a href="markov-chain-monte-carlo.html#cb39-18"></a>plot(sim_time, y_true, xlabel=<span class="st">"Time"</span>, ylabel=<span class="st">"Value"</span>, label=<span class="st">"True Model"</span>, legend=:topleft);</span>
+<span id="cb39-19"><a href="markov-chain-monte-carlo.html#cb39-19"></a>scatter!(sim_time, y_obs, label=<span class="st">"Observations"</span>);</span>
+<span id="cb39-20"><a href="markov-chain-monte-carlo.html#cb39-20"></a>plot!(size=(<span class="fl">320</span>, <span class="fl">240</span>))</span></code></pre></div>
+<p>
+<span class="marginnote shownote">
+<!--
+<div class="figure">--><span style="display:block;" id="fig:mcmc-regress-obs"></span>
+<img src="raes_files/figure-html/mcmc-regress-obs-J1.png" alt="Pseudo-observations used to calibrate the linear regression example."><!--
+<p class="caption marginnote">-->Figure 5.2: Pseudo-observations used to calibrate the linear regression example.<!--</p>-->
+<!--</div>--></span>
+</p>
+</div>
+<div id="define-the-statistical-model" class="section level3">
+<h3>
+<span class="header-section-number">5.4.2</span> Define the Statistical Model<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('define-the-statistical-model')" onmouseout="reset_tooltip('define-the-statistical-model-tooltip')"><span class="tooltiptext" id="define-the-statistical-model-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
+</h3>
+<p>To specify a Bayesian model, we need to specify a likelihood function and prior distributions over the physical model and statistical parameters. The likelihood function is based on our model of the error process, as
+<span class="math display">\[y_t - f(\alpha, \beta, t) = \varepsilon_t \sim N(0, \sigma^2).\]</span>
+Thus, for proposed values of <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span>, we can compute the <em>residuals</em> between the observations and the model predictions, and these should be distributed according to the normal distribution specified by <span class="math inline">\(\sigma\)</span>. We’ve also assumed that these errors are independent<label for="tufte-sn-16" class="margin-toggle sidenote-number">16</label><input type="checkbox" id="tufte-sn-16" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">16</span> We could have instead modeled them as autocorrelated, if an analysis of the residual structure suggested that this was the case.</span>, so the log-likelihood function is the sum of the log-likelihoods for each individual data point.<label for="tufte-sn-17" class="margin-toggle sidenote-number">17</label><input type="checkbox" id="tufte-sn-17" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">17</span> In general, it’s preferable to work with log-likelihoods instead of likelihoods because likelihood values can be quite small, and so the logarithms are more numerically stable.</span></p>
+<p>For the code implementation, it might be tempting to pass each individual parameter as a function input, as the problem is so small. The downside to this is that it doesn’t scale well — for a bigger problem, where we might have dozens of parameters, the function specification would get out of control! It’s more readable and more straightforward to pass around the entire parameter vector and then access which parameters you need.<label for="tufte-sn-18" class="margin-toggle sidenote-number">18</label><input type="checkbox" id="tufte-sn-18" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">18</span> Just make sure to document how the parameters are indexed within the vector. This should be specified clearly somewhere in your code and documentation.</span></p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb40-1"><a href="markov-chain-monte-carlo.html#cb40-1"></a><span class="co"># We will need the Distributions.jl package loaded when we actually</span></span>
+<span id="cb40-2"><a href="markov-chain-monte-carlo.html#cb40-2"></a><span class="co"># want to run this function, but here we're just defining it </span></span>
+<span id="cb40-3"><a href="markov-chain-monte-carlo.html#cb40-3"></a></span>
+<span id="cb40-4"><a href="markov-chain-monte-carlo.html#cb40-4"></a><span class="co"># The inputs to the log-likelihood function are the model parameters,</span></span>
+<span id="cb40-5"><a href="markov-chain-monte-carlo.html#cb40-5"></a><span class="co"># as well as the vector of observations and a vector of times to which</span></span>
+<span id="cb40-6"><a href="markov-chain-monte-carlo.html#cb40-6"></a><span class="co"># the observations correspond.</span></span>
+<span id="cb40-7"><a href="markov-chain-monte-carlo.html#cb40-7"></a><span class="co">#</span></span>
+<span id="cb40-8"><a href="markov-chain-monte-carlo.html#cb40-8"></a><span class="co"># alpha = theta[1], beta = theta[[2], sigma = theta[3]</span></span>
+<span id="cb40-9"><a href="markov-chain-monte-carlo.html#cb40-9"></a><span class="kw">function</span> log_likelihood(theta, obs, model_time)</span>
+<span id="cb40-10"><a href="markov-chain-monte-carlo.html#cb40-10"></a>    <span class="co"># compute model output with the parameters</span></span>
+<span id="cb40-11"><a href="markov-chain-monte-carlo.html#cb40-11"></a>    f_out = (theta[<span class="fl">1</span>] .* model_time) .+ theta[<span class="fl">2</span>]</span>
+<span id="cb40-12"><a href="markov-chain-monte-carlo.html#cb40-12"></a>    <span class="co"># compute the residuals</span></span>
+<span id="cb40-13"><a href="markov-chain-monte-carlo.html#cb40-13"></a>    residuals = obs - f_out</span>
+<span id="cb40-14"><a href="markov-chain-monte-carlo.html#cb40-14"></a></span>
+<span id="cb40-15"><a href="markov-chain-monte-carlo.html#cb40-15"></a>    <span class="co"># calculate the log-likelihood for each residual and sum</span></span>
+<span id="cb40-16"><a href="markov-chain-monte-carlo.html#cb40-16"></a>    resid_normal_dist = Normal(<span class="fl">0</span>, theta[<span class="fl">3</span>])</span>
+<span id="cb40-17"><a href="markov-chain-monte-carlo.html#cb40-17"></a>    log_lik = loglikelihood(resid_normal_dist, residuals)</span>
+<span id="cb40-18"><a href="markov-chain-monte-carlo.html#cb40-18"></a></span>
+<span id="cb40-19"><a href="markov-chain-monte-carlo.html#cb40-19"></a>    <span class="kw">return</span> log_lik</span>
+<span id="cb40-20"><a href="markov-chain-monte-carlo.html#cb40-20"></a><span class="kw">end</span></span></code></pre></div>
+<pre class="code-out"><code>log_likelihood (generic function with 1 method)</code></pre>
+<p>In this example, we are given very little prior information about the physical process, so it is difficult to define an informative prior distribution. One key consideration is that one should not specify the priors based on the data<label for="tufte-sn-19" class="margin-toggle sidenote-number">19</label><input type="checkbox" id="tufte-sn-19" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">19</span> This would be result in the information in the observations being counted twice — once in the likelihood, and once in the priors — which could result in overconfident inferences.</span>, so we will just use diffuse priors which do not contain much information:</p>
+<ul>
+<li>
+<span class="math inline">\(\alpha \sim N(0, 10)\)</span>;</li>
+<li>
+<span class="math inline">\(\beta \sim N(0, 10)\)</span>;</li>
+<li>
+<span class="math inline">\(\sigma \sim \text{Half-Cauchy}(0, 2)\)</span>.<label for="tufte-sn-20" class="margin-toggle sidenote-number">20</label><input type="checkbox" id="tufte-sn-20" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">20</span> This is a <a href="https://en.wikipedia.org/wiki/Cauchy_distribution">Cauchy distribution</a> <em>truncated</em> at 0, so it only has positive probability on the positive real-line. This choice gives us a fatter tail for the variance than using a truncated normal or log-normal. Some arguments in favor of using half-<span class="math inline">\(t\)</span> or half-Cauchy distributions for this type of prior are given by <span class="citation">Gelman (<a href="#ref-gelmanPriorDistributionsVariance2006" role="doc-biblioref">2006</a>)</span> and polsonHalfCauchyPriorGlobal2012.</span>
+</li>
+</ul>
+<div class="sourceCode" id="cb42"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb42-1"><a href="markov-chain-monte-carlo.html#cb42-1"></a><span class="co"># once again, we will need to load Distributions.jl before we use this function</span></span>
+<span id="cb42-2"><a href="markov-chain-monte-carlo.html#cb42-2"></a></span>
+<span id="cb42-3"><a href="markov-chain-monte-carlo.html#cb42-3"></a><span class="co"># the inputs to the log-prior function are the model parameters only;</span></span>
+<span id="cb42-4"><a href="markov-chain-monte-carlo.html#cb42-4"></a><span class="co"># they are indexed the same as in log_prior</span></span>
+<span id="cb42-5"><a href="markov-chain-monte-carlo.html#cb42-5"></a><span class="kw">function</span> log_prior(theta)</span>
+<span id="cb42-6"><a href="markov-chain-monte-carlo.html#cb42-6"></a>    <span class="co"># define the prior distributions</span></span>
+<span id="cb42-7"><a href="markov-chain-monte-carlo.html#cb42-7"></a>    alpha_prior = Normal(<span class="fl">0</span>, <span class="fl">10</span>)</span>
+<span id="cb42-8"><a href="markov-chain-monte-carlo.html#cb42-8"></a>    beta_prior = Normal(<span class="fl">0</span>, <span class="fl">10</span>)</span>
+<span id="cb42-9"><a href="markov-chain-monte-carlo.html#cb42-9"></a>    <span class="co"># we will use the truncated() function in Distributions.jl</span></span>
+<span id="cb42-10"><a href="markov-chain-monte-carlo.html#cb42-10"></a>    <span class="co"># to specify the half-Cauchy</span></span>
+<span id="cb42-11"><a href="markov-chain-monte-carlo.html#cb42-11"></a>    sigma_prior = truncated(Cauchy(<span class="fl">0</span>, <span class="fl">2</span>), <span class="fl">0</span>, Inf)</span>
+<span id="cb42-12"><a href="markov-chain-monte-carlo.html#cb42-12"></a></span>
+<span id="cb42-13"><a href="markov-chain-monte-carlo.html#cb42-13"></a>    logpri = logpdf(alpha_prior, theta[<span class="fl">1</span>]) +</span>
+<span id="cb42-14"><a href="markov-chain-monte-carlo.html#cb42-14"></a>             logpdf(beta_prior, theta[<span class="fl">2</span>]) + </span>
+<span id="cb42-15"><a href="markov-chain-monte-carlo.html#cb42-15"></a>             logpdf(sigma_prior, theta[<span class="fl">3</span>])</span>
+<span id="cb42-16"><a href="markov-chain-monte-carlo.html#cb42-16"></a></span>
+<span id="cb42-17"><a href="markov-chain-monte-carlo.html#cb42-17"></a>    <span class="kw">return</span> logpri</span>
+<span id="cb42-18"><a href="markov-chain-monte-carlo.html#cb42-18"></a><span class="kw">end</span></span></code></pre></div>
+<pre class="code-out"><code>log_prior (generic function with 1 method)</code></pre>
+<p>Finally, we can specify the log-posterior function, which is straightforward, as the log-likelihood and log-prior just need to be computed and summed.<label for="tufte-sn-21" class="margin-toggle sidenote-number">21</label><input type="checkbox" id="tufte-sn-21" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">21</span> Notice that we don’t compute normalizing constants anywhere; as noted above, this is completely unnecessary with MCMC, as all we need to know is a distribution which is proportional to the posterior distribution.</span></p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb44-1"><a href="markov-chain-monte-carlo.html#cb44-1"></a><span class="co"># again, load Distributions.jl before using this function</span></span>
+<span id="cb44-2"><a href="markov-chain-monte-carlo.html#cb44-2"></a></span>
+<span id="cb44-3"><a href="markov-chain-monte-carlo.html#cb44-3"></a><span class="co"># the inputs to the log-posterior function are the model parameters,</span></span>
+<span id="cb44-4"><a href="markov-chain-monte-carlo.html#cb44-4"></a><span class="co"># the observations, and the model simulation times.</span></span>
+<span id="cb44-5"><a href="markov-chain-monte-carlo.html#cb44-5"></a><span class="kw">function</span> log_posterior(theta, obs, model_time)</span>
+<span id="cb44-6"><a href="markov-chain-monte-carlo.html#cb44-6"></a>    loglik = log_likelihood(theta, obs, model_time)</span>
+<span id="cb44-7"><a href="markov-chain-monte-carlo.html#cb44-7"></a>    logpri = log_prior(theta)</span>
+<span id="cb44-8"><a href="markov-chain-monte-carlo.html#cb44-8"></a></span>
+<span id="cb44-9"><a href="markov-chain-monte-carlo.html#cb44-9"></a>    <span class="kw">return</span> loglik + logpri</span>
+<span id="cb44-10"><a href="markov-chain-monte-carlo.html#cb44-10"></a><span class="kw">end</span></span></code></pre></div>
+<pre class="code-out"><code>log_posterior (generic function with 1 method)</code></pre>
+</div>
+<div id="metropolis-hastings-implementation" class="section level3">
+<h3>
+<span class="header-section-number">5.4.3</span> Metropolis-Hastings Implementation<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('metropolis-hastings-implementation')" onmouseout="reset_tooltip('metropolis-hastings-implementation-tooltip')"><span class="tooltiptext" id="metropolis-hastings-implementation-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
+</h3>
+<p>In this particular example, we will implement the Metropolis-Hastings algorithm manually, since the problem is so simple. For more complex problems, we might want to use the <a href="https://turing.ml/stable/"><code>Turing.jl</code></a> package.<label for="tufte-sn-22" class="margin-toggle sidenote-number">22</label><input type="checkbox" id="tufte-sn-22" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">22</span> <code>Turing.jl</code> can sample from the posterior using a variety of MCMC algorithms, including Metropolis-Hastings, and will automatically keep track of various diagnostics and associated quantities, such as log-posterior values and acceptance rates. We will have to do this manually in this example.</span></p>
+<p>We will draw our proposals from a multivariate normal distribution with a diagonal covariance matrix.<label for="tufte-sn-23" class="margin-toggle sidenote-number">23</label><input type="checkbox" id="tufte-sn-23" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">23</span> This is the same thing as drawing them from independent univariate normals, but this approach scales better to larger problems.</span> These matrices are specified using <a href="https://github.com/JuliaStats/PDMats.jl"><code>PDMats.jl</code></a>, which ensures that the matrices are positive definite.<label for="tufte-sn-24" class="margin-toggle sidenote-number">24</label><input type="checkbox" id="tufte-sn-24" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">24</span> Positive <a href="https://en.wikipedia.org/wiki/Definite_matrix">definite matrices</a> are symmetric and have positive eigenvalues. Covariance matrices must be positive definite.</span> <code>PDMats.jl</code> has special forms for various types of positive-definite matrices, including matrices which are diagonal, which helps with speed and memory usage.</p>
+<p>The Metropolis-Hastings sampler below is also coded as a function; we do this to allow the proposal standard deviations to be passed in as an input. This is typically not necessary, but it will allow us to examine the implications of various choices later.<label for="tufte-sn-25" class="margin-toggle sidenote-number">25</label><input type="checkbox" id="tufte-sn-25" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">25</span> This is also the reason that we’re keeping track of the number of accepted proposals, which isn’t strictly necessary, but is a useful diagnostic, as we shall see.</span></p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb46-1"><a href="markov-chain-monte-carlo.html#cb46-1"></a><span class="co"># load Distributions.jl and PDMats.jl before using this function</span></span>
+<span id="cb46-2"><a href="markov-chain-monte-carlo.html#cb46-2"></a></span>
+<span id="cb46-3"><a href="markov-chain-monte-carlo.html#cb46-3"></a><span class="co"># the first input (stepsize) is a vector of standard deviations; these will need</span></span>
+<span id="cb46-4"><a href="markov-chain-monte-carlo.html#cb46-4"></a><span class="co"># to be squared; the second is the number of MCMC iterations; the third are</span></span>
+<span id="cb46-5"><a href="markov-chain-monte-carlo.html#cb46-5"></a><span class="co"># the initial values, and we also need to pass in the observations and the model time</span></span>
+<span id="cb46-6"><a href="markov-chain-monte-carlo.html#cb46-6"></a><span class="kw">function</span> mhsample(stepsize, niter, theta_0, obs, model_time)</span>
+<span id="cb46-7"><a href="markov-chain-monte-carlo.html#cb46-7"></a>    <span class="co"># initialize storage for samples and log-posterior values</span></span>
+<span id="cb46-8"><a href="markov-chain-monte-carlo.html#cb46-8"></a>    samples = zeros(niter+<span class="fl">1</span>, <span class="fl">3</span>)</span>
+<span id="cb46-9"><a href="markov-chain-monte-carlo.html#cb46-9"></a>    logp = zeros(niter+<span class="fl">1</span>)</span>
+<span id="cb46-10"><a href="markov-chain-monte-carlo.html#cb46-10"></a>    <span class="co"># initialize the number of accepted proposals</span></span>
+<span id="cb46-11"><a href="markov-chain-monte-carlo.html#cb46-11"></a>    accepts = <span class="fl">0</span></span>
+<span id="cb46-12"><a href="markov-chain-monte-carlo.html#cb46-12"></a></span>
+<span id="cb46-13"><a href="markov-chain-monte-carlo.html#cb46-13"></a>    <span class="co"># set theta_0 as the initial sample value</span></span>
+<span id="cb46-14"><a href="markov-chain-monte-carlo.html#cb46-14"></a>    samples[<span class="fl">1</span>, :] = theta_0</span>
+<span id="cb46-15"><a href="markov-chain-monte-carlo.html#cb46-15"></a>    <span class="co"># compute the log-probability of the initial value and store</span></span>
+<span id="cb46-16"><a href="markov-chain-monte-carlo.html#cb46-16"></a>    logp[<span class="fl">1</span>] = log_posterior(theta_0, obs, model_time)</span>
+<span id="cb46-17"><a href="markov-chain-monte-carlo.html#cb46-17"></a>    <span class="co"># create covariance matrix for the proposal distribution</span></span>
+<span id="cb46-18"><a href="markov-chain-monte-carlo.html#cb46-18"></a>    covmat = PDiagMat(stepsize)</span>
+<span id="cb46-19"><a href="markov-chain-monte-carlo.html#cb46-19"></a></span>
+<span id="cb46-20"><a href="markov-chain-monte-carlo.html#cb46-20"></a>    <span class="kw">for</span> i <span class="kw">in</span> <span class="fl">2</span>:niter+<span class="fl">1</span></span>
+<span id="cb46-21"><a href="markov-chain-monte-carlo.html#cb46-21"></a>        <span class="co"># propose new value</span></span>
+<span id="cb46-22"><a href="markov-chain-monte-carlo.html#cb46-22"></a>        theta_new = rand(MvNormal(samples[i-<span class="fl">1</span>, :], covmat), <span class="fl">1</span>)</span>
+<span id="cb46-23"><a href="markov-chain-monte-carlo.html#cb46-23"></a>        <span class="co"># compute acceptance probability</span></span>
+<span id="cb46-24"><a href="markov-chain-monte-carlo.html#cb46-24"></a>        <span class="co"># if we accidentally sampled a zero value for sigma, return -Inf</span></span>
+<span id="cb46-25"><a href="markov-chain-monte-carlo.html#cb46-25"></a>        <span class="kw">if</span> theta_new[<span class="fl">3</span>] &lt;= <span class="fl">0</span></span>
+<span id="cb46-26"><a href="markov-chain-monte-carlo.html#cb46-26"></a>            logp_new = -Inf</span>
+<span id="cb46-27"><a href="markov-chain-monte-carlo.html#cb46-27"></a>        <span class="kw">else</span></span>
+<span id="cb46-28"><a href="markov-chain-monte-carlo.html#cb46-28"></a>            logp_new = log_posterior(theta_new, obs, model_time)</span>
+<span id="cb46-29"><a href="markov-chain-monte-carlo.html#cb46-29"></a>        <span class="kw">end</span></span>
+<span id="cb46-30"><a href="markov-chain-monte-carlo.html#cb46-30"></a>        <span class="co"># compare the new log-posterior to the old log-posterior and calculate</span></span>
+<span id="cb46-31"><a href="markov-chain-monte-carlo.html#cb46-31"></a>        <span class="co"># the acceptance probability; we don't need to compare to one in practice</span></span>
+<span id="cb46-32"><a href="markov-chain-monte-carlo.html#cb46-32"></a>        log_accept = logp_new - logp[i-<span class="fl">1</span>]</span>
+<span id="cb46-33"><a href="markov-chain-monte-carlo.html#cb46-33"></a>        log_u = log(rand(Uniform(<span class="fl">0</span>, <span class="fl">1</span>), <span class="fl">1</span>)[<span class="fl">1</span>])</span>
+<span id="cb46-34"><a href="markov-chain-monte-carlo.html#cb46-34"></a>        <span class="co"># if we accept, update everything accordingly; otherwise, keep the old values</span></span>
+<span id="cb46-35"><a href="markov-chain-monte-carlo.html#cb46-35"></a>        <span class="kw">if</span> log_u &lt; log_accept</span>
+<span id="cb46-36"><a href="markov-chain-monte-carlo.html#cb46-36"></a>            samples[i, :] = theta_new</span>
+<span id="cb46-37"><a href="markov-chain-monte-carlo.html#cb46-37"></a>            logp[i] = logp_new</span>
+<span id="cb46-38"><a href="markov-chain-monte-carlo.html#cb46-38"></a>            accepts += <span class="fl">1</span></span>
+<span id="cb46-39"><a href="markov-chain-monte-carlo.html#cb46-39"></a>        <span class="kw">else</span></span>
+<span id="cb46-40"><a href="markov-chain-monte-carlo.html#cb46-40"></a>            samples[i, :] = samples[i-<span class="fl">1</span>, :]</span>
+<span id="cb46-41"><a href="markov-chain-monte-carlo.html#cb46-41"></a>            logp[i] = logp[i-<span class="fl">1</span>]</span>
+<span id="cb46-42"><a href="markov-chain-monte-carlo.html#cb46-42"></a>        <span class="kw">end</span></span>
+<span id="cb46-43"><a href="markov-chain-monte-carlo.html#cb46-43"></a>    <span class="kw">end</span></span>
+<span id="cb46-44"><a href="markov-chain-monte-carlo.html#cb46-44"></a></span>
+<span id="cb46-45"><a href="markov-chain-monte-carlo.html#cb46-45"></a>    <span class="co"># return the samples, the log-posterior values, and the number of acceptances</span></span>
+<span id="cb46-46"><a href="markov-chain-monte-carlo.html#cb46-46"></a>    <span class="kw">return</span> samples, logp, accepts</span>
+<span id="cb46-47"><a href="markov-chain-monte-carlo.html#cb46-47"></a><span class="kw">end</span></span></code></pre></div>
+<pre class="code-out"><code>mhsample (generic function with 1 method)</code></pre>
+<p>Now we can sample using different step sizes. We’ll just use arbitrary values for the initial parameter vector <span class="math inline">\(\theta_0\)</span>.<label for="tufte-sn-26" class="margin-toggle sidenote-number">26</label><input type="checkbox" id="tufte-sn-26" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">26</span> This can be an important choice for more difficult problems, as the choice of initial value is directly relevant to the length of the transient portion of the chain, before convergence to the stationary distribution. While <a href="markov-chain-monte-carlo.html#detailed-balance">we will see</a> that the Markov chain constructed by the Metropolis-Hastings algorithm has the right stationary distribution no matter what, the length of time that it takes to converge to this distribution is only guaranteed asymptotically (in other words, as the number of iterations goes to infinity), and identifying the length of this portion of the chain is one of the major challenges in practical MCMC.</span></p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb48-1"><a href="markov-chain-monte-carlo.html#cb48-1"></a>using Random</span>
+<span id="cb48-2"><a href="markov-chain-monte-carlo.html#cb48-2"></a>using Distributions</span>
+<span id="cb48-3"><a href="markov-chain-monte-carlo.html#cb48-3"></a>using PDMats</span>
+<span id="cb48-4"><a href="markov-chain-monte-carlo.html#cb48-4"></a></span>
+<span id="cb48-5"><a href="markov-chain-monte-carlo.html#cb48-5"></a><span class="co"># specify the different step sizes</span></span>
+<span id="cb48-6"><a href="markov-chain-monte-carlo.html#cb48-6"></a>smallstep = [<span class="fl">0.01</span>, <span class="fl">0.01</span>, <span class="fl">0.01</span>];</span>
+<span id="cb48-7"><a href="markov-chain-monte-carlo.html#cb48-7"></a>medstep = [<span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">1</span>];</span>
+<span id="cb48-8"><a href="markov-chain-monte-carlo.html#cb48-8"></a>largestep = [<span class="fl">100</span>, <span class="fl">100</span>, <span class="fl">100</span>];</span>
+<span id="cb48-9"><a href="markov-chain-monte-carlo.html#cb48-9"></a><span class="co"># set the number of iterations</span></span>
+<span id="cb48-10"><a href="markov-chain-monte-carlo.html#cb48-10"></a>niter = <span class="fl">5</span>*<span class="fl">10</span>^<span class="fl">4</span>;</span>
+<span id="cb48-11"><a href="markov-chain-monte-carlo.html#cb48-11"></a><span class="co"># set the initial parameter vector</span></span>
+<span id="cb48-12"><a href="markov-chain-monte-carlo.html#cb48-12"></a>theta_0 = [<span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">1</span>];</span>
+<span id="cb48-13"><a href="markov-chain-monte-carlo.html#cb48-13"></a></span>
+<span id="cb48-14"><a href="markov-chain-monte-carlo.html#cb48-14"></a><span class="co"># run the M-H sampler)</span></span>
+<span id="cb48-15"><a href="markov-chain-monte-carlo.html#cb48-15"></a>mcmc_smallstep = mhsample(smallstep, niter, theta_0, y_obs, sim_time);</span>
+<span id="cb48-16"><a href="markov-chain-monte-carlo.html#cb48-16"></a>mcmc_medstep = mhsample(medstep, niter, theta_0, y_obs, sim_time);</span>
+<span id="cb48-17"><a href="markov-chain-monte-carlo.html#cb48-17"></a>mcmc_largestep = mhsample(largestep, niter, theta_0, y_obs, sim_time);</span></code></pre></div>
+</div>
+</div>
+<div id="proposal-distribution" class="section level2">
+<h2>
+<span class="header-section-number">5.5</span> Finding A Good Proposal Distribution<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('proposal-distribution')" onmouseout="reset_tooltip('proposal-distribution-tooltip')"><span class="tooltiptext" id="proposal-distribution-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
+</h2>
+<p>Before we look at the results of the MCMC inference for summary statistics, we should make sure that we made sensible choices for the stepsize. One useful diagnostic is to look at the trace plots.<label for="tufte-sn-27" class="margin-toggle sidenote-number">27</label><input type="checkbox" id="tufte-sn-27" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">27</span> <em>Trace plots</em> are plots of sampled parameter values versus iteration. They are extremely useful for understanding how an MCMC sample is performing.</span></p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb49-1"><a href="markov-chain-monte-carlo.html#cb49-1"></a>using Plots</span>
+<span id="cb49-2"><a href="markov-chain-monte-carlo.html#cb49-2"></a></span>
+<span id="cb49-3"><a href="markov-chain-monte-carlo.html#cb49-3"></a>p1 = plot(mcmc_smallstep[<span class="fl">1</span>][:, <span class="fl">1</span>], label=:false, xlabel=<span class="st">"Iteration"</span>, ylabel=<span class="st">"</span><span class="sc">\\</span><span class="st">alpha"</span>, xticks=:false);</span>
+<span id="cb49-4"><a href="markov-chain-monte-carlo.html#cb49-4"></a>p2 = plot(mcmc_smallstep[<span class="fl">1</span>][:, <span class="fl">2</span>], label=:false, xlabel=<span class="st">"Iteration"</span>, ylabel=<span class="st">"</span><span class="sc">\\</span><span class="st">beta"</span>, xticks=:false);</span>
+<span id="cb49-5"><a href="markov-chain-monte-carlo.html#cb49-5"></a>p3 = plot(mcmc_smallstep[<span class="fl">1</span>][:, <span class="fl">3</span>], label=:false, xlabel=<span class="st">"Iteration"</span>, ylabel=<span class="st">"</span><span class="sc">\\</span><span class="st">sigma"</span>, xticks=:false);</span>
+<span id="cb49-6"><a href="markov-chain-monte-carlo.html#cb49-6"></a>p4 = plot(mcmc_medstep[<span class="fl">1</span>][:, <span class="fl">1</span>], label=:false, xlabel=<span class="st">"Iteration"</span>, ylabel=<span class="st">"</span><span class="sc">\\</span><span class="st">alpha"</span>, xticks=:false);</span>
+<span id="cb49-7"><a href="markov-chain-monte-carlo.html#cb49-7"></a>p5 = plot(mcmc_medstep[<span class="fl">1</span>][:, <span class="fl">2</span>], label=:false, xlabel=<span class="st">"Iteration"</span>, ylabel=<span class="st">"</span><span class="sc">\\</span><span class="st">beta"</span>, xticks=:false);</span>
+<span id="cb49-8"><a href="markov-chain-monte-carlo.html#cb49-8"></a>p6 = plot(mcmc_medstep[<span class="fl">1</span>][:, <span class="fl">3</span>], label=:false, xlabel=<span class="st">"Iteration"</span>, ylabel=<span class="st">"</span><span class="sc">\\</span><span class="st">sigma"</span>, xticks=:false);</span>
+<span id="cb49-9"><a href="markov-chain-monte-carlo.html#cb49-9"></a>p7 = plot(mcmc_largestep[<span class="fl">1</span>][:, <span class="fl">1</span>], label=:false, xlabel=<span class="st">"Iteration"</span>, ylabel=<span class="st">"</span><span class="sc">\\</span><span class="st">alpha"</span>, xticks=:false);</span>
+<span id="cb49-10"><a href="markov-chain-monte-carlo.html#cb49-10"></a>p8 = plot(mcmc_largestep[<span class="fl">1</span>][:, <span class="fl">2</span>], label=:false, xlabel=<span class="st">"Iteration"</span>, ylabel=<span class="st">"</span><span class="sc">\\</span><span class="st">beta"</span>, xticks=:false);</span>
+<span id="cb49-11"><a href="markov-chain-monte-carlo.html#cb49-11"></a>p9 = plot(mcmc_largestep[<span class="fl">1</span>][:, <span class="fl">3</span>], label=:false, xlabel=<span class="st">"Iteration"</span>, ylabel=<span class="st">"</span><span class="sc">\\</span><span class="st">sigma"</span>, xticks=:false);</span>
+<span id="cb49-12"><a href="markov-chain-monte-carlo.html#cb49-12"></a></span>
+<span id="cb49-13"><a href="markov-chain-monte-carlo.html#cb49-13"></a>plot(p1, p2, p3, p4, p5, p6, p7, p8, p9, layout=(<span class="fl">3</span>, <span class="fl">3</span>))</span></code></pre></div>
+<div class="figure fullwidth">
+<span style="display:block;" id="fig:traceplots"></span>
+<img src="raes_files/figure-html/traceplots-J1.png" alt="Trace plots for the Metropolis-Hastings samplers with varying proposal distribution variances. The first column are the traceplots for the model slope $\alpha$, the second column are the traceplots for the model intercept $\beta$, and the third column are the traceplots for the observation error standard deviation $\sigma$. The first row are the traceplots for the small-step size sampler, the second row are the traceplots for the medium-step size sampler, and the third row are the traceplots for the large-step size sampler."><p class="caption marginnote shownote">
+Figure 5.3: Trace plots for the Metropolis-Hastings samplers with varying proposal distribution variances. The first column are the traceplots for the model slope <span class="math inline">\(\alpha\)</span>, the second column are the traceplots for the model intercept <span class="math inline">\(\beta\)</span>, and the third column are the traceplots for the observation error standard deviation <span class="math inline">\(\sigma\)</span>. The first row are the traceplots for the small-step size sampler, the second row are the traceplots for the medium-step size sampler, and the third row are the traceplots for the large-step size sampler.
+</p>
+</div>
+<p>We can see from Figure <a href="markov-chain-monte-carlo.html#fig:traceplots">5.3</a> that there is different behavior, across the different choices, but it’s tough to see with that many panels. Instead, let’s zoom in more on just the <span class="math inline">\(\alpha\)</span> traceplots.</p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb50-1"><a href="markov-chain-monte-carlo.html#cb50-1"></a>plot!(p1, xticks=:true);</span>
+<span id="cb50-2"><a href="markov-chain-monte-carlo.html#cb50-2"></a>plot!(p4, xticks=:true);</span>
+<span id="cb50-3"><a href="markov-chain-monte-carlo.html#cb50-3"></a>plot!(p7, xticks=:true);</span>
+<span id="cb50-4"><a href="markov-chain-monte-carlo.html#cb50-4"></a></span>
+<span id="cb50-5"><a href="markov-chain-monte-carlo.html#cb50-5"></a>plot(p1, p4, p7, layout=(<span class="fl">3</span>, <span class="fl">1</span>));</span>
+<span id="cb50-6"><a href="markov-chain-monte-carlo.html#cb50-6"></a></span>
+<span id="cb50-7"><a href="markov-chain-monte-carlo.html#cb50-7"></a>fontsize=<span class="fl">12</span>;</span>
+<span id="cb50-8"><a href="markov-chain-monte-carlo.html#cb50-8"></a>annotate!(-<span class="fl">6000</span>,  <span class="fl">6</span>, text(<span class="st">"C"</span>, :left, fontsize), subplot=<span class="fl">3</span>);</span>
+<span id="cb50-9"><a href="markov-chain-monte-carlo.html#cb50-9"></a>annotate!(-<span class="fl">6000</span>, <span class="fl">24</span>, text(<span class="st">"B"</span>, :left, fontsize), subplot=<span class="fl">3</span>);</span>
+<span id="cb50-10"><a href="markov-chain-monte-carlo.html#cb50-10"></a>annotate!(-<span class="fl">6000</span>, <span class="fl">42</span>, text(<span class="st">"A"</span>, :left, fontsize), subplot=<span class="fl">3</span>)</span></code></pre></div>
+<div class="figure fullwidth">
+<span style="display:block;" id="fig:traceplots-alpha"></span>
+<img src="raes_files/figure-html/traceplots-alpha-J1.png" alt="Trace plots for $\alpha$ only. Panel A is the small step size, panel B is the medium step size, and panel C is the large step size."><p class="caption marginnote shownote">
+Figure 5.4: Trace plots for <span class="math inline">\(\alpha\)</span> only. Panel A is the small step size, panel B is the medium step size, and panel C is the large step size.
+</p>
+</div>
+<p>The trace plot in panel A of Figure <a href="markov-chain-monte-carlo.html#fig:traceplots-alpha">5.4</a> shows “snaking”<label for="tufte-sn-28" class="margin-toggle sidenote-number">28</label><input type="checkbox" id="tufte-sn-28" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">28</span> A highly technical term.</span> behavior: the sampling is highly autocorrelated. Meanwhile, the traceplot in panel B has less snaking behavior. In Panel C, the traceplot stands still for long periods of time, and then jumps rapidly for a few iterations before getting stuck again. These different behaviors are related to the different acceptance rates of the various samplers.</p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb51-1"><a href="markov-chain-monte-carlo.html#cb51-1"></a>mcmc_smallstep[<span class="fl">3</span>]/niter</span></code></pre></div>
+<pre class="code-out"><code>0.88084</code></pre>
+<div class="sourceCode" id="cb53"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb53-1"><a href="markov-chain-monte-carlo.html#cb53-1"></a>mcmc_medstep[<span class="fl">3</span>]/niter</span></code></pre></div>
+<pre class="code-out"><code>0.3034</code></pre>
+<div class="sourceCode" id="cb55"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb55-1"><a href="markov-chain-monte-carlo.html#cb55-1"></a>mcmc_largestep[<span class="fl">3</span>]/niter</span></code></pre></div>
+<pre class="code-out"><code>0.0051</code></pre>
+<p>
+<span class="marginnote shownote">
+<!--
+<div class="figure">--><span style="display:block;" id="fig:stepsize"></span>
+<img src="raes_files/figure-html/stepsize-J1.png" alt="Cartoon illustrating the 90% credible intervals of various proposal distribution variances. The star is the current value of the Metropolis-Hastings sampler."><!--
+<p class="caption marginnote">-->Figure 5.5: Cartoon illustrating the 90% credible intervals of various proposal distribution variances. The star is the current value of the Metropolis-Hastings sampler.<!--</p>-->
+<!--</div>--></span>
+</p>
+<p>When the proposal distribution is too narrow, the sampler accepts most proposals (in this case, 88%) as the posterior density values are close to the value at the current point (illustrated in Figure <a href="markov-chain-monte-carlo.html#fig:stepsize">5.5</a>). The problem is that the results are highly autocorrelated, because the sampler moves very slowly through the parameter space. If we remember that the ideal situation (which is rarely achieved with MCMC) is for samples to be as close to independent as possible, it becomes clear that high degrees of autocorrelation are bad, as each sample loses the amount of new information it contributes.<label for="tufte-sn-29" class="margin-toggle sidenote-number">29</label><input type="checkbox" id="tufte-sn-29" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">29</span> The “total amount of information” contained in a batch of autocorrelated samples of size <span class="math inline">\(N\)</span> is called the <em>effective sample size</em>, and it is defined as <span class="math display">\[N_\text{eff} = \frac{N}{1+2\sum_{k=1}^\infty \rho_k},\]</span> where <span class="math inline">\(\rho_k\)</span> is the within-sample autocorrelation at lag <span class="math inline">\(k\)</span>. When the effective sample size is much smaller than the number of MCMC iterations, it is a sign that the MCMC sampler was not particularly efficient and that calculations (such as quantiles) requiring larger number of samples should not be viewed with high levels of confidence, as the sampler was not able to thoroughly explore the distribution. <code>Turing.jl</code> will automatically calculate the effective sample size of its output.</span>.</p>
+<p>At the other extreme, when the proposal distribution is too large, the sampler accepts very few proposals (0.5% in this example). In Figure <a href="markov-chain-monte-carlo.html#fig:stepsize">5.5</a>, the wide proposal variance would result in many proposals having log-posterior values which are much worse than the previous iteration’s log-posterior, resulting in the sampler getting stuck at certain values for extended periods. Once again, this results in poor exploration of the sample space.</p>
+<p>Finally, the medium step-size sampler accepted 30% of proposals, which is pretty close to ideal.<label for="tufte-sn-30" class="margin-toggle sidenote-number">30</label><input type="checkbox" id="tufte-sn-30" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">30</span> The widely-used “theoretical” optimal is 23.4% <span class="citation">(Gelman et al., <a href="#ref-gelmanWeakConvergenceOptimal1997" role="doc-biblioref">1997</a>)</span>, though in practice the ideal acceptance rate can vary depending on the properties of the problem <span class="citation">(Bédard, <a href="#ref-bedardOptimalAcceptanceRates2008" role="doc-biblioref">2008</a>)</span>. MCMC is an art as much of a science.</span> This trace plot shows the “hairy caterpillar”<label for="tufte-sn-31" class="margin-toggle sidenote-number">31</label><input type="checkbox" id="tufte-sn-31" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">31</span> Another highly technical term.</span> that is ideal for MCMC output: the sampler is consistently moving around the posterior distribution and isn’t getting stuck in a particular region.</p>
+<p>As we’ve seen, choosing the “right” proposal distribution can be very important in improving the efficiency of the Metropolis-Hastings sampler.<label for="tufte-sn-32" class="margin-toggle sidenote-number">32</label><input type="checkbox" id="tufte-sn-32" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">32</span> Though as <a href="markov-chain-monte-carlo.html#detailed-balance">we will see</a>, eventually everything will work out, it’s a matter of computational resources and patience.</span> One approach to manually tweaking the proposal is to use an adaptive sampler<label for="tufte-sn-33" class="margin-toggle sidenote-number">33</label><input type="checkbox" id="tufte-sn-33" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">33</span> One example is given by <span class="citation">Vihola (<a href="#ref-viholaRobustAdaptiveMetropolis2012" role="doc-biblioref">2012</a>)</span>.</span>, which uses the early part of the run to tune the proposal covariance matrix to achieve the targeted acceptance rate.</p>
+</div>
+<div id="has-the-chain-converged" class="section level2">
+<h2>
+<span class="header-section-number">5.6</span> Has The Chain Converged?<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('has-the-chain-converged')" onmouseout="reset_tooltip('has-the-chain-converged-tooltip')"><span class="tooltiptext" id="has-the-chain-converged-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
+</h2>
+<p>Now that we’ve decided to use the medium step-size sampler output, what do we do about the transient portion of the chain? The typical approach is to discard this as <em>burn-in</em><label for="tufte-sn-34" class="margin-toggle sidenote-number">34</label><input type="checkbox" id="tufte-sn-34" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">34</span> Though this is a not consensus position. <span class="citation">Geyer (<a href="#ref-geyerIntroductionMarkovChain2011" role="doc-biblioref">2011</a>)</span> argues that discharding burn-in is still just a heuristic and may not be a particularly good approach to finding a good starting point for the analyzed samples. One alternative approach is to find a sensible starting point, such as the <em>maximum a posteriori</em> (MAP) estimate. Again, as much an art as a science.</span>. An important consideration is how computationally expensive the MCMC iterations are. For the simple linear regression example in this chapter, it’s not a big deal to throw out a bunch of iterations at the beginning, but if we were calibrating a more complex and/or computationally expensive model, we might not want to lose those runs.</p>
+<p>Judging whether the chain has converged is difficult, as the only guarantees are asymptotic, and chains can jump to a different distribution after appearing to be converged for what seems like a sufficiently long time. Ultimately, assessing convergence relies on heuristics, and it can be useful to use multiple of the approaches below (and possibly others not described here) to gather evidence for or against convergence.<label for="tufte-sn-35" class="margin-toggle sidenote-number">35</label><input type="checkbox" id="tufte-sn-35" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">35</span> As <span class="citation">Geyer (<a href="#ref-geyerIntroductionMarkovChain2011" role="doc-biblioref">2011</a>)</span> notes, the only real solution is to run the chain longer, if this is computationally and personally tenable. You can’t run MCMC chains too long.</span></p>
+<div id="visual-inspection" class="section level3">
+<h3>
+<span class="header-section-number">5.6.1</span> Visual Inspection<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('visual-inspection')" onmouseout="reset_tooltip('visual-inspection-tooltip')"><span class="tooltiptext" id="visual-inspection-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
+</h3>
+<p>If we want to throw out some initial runs at burn-in, a good starting point is to visually inspect the traceplots to look at where the samples seem particularly unrepresentative of the broader chain.</p>
+<div class="sourceCode" id="cb57"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb57-1"><a href="markov-chain-monte-carlo.html#cb57-1"></a>plot!(p4, xticks=:true);</span>
+<span id="cb57-2"><a href="markov-chain-monte-carlo.html#cb57-2"></a>plot!(p5, xticks=:true);</span>
+<span id="cb57-3"><a href="markov-chain-monte-carlo.html#cb57-3"></a>plot!(p6, xticks=:true);</span>
+<span id="cb57-4"><a href="markov-chain-monte-carlo.html#cb57-4"></a></span>
+<span id="cb57-5"><a href="markov-chain-monte-carlo.html#cb57-5"></a>vspan!(p4, [<span class="fl">0</span>, <span class="fl">1000</span>], color=:red, alpha=<span class="fl">0.2</span>, label=:false);</span>
+<span id="cb57-6"><a href="markov-chain-monte-carlo.html#cb57-6"></a>vspan!(p5, [<span class="fl">0</span>, <span class="fl">1000</span>], color=:red, alpha=<span class="fl">0.2</span>, label=:false);</span>
+<span id="cb57-7"><a href="markov-chain-monte-carlo.html#cb57-7"></a>vspan!(p6, [<span class="fl">0</span>, <span class="fl">1000</span>], color=:red, alpha=<span class="fl">0.2</span>, label=:false);</span>
+<span id="cb57-8"><a href="markov-chain-monte-carlo.html#cb57-8"></a></span>
+<span id="cb57-9"><a href="markov-chain-monte-carlo.html#cb57-9"></a>plot(p4, p5, p6, layout=(<span class="fl">3</span>, <span class="fl">1</span>))</span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:medtraceplots"></span>
+<p class="caption marginnote shownote">
+Figure 5.6: Traceplots for the medium step-size sampler applied to our linear regression example. The red portion would be a reasonable number of iterations (in this case, 1,000) to throw out as burn-in.
+</p>
+<img src="raes_files/figure-html/medtraceplots-J1.png" alt="Traceplots for the medium step-size sampler applied to our linear regression example. The red portion would be a reasonable number of iterations (in this case, 1,000) to throw out as burn-in.">
+</div>
+<p>Then we might look to see if the chain looks like a “hairy caterpillar” to get a sense of if it is stuck or if it is very slowly exploring the parameter space. A complementary approach is to look at the distribution of samples for the whole post-burn-in chain and for the first half, to see if the distribution has stabilized. For example, in Figure <a href="markov-chain-monte-carlo.html#fig:distchange">5.7</a>, we can see that while the marginal posterior distribution for <span class="math inline">\(\sigma\)</span> seems to have converged, there are some slight differences in the <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> distributions that might warrant running the chain longer.</p>
+<div class="sourceCode" id="cb58"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb58-1"><a href="markov-chain-monte-carlo.html#cb58-1"></a>density(mcmc_medstep[<span class="fl">1</span>][<span class="fl">1001</span>:niter, :], labels=<span class="st">"full chain"</span>, lw=<span class="fl">3</span>, linestyle=:solid, layout=<span class="fl">3</span>, xlabel=[<span class="st">"</span><span class="sc">\\</span><span class="st">alpha"</span> <span class="st">"</span><span class="sc">\\</span><span class="st">beta"</span> <span class="st">"</span><span class="sc">\\</span><span class="st">sigma"</span>], yticks=:false, yaxis=:false, grid=:false);</span>
+<span id="cb58-2"><a href="markov-chain-monte-carlo.html#cb58-2"></a>density!(mcmc_medstep[<span class="fl">1</span>][<span class="fl">1001</span>:trunc(<span class="dt">Int</span>, (niter-<span class="fl">1000</span>)/<span class="fl">2</span>), :], label=<span class="st">"half chain"</span>, lw=<span class="fl">3</span>, linestyle=:dash, layout=<span class="fl">3</span>)</span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:distchange"></span>
+<p class="caption marginnote shownote">
+Figure 5.7: Plots of the kernel density estimates for the posterior samples for the whole chain (solid, blue) and the first half of the chain (dashed, orange).
+</p>
+<img src="raes_files/figure-html/distchange-J1.png" alt="Plots of the kernel density estimates for the posterior samples for the whole chain (solid, blue) and the first half of the chain (dashed, orange).">
+</div>
+</div>
+<div id="monte-carlo-standard-error" class="section level3">
+<h3>
+<span class="header-section-number">5.6.2</span> Monte Carlo Standard Error<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('monte-carlo-standard-error')" onmouseout="reset_tooltip('monte-carlo-standard-error-tooltip')"><span class="tooltiptext" id="monte-carlo-standard-error-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
+</h3>
+<p>One goal of using MCMC is to approximate the expectation of the posterior distribution. These approximations are not exact, but differ from the “true” value by some amount known as the <em>Monte Carlo standard error</em> (MCSE). For MCMC output, we cannot use the “usual” method for computing the Monte Carlo standard error, as the samples are not independent. Instead, one approach is to use the <em>batch means</em> method <span class="citation">(Flegal et al., <a href="#ref-flegalMarkovChainMonte2008" role="doc-biblioref">2008</a>)</span>.</p>
+<p>Suppose we have a Markov chain <span class="math inline">\(X = \{X_1, X_2, X_3, \ldots, X_n\}\)</span> with stationary distribution <span class="math inline">\(\pi\)</span> and a function <span class="math inline">\(g(x)\)</span> whose expectation<label for="tufte-sn-36" class="margin-toggle sidenote-number">36</label><input type="checkbox" id="tufte-sn-36" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">36</span> If <span class="math inline">\(g: \Xi \to \mathbb{R}\)</span> is an integrable function with respect to <span class="math inline">\(\pi\)</span>, its expectation is <span class="math display">\[\int_\Xi g(x)\pi(dx).\]</span></span> we wish to estimate. The Monte Carlo estimate of the sample mean is <span class="math display">\[\overline{g}_n = \frac{1}{n} \sum_{i=1}^n g(X_i).\]</span> If we divide the chain into <span class="math inline">\(a\)</span> even batches consisting of <span class="math inline">\(b\)</span> samples each, the batch means estimate of the variance of that estimate, <span class="math inline">\(\hat{\sigma}^2_g\)</span>, is <span class="math display">\[\hat{\sigma}^2_g = \frac{b}{a-1} \sum_{j=1}^a \left(\hat{Y}_j - \overline{g}_n\right)^2,\]</span> where <span class="math display">\[\hat{Y}_j = \frac{1}{b} \sum_{i=(j-1)b+1}^{jb} g(X_i) \quad \text{for } j=1, \ldots, a.\]</span> Then we can estimate the MCSE as <span class="math display">\[\text{MCSE} = \frac{\hat{\sigma}_g^2}{\sqrt{n}}.\]</span></p>
+<p>If we had an infinitely long chain, the MCSE would go to zero. As this is never the case, we can determine when the chain has been run long enough by setting a threshold under which the MCSE would be sufficiently small. In general, it is always a good idea to report the MCSE when using MCMC to estimate expectations, as this communicates the accuracy of the estimate <span class="citation">(Flegal et al., <a href="#ref-flegalMarkovChainMonte2008" role="doc-biblioref">2008</a>)</span>.</p>
+</div>
+<div id="the-heidelberger-welch-diagnostic" class="section level3">
+<h3>
+<span class="header-section-number">5.6.3</span> The Heidelberger-Welch Diagnostic<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('the-heidelberger-welch-diagnostic')" onmouseout="reset_tooltip('the-heidelberger-welch-diagnostic-tooltip')"><span class="tooltiptext" id="the-heidelberger-welch-diagnostic-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
+</h3>
+<p>Another test for convergence is the Heidelberger-Welch diagnostic <span class="citation">(Heidelberger &amp; Welch, <a href="#ref-heidelbergerSimulationRunLength1983" role="doc-biblioref">1983</a>)</span>. The Heidelberger and Welch diagnostic first tests the null hypothesis that the chain has been drawn from the stationary distribution. If this test fails, then the first 10% of the chain is discarded and the rest is retested. The process continues until either a portion of the chain has passed the test or the entire chain has been discarded. If any part of the chain passes the test, a 95% confidence interval is calculated for the mean of the remaining chain. Then half the width of this interval is compared to the mean of the samples. If the ratio between the half-width and the mean is less than a user-specified tolerance <span class="math inline">\(\varepsilon\)</span>, the chain has passed the diagnostic. If no part of the chain passes either part of the diagnostic, this is a sign that the chain has not converged and needs to be run longer.</p>
+</div>
+<div id="the-gelman-rubin-diagnostic" class="section level3">
+<h3>
+<span class="header-section-number">5.6.4</span> The Gelman-Rubin Diagnostic<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('the-gelman-rubin-diagnostic')" onmouseout="reset_tooltip('the-gelman-rubin-diagnostic-tooltip')"><span class="tooltiptext" id="the-gelman-rubin-diagnostic-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
+</h3>
+<p>The Gelman-Rubin diagnostic <span class="citation">(Gelman &amp; Rubin, <a href="#ref-gelmanInferenceIterativeSimulation1992" role="doc-biblioref">1992</a>)</span> uses multiple chains, which start at very different initial conditions, to test for convergence. The diagnostic compares the variance within each chain and compares it to the the variance between chains, which is reported as the <em>potential scale reduction factor</em>, <span class="math inline">\(\hat{R}\)</span>. If the between-chain variance is similar<label for="tufte-sn-37" class="margin-toggle sidenote-number">37</label><input type="checkbox" id="tufte-sn-37" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">37</span> Typically, you would set an acceptable threshold close to 1, such as 1.1 or 1.05, and see if <span class="math inline">\(\hat{R}\)</span> is below that threshold.</span> to the within-chain variance, this is evidence for convergence.</p>
+</div>
+</div>
+<div id="calibrating-a-sea-level-rise-model" class="section level2">
+<h2>
+<span class="header-section-number">5.7</span> Calibrating a Sea-Level Rise Model<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('calibrating-a-sea-level-rise-model')" onmouseout="reset_tooltip('calibrating-a-sea-level-rise-model-tooltip')"><span class="tooltiptext" id="calibrating-a-sea-level-rise-model-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
+</h2>
+<p>In our <a href="markov-chain-monte-carlo.html#lr-calibrate">previous MCMC example</a>, we calibrated a simple linear model to synthetically-generated pseudo-observations using MCMC. Now, let’s apply our understanding of MCMC to calibrate a model of sea-level rise. Calibrating simulation models to real data requires accounting for additional uncertainties. Previously, we calibrated the same model that was used to generate the data, but real-world processes are too complex to be fully captured by any single computer model. Models cannot directly account for several resulting sources of uncertainty<label for="tufte-sn-38" class="margin-toggle sidenote-number">38</label><input type="checkbox" id="tufte-sn-38" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">38</span> These sources might include, but are not limited to, missing physical processes, physical process variability, and observational uncertainties.</span>.</p>
+<p>We typically account for these sources of model-data <em>discrepancy</em> by modeling a residual process. It is important to capture patterns in the residuals as closely as possible.<label for="tufte-sn-39" class="margin-toggle sidenote-number">39</label><input type="checkbox" id="tufte-sn-39" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">39</span> Otherwise, the resulting inferences and projections will often be biased <span class="citation">(Brynjarsdóttir &amp; O’Hagan, <a href="#ref-brynjarsdottirLearningPhysicalParameters2014" role="doc-biblioref">2014</a>)</span>.</span> For example, we might expect that once the model projections under- or over-estimate the main trend of the data, that this will persist for some additional time. Ignoring this potential residual autocorrelation and heteroskedasticity would impact the final calibration results.<label for="tufte-sn-40" class="margin-toggle sidenote-number">40</label><input type="checkbox" id="tufte-sn-40" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">40</span> A good strategy is to start by assuming residual independence, fitting the model, and examining if the residuals were actually independent. Start simple, and add complexity as needed!</span>. In the context of sea-level data, we know that observation errors have changed over time as technology has improved the accuracy of measurements, so we need to account for heterskedasticity. We will also account for autocorrelated deviations between the model projections and the data trend.</p>
+<p>The sea-level rise model that we will be calibrating is a semi-empirical model from <span class="citation">Rahmstorf (<a href="#ref-rahmstorfSemiEmpiricalApproachProjecting2007" role="doc-biblioref">2007</a>)</span>, which relates the change in global mean sea-level <span class="math inline">\(H(t)\)</span> to changes in global mean atmospheric temperature <span class="math inline">\(T(t)\)</span> from an equilibrium: <span class="math display">\[\Delta H/\Delta t = \alpha \left(T - T_{\text{eq}}\right).\]</span> Since we are modeling the change in <span class="math inline">\(H(t)\)</span>, we need to add <span class="math inline">\(H_0\)</span>, the initial sea-level anomaly prior to the observations, to the list of parameters.</p>
+<div id="downloading-the-data-1" class="section level3">
+<h3>
+<span class="header-section-number">5.7.1</span> Downloading the Data<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('downloading-the-data-1')" onmouseout="reset_tooltip('downloading-the-data-1-tooltip')"><span class="tooltiptext" id="downloading-the-data-1-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
+</h3>
+<p>Unfortunately, the 1880–2013 sea-level rise reconstruction updating <span class="citation">Church &amp; White (<a href="#ref-Church2011-bj" role="doc-biblioref">2011</a>)</span> comes in a <code>.zip</code> file from Australia’s <a href="https://research.csiro.au/slrwavescoast/sea-level/measurements-and-data/sea-level-data/">Commonwealth Scientific and Industrial Research Organization (CSIRO)</a>. Download this data and extract <code>CSIRO_Recons_gmsl_yr_2015.txt</code> to a <code>data/</code> subfolder. Looking at the data file, we can see that it contains three columns:</p>
+<ol style="list-style-type: decimal">
+<li>time in years (the fractions correspond to months);</li>
+<li>Global mean sea-level in mm;</li>
+<li>Standard deviation of the observational error in mm.</li>
+</ol>
+<p>We also need to read in temperature data, which we will get from the <a href="https://www.metoffice.gov.uk/hadobs/hadcrut4/data/current/download.html">HadCRUT4 data website</a>.</p>
+<div class="sourceCode" id="cb59"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb59-1"><a href="markov-chain-monte-carlo.html#cb59-1"></a><span class="co"># if "data/" does not exist, create it</span></span>
+<span id="cb59-2"><a href="markov-chain-monte-carlo.html#cb59-2"></a>isdir(<span class="st">"data"</span>) || mkdir(<span class="st">"data"</span>); </span>
+<span id="cb59-3"><a href="markov-chain-monte-carlo.html#cb59-3"></a><span class="co"># download files and save in "data"</span></span>
+<span id="cb59-4"><a href="markov-chain-monte-carlo.html#cb59-4"></a>download(<span class="st">"https://www.metoffice.gov.uk/hadobs/hadcrut4/data/current/time_series/HadCRUT.4.6.0.0.annual_ns_avg.txt"</span>,</span>
+<span id="cb59-5"><a href="markov-chain-monte-carlo.html#cb59-5"></a>    <span class="st">"data/HadCRUT.4.6.0.0.annual_ns_avg.txt"</span>);</span></code></pre></div>
+<p>We want the annual, global temperature series, and the website tells us that the first column is the median of the HadCRUT4 ensemble.</p>
+<p>If we look at the source files, we can see that there is no need to skip any initial rows, and there is no file header, so the following code will read in the data.</p>
+<div class="sourceCode" id="cb60"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb60-1"><a href="markov-chain-monte-carlo.html#cb60-1"></a>using DelimitedFiles</span>
+<span id="cb60-2"><a href="markov-chain-monte-carlo.html#cb60-2"></a></span>
+<span id="cb60-3"><a href="markov-chain-monte-carlo.html#cb60-3"></a><span class="co"># read data</span></span>
+<span id="cb60-4"><a href="markov-chain-monte-carlo.html#cb60-4"></a>slr_data = readdlm(<span class="st">"data/CSIRO_Recons_gmsl_yr_2015.txt"</span>, header=false);</span>
+<span id="cb60-5"><a href="markov-chain-monte-carlo.html#cb60-5"></a>temp_data = readdlm(<span class="st">"data/HadCRUT.4.6.0.0.annual_ns_avg.txt"</span>, header=false);</span></code></pre></div>
+</div>
+<div id="specifying-the-residual-structure" class="section level3">
+<h3>
+<span class="header-section-number">5.7.2</span> Specifying the Residual Structure<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('specifying-the-residual-structure')" onmouseout="reset_tooltip('specifying-the-residual-structure-tooltip')"><span class="tooltiptext" id="specifying-the-residual-structure-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
+</h3>
+<p>The error is included in the residual term of the statistical model.<label for="tufte-sn-41" class="margin-toggle sidenote-number">41</label><input type="checkbox" id="tufte-sn-41" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">41</span> It is important to distinguish between “residuals” and “errors.” An error is a difference between the observed value and the “unobservable” true value. On
+the other hand, a residual is the deviation of an observation from its estimated or modeled value, <span class="math display">\[R_t = y_t - f(\theta, t),\]</span> where <span class="math inline">\(R_t\)</span> is the residual at time <span class="math inline">\(t\)</span>, <span class="math inline">\(y_t\)</span> is the observation, and <span class="math inline">\(f(\theta, t)\)</span> is the model output at time <span class="math inline">\(t\)</span> with parameters <span class="math inline">\(\theta\)</span>.</span> In this case, due to the considerations discussed above, we specify the residuals as the sum of the <em>model discrepancy</em> <span class="math inline">\(\omega_t\)</span> and the <em>observation error</em> <span class="math inline">\(\varepsilon_t\)</span>, <span class="math display">\[R_t = \omega_t + \varepsilon_t.\]</span></p>
+<p>To account for autocorrelations in the model discrepancy, we model <span class="math inline">\(\omega_t\)</span> as a first-order autoregressive time series, or AR(1) model.<label for="tufte-sn-42" class="margin-toggle sidenote-number">42</label><input type="checkbox" id="tufte-sn-42" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">42</span> If the autocorrelation structure are more complex, other models can be used, such as AR(<span class="math inline">\(k\)</span>) models, ARIMA models, or other time-series specifications.</span> Autoregressive model output depends on previous values and white noise, which is a sequence of independent random variables with zero mean and constant variance. The subsequent values of an AR(1) model only depend on the previous term, the autocorrelation coefficient <span class="math inline">\(\rho\)</span>, and white noise<label for="tufte-sn-43" class="margin-toggle sidenote-number">43</label><input type="checkbox" id="tufte-sn-43" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">43</span> White noise is a sequence of independent random variables with zero mean and constant variance.</span>. So the model discrepancy model is given by
+<span class="math display">\[\begin{align*}
+\omega_t &amp;= \rho \cdot \omega_{t-1} + \delta_t \\
+\delta_t &amp;\sim N(0, \sigma^2_{\text{AR1}}) \\
+\omega_0 &amp;\sim N\left(0, \frac{\sigma^2_{\text{AR1}}}{1-\rho^2}\right).
+\end{align*}\]</span></p>
+<p>Now let’s look at the structure of the observation errors. The sea-level rise data file includes the standard deviation of the observational error, so that will reflect potential heteroskedasticity.</p>
+<div class="sourceCode" id="cb61"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb61-1"><a href="markov-chain-monte-carlo.html#cb61-1"></a>using Plots</span>
+<span id="cb61-2"><a href="markov-chain-monte-carlo.html#cb61-2"></a></span>
+<span id="cb61-3"><a href="markov-chain-monte-carlo.html#cb61-3"></a><span class="co"># plot reconstructed anomalies as black points</span></span>
+<span id="cb61-4"><a href="markov-chain-monte-carlo.html#cb61-4"></a>scatter(slr_data[:, <span class="fl">1</span>], slr_data[:, <span class="fl">2</span>], grid=:false, color=<span class="st">"black"</span>, markersize=<span class="fl">3</span>, xlabel=<span class="st">"Year"</span>, ylabel=<span class="st">"Sea-Level Anomaly (mm)"</span>, legend=:topleft, label=<span class="st">"Reconstructed annual mean"</span>);</span>
+<span id="cb61-5"><a href="markov-chain-monte-carlo.html#cb61-5"></a><span class="co"># plot the observation error range as a red ribbon</span></span>
+<span id="cb61-6"><a href="markov-chain-monte-carlo.html#cb61-6"></a>plot!(slr_data[:, <span class="fl">1</span>], slr_data[:, <span class="fl">2</span>] - slr_data[:, <span class="fl">3</span>], fillrange = slr_data[:, <span class="fl">2</span>] + slr_data[:, <span class="fl">3</span>], fillcolor=<span class="st">"red"</span>, fillalpha=<span class="fl">0.2</span>, alpha=<span class="fl">0.2</span>, label=<span class="st">"One-</span><span class="sc">\\</span><span class="st">sigma observational error"</span>);</span>
+<span id="cb61-7"><a href="markov-chain-monte-carlo.html#cb61-7"></a><span class="co"># resize the figure to make the fonts bigger </span></span>
+<span id="cb61-8"><a href="markov-chain-monte-carlo.html#cb61-8"></a>plot!(size=(<span class="fl">350</span>, <span class="fl">280</span>))</span></code></pre></div>
+<p>
+<span class="marginnote shownote">
+<!--
+<div class="figure">--><span style="display:block;" id="fig:slr-error"></span>
+<img src="raes_files/figure-html/slr-error-J1.png" alt="Sea-level rise reconstructed data from @Church2011-bj (in black) with observational error (red ribbon)."><!--
+<p class="caption marginnote">-->Figure 5.8: Sea-level rise reconstructed data from <span class="citation">Church &amp; White (<a href="#ref-Church2011-bj" role="doc-biblioref">2011</a>)</span> (in black) with observational error (red ribbon).<!--</p>-->
+<!--</div>--></span>
+</p>
+<p>Figure <a href="markov-chain-monte-carlo.html#fig:slr-error">5.8</a> shows the reconstructed sea-level anomaly series as well as the one-standard deviation error range. We can see that the observation errors have decreased over time, so we will want to represent that heteroskedasticity in the error specification. Using the supplied errors as the observational error standard deviations, <span class="math inline">\(\sigma_\text{obs}, t\)</span>, gives us the following full residual model.
+<span class="math display">\[\begin{align*}
+R_t &amp;= \omega_t + \varepsilon_t \\
+\omega_t &amp;= \rho \cdot \omega_{t-1} + \delta_t \\
+\delta_t &amp;\sim N(0, \sigma^2_{\text{AR1}}) \\
+\omega_0 &amp;\sim N\left(0, \frac{\sigma^2_{\text{AR1}}}{1-\rho^2}\right) \\
+\varepsilon_t &amp;\sim N\left(0, \sigma^2_{\text{obs}, t}\right).
+\end{align*}\]</span></p>
+<p>The next step is to write down the likelihood function for this model. The joint distribution of an AR(1) model with is a multivariate normal distribution. To compute the covariance matrix of this distribution, we start by computing the marginal variance of any particular element of the series, <span class="math inline">\(x_t\)</span>.</p>
+<p><span class="math display">\[\begin{align*}
+\text{Var}\left(x_t\right) &amp;= \text{Var}\left(\rho x_{t-1} + \delta_t\right) \\
+&amp;= \rho^2 \text{Var}\left(x_{t-1}\right) + \sigma^2_{\text{AR1}}.
+\end{align*}\]</span></p>
+<p>We can solve this equation by assuming that the variances are the same throughout the process, so <span class="math inline">\(\text{Var}\left(x_t\right) = \text{Var}\left(x_{t-1}\right)\)</span>. This yields
+<span class="math display">\[\text{Var}\left(x_t\right) = \frac{\sigma^2_{\text{AR1}}}{1 - \rho^2},\]</span></p>
+<p>which is also how we obtained the variance for <span class="math inline">\(\omega_0\)</span> above.</p>
+<p>Next, we need to calculate the marginal covariance of <span class="math inline">\(x_t\)</span> with a previous value <span class="math inline">\(x_{t-i}\)</span>.
+<span class="math display">\[\begin{align*}
+\text{Cov}\left(x_t, x_{t-i}\right) &amp;= E\left[x_t x_{t-i}\right] \\
+&amp;= E\left[\rho^i x_{t-i} x_{t-i}\right] \\
+&amp;= \rho^i \text{Var}\left(x_{t-i}\right).
+\end{align*}\]</span></p>
+<p>Since we assume the mean of any part of the error is zero, denoting the entire series by <span class="math inline">\(\omega = \left\{\omega_1, \omega_2, \ldots, \omega_n\right\}\)</span>, the joint distribution of <span class="math inline">\(\omega\)</span> is <span class="math inline">\(\mathcal{N}\left(0, \Omega_n\right)\)</span>, where
+<span class="math display">\[
+\Omega_n = \frac{\sigma^2_{\text{AR1}}}{1 - \rho^2} \begin{pmatrix}1 &amp; \rho &amp; \rho^2  &amp; \cdots &amp; \rho^{n-1} \\ \rho &amp; 1 &amp; \rho &amp; \cdots &amp; \rho^{n-2} \\ \rho^2 &amp; \rho &amp; 1 &amp; \cdots &amp; \rho^{n-3} \\ \vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\ \rho^{n-1} &amp; \rho^{n-2} &amp; \rho^{n-3} &amp; \cdots &amp; 1\end{pmatrix}.
+\]</span></p>
+<p>The joint distribution of the observation errors <span class="math inline">\(\varepsilon = \left\{\varepsilon_1, \varepsilon_2, \ldots, \varepsilon_n\right\}\)</span> is also a multivariate normal distribution, as each term is normally-distributed and independent of each other<label for="tufte-sn-44" class="margin-toggle sidenote-number">44</label><input type="checkbox" id="tufte-sn-44" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">44</span> So the off-diagonal entries of the joint covariance matrix <span class="math inline">\(\Gamma\)</span> are zero, and the diagonal entries are the observation errors.</span>. The joint residual process <span class="math inline">\(R\)</span> then has the distribution <span class="math inline">\(R \sim \mathcal{N}(0, \Sigma)\)</span>, where <span class="math inline">\(\Sigma = \Omega + \Gamma\)</span>.<label for="tufte-sn-45" class="margin-toggle sidenote-number">45</label><input type="checkbox" id="tufte-sn-45" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">45</span> As these are two independent normal distributions, and normally-distributed are <em>linear</em>, that is, if <span class="math inline">\(X \sim \mathcal{N}(\mu_X, \Sigma_X)\)</span> and <span class="math inline">\(Y \sim \mathcal{N}(\mu_Y, \Sigma_Y)\)</span>, <span class="math display">\[X+Y \sim \mathcal{N}(\mu_X + \mu_Y, \Sigma_X + \Sigma_Y).\]</span></span></p>
+</div>
+<div id="prior-distributions" class="section level3">
+<h3>
+<span class="header-section-number">5.7.3</span> Prior Distributions<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('prior-distributions')" onmouseout="reset_tooltip('prior-distributions-tooltip')"><span class="tooltiptext" id="prior-distributions-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
+</h3>
+<p>In general, we will use weakly informative normal distributions, to minimize the risk of overly constraining the posterior distributions of <span class="math inline">\(\alpha\)</span>, <span class="math inline">\(\T_0\)</span>, <span class="math inline">\(H_0\)</span>, <span class="math inline">\(\rho\)</span>, and <span class="math inline">\(\sigma_{\text{AR1}}\)</span>.<label for="tufte-sn-46" class="margin-toggle sidenote-number">46</label><input type="checkbox" id="tufte-sn-46" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">46</span> As noted <a href="#role-prior-distributions">earlier</a>, bounded uniform distributions imply the strong claim that we know exactly where a distribution should change from non-zero probability to zero probability. A relatively high-variance normal distribution avoids this epistemic claim while allowing us to concentrate prior probability in a region we think is more plausible.</span> The list of prior distributions that we will use are:</p>
+<ul>
+<li>
+<span class="math inline">\(\alpha \sim N(10, 5)\)</span>, since we know that <span class="math inline">\(alpha\)</span> should be positive;</li>
+<li>
+<span class="math inline">\(T_{\text{eq}} \sim N(-0.5, 0.5)\)</span>, since the temperature at which there is no sea-level rise should be lower than in the observational data;</li>
+<li>
+<span class="math inline">\(H_0 \sim N(\text{SL}_1, \sigma_{\text{obs}, 1})\)</span>, where <span class="math inline">\(\text{SL}_1\)</span> is the observed sea-level anomaly in 1880 and <span class="math inline">\(\sigma_{\text{obs}, 1}\)</span> is the observation error in 1880;</li>
+<li>
+<span class="math inline">\(\rho \sim \text{Uniform}(-0.99, 0.99)\)</span> since <span class="math inline">\(\|\rho\| &lt; 1\)</span>;</li>
+<li>
+<span class="math inline">\(\sigma_{\text{AR1}} \sim \text{TruncNorm}(0, 5; 0, \infty)\)</span>, which is <span class="math inline">\(N(0, 5)\)</span> truncated to the interval <span class="math inline">\((0, \infty)\)</span>.</li>
+</ul>
+</div>
+<div id="julia-implementation" class="section level3">
+<h3>
+<span class="header-section-number">5.7.4</span> Julia Implementation<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('julia-implementation')" onmouseout="reset_tooltip('julia-implementation-tooltip')"><span class="tooltiptext" id="julia-implementation-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
+</h3>
+<p>The following code computes the log-posterior for this model.</p>
+<div class="sourceCode" id="cb62"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb62-1"><a href="markov-chain-monte-carlo.html#cb62-1"></a><span class="co"># define a function to calculate the SLR using the model</span></span>
+<span id="cb62-2"><a href="markov-chain-monte-carlo.html#cb62-2"></a><span class="kw">function</span> slr_model(alpha, Teq, H0, temp_data) </span>
+<span id="cb62-3"><a href="markov-chain-monte-carlo.html#cb62-3"></a>    slr_predict = zeros(length(temp_data) + <span class="fl">1</span>)</span>
+<span id="cb62-4"><a href="markov-chain-monte-carlo.html#cb62-4"></a>    slr_predict[<span class="fl">1</span>] = H0</span>
+<span id="cb62-5"><a href="markov-chain-monte-carlo.html#cb62-5"></a>    <span class="kw">for</span> i <span class="kw">in</span> <span class="fl">2</span>:length(temp_data)+<span class="fl">1</span></span>
+<span id="cb62-6"><a href="markov-chain-monte-carlo.html#cb62-6"></a>        slr_predict[i] = slr_predict[i-<span class="fl">1</span>] + alpha * (temp_data[i-<span class="fl">1</span>] - Teq)</span>
+<span id="cb62-7"><a href="markov-chain-monte-carlo.html#cb62-7"></a>    <span class="kw">end</span></span>
+<span id="cb62-8"><a href="markov-chain-monte-carlo.html#cb62-8"></a></span>
+<span id="cb62-9"><a href="markov-chain-monte-carlo.html#cb62-9"></a>    <span class="kw">return</span> slr_predict[<span class="fl">2</span>:<span class="kw">end</span>]</span>
+<span id="cb62-10"><a href="markov-chain-monte-carlo.html#cb62-10"></a><span class="kw">end</span></span></code></pre></div>
+<pre class="code-out"><code>slr_model (generic function with 1 method)</code></pre>
+<div class="sourceCode" id="cb64"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb64-1"><a href="markov-chain-monte-carlo.html#cb64-1"></a></span>
+<span id="cb64-2"><a href="markov-chain-monte-carlo.html#cb64-2"></a><span class="co"># calculate the log-posterior</span></span>
+<span id="cb64-3"><a href="markov-chain-monte-carlo.html#cb64-3"></a><span class="kw">function</span> log_posterior(theta, data)</span>
+<span id="cb64-4"><a href="markov-chain-monte-carlo.html#cb64-4"></a>    <span class="co"># return -Inf if sigma is invalid</span></span>
+<span id="cb64-5"><a href="markov-chain-monte-carlo.html#cb64-5"></a>    <span class="kw">if</span> theta[<span class="fl">4</span>] &lt;= <span class="fl">0</span></span>
+<span id="cb64-6"><a href="markov-chain-monte-carlo.html#cb64-6"></a>        <span class="kw">return</span> -Inf</span>
+<span id="cb64-7"><a href="markov-chain-monte-carlo.html#cb64-7"></a>    <span class="kw">end</span></span>
+<span id="cb64-8"><a href="markov-chain-monte-carlo.html#cb64-8"></a></span>
+<span id="cb64-9"><a href="markov-chain-monte-carlo.html#cb64-9"></a>    <span class="co"># priors</span></span>
+<span id="cb64-10"><a href="markov-chain-monte-carlo.html#cb64-10"></a>    log_pri = <span class="fl">0</span></span>
+<span id="cb64-11"><a href="markov-chain-monte-carlo.html#cb64-11"></a>    <span class="co"># alpha</span></span>
+<span id="cb64-12"><a href="markov-chain-monte-carlo.html#cb64-12"></a>    log_pri +=  logpdf(Normal(<span class="fl">10</span>, <span class="fl">5</span>), theta[<span class="fl">1</span>])</span>
+<span id="cb64-13"><a href="markov-chain-monte-carlo.html#cb64-13"></a>    <span class="co"># T_eq</span></span>
+<span id="cb64-14"><a href="markov-chain-monte-carlo.html#cb64-14"></a>    log_pri +=  logpdf(Normal(-<span class="fl">0.5</span>, <span class="fl">0.5</span>), theta[<span class="fl">2</span>])</span>
+<span id="cb64-15"><a href="markov-chain-monte-carlo.html#cb64-15"></a>    <span class="co"># S_0</span></span>
+<span id="cb64-16"><a href="markov-chain-monte-carlo.html#cb64-16"></a>    log_pri += logpdf(Normal(data[<span class="fl">1</span>, <span class="fl">1</span>], data[<span class="fl">1</span>, <span class="fl">2</span>]), theta[<span class="fl">3</span>])</span>
+<span id="cb64-17"><a href="markov-chain-monte-carlo.html#cb64-17"></a>    <span class="co"># rho</span></span>
+<span id="cb64-18"><a href="markov-chain-monte-carlo.html#cb64-18"></a>    log_pri += logpdf(Uniform(-<span class="fl">0.99</span>, <span class="fl">0.99</span>), theta[<span class="fl">4</span>])</span>
+<span id="cb64-19"><a href="markov-chain-monte-carlo.html#cb64-19"></a>        <span class="co"># sigma</span></span>
+<span id="cb64-20"><a href="markov-chain-monte-carlo.html#cb64-20"></a>    log_pri += logpdf(truncated(Normal(<span class="fl">0</span>, <span class="fl">5</span>), <span class="fl">0</span>, Inf), theta[<span class="fl">5</span>])</span>
+<span id="cb64-21"><a href="markov-chain-monte-carlo.html#cb64-21"></a></span>
+<span id="cb64-22"><a href="markov-chain-monte-carlo.html#cb64-22"></a>    <span class="co"># don't bother evaluating model if log_prior = -Inf</span></span>
+<span id="cb64-23"><a href="markov-chain-monte-carlo.html#cb64-23"></a>    <span class="kw">if</span> log_pri == -Inf</span>
+<span id="cb64-24"><a href="markov-chain-monte-carlo.html#cb64-24"></a>        <span class="kw">return</span> -Inf</span>
+<span id="cb64-25"><a href="markov-chain-monte-carlo.html#cb64-25"></a>    <span class="kw">end</span></span>
+<span id="cb64-26"><a href="markov-chain-monte-carlo.html#cb64-26"></a></span>
+<span id="cb64-27"><a href="markov-chain-monte-carlo.html#cb64-27"></a>    <span class="co"># compute model residuals</span></span>
+<span id="cb64-28"><a href="markov-chain-monte-carlo.html#cb64-28"></a>    slr_proj = slr_model(theta[<span class="fl">1</span>], theta[<span class="fl">2</span>], theta[<span class="fl">3</span>], data[:, <span class="fl">3</span>])</span>
+<span id="cb64-29"><a href="markov-chain-monte-carlo.html#cb64-29"></a>    residuals = data[:, <span class="fl">1</span>] - slr_proj</span>
+<span id="cb64-30"><a href="markov-chain-monte-carlo.html#cb64-30"></a></span>
+<span id="cb64-31"><a href="markov-chain-monte-carlo.html#cb64-31"></a>    <span class="co"># compute the covariance function</span></span>
+<span id="cb64-32"><a href="markov-chain-monte-carlo.html#cb64-32"></a>    n = size(data, <span class="fl">1</span>)</span>
+<span id="cb64-33"><a href="markov-chain-monte-carlo.html#cb64-33"></a>    H = abs.((<span class="fl">1</span>:n) .- (<span class="fl">1</span>:n)')</span>
+<span id="cb64-34"><a href="markov-chain-monte-carlo.html#cb64-34"></a>    Sigma = ((theta[<span class="fl">5</span>]^<span class="fl">2</span> / (<span class="fl">1</span> - theta[<span class="fl">4</span>]^<span class="fl">2</span>)) .* (theta[<span class="fl">4</span>].^H)) + PDiagMat(data[:, <span class="fl">2</span>].^<span class="fl">2</span>)</span>
+<span id="cb64-35"><a href="markov-chain-monte-carlo.html#cb64-35"></a>    </span>
+<span id="cb64-36"><a href="markov-chain-monte-carlo.html#cb64-36"></a>    <span class="co"># compute the log-likelihood</span></span>
+<span id="cb64-37"><a href="markov-chain-monte-carlo.html#cb64-37"></a>    log_lik = logpdf(MvNormal(zeros(n), Sigma),  residuals)</span>
+<span id="cb64-38"><a href="markov-chain-monte-carlo.html#cb64-38"></a></span>
+<span id="cb64-39"><a href="markov-chain-monte-carlo.html#cb64-39"></a>    <span class="co"># return the log-posterior</span></span>
+<span id="cb64-40"><a href="markov-chain-monte-carlo.html#cb64-40"></a>    <span class="kw">return</span> (log_pri + log_lik);</span>
+<span id="cb64-41"><a href="markov-chain-monte-carlo.html#cb64-41"></a><span class="kw">end</span></span></code></pre></div>
+<pre class="code-out"><code>log_posterior (generic function with 2 methods)</code></pre>
+</div>
+<div id="running-mcmc" class="section level3">
+<h3>
+<span class="header-section-number">5.7.5</span> Running MCMC<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('running-mcmc')" onmouseout="reset_tooltip('running-mcmc-tooltip')"><span class="tooltiptext" id="running-mcmc-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
+</h3>
+<p>For this example, we will use <a href="https://github.com/anthofflab/RobustAdaptiveMetropolisSampler.jl"><code>RobustAdaptiveMetropolisSampler.jl</code></a>, which implements the adaptive Metropolis-Hastings sampler from <span class="citation">Vihola (<a href="#ref-viholaRobustAdaptiveMetropolis2012" role="doc-biblioref">2012</a>)</span>. This adaptive sampler automatically adjusts the <a href="markov-chain-monte-carlo.html#proposal-distribution">proposal distribution variance</a> to achieve a target acceptance rate.<label for="tufte-sn-47" class="margin-toggle sidenote-number">47</label><input type="checkbox" id="tufte-sn-47" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">47</span> We should be careful with adaptive samplers, as they can lead to <a href="markov-chain-monte-carlo.html#detailed-balance">a loss of convergence guarantees</a> <span class="citation">(Andrieu &amp; Moulines, <a href="#ref-andrieuErgodicityPropertiesAdaptive2006" role="doc-biblioref">2006</a>)</span>. <span class="citation">Vihola (<a href="#ref-viholaRobustAdaptiveMetropolis2012" role="doc-biblioref">2012</a>)</span> contains some proofs of convergence under some typical assumptions, but when in doubt, you can use an adaptive sampler for a “preliminary” chain to find a good starting parameter vector (the last element of the preliminary chain) and covariance matrix, then run a “production” chain using that covariance matrix for a fixed proposal distribution.</span> <code>RobustAdaptiveMetropolisSampler.jl</code> is focused on the <code>RAM_sample()</code> function.</p>
+<p><code>RAM_sample()</code> requires a target function which returns the target log-density and requires only one input, the proposed parameter vector <span class="math inline">\(\theta\)</span>. Our <code>log_posterior()</code> function above takes in two inputs, <code>theta</code> (the parameter vector) and <code>data</code> (the calibration data array). Julia lets us resolve this in several ways. The approach that we will take is to define an anonymous function, <code>theta -&gt; log_posterior(theta, data)</code>. However, if we had a large dataset or wanted to do a lot of pre-processing before evaluation, we could also write a wrapper function which takes in <code>theta</code> and <code>data</code> and returns a function which is pre-configured to use <code>data</code> and only requires <code>thetsa</code> as an input.</p>
+<p>The other parameters that we will pass to <code>RAM_sample()</code> are a starting parameter vector<label for="tufte-sn-48" class="margin-toggle sidenote-number">48</label><input type="checkbox" id="tufte-sn-48" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">48</span> Which we choose arbitrarily, rather than using “smarter” choices like the MAP</span>, a starting proposal covariance<label for="tufte-sn-49" class="margin-toggle sidenote-number">49</label><input type="checkbox" id="tufte-sn-49" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">49</span> We provide this just as a scalar, which will use that value along the diagonal of the proposal covariance matrix, but we could also provide a vector with different diagonal elements or a full covariance matrix.</span>, and the number of iterations. We could also supply it with a target acceptance rate, rather than the default 23.4%, but we will use the default here.</p>
+<p>For output, we will grab the chains, the final acceptance rate, the final covariance matrix, and the log-posterior (though we don’t need all of them for the purposes of this section).</p>
+<div class="sourceCode" id="cb66"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb66-1"><a href="markov-chain-monte-carlo.html#cb66-1"></a>using RobustAdaptiveMetropolisSampler</span>
+<span id="cb66-2"><a href="markov-chain-monte-carlo.html#cb66-2"></a></span>
+<span id="cb66-3"><a href="markov-chain-monte-carlo.html#cb66-3"></a><span class="co"># merge the two data sets</span></span>
+<span id="cb66-4"><a href="markov-chain-monte-carlo.html#cb66-4"></a>data = hcat(slr_data[:, <span class="fl">2</span>:<span class="fl">3</span>], temp_data[<span class="fl">31</span>:<span class="fl">164</span>, <span class="fl">2</span>]);</span>
+<span id="cb66-5"><a href="markov-chain-monte-carlo.html#cb66-5"></a></span>
+<span id="cb66-6"><a href="markov-chain-monte-carlo.html#cb66-6"></a><span class="co"># run the M-H sampler for 150,000 iterations</span></span>
+<span id="cb66-7"><a href="markov-chain-monte-carlo.html#cb66-7"></a>chain, accrate, S, lp = RAM_sample(</span>
+<span id="cb66-8"><a href="markov-chain-monte-carlo.html#cb66-8"></a>    theta -&gt; log_posterior(theta, data),</span>
+<span id="cb66-9"><a href="markov-chain-monte-carlo.html#cb66-9"></a>    [<span class="fl">10</span>., -<span class="fl">0.5</span>, -<span class="fl">150</span>, <span class="fl">0.9</span>, <span class="fl">1</span>.],</span>
+<span id="cb66-10"><a href="markov-chain-monte-carlo.html#cb66-10"></a>    <span class="fl">0.1</span>,</span>
+<span id="cb66-11"><a href="markov-chain-monte-carlo.html#cb66-11"></a>    <span class="fl">400</span>_000,</span>
+<span id="cb66-12"><a href="markov-chain-monte-carlo.html#cb66-12"></a>    show_progress = false</span>
+<span id="cb66-13"><a href="markov-chain-monte-carlo.html#cb66-13"></a>);</span>
+<span id="cb66-14"><a href="markov-chain-monte-carlo.html#cb66-14"></a><span class="co"># print out the acceptance rate</span></span>
+<span id="cb66-15"><a href="markov-chain-monte-carlo.html#cb66-15"></a>accrate</span></code></pre></div>
+<pre class="code-out"><code>0.240825</code></pre>
+<p>Let’s examine the traceplots.</p>
+<div class="sourceCode" id="cb68"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb68-1"><a href="markov-chain-monte-carlo.html#cb68-1"></a>plot(chain, layout=<span class="fl">5</span>, label=:false, ylabel=[<span class="st">"alpha"</span> <span class="st">"Teq"</span> <span class="st">"H0"</span> <span class="st">"rho"</span> <span class="st">"sigma"</span>], xlabel=<span class="st">"Iteration"</span>, xrotation=<span class="fl">45</span>, bottom_margin=<span class="fl">10</span>mm)</span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:slr-traceplot"></span>
+<p class="caption marginnote shownote">
+Figure 5.9: Traceplots for the Metropolis-Hastings samples for the sea-level rise model.
+</p>
+<img src="raes_files/figure-html/slr-traceplot-J1.png" alt="Traceplots for the Metropolis-Hastings samples for the sea-level rise model.">
+</div>
+<p>Visually, Figure <a href="markov-chain-monte-carlo.html#fig:slr-traceplot">5.9</a> suggests that keeping the second half of the chain might be reasonable. Indeed, Figure <a href="markov-chain-monte-carlo.html#fig:slr-traceplot-burnin">5.10</a> looks “right.”<label for="tufte-sn-50" class="margin-toggle sidenote-number">50</label><input type="checkbox" id="tufte-sn-50" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">50</span> Hairy caterpillars and all.</span></p>
+<div class="sourceCode" id="cb69"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb69-1"><a href="markov-chain-monte-carlo.html#cb69-1"></a>burnin = floor(<span class="dt">Int</span>, size(chain, <span class="fl">1</span>) / <span class="fl">2</span>);</span>
+<span id="cb69-2"><a href="markov-chain-monte-carlo.html#cb69-2"></a>plot(chain[burnin+<span class="fl">1</span>:<span class="kw">end</span>, :], layout=<span class="fl">5</span>, label=:false, ylabel=[<span class="st">"alpha"</span> <span class="st">"Teq"</span> <span class="st">"H0"</span> <span class="st">"rho"</span> <span class="st">"sigma"</span>], xlabel=<span class="st">"Iteration"</span>, xrotation=<span class="fl">45</span>, bottom_margin=<span class="fl">10</span>mm)</span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:slr-traceplot-burnin"></span>
+<p class="caption marginnote shownote">
+Figure 5.10: Traceplots for the Metropolis-Hastings samples for the sea-level rise model after removing the first half of the chain as burn-in.
+</p>
+<img src="raes_files/figure-html/slr-traceplot-burnin-J1.png" alt="Traceplots for the Metropolis-Hastings samples for the sea-level rise model after removing the first half of the chain as burn-in.">
+</div>
+<p>We can compute some quantiative diagnostics using <a href="https://turinglang.github.io/MCMCChains.jl/stable/"><code>MCMCChains.jl</code></a>. To do this, we will need to convert <code>chains</code> to a <code>MCMCChains.Chains</code> object. We can pass in a vector of parameter names, as well as any additional information such as the starting iteration (if we had already thrown away the burn-in) or thinning frequency.</p>
+<div class="sourceCode" id="cb70"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb70-1"><a href="markov-chain-monte-carlo.html#cb70-1"></a>using MCMCChains</span>
+<span id="cb70-2"><a href="markov-chain-monte-carlo.html#cb70-2"></a></span>
+<span id="cb70-3"><a href="markov-chain-monte-carlo.html#cb70-3"></a><span class="co"># convert raw chain output to a Chains object</span></span>
+<span id="cb70-4"><a href="markov-chain-monte-carlo.html#cb70-4"></a>chn = Chains(chain[burnin+<span class="fl">1</span>:<span class="kw">end</span>, :], [<span class="st">"alpha"</span>, <span class="st">"Teq"</span>, <span class="st">"H0"</span>, <span class="st">"rho"</span>, <span class="st">"sigma"</span>], start=burnin+<span class="fl">1</span>, thin=<span class="fl">1</span>);</span>
+<span id="cb70-5"><a href="markov-chain-monte-carlo.html#cb70-5"></a></span>
+<span id="cb70-6"><a href="markov-chain-monte-carlo.html#cb70-6"></a><span class="co"># print summary</span></span>
+<span id="cb70-7"><a href="markov-chain-monte-carlo.html#cb70-7"></a>summarystats(chn)</span></code></pre></div>
+<pre class="code-out"><code>Summary Statistics
+  parameters        mean       std   naive_se      mcse         ess      rhat
+      Symbol     Float64   Float64    Float64   Float64     Float64   Float64
+
+       alpha      2.3500    0.3023     0.0007    0.0095    850.9821    1.0018
+         Teq     -0.7843    0.0965     0.0002    0.0031    808.4198    1.0033
+          H0   -154.6956    4.9044     0.0110    0.1264   1313.7928    1.0007
+         rho      0.7014    0.2514     0.0006    0.0064   1393.1876    1.0017
+       sigma      1.4614    0.7348     0.0016    0.0102   4708.6246    1.0001</code></pre>
+<p>For example, we can see that the MCSE for <span class="math inline">\(H_0\)</span> is a bit higher than the others. Whether this is acceptable or not depends on context<label for="tufte-sn-51" class="margin-toggle sidenote-number">51</label><input type="checkbox" id="tufte-sn-51" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">51</span> There’s a connection between significant digits and what MCSE threshold makes sense. Keeping significant digits in mind, we not want to be overly precise about a parameter like <span class="math inline">\(H_0\)</span> anyway; what degree of precision does it make sense to report <span class="math inline">\(H_0\)</span> to?</span>. We can also see our effective sample size; even though we have 200,000 retained MCMC iterations, our effective samples are roughly two orders of magnitude below that!</p>
+<p>We can also look at the quantiles and plot the distribution of our samples.</p>
+<div class="sourceCode" id="cb72"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb72-1"><a href="markov-chain-monte-carlo.html#cb72-1"></a>quantile(chn)</span></code></pre></div>
+<pre class="code-out"><code>Quantiles
+  parameters        2.5%       25.0%       50.0%       75.0%       97.5%
+      Symbol     Float64     Float64     Float64     Float64     Float64
+
+       alpha      1.7634      2.1521      2.3375      2.5260      3.0381
+         Teq     -1.0193     -0.8381     -0.7748     -0.7193     -0.6164
+          H0   -164.9125   -157.6706   -154.5539   -151.5305   -145.4417
+         rho      0.0753      0.5736      0.7847      0.8951      0.9788
+       sigma      0.1216      0.9450      1.4544      1.9474      2.9776</code></pre>
+<div class="sourceCode" id="cb74"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb74-1"><a href="markov-chain-monte-carlo.html#cb74-1"></a></span>
+<span id="cb74-2"><a href="markov-chain-monte-carlo.html#cb74-2"></a>plot(chain[burnin+<span class="fl">1</span>:<span class="kw">end</span>, :], layout=<span class="fl">5</span>, seriestype=:density, label=:false, xlabel=[<span class="st">"alpha"</span> <span class="st">"Teq"</span> <span class="st">"H0"</span> <span class="st">"rho"</span> <span class="st">"sigma"</span>], grid=:false)</span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:slr-density"></span>
+<p class="caption marginnote shownote">
+Figure 5.11: Marginal posterior densities for the Metropolis-Hastings samples for the sea-level rise model.
+</p>
+<img src="raes_files/figure-html/slr-density-J1.png" alt="Marginal posterior densities for the Metropolis-Hastings samples for the sea-level rise model.">
+</div>
+<p>A pairs plot is a useful visual representation of the posterior samples, typically including marginal histograms and pairwise scatterplots^[Sometimes other useful information, such as correlation coefficients or bivariate densities are also included in a pairs plot. <code>StatsPlots.jl</code> provides two types of pairs plots. <code>corrplot()</code> provides a plot which also includes a color-coded correlation plot (including the best-fit line) for each pair of parameters. An example is shown in Figure <a href="markov-chain-monte-carlo.html#fig:slr-pairs">5.12</a>.<label for="tufte-sn-52" class="margin-toggle sidenote-number">52</label><input type="checkbox" id="tufte-sn-52" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">52</span> This may be a bit cramped due to the size of the plotting space, but you get the idea of what’s included.</span></p>
+<div class="sourceCode" id="cb75"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb75-1"><a href="markov-chain-monte-carlo.html#cb75-1"></a>using StatsPlots</span>
+<span id="cb75-2"><a href="markov-chain-monte-carlo.html#cb75-2"></a></span>
+<span id="cb75-3"><a href="markov-chain-monte-carlo.html#cb75-3"></a>corrplot(chain[burnin+<span class="fl">1</span>:<span class="kw">end</span>, :], label=[<span class="st">"alpha"</span> <span class="st">"Teq"</span> <span class="st">"H0"</span> <span class="st">"rho"</span> <span class="st">"sigma"</span>], xrotation=<span class="fl">45</span>)</span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:slr-pairs"></span>
+<p class="caption marginnote shownote">
+Figure 5.12: Pairs plot for the posterior density for our calibrated sea-level rise model.
+</p>
+<img src="raes_files/figure-html/slr-pairs-J1.png" alt="Pairs plot for the posterior density for our calibrated sea-level rise model.">
+</div>
+<p><code>cornerplot()</code> shows the marginal histograms around the edges of the plotting window, and can be used to provide a more compact representation with the flag <code>compact=true</code>. An example is shown in Figure <a href="markov-chain-monte-carlo.html#fig:slr-corner">5.13</a>.</p>
+<div class="sourceCode" id="cb76"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb76-1"><a href="markov-chain-monte-carlo.html#cb76-1"></a>cornerplot(chain[burnin+<span class="fl">1</span>:<span class="kw">end</span>, :], label=[<span class="st">"alpha"</span> <span class="st">"Teq"</span> <span class="st">"H0"</span> <span class="st">"rho"</span> <span class="st">"sigma"</span>], xrotation=<span class="fl">45</span>, compact=true)</span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:slr-corner"></span>
+<p class="caption marginnote shownote">
+Figure 5.13: Corner plot for the posterior density for our calibrated sea-level rise model.
+</p>
+<img src="raes_files/figure-html/slr-corner-J1.png" alt="Corner plot for the posterior density for our calibrated sea-level rise model.">
+</div>
+<p>We can see from Figures <a href="markov-chain-monte-carlo.html#fig:slr-pairs">5.12</a> and <a href="markov-chain-monte-carlo.html#fig:slr-corner">5.13</a> that <span class="math inline">\(\alpha\)</span> is highly correlated with <span class="math inline">\(T_\text{eq}\)</span> and <span class="math inline">\(H_0\)</span>. This makes sense if we think about it. For example, if <span class="math inline">\(T_\text{eq}\)</span> is lower, <span class="math inline">\(\alpha\)</span> can be smaller to get the same overall value of the linear term <span class="math inline">\(\alpha (T - T_\text{eq})\)</span>. Similarly, if <span class="math inline">\(H_0\)</span> is smaller, a larger value of <span class="math inline">\(\alpha\)</span> is needed to get the right <span class="math inline">\(\Delta H/delta t\)</span> to approximate the observations.<label for="tufte-sn-53" class="margin-toggle sidenote-number">53</label><input type="checkbox" id="tufte-sn-53" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">53</span> The same line of reasoning explains why <span class="math inline">\(T_\text{eq}\)</span> and <span class="math inline">\(H_0\)</span> should be positively pairwise correlated.</span> The relationship of the discrepancy terms <span class="math inline">\(\rho\)</span> and <span class="math inline">\(\sigma\)</span> with the model parameters is more complex and less intuitive.</p>
+</div>
+<div id="posterior-checking-with-hindcasts" class="section level3">
+<h3>
+<span class="header-section-number">5.7.6</span> Posterior Checking with Hindcasts<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('posterior-checking-with-hindcasts')" onmouseout="reset_tooltip('posterior-checking-with-hindcasts-tooltip')"><span class="tooltiptext" id="posterior-checking-with-hindcasts-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
+</h3>
+<p>In Figure <a href="markov-chain-monte-carlo.html#fig:slr-density">5.11</a>, we plotted the distribution of our posterior samples. However, calibrating a model does not mean that the model appropriately captures key dynamics and uncertainties. This can be due to either structural deficiencies or due to choices that we made during the calibration process, such as if our priors were overly constrained or if our likelihood model failed to take into account statistical features such as correlated residuals. We can get a sense of how appropriate our inferences are through <em>posterior predictive checks</em>, which compare simulated realizations from the posterior predictive distribution to the observed data.</p>
+<p>A common class of posterior predictive checks which are particularly applicable for climate applications are <em>hindcasts</em>, in which alternative historical “datasets” are simulated. We will draw samples from our posterior distribution and run our model.</p>
+<p>When we implemented our likelihood, we included a function <code>slr_model()</code> which we used to compute the residuals. We will reuse that function in our posterior simulations. One important note is that we need to add in the model-data discrepancy terms and observation error as well. We don’t need to add in observation errors for future projections<label for="tufte-sn-54" class="margin-toggle sidenote-number">54</label><input type="checkbox" id="tufte-sn-54" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">54</span> After all, there are no observations!</span>. So we will add an optional argument which will only add in the observation error variance if we are using projections.</p>
+<div class="sourceCode" id="cb77"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb77-1"><a href="markov-chain-monte-carlo.html#cb77-1"></a><span class="co"># obs_err needs to be passed in if project = false</span></span>
+<span id="cb77-2"><a href="markov-chain-monte-carlo.html#cb77-2"></a><span class="kw">function</span> sample_residuals(rho, sigma, temps; project = false, obs_err = missing)</span>
+<span id="cb77-3"><a href="markov-chain-monte-carlo.html#cb77-3"></a>    <span class="co"># check if obs_err was passed in if project=false</span></span>
+<span id="cb77-4"><a href="markov-chain-monte-carlo.html#cb77-4"></a>    <span class="kw">if</span> !project &amp;&amp; ismissing(obs_err)</span>
+<span id="cb77-5"><a href="markov-chain-monte-carlo.html#cb77-5"></a>        error(<span class="st">"If not making projections, need to include observation error!"</span>)</span>
+<span id="cb77-6"><a href="markov-chain-monte-carlo.html#cb77-6"></a>    <span class="kw">end</span></span>
+<span id="cb77-7"><a href="markov-chain-monte-carlo.html#cb77-7"></a></span>
+<span id="cb77-8"><a href="markov-chain-monte-carlo.html#cb77-8"></a>    <span class="co"># compute the covariance matrix</span></span>
+<span id="cb77-9"><a href="markov-chain-monte-carlo.html#cb77-9"></a>    n = length(temps)</span>
+<span id="cb77-10"><a href="markov-chain-monte-carlo.html#cb77-10"></a>    H = abs.((<span class="fl">1</span>:n) .- (<span class="fl">1</span>:n)')</span>
+<span id="cb77-11"><a href="markov-chain-monte-carlo.html#cb77-11"></a>    Sigma = ((sigma^<span class="fl">2</span> / (<span class="fl">1</span> - rho^<span class="fl">2</span>)) .* (rho.^H))</span>
+<span id="cb77-12"><a href="markov-chain-monte-carlo.html#cb77-12"></a>    <span class="co"># if making projections, add in the observation error variance</span></span>
+<span id="cb77-13"><a href="markov-chain-monte-carlo.html#cb77-13"></a>    <span class="kw">if</span> !project</span>
+<span id="cb77-14"><a href="markov-chain-monte-carlo.html#cb77-14"></a>        Sigma += PDiagMat(obs_err).^<span class="fl">2</span></span>
+<span id="cb77-15"><a href="markov-chain-monte-carlo.html#cb77-15"></a>    <span class="kw">end</span></span>
+<span id="cb77-16"><a href="markov-chain-monte-carlo.html#cb77-16"></a></span>
+<span id="cb77-17"><a href="markov-chain-monte-carlo.html#cb77-17"></a>    residuals = rand(MvNormal(zeros(n), Sigma), <span class="fl">1</span>)</span>
+<span id="cb77-18"><a href="markov-chain-monte-carlo.html#cb77-18"></a><span class="kw">end</span></span></code></pre></div>
+<pre class="code-out"><code>sample_residuals (generic function with 1 method)</code></pre>
+<p>Then, given a parameter vector, we can combine the two functions to produce projections or hindcasts.</p>
+<div class="sourceCode" id="cb79"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb79-1"><a href="markov-chain-monte-carlo.html#cb79-1"></a><span class="co"># this function will take in posterior samples and generate an ensemble of simulations</span></span>
+<span id="cb79-2"><a href="markov-chain-monte-carlo.html#cb79-2"></a><span class="kw">function</span> simulate_slr(post_samples, yrs, temps; project = false, obs_err = missing)</span>
+<span id="cb79-3"><a href="markov-chain-monte-carlo.html#cb79-3"></a>    slr_sims = zeros(length(yrs), size(post_samples, <span class="fl">1</span>) + <span class="fl">1</span>)</span>
+<span id="cb79-4"><a href="markov-chain-monte-carlo.html#cb79-4"></a>    slr_sims[:, <span class="fl">1</span>] = yrs</span>
+<span id="cb79-5"><a href="markov-chain-monte-carlo.html#cb79-5"></a>    <span class="kw">for</span> i <span class="kw">in</span> <span class="fl">1</span>:size(post_samples, <span class="fl">1</span>)</span>
+<span id="cb79-6"><a href="markov-chain-monte-carlo.html#cb79-6"></a>        theta = post_samples[i, :]</span>
+<span id="cb79-7"><a href="markov-chain-monte-carlo.html#cb79-7"></a>        model_out = slr_model(theta[<span class="fl">1</span>], theta[<span class="fl">2</span>], theta[<span class="fl">3</span>], temps) </span>
+<span id="cb79-8"><a href="markov-chain-monte-carlo.html#cb79-8"></a>        residuals = sample_residuals(theta[<span class="fl">4</span>], theta[<span class="fl">5</span>], temps, project=project, obs_err=obs_err)</span>
+<span id="cb79-9"><a href="markov-chain-monte-carlo.html#cb79-9"></a>        slr_sims[:, i] = model_out + residuals</span>
+<span id="cb79-10"><a href="markov-chain-monte-carlo.html#cb79-10"></a>    <span class="kw">end</span></span>
+<span id="cb79-11"><a href="markov-chain-monte-carlo.html#cb79-11"></a>    <span class="kw">return</span> slr_sims</span>
+<span id="cb79-12"><a href="markov-chain-monte-carlo.html#cb79-12"></a><span class="kw">end</span></span></code></pre></div>
+<pre class="code-out"><code>simulate_slr (generic function with 1 method)</code></pre>
+<p>We can see the results of our hindcasting exercise in Figure <a href="markov-chain-monte-carlo.html#fig:slr-hindcast">5.14</a>.</p>
+<div class="sourceCode" id="cb81"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb81-1"><a href="markov-chain-monte-carlo.html#cb81-1"></a>nsamples = <span class="fl">10000</span>;</span>
+<span id="cb81-2"><a href="markov-chain-monte-carlo.html#cb81-2"></a>sample_idx = rand(burnin+<span class="fl">1</span>:size(chain, <span class="fl">1</span>), nsamples);</span>
+<span id="cb81-3"><a href="markov-chain-monte-carlo.html#cb81-3"></a>post_samples = chain[sample_idx, :];</span>
+<span id="cb81-4"><a href="markov-chain-monte-carlo.html#cb81-4"></a>yrs = slr_data[:, <span class="fl">1</span>] .- <span class="fl">0.5</span>;</span>
+<span id="cb81-5"><a href="markov-chain-monte-carlo.html#cb81-5"></a>slr_sims = simulate_slr(post_samples, yrs, data[:, <span class="fl">3</span>], obs_err = data[:, <span class="fl">2</span>]);</span>
+<span id="cb81-6"><a href="markov-chain-monte-carlo.html#cb81-6"></a></span>
+<span id="cb81-7"><a href="markov-chain-monte-carlo.html#cb81-7"></a><span class="co"># compute credible interval bounds</span></span>
+<span id="cb81-8"><a href="markov-chain-monte-carlo.html#cb81-8"></a>cis = zeros(length(yrs), <span class="fl">3</span>);</span>
+<span id="cb81-9"><a href="markov-chain-monte-carlo.html#cb81-9"></a>cis[:, <span class="fl">1</span>] = yrs;</span>
+<span id="cb81-10"><a href="markov-chain-monte-carlo.html#cb81-10"></a><span class="kw">for</span> i = <span class="fl">1</span>:length(yrs)</span>
+<span id="cb81-11"><a href="markov-chain-monte-carlo.html#cb81-11"></a>    cis[i, <span class="fl">2</span>:<span class="fl">3</span>] = quantile(slr_sims[i, <span class="fl">2</span>:<span class="kw">end</span>], [<span class="fl">0.05</span>, <span class="fl">0.95</span>]);</span>
+<span id="cb81-12"><a href="markov-chain-monte-carlo.html#cb81-12"></a><span class="kw">end</span></span>
+<span id="cb81-13"><a href="markov-chain-monte-carlo.html#cb81-13"></a></span>
+<span id="cb81-14"><a href="markov-chain-monte-carlo.html#cb81-14"></a><span class="co"># plot</span></span>
+<span id="cb81-15"><a href="markov-chain-monte-carlo.html#cb81-15"></a>scatter(yrs, data[:, <span class="fl">1</span>], markersize=<span class="fl">3</span>, color=<span class="st">"black"</span>, grid=:false, xlabel=<span class="st">"Year"</span>, ylabel=<span class="st">"Sea Level Anomaly (mm)"</span>, legend=:topleft, label=<span class="st">"Reconstructed Data"</span>);</span>
+<span id="cb81-16"><a href="markov-chain-monte-carlo.html#cb81-16"></a>plot!(yrs, cis[:, <span class="fl">2</span>], fillrange=cis[:, <span class="fl">3</span>], fillcolor=<span class="st">"blue"</span>, fillalpha=<span class="fl">0.2</span>, alpha=<span class="fl">0.2</span>, label=<span class="st">"90% Hindcast Credible Interval"</span>);</span>
+<span id="cb81-17"><a href="markov-chain-monte-carlo.html#cb81-17"></a>plot!(size=(<span class="fl">350</span>, <span class="fl">280</span>))</span></code></pre></div>
+<p>
+<span class="marginnote shownote">
+<!--
+<div class="figure">--><span style="display:block;" id="fig:slr-hindcast"></span>
+<img src="raes_files/figure-html/slr-hindcast-J1.png" alt="Sea-level rise hindcastsfrom 1880--2013 using our calibrated model. Reconstructed data from @Church2011-bj are black dots, the 90% model output credible interval is in blue."><!--
+<p class="caption marginnote">-->Figure 5.14: Sea-level rise hindcastsfrom 1880–2013 using our calibrated model. Reconstructed data from <span class="citation">Church &amp; White (<a href="#ref-Church2011-bj" role="doc-biblioref">2011</a>)</span> are black dots, the 90% model output credible interval is in blue.<!--</p>-->
+<!--</div>--></span>
+</p>
+<p>Visually, the hindcast in Figure <a href="markov-chain-monte-carlo.html#fig:slr-hindcast">5.14</a> looks pretty good! We see that the uncertainty actually decreases over time, which is the result of the reduced observation error. In general, our data is contained within our credible interval, but we don’t actually want all of the data to be contained within a 90% credible interval. The level of the interval (in this case, 90%) suggests that the fraction of data that should be included within the interval if the model is appropriately calibrated. We can calculate this fraction, or its opposite<label for="tufte-sn-55" class="margin-toggle sidenote-number">55</label><input type="checkbox" id="tufte-sn-55" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">55</span> The fraction of data located outside of the interval.</span>, which is called the <em>surprise index</em>.</p>
+<div class="sourceCode" id="cb82"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb82-1"><a href="markov-chain-monte-carlo.html#cb82-1"></a><span class="co"># calculate the surprise index</span></span>
+<span id="cb82-2"><a href="markov-chain-monte-carlo.html#cb82-2"></a>surprise_count = sum((data[:, <span class="fl">1</span>] .&lt;= cis[:, <span class="fl">2</span>]) .| (data[:, <span class="fl">1</span>] .&gt;= cis[:, <span class="fl">3</span>]));</span>
+<span id="cb82-3"><a href="markov-chain-monte-carlo.html#cb82-3"></a>surprise_count / length(yrs)</span></code></pre></div>
+<pre class="code-out"><code>0.0</code></pre>
+<p>None of our data is outside of the credible interval, which suggests that it’s underconfident (since about 10% of the data ought to be). Looking again at <a href="markov-chain-monte-carlo.html#fig:slr-hindcast">5.14</a>, it looks like some of the data is close, which suggests that our priors may be too wide if we can justify narrowing them<label for="tufte-sn-56" class="margin-toggle sidenote-number">56</label><input type="checkbox" id="tufte-sn-56" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">56</span> Which we might not be able to, depending on what information we used to determine them.</span>.</p>
+</div>
+</div>
+<div id="detailed-balance" class="section level2">
+<h2>
+<span class="header-section-number">5.8</span> Why Metropolis-Hastings Works<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('detailed-balance')" onmouseout="reset_tooltip('detailed-balance-tooltip')"><span class="tooltiptext" id="detailed-balance-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
+</h2>
+<p>Why does the Metropolis-Hastings algorithm work? The answer is in the <em>detailed balance equations</em>. Detailed balance is when a process is in equilibrium with its reverse process.<label for="tufte-sn-57" class="margin-toggle sidenote-number">57</label><input type="checkbox" id="tufte-sn-57" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">57</span> Which is why another term for detailed balance is <em>reversibility</em>.</span> Let’s consider a Markov chain over a parameter space <span class="math inline">\(X\)</span> with transition distribution <span class="math inline">\(P\)</span> and stationary distribution <span class="math inline">\(\pi\)</span>. If for any two states <span class="math inline">\(x, y \in X\)</span>,
+<span class="math display">\[\pi(x)T(x,y) = \pi(y)T(y,x),\]</span>
+then the chain satisfies detailed balance or is reversible.</p>
+<p>Detailed balance is a stronger condition than the condition that <span class="math inline">\(\pi\)</span> is a stationary distribution for the chain. Being at equilibrium implies that the total probability flowing in equals the probability flowing out of any state at a given time step. Reversibility additionally requires that the probability flowing across each edge in one direction at each time step must equal the probability flowing in the opposite direction.<label for="tufte-sn-58" class="margin-toggle sidenote-number">58</label><input type="checkbox" id="tufte-sn-58" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">58</span> An analogy (borrowed from <a href="https://cims.nyu.edu/~holmes/teaching/asa19/handout_Lecture3_2019.pdf">Miranda Holmes-Cerfon’s lecture notes</a>) is to traffic flow. Suppose that each neighborhood of a city is a state, and roads connecting neighborhoods are edges. Each car represents some probability mass. The city’s Markov chain is in equilibrium if the number of cars in each neighborhood doesn’t change with time — the numbers leaving and entering each neighborhood are the same. The city is in detailed balance only if the number of cars leaving each road at any time equal the number of cars entering that road, so the fluxes of cars across each road are the same in both directions.</span></p>
+<p>For the Metropolis-Hastings algorithm, the transition probability (or the <em>transition kernel</em>) <span class="math inline">\(k(x,y)\)</span> of moving from <span class="math inline">\(x \to y\)</span> is
+<span class="math display">\[k(x,y) = \alpha(y | x)q(y | x).\]</span> The detailed balance equation is then <span class="math display">\[\pi(x)k(x,y) = \pi(y)k(y,x).\]</span> We only need to consider the case where <span class="math inline">\(x \neq y\)</span>. Then the left-hand side of the detailed balance equation becomes
+<span class="math display">\[\pi(x)k(x,y) = \pi(x)q(y|x)\alpha(y|x).\]</span> If <span class="math inline">\(\pi(y)q(x | y) &gt; \pi(x) q(y | x)\)</span>,<label for="tufte-sn-59" class="margin-toggle sidenote-number">59</label><input type="checkbox" id="tufte-sn-59" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">59</span> Which we can assume without loss of generality; the argument is analogous if you reverse the inequality.</span> then <span class="math inline">\(\alpha(y|x) = 1\)</span>, and the left-hand side is
+<span class="math display">\[\pi(x)k(x,y) = \pi(x)q(y|x).\]</span> The right-hand side of the detailed balance equation is
+<span class="math display">\[\pi(y)k(y, x) = \pi(y)q(x|y)\alpha(x|y) = \pi(y)q(x|y)\times \frac{\pi(x)q(y|x)}{\pi(y)q(x|y)} = \pi(x)q(x|y)\]</span>
+and detailed balance is satisfied.</p>
+<p>Observe that nothing about the form of <span class="math inline">\(q\)</span> was used, not even symmetry: <span class="math inline">\(q\)</span> can be any proposal distribution over the state space! This gives us a lot of freedom to tweak the method for a given problem to improve efficiency.</p>
+
+
+</div>
+</div>
+<h3>References<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('NA')" onmouseout="reset_tooltip('NA-tooltip')"><span class="tooltiptext" id="NA-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
+</h3>
+<div id="refs" class="references">
+<div id="ref-andrieuErgodicityPropertiesAdaptive2006">
+<p>Andrieu, C., &amp; Moulines, É. (2006). On the ergodicity properties of some adaptive MCMC algorithms. <em>The Annals of Applied Probability</em>, <em>16</em>(3), 1462–1505. <a href="https://doi.org/10/drxrxc">https://doi.org/10/drxrxc</a></p>
+</div>
+<div id="ref-bedardOptimalAcceptanceRates2008">
+<p>Bédard, M. (2008). Optimal acceptance rates for Metropolis algorithms: Moving beyond 0.234. <em>Stochastic Processes and Their Applications</em>, <em>118</em>(12), 2198–2222. <a href="https://doi.org/10/bbcdb7">https://doi.org/10/bbcdb7</a></p>
+</div>
+<div id="ref-brynjarsdottirLearningPhysicalParameters2014">
+<p>Brynjarsdóttir, J., &amp; O’Hagan, A. (2014). Learning about physical parameters: The importance of model discrepancy. <em>Inverse Problems</em>, <em>30</em>(11), 114007. <a href="https://doi.org/10.1088/0266-5611/30/11/114007">https://doi.org/10.1088/0266-5611/30/11/114007</a></p>
+</div>
+<div id="ref-Church2011-bj">
+<p>Church, J. A., &amp; White, N. J. (2011). Sea-Level rise from the late 19th to the early 21st century. <em>Surv. Geophys.</em>, <em>32</em>(4), 585–602. <a href="https://doi.org/10.1007/s10712-011-9119-1">https://doi.org/10.1007/s10712-011-9119-1</a></p>
+</div>
+<div id="ref-flegalMarkovChainMonte2008">
+<p>Flegal, J. M., Haran, M., &amp; Jones, G. L. (2008). Markov chain Monte Carlo: Can we trust the third significant figure? <em>Statistical Science</em>, <em>23</em>(2). <a href="https://doi.org/10.1214/08-STS257">https://doi.org/10.1214/08-STS257</a></p>
+</div>
+<div id="ref-gelmanPriorDistributionsVariance2006">
+<p>Gelman, A. (2006). Prior distributions for variance parameters in hierarchical models (comment on article by Browne and Draper). <em>Bayesian Analysis</em>, <em>1</em>(3), 515–534. <a href="https://doi.org/10/bh3qjf">https://doi.org/10/bh3qjf</a></p>
+</div>
+<div id="ref-gelmanInferenceIterativeSimulation1992">
+<p>Gelman, A., &amp; Rubin, D. B. (1992). Inference from Iterative Simulation Using Multiple Sequences. <em>Statistical Science</em>, <em>7</em>(4), 457–472. <a href="https://doi.org/10/bk4g9g">https://doi.org/10/bk4g9g</a></p>
+</div>
+<div id="ref-gelmanWeakConvergenceOptimal1997">
+<p>Gelman, A., Gilks, W. R., &amp; Roberts, G. O. (1997). Weak convergence and optimal scaling of random walk Metropolis algorithms. <em>The Annals of Applied Probability</em>, <em>7</em>(1), 110–120. <a href="https://doi.org/10/fpp233">https://doi.org/10/fpp233</a></p>
+</div>
+<div id="ref-geyerIntroductionMarkovChain2011">
+<p>Geyer, C. (2011). Introduction to Markov Chain Monte Carlo. In S. Brooks, A. Gelman, G. Jones, &amp; X.-L. Meng (Eds.), <em>Handbook of Markov Chain Monte Carlo</em> (Vol. 20116022). Chapman and Hall/CRC. <a href="https://doi.org/10.1201/b10905-2">https://doi.org/10.1201/b10905-2</a></p>
+</div>
+<div id="ref-grinsteadIntroductionProbability2006">
+<p>Grinstead, C. M., &amp; Snell, J. L. (2006). <em>Introduction to Probability</em>. American Mathematical Society.</p>
+</div>
+<div id="ref-heidelbergerSimulationRunLength1983">
+<p>Heidelberger, P., &amp; Welch, P. D. (1983). Simulation Run Length Control in the Presence of an Initial Transient. <em>Operations Research</em>, <em>31</em>(6), 1109–1144. <a href="https://doi.org/10/czwz43">https://doi.org/10/czwz43</a></p>
+</div>
+<div id="ref-rahmstorfSemiEmpiricalApproachProjecting2007">
+<p>Rahmstorf, S. (2007). A Semi-Empirical Approach to Projecting Future Sea-Level Rise. <em>Science</em>, <em>315</em>(5810), 368–370. <a href="https://doi.org/10/djt4n9">https://doi.org/10/djt4n9</a></p>
+</div>
+<div id="ref-robertMetropolisHastingsAlgorithm2015">
+<p>Robert, C. P. (2015). The Metropolis-Hastings algorithm. <em>Wiley StatsRef: Statistics Reference Online</em>. <a href="https://doi.org/10.1002/9781118445112.stat07834">https://doi.org/10.1002/9781118445112.stat07834</a></p>
+</div>
+<div id="ref-viholaRobustAdaptiveMetropolis2012">
+<p>Vihola, M. (2012). Robust adaptive metropolis algorithm with coerced acceptance rate. <em>Statistics and Computing</em>, <em>22</em>(5), 997–1008. <a href="https://doi.org/10.1007/s11222-011-9269-5">https://doi.org/10.1007/s11222-011-9269-5</a></p>
+</div>
+</div>
+</body></html>
+
+<p style="text-align: center;">
+<a href="normal-distributions-and-the-galton-board.html"><button class="btn btn-default">Previous</button></a>
+<a href="references.html"><button class="btn btn-default">Next</button></a>
+</p>
+<p class="build-date">Page built: 
+2021-12-15
+ using 
+R version 4.1.2 (2021-11-01)
+</p>
+</div>
+</div>
+
+
+
+</body>
+</html>

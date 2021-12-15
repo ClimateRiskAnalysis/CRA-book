@@ -2,66 +2,82 @@
 <html lang="" xml:lang="">
 <head>
 
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>About This Book | Risk Analysis in the Earth Sciences</title>
-  <meta name="description" content="About This Book | Risk Analysis in the Earth Sciences" />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="About This Book | Risk Analysis in the Earth Sciences" />
+<meta property="og:type" content="book" />
 
-  <meta property="og:title" content="About This Book | Risk Analysis in the Earth Sciences" />
-  <meta property="og:type" content="book" />
-  
-  <meta property="og:image" content="/images/cover_with_alexander.png" />
-  
-  <meta name="github-repo" content="vsrikrish/RAES" />
+<meta property="og:image" content="/images/cover_with_alexander.png" />
 
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="About This Book | Risk Analysis in the Earth Sciences" />
-  
-  
-  <meta name="twitter:image" content="/images/cover_with_alexander.png" />
+<meta name="github-repo" content="vsrikrish/RAES" />
 
 <meta name="author" content="Vivek Srikrishnan" />
 <meta name="author" content="Klaus Keller" />
 
+<meta name="date" content="2021-12-15" />
 
-<meta name="date" content="2021-12-05" />
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
 
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="description" content="About This Book | Risk Analysis in the Earth Sciences">
+
+<title>About This Book | Risk Analysis in the Earth Sciences</title>
+
+<link href="libs/tufte-css-2015.12.29/tufte.css" rel="stylesheet" />
+<link href="libs/tufte-css-2015.12.29/envisioned.css" rel="stylesheet" />
+<link href="libs/msmb-css-0/msmb.css" rel="stylesheet" />
+<script>
+function toggle_visibility(id1, id2) {
+var e = document.getElementById(id1);
+var f = document.getElementById(id2);
+
+e.style.display = ((e.style.display!='none') ? 'none' : 'block');
+
+if(f.classList.contains('fa-plus-square')) {
+    f.classList.add('fa-minus-square')
+    f.classList.remove('fa-plus-square')
+} else {
+    f.classList.add('fa-plus-square')
+    f.classList.remove('fa-minus-square')
+}
+
+}
+</script>
+<script>
+function copy_link(id) {
+  var dummy = document.createElement('input'),
+  text = window.location.href.split(/[?#]/)[0] + '#' + id;
+  document.body.appendChild(dummy);
+  dummy.value = text;
+  dummy.select();
+  document.execCommand('copy');
+  document.body.removeChild(dummy);
   
-  
-<link rel="prev" href="index.html"/>
-<link rel="next" href="contributor-bios.html"/>
-<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
-<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+  var tooltip = document.getElementById(id + '-tooltip');
+  tooltip.innerHTML = 'Copied!';
+}
 
-
-
-
-
-
-
-
+function reset_tooltip(id) {
+  var tooltip = document.getElementById(id);
+  tooltip.innerHTML = 'Copy link';
+}
+</script>
 <script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 
+<style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
 code.sourceCode > span { display: inline-block; line-height: 1.25; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
+
 code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -121,100 +137,46 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </style>
 
 
+
 <link rel="stylesheet" href="css/style.css" type="text/css" />
+
 </head>
 
 <body>
 
 
 
-  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
-
-    <div class="book-summary">
-      <nav role="navigation">
-
-<ul class="summary">
-<li><a href="./">Risk Analysis in the Earth Sciencese</a></li>
-
-<li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
-<li class="chapter" data-level="" data-path="about-this-book.html"><a href="about-this-book.html"><i class="fa fa-check"></i>About This Book</a><ul>
-<li class="chapter" data-level="" data-path="contributor-bios.html"><a href="contributor-bios.html"><i class="fa fa-check"></i>Contributor Bios</a></li>
-<li class="chapter" data-level="" data-path="acknowledgements.html"><a href="acknowledgements.html"><i class="fa fa-check"></i>Acknowledgements</a></li>
-<li class="chapter" data-level="" data-path="book-source-and-scripts.html"><a href="book-source-and-scripts.html"><i class="fa fa-check"></i>Book Source and Scripts</a></li>
-<li class="chapter" data-level="" data-path="comments-and-questions.html"><a href="comments-and-questions.html"><i class="fa fa-check"></i>Comments and Questions</a></li>
-</ul></li>
-<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
-<li class="chapter" data-level="1.1" data-path="climate-risks.html"><a href="climate-risks.html"><i class="fa fa-check"></i><b>1.1</b> Climate Risks</a></li>
-<li class="chapter" data-level="1.2" data-path="some-questions.html"><a href="some-questions.html"><i class="fa fa-check"></i><b>1.2</b> Some Questions</a></li>
-<li class="chapter" data-level="1.3" data-path="types-of-uncertainty.html"><a href="types-of-uncertainty.html"><i class="fa fa-check"></i><b>1.3</b> Types of (Un)certainty</a></li>
-<li class="chapter" data-level="1.4" data-path="what-is-risk.html"><a href="what-is-risk.html"><i class="fa fa-check"></i><b>1.4</b> What is Risk?</a></li>
-<li class="chapter" data-level="1.5" data-path="uncertainty-vs.-risk.html"><a href="uncertainty-vs.-risk.html"><i class="fa fa-check"></i><b>1.5</b> “Uncertainty” vs. “Risk”</a></li>
-</ul></li>
-<li class="chapter" data-level="2" data-path="julia-syntax.html"><a href="julia-syntax.html"><i class="fa fa-check"></i><b>2</b> Learning the basics of Julia</a><ul>
-<li class="chapter" data-level="" data-path="julia-syntax.html"><a href="julia-syntax.html#learning-objectives"><i class="fa fa-check"></i>Learning objectives</a></li>
-<li class="chapter" data-level="2.1" data-path="introduction-1.html"><a href="introduction-1.html"><i class="fa fa-check"></i><b>2.1</b> Introduction</a></li>
-<li class="chapter" data-level="2.2" data-path="getting-started.html"><a href="getting-started.html"><i class="fa fa-check"></i><b>2.2</b> Getting Started</a><ul>
-<li class="chapter" data-level="2.2.1" data-path="getting-started.html"><a href="getting-started.html#why-julia"><i class="fa fa-check"></i><b>2.2.1</b> Why Julia?</a></li>
-<li class="chapter" data-level="2.2.2" data-path="getting-started.html"><a href="getting-started.html#installing-julia"><i class="fa fa-check"></i><b>2.2.2</b> Installing Julia</a></li>
-<li class="chapter" data-level="2.2.3" data-path="getting-started.html"><a href="getting-started.html#why-write-scripts"><i class="fa fa-check"></i><b>2.2.3</b> Why write scripts?</a></li>
-<li class="chapter" data-level="2.2.4" data-path="getting-started.html"><a href="getting-started.html#package-and-environment-management"><i class="fa fa-check"></i><b>2.2.4</b> Package and environment management</a></li>
-<li class="chapter" data-level="2.2.5" data-path="getting-started.html"><a href="getting-started.html#getting-help"><i class="fa fa-check"></i><b>2.2.5</b> Getting help</a></li>
-<li class="chapter" data-level="2.2.6" data-path="getting-started.html"><a href="getting-started.html#when-the-documentation-and-searching-the-internet-dont-help"><i class="fa fa-check"></i><b>2.2.6</b> When the documentation and searching the Internet don’t help</a></li>
-</ul></li>
-<li class="chapter" data-level="2.3" data-path="julia-syntax-1.html"><a href="julia-syntax-1.html"><i class="fa fa-check"></i><b>2.3</b> Julia Syntax</a><ul>
-<li class="chapter" data-level="2.3.1" data-path="julia-syntax-1.html"><a href="julia-syntax-1.html#comments"><i class="fa fa-check"></i><b>2.3.1</b> Comments</a></li>
-<li class="chapter" data-level="2.3.2" data-path="julia-syntax-1.html"><a href="julia-syntax-1.html#variables"><i class="fa fa-check"></i><b>2.3.2</b> Variables</a></li>
-<li class="chapter" data-level="2.3.3" data-path="julia-syntax-1.html"><a href="julia-syntax-1.html#data-types"><i class="fa fa-check"></i><b>2.3.3</b> Data Types</a></li>
-</ul></li>
-<li class="chapter" data-level="2.4" data-path="data-structures.html"><a href="data-structures.html"><i class="fa fa-check"></i><b>2.4</b> Data Structures</a></li>
-</ul></li>
-<li class="chapter" data-level="3" data-path="plotting-time-series-data.html"><a href="plotting-time-series-data.html"><i class="fa fa-check"></i><b>3</b> Plotting Time Series Data</a><ul>
-<li class="chapter" data-level="" data-path="plotting-time-series-data.html"><a href="plotting-time-series-data.html#learning-objectives-1"><i class="fa fa-check"></i>Learning Objectives</a></li>
-<li class="chapter" data-level="3.1" data-path="introduction-2.html"><a href="introduction-2.html"><i class="fa fa-check"></i><b>3.1</b> Introduction</a></li>
-<li class="chapter" data-level="3.2" data-path="tutorial.html"><a href="tutorial.html"><i class="fa fa-check"></i><b>3.2</b> Tutorial</a><ul>
-<li class="chapter" data-level="3.2.1" data-path="tutorial.html"><a href="tutorial.html#downloading-the-data"><i class="fa fa-check"></i><b>3.2.1</b> Downloading the Data</a></li>
-<li class="chapter" data-level="3.2.2" data-path="tutorial.html"><a href="tutorial.html#reading-the-data"><i class="fa fa-check"></i><b>3.2.2</b> Reading the Data</a></li>
-<li class="chapter" data-level="3.2.3" data-path="tutorial.html"><a href="tutorial.html#plotting-the-data"><i class="fa fa-check"></i><b>3.2.3</b> Plotting the Data</a></li>
-</ul></li>
-<li class="chapter" data-level="3.3" data-path="exercises.html"><a href="exercises.html"><i class="fa fa-check"></i><b>3.3</b> Exercises</a><ul>
-<li class="chapter" data-level="" data-path="exercises.html"><a href="exercises.html#part-1"><i class="fa fa-check"></i>Part 1</a></li>
-<li class="chapter" data-level="" data-path="exercises.html"><a href="exercises.html#part-2"><i class="fa fa-check"></i>Part 2</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="4" data-path="normal-distributions-and-the-galton-board.html"><a href="normal-distributions-and-the-galton-board.html"><i class="fa fa-check"></i><b>4</b> Normal distributions and the Galton board</a><ul>
-<li class="chapter" data-level="" data-path="normal-distributions-and-the-galton-board.html"><a href="normal-distributions-and-the-galton-board.html#learning-objectives-2"><i class="fa fa-check"></i>Learning objectives</a></li>
-<li class="chapter" data-level="4.1" data-path="introduction-3.html"><a href="introduction-3.html"><i class="fa fa-check"></i><b>4.1</b> Introduction</a></li>
-<li class="chapter" data-level="4.2" data-path="tutorial-1.html"><a href="tutorial-1.html"><i class="fa fa-check"></i><b>4.2</b> Tutorial</a><ul>
-<li class="chapter" data-level="4.2.1" data-path="tutorial-1.html"><a href="tutorial-1.html#writing-our-own-simple-galton-board-script"><i class="fa fa-check"></i><b>4.2.1</b> Writing our own simple Galton board script</a></li>
-<li class="chapter" data-level="4.2.2" data-path="tutorial-1.html"><a href="tutorial-1.html#doing-things-over-and-over-again-for-loops"><i class="fa fa-check"></i><b>4.2.2</b> Doing things over and over again: <code>for</code> loops</a></li>
-<li class="chapter" data-level="4.2.3" data-path="tutorial-1.html"><a href="tutorial-1.html#normal-or-not-normal-generating-and-interpreting-quantile-quantile-plots"><i class="fa fa-check"></i><b>4.2.3</b> Normal or not normal?: Generating and interpreting quantile-quantile plots</a></li>
-</ul></li>
-<li class="chapter" data-level="4.3" data-path="exercises-1.html"><a href="exercises-1.html"><i class="fa fa-check"></i><b>4.3</b> Exercises</a><ul>
-<li class="chapter" data-level="" data-path="exercises-1.html"><a href="exercises-1.html#part-1-1"><i class="fa fa-check"></i>Part 1</a></li>
-<li class="chapter" data-level="" data-path="exercises-1.html"><a href="exercises-1.html#part-2-1"><i class="fa fa-check"></i>Part 2</a></li>
-<li class="chapter" data-level="" data-path="exercises-1.html"><a href="exercises-1.html#part-3"><i class="fa fa-check"></i>Part 3</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<div class="row">
+<div class="col-sm-12">
+<div id="TOC">
+<ul class="navbar">
+<li class="msmb"><p class="title">Risk Analysis in the Earth Sciences<p><p class="author">Vivek Srikrishnan, Klaus Keller</p>
+<li class="dropdown" style="float:right">
+<a href="javascript:void(0)" class="dropbtn">&#x25BE; Chapters</a>
+<div class="dropdown-content">
+<a href="index.html">Preface</a>
+<a id="active-page" href="about-this-book.html">About This Book</a><ul class="toc-sections">
+<li class="toc"><a href="#contributor-bios">Contributor Bios</a></li>
+<li class="toc"><a href="#acknowledgements">Acknowledgements</a></li>
+<li class="toc"><a href="#book-source-and-scripts">Book Source and Scripts</a></li>
+<li class="toc"><a href="#comments-and-questions">Comments and Questions</a></li>
 </ul>
-
-      </nav>
-    </div>
-
-    <div class="book-body">
-      <div class="body-inner">
-        <div class="book-header" role="navigation">
-          <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Risk Analysis in the Earth Sciences</a>
-          </h1>
-        </div>
-
-        <div class="page-wrapper" tabindex="-1" role="main">
-          <div class="page-inner">
-
-            <section class="normal" id="section-">
-<div id="about-this-book" class="section level1 unnumbered">
+<a href="what-is-climate-risk.html"><span class="toc-section-number">1</span> What is Climate Risk?</a>
+<a href="julia-syntax.html"><span class="toc-section-number">2</span> Learning the basics of Julia</a>
+<a href="plotting-time-series-data.html"><span class="toc-section-number">3</span> Plotting Time Series Data</a>
+<a href="normal-distributions-and-the-galton-board.html"><span class="toc-section-number">4</span> Normal distributions and the Galton board</a>
+<a href="markov-chain-monte-carlo.html"><span class="toc-section-number">5</span> Markov Chain Monte Carlo</a>
+<a href="references.html">References</a>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body><div id="about-this-book" class="section level1 unnumbered">
 <h1>About This Book</h1>
 <p>This textbook presents a series of chapters that introduce students to the statistical aspects of risk analysis in the Earth sciences using Julia. Most of these chapters have to do with sea-level rise, which is a major focus of the authors’ research activities.</p>
 <p>The exercises are intended for upper-level undergraduates, beginning graduate students, and professionals in other areas who wish to gain insight into academic climate risk analysis. Previous programming experience is helpful, but not required; the first exercise explains how to learn the basics of Julia.</p>
@@ -230,67 +192,56 @@ textbook specifically disclaim any liability for damages associated with the use
 this textbook.</p>
 </div>
 </div>
+<div id="contributor-bios" class="section level2 unnumbered">
+<h2>Contributor Bios<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('contributor-bios')" onmouseout="reset_tooltip('contributor-bios-tooltip')"><span class="tooltiptext" id="contributor-bios-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
+</h2>
+<p><strong>Vivek Srikrishnan</strong> is an Assistant Professor in the Department of Biological &amp; Environmental Engineering at Cornell University. He studies decision-making under uncertain climate risks and feedbacks between natural and human systems. His research combines model development, uncertainty quantification, complex systems dynamics, and decision-making under uncertainty. He has a Ph.D. in Energy &amp; Mineral Engineering from Penn State. Vivek’s email address is <a href="mailto:viveks@cornell.edu" class="email">viveks@cornell.edu</a>, and his website is <a href="http://www.viveks.me" class="uri">http://www.viveks.me</a>.</p>
+<p><strong>Patrick J. Applegate</strong> is an Academic Editor at Research Square. In this role, Patrick helps researchers communicate their science and works on data science projects in Python. Patrick earned his Ph.D. in Geosciences at Penn State and is first author or co-author of 20 peer-reviewed scientific papers. His research treats topics including ice sheets and their contributions to sea level rise, methods for estimating the ages of glacial deposits, and the application of statistical methods to problems in the geosciences.</p>
+<p><strong>Tony E. Wong</strong> is an Assistant Professor in the School of Mathematical &amp; Statistical Sciences at the Rochester Institute of Technology. He received his PhD in Applied Mathematics from CU Boulder in 2016, and later was a Postdoctoral Scholar at Penn State’s Earth and Environmental Systems Institute. Prior to joining RIT, Tony returned to CU as an Instructor in the Department of Computer Science to pursue his love of teaching. His current research focuses on uncertainty quantification and model calibration in sea level and coastal storm surge projections. Tony’s email address is <a href="mailto:aeswma@rit.edu" class="email">aeswma@rit.edu</a> and his website is <a href="https://tonyewong.github.io" class="uri">https://tonyewong.github.io</a>.</p>
+<p><strong>Ryan L. Sriver</strong> is an Associate Professor of Atmospheric Sciences at the University of Illinois at Urbana-Champaign (UIUC). Prior to joining UIUC in the fall of 2012, he worked as a research associate in Penn State’s Department of Geosciences and as a NOAA Climate and Global Change postdoctoral fellow in Penn State’s Department of Meteorology. He graduated from Purdue University with a Ph.D. in Earth and Atmospheric Sciences. His research seeks to develop a deeper understanding about the physical processes influencing variability within Earth’s climate system, and to quantify climate change uncertainties relevant to adaptation planning and decision-making. Ryan’s email address is <a href="mailto:rsriver@illinois.edu" class="email">rsriver@illinois.edu</a>, and his website is at <a href="https://www.atmos.illinois.edu/~rsriver/index.html" class="uri">https://www.atmos.illinois.edu/~rsriver/index.html</a>.</p>
+<p><strong>Alexander Bakker</strong> is a senior advisor at Rijkswaterstraat. He received a Masters in Civil Engineering from the Delft University of Technology and obtained a PhD in Regional climate change scenarios at VU University of Amsterdam.</p>
+<p><strong>Kelsey L. Ruckert</strong> is a geologist by training. She is a Coastal Extension Specialist for the Earth and Environmental Systems Institute at Penn State. She specializes in geology, flood hazards, water quality, and climate change impacts where she excels in GIS, statistical analysis, modeling, and fieldwork. Her research focuses on understanding sea-level rise, storm surge, and water resources, and their implications to vulnerability and the design of risk management strategies. Her email address is <a href="mailto:klr324@psu.edu" class="email">klr324@psu.edu</a> and her website is <a href="http://klr324.github.io" class="uri">http://klr324.github.io</a>.</p>
+<p><strong>Klaus Keller</strong> is a Professor of Geosciences at Penn State and a Visiting Professor at the Thayer School of Engineering at Dartmouth University. Keller directs the Center for Climate Risk Management as well as the research network for <a href="https://scrimhub.org">Sustainable Climate Risk Management</a>. Before joining Penn State, he worked as a research scientist and lecturer at Princeton University and as an engineer in Germany. Professor Keller graduated from Princeton with a Ph.D. in civil and environmental engineering. He received master’s degrees from M.I.T. and Princeton as well as an engineer’s degree from the Technische Universität Berlin. His research addresses two interrelated questions. First, how can we mechanistically understand past and potentially predict future changes in the climate system? Second, how can we use this information to design sustainable, scientifically sound, technologically feasible, economically efficient, and ethically defensible climate risk management strategies? He analyzes these questions by mission-oriented basic research covering a wide range of disciplines such as Earth system science, economics, engineering, philosophy, decision science, and statistics. Klaus’ email address is <a href="mailto:klaus@psu.edu" class="email">klaus@psu.edu</a>, and website is at <a href="http://www3.geosc.psu.edu/~kzk10/" class="uri">http://www3.geosc.psu.edu/~kzk10/</a>.</p>
 </div>
-            </section>
+<div id="acknowledgements" class="section level2 unnumbered">
+<h2>Acknowledgements<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('acknowledgements')" onmouseout="reset_tooltip('acknowledgements-tooltip')"><span class="tooltiptext" id="acknowledgements-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
+</h2>
+<p>This work was supported by the National Science Foundation through the Network for Sustainable Climate Risk Management (SCRiM) under NSF cooperative agreement GEO-1240507. Any opinions, findings, and conclusions or recommendations expressed in this material are those of the author(s) and do not necessarily reflect the views of the National Science Foundation. Other support was provided by the <a href="http://www.clima.psu.edu/index.php">Center for Climate Risk Management</a> and the <a href="http://rockethics.psu.edu">Rock Ethics Institute</a>.</p>
+<p>Most of these exercises were originally developed as part of a course titled <a href="http://bulletins.psu.edu/undergrad/courses/G/GEOSC/450/200910SP">Risk Analysis in the Earth Sciences</a>, developed and taught by Klaus Keller in the <a href="http://www.geosc.psu.edu">Department of Geosciences</a> at the <a href="http://www.psu.edu">Pennsylvania State University</a>. The exercises discussed in this lab manual were co-developed by a large group (see the individual chapters).</p>
+<p>Katerina Kostadinova designed the cover using a photograph provided by Frank Erickson.</p>
+<p>Randy Miller created the Github repository.</p>
+<p>Thomas Patrick Walsh and Naomi Radke made suggestions for improving the text and lab exercises.</p>
+<p><strong>Vivek Srikrishnan</strong> thanks his colleagues in the Keller research group and beyond for being willing and able to work on this textbook. Special thanks go to Patrick Applegate for leading the development of an excellent first edition of this book.</p>
+<p><strong>Klaus Keller</strong> thanks all the students from the Risk Analysis course, the members of the Keller research group, and his SCRiM collaborators for invaluable inputs. Special thanks go to his family, many mentors, and friends for support.</p>
+</div>
+<div id="book-source-and-scripts" class="section level2 unnumbered">
+<h2>Book Source and Scripts<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('book-source-and-scripts')" onmouseout="reset_tooltip('book-source-and-scripts-tooltip')"><span class="tooltiptext" id="book-source-and-scripts-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
+</h2>
+<p>As noted above, most of the exercises presented in this e-textbook ask students to modify existing R scripts. These R scripts can be downloaded as a <code>.zip</code> file from <a href="https://www.scrimhub.org/raes" class="uri">https://www.scrimhub.org/raes</a>.</p>
+<p>The source files for the book are stored in a Github repository at <a href="https://github.com/scrim-network/raes" class="uri">https://github.com/scrim-network/raes</a>.</p>
+</div>
+<div id="comments-and-questions" class="section level2 unnumbered">
+<h2>Comments and Questions<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('comments-and-questions')" onmouseout="reset_tooltip('comments-and-questions-tooltip')"><span class="tooltiptext" id="comments-and-questions-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
+</h2>
+<p>We’d like to make <em>Risk Analysis in the Earth Sciences</em> as useful as possible. If you have a comment about the book or a question about one of the chapters, please post an issue to the <a href="https://github.com/scrim-network/raes">Github repository</a> mentioned above. If we make a change to the book based on your comments, we will be sure to add your name to the Acknowledgements section in future versions.</p>
 
-          </div>
-        </div>
-      </div>
-<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="contributor-bios.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
-    </div>
-  </div>
-<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
-<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
-<script>
-gitbook.require(["gitbook"], function(gitbook) {
-gitbook.start({
-"sharing": {
-"github": true,
-"facebook": false,
-"twitter": true,
-"linkedin": false,
-"weibo": false,
-"instapaper": false,
-"vk": false,
-"whatsapp": false,
-"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
-},
-"fontsettings": {
-"theme": "white",
-"family": "sans",
-"size": 2
-},
-"edit": {
-"link": null,
-"text": null
-},
-"history": {
-"link": null,
-"text": null
-},
-"view": {
-"link": null,
-"text": null
-},
-"download": ["raes.pdf", "raes.epub"],
-"search": {
-"engine": "fuse",
-"options": null
-},
-"toc": {
-"collapse": "none"
-}
-});
-});
-</script>
+
+</div>
+</div></body></html>
+
+<p style="text-align: center;">
+<a href="index.html"><button class="btn btn-default">Previous</button></a>
+<a href="what-is-climate-risk.html"><button class="btn btn-default">Next</button></a>
+</p>
+<p class="build-date">Page built: 
+2021-12-15
+ using 
+R version 4.1.2 (2021-11-01)
+</p>
+</div>
+</div>
+
+
 
 </body>
-
 </html>

@@ -2,66 +2,82 @@
 <html lang="" xml:lang="">
 <head>
 
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 2 Learning the basics of Julia | Risk Analysis in the Earth Sciences</title>
-  <meta name="description" content="Chapter 2 Learning the basics of Julia | Risk Analysis in the Earth Sciences" />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Chapter 2 Learning the basics of Julia | Risk Analysis in the Earth Sciences" />
+<meta property="og:type" content="book" />
 
-  <meta property="og:title" content="Chapter 2 Learning the basics of Julia | Risk Analysis in the Earth Sciences" />
-  <meta property="og:type" content="book" />
-  
-  <meta property="og:image" content="/images/cover_with_alexander.png" />
-  
-  <meta name="github-repo" content="vsrikrish/RAES" />
+<meta property="og:image" content="/images/cover_with_alexander.png" />
 
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 2 Learning the basics of Julia | Risk Analysis in the Earth Sciences" />
-  
-  
-  <meta name="twitter:image" content="/images/cover_with_alexander.png" />
+<meta name="github-repo" content="vsrikrish/RAES" />
 
 <meta name="author" content="Vivek Srikrishnan" />
 <meta name="author" content="Klaus Keller" />
 
+<meta name="date" content="2021-12-15" />
 
-<meta name="date" content="2021-12-05" />
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
 
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="description" content="Chapter 2 Learning the basics of Julia | Risk Analysis in the Earth Sciences">
+
+<title>Chapter 2 Learning the basics of Julia | Risk Analysis in the Earth Sciences</title>
+
+<link href="libs/tufte-css-2015.12.29/tufte.css" rel="stylesheet" />
+<link href="libs/tufte-css-2015.12.29/envisioned.css" rel="stylesheet" />
+<link href="libs/msmb-css-0/msmb.css" rel="stylesheet" />
+<script>
+function toggle_visibility(id1, id2) {
+var e = document.getElementById(id1);
+var f = document.getElementById(id2);
+
+e.style.display = ((e.style.display!='none') ? 'none' : 'block');
+
+if(f.classList.contains('fa-plus-square')) {
+    f.classList.add('fa-minus-square')
+    f.classList.remove('fa-plus-square')
+} else {
+    f.classList.add('fa-plus-square')
+    f.classList.remove('fa-minus-square')
+}
+
+}
+</script>
+<script>
+function copy_link(id) {
+  var dummy = document.createElement('input'),
+  text = window.location.href.split(/[?#]/)[0] + '#' + id;
+  document.body.appendChild(dummy);
+  dummy.value = text;
+  dummy.select();
+  document.execCommand('copy');
+  document.body.removeChild(dummy);
   
-  
-<link rel="prev" href="uncertainty-vs.-risk.html"/>
-<link rel="next" href="introduction-1.html"/>
-<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
-<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+  var tooltip = document.getElementById(id + '-tooltip');
+  tooltip.innerHTML = 'Copied!';
+}
 
-
-
-
-
-
-
-
+function reset_tooltip(id) {
+  var tooltip = document.getElementById(id);
+  tooltip.innerHTML = 'Copy link';
+}
+</script>
 <script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 
+<style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
 code.sourceCode > span { display: inline-block; line-height: 1.25; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
+
 code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -121,104 +137,52 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </style>
 
 
+
 <link rel="stylesheet" href="css/style.css" type="text/css" />
+
 </head>
 
 <body>
 
 
 
-  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
-
-    <div class="book-summary">
-      <nav role="navigation">
-
-<ul class="summary">
-<li><a href="./">Risk Analysis in the Earth Sciencese</a></li>
-
-<li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
-<li class="chapter" data-level="" data-path="about-this-book.html"><a href="about-this-book.html"><i class="fa fa-check"></i>About This Book</a><ul>
-<li class="chapter" data-level="" data-path="contributor-bios.html"><a href="contributor-bios.html"><i class="fa fa-check"></i>Contributor Bios</a></li>
-<li class="chapter" data-level="" data-path="acknowledgements.html"><a href="acknowledgements.html"><i class="fa fa-check"></i>Acknowledgements</a></li>
-<li class="chapter" data-level="" data-path="book-source-and-scripts.html"><a href="book-source-and-scripts.html"><i class="fa fa-check"></i>Book Source and Scripts</a></li>
-<li class="chapter" data-level="" data-path="comments-and-questions.html"><a href="comments-and-questions.html"><i class="fa fa-check"></i>Comments and Questions</a></li>
-</ul></li>
-<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
-<li class="chapter" data-level="1.1" data-path="climate-risks.html"><a href="climate-risks.html"><i class="fa fa-check"></i><b>1.1</b> Climate Risks</a></li>
-<li class="chapter" data-level="1.2" data-path="some-questions.html"><a href="some-questions.html"><i class="fa fa-check"></i><b>1.2</b> Some Questions</a></li>
-<li class="chapter" data-level="1.3" data-path="types-of-uncertainty.html"><a href="types-of-uncertainty.html"><i class="fa fa-check"></i><b>1.3</b> Types of (Un)certainty</a></li>
-<li class="chapter" data-level="1.4" data-path="what-is-risk.html"><a href="what-is-risk.html"><i class="fa fa-check"></i><b>1.4</b> What is Risk?</a></li>
-<li class="chapter" data-level="1.5" data-path="uncertainty-vs.-risk.html"><a href="uncertainty-vs.-risk.html"><i class="fa fa-check"></i><b>1.5</b> “Uncertainty” vs. “Risk”</a></li>
-</ul></li>
-<li class="chapter" data-level="2" data-path="julia-syntax.html"><a href="julia-syntax.html"><i class="fa fa-check"></i><b>2</b> Learning the basics of Julia</a><ul>
-<li class="chapter" data-level="" data-path="julia-syntax.html"><a href="julia-syntax.html#learning-objectives"><i class="fa fa-check"></i>Learning objectives</a></li>
-<li class="chapter" data-level="2.1" data-path="introduction-1.html"><a href="introduction-1.html"><i class="fa fa-check"></i><b>2.1</b> Introduction</a></li>
-<li class="chapter" data-level="2.2" data-path="getting-started.html"><a href="getting-started.html"><i class="fa fa-check"></i><b>2.2</b> Getting Started</a><ul>
-<li class="chapter" data-level="2.2.1" data-path="getting-started.html"><a href="getting-started.html#why-julia"><i class="fa fa-check"></i><b>2.2.1</b> Why Julia?</a></li>
-<li class="chapter" data-level="2.2.2" data-path="getting-started.html"><a href="getting-started.html#installing-julia"><i class="fa fa-check"></i><b>2.2.2</b> Installing Julia</a></li>
-<li class="chapter" data-level="2.2.3" data-path="getting-started.html"><a href="getting-started.html#why-write-scripts"><i class="fa fa-check"></i><b>2.2.3</b> Why write scripts?</a></li>
-<li class="chapter" data-level="2.2.4" data-path="getting-started.html"><a href="getting-started.html#package-and-environment-management"><i class="fa fa-check"></i><b>2.2.4</b> Package and environment management</a></li>
-<li class="chapter" data-level="2.2.5" data-path="getting-started.html"><a href="getting-started.html#getting-help"><i class="fa fa-check"></i><b>2.2.5</b> Getting help</a></li>
-<li class="chapter" data-level="2.2.6" data-path="getting-started.html"><a href="getting-started.html#when-the-documentation-and-searching-the-internet-dont-help"><i class="fa fa-check"></i><b>2.2.6</b> When the documentation and searching the Internet don’t help</a></li>
-</ul></li>
-<li class="chapter" data-level="2.3" data-path="julia-syntax-1.html"><a href="julia-syntax-1.html"><i class="fa fa-check"></i><b>2.3</b> Julia Syntax</a><ul>
-<li class="chapter" data-level="2.3.1" data-path="julia-syntax-1.html"><a href="julia-syntax-1.html#comments"><i class="fa fa-check"></i><b>2.3.1</b> Comments</a></li>
-<li class="chapter" data-level="2.3.2" data-path="julia-syntax-1.html"><a href="julia-syntax-1.html#variables"><i class="fa fa-check"></i><b>2.3.2</b> Variables</a></li>
-<li class="chapter" data-level="2.3.3" data-path="julia-syntax-1.html"><a href="julia-syntax-1.html#data-types"><i class="fa fa-check"></i><b>2.3.3</b> Data Types</a></li>
-</ul></li>
-<li class="chapter" data-level="2.4" data-path="data-structures.html"><a href="data-structures.html"><i class="fa fa-check"></i><b>2.4</b> Data Structures</a></li>
-</ul></li>
-<li class="chapter" data-level="3" data-path="plotting-time-series-data.html"><a href="plotting-time-series-data.html"><i class="fa fa-check"></i><b>3</b> Plotting Time Series Data</a><ul>
-<li class="chapter" data-level="" data-path="plotting-time-series-data.html"><a href="plotting-time-series-data.html#learning-objectives-1"><i class="fa fa-check"></i>Learning Objectives</a></li>
-<li class="chapter" data-level="3.1" data-path="introduction-2.html"><a href="introduction-2.html"><i class="fa fa-check"></i><b>3.1</b> Introduction</a></li>
-<li class="chapter" data-level="3.2" data-path="tutorial.html"><a href="tutorial.html"><i class="fa fa-check"></i><b>3.2</b> Tutorial</a><ul>
-<li class="chapter" data-level="3.2.1" data-path="tutorial.html"><a href="tutorial.html#downloading-the-data"><i class="fa fa-check"></i><b>3.2.1</b> Downloading the Data</a></li>
-<li class="chapter" data-level="3.2.2" data-path="tutorial.html"><a href="tutorial.html#reading-the-data"><i class="fa fa-check"></i><b>3.2.2</b> Reading the Data</a></li>
-<li class="chapter" data-level="3.2.3" data-path="tutorial.html"><a href="tutorial.html#plotting-the-data"><i class="fa fa-check"></i><b>3.2.3</b> Plotting the Data</a></li>
-</ul></li>
-<li class="chapter" data-level="3.3" data-path="exercises.html"><a href="exercises.html"><i class="fa fa-check"></i><b>3.3</b> Exercises</a><ul>
-<li class="chapter" data-level="" data-path="exercises.html"><a href="exercises.html#part-1"><i class="fa fa-check"></i>Part 1</a></li>
-<li class="chapter" data-level="" data-path="exercises.html"><a href="exercises.html#part-2"><i class="fa fa-check"></i>Part 2</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="4" data-path="normal-distributions-and-the-galton-board.html"><a href="normal-distributions-and-the-galton-board.html"><i class="fa fa-check"></i><b>4</b> Normal distributions and the Galton board</a><ul>
-<li class="chapter" data-level="" data-path="normal-distributions-and-the-galton-board.html"><a href="normal-distributions-and-the-galton-board.html#learning-objectives-2"><i class="fa fa-check"></i>Learning objectives</a></li>
-<li class="chapter" data-level="4.1" data-path="introduction-3.html"><a href="introduction-3.html"><i class="fa fa-check"></i><b>4.1</b> Introduction</a></li>
-<li class="chapter" data-level="4.2" data-path="tutorial-1.html"><a href="tutorial-1.html"><i class="fa fa-check"></i><b>4.2</b> Tutorial</a><ul>
-<li class="chapter" data-level="4.2.1" data-path="tutorial-1.html"><a href="tutorial-1.html#writing-our-own-simple-galton-board-script"><i class="fa fa-check"></i><b>4.2.1</b> Writing our own simple Galton board script</a></li>
-<li class="chapter" data-level="4.2.2" data-path="tutorial-1.html"><a href="tutorial-1.html#doing-things-over-and-over-again-for-loops"><i class="fa fa-check"></i><b>4.2.2</b> Doing things over and over again: <code>for</code> loops</a></li>
-<li class="chapter" data-level="4.2.3" data-path="tutorial-1.html"><a href="tutorial-1.html#normal-or-not-normal-generating-and-interpreting-quantile-quantile-plots"><i class="fa fa-check"></i><b>4.2.3</b> Normal or not normal?: Generating and interpreting quantile-quantile plots</a></li>
-</ul></li>
-<li class="chapter" data-level="4.3" data-path="exercises-1.html"><a href="exercises-1.html"><i class="fa fa-check"></i><b>4.3</b> Exercises</a><ul>
-<li class="chapter" data-level="" data-path="exercises-1.html"><a href="exercises-1.html#part-1-1"><i class="fa fa-check"></i>Part 1</a></li>
-<li class="chapter" data-level="" data-path="exercises-1.html"><a href="exercises-1.html#part-2-1"><i class="fa fa-check"></i>Part 2</a></li>
-<li class="chapter" data-level="" data-path="exercises-1.html"><a href="exercises-1.html#part-3"><i class="fa fa-check"></i>Part 3</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<div class="row">
+<div class="col-sm-12">
+<div id="TOC">
+<ul class="navbar">
+<li class="msmb"><p class="title">Risk Analysis in the Earth Sciences<p><p class="author">Vivek Srikrishnan, Klaus Keller</p>
+<li class="dropdown" style="float:right">
+<a href="javascript:void(0)" class="dropbtn">&#x25BE; Chapters</a>
+<div class="dropdown-content">
+<a href="index.html">Preface</a>
+<a href="about-this-book.html">About This Book</a>
+<a href="what-is-climate-risk.html"><span class="toc-section-number">1</span> What is Climate Risk?</a>
+<a id="active-page" href="julia-syntax.html"><span class="toc-section-number">2</span> Learning the basics of Julia</a><ul class="toc-sections">
+<li class="toc"><a href="#introduction"> Introduction</a></li>
+<li class="toc"><a href="#getting-started"> Getting Started</a></li>
+<li class="toc"><a href="#julia-syntax-1"> Julia Syntax</a></li>
+<li class="toc"><a href="#data-structures"> Data Structures</a></li>
 </ul>
-
-      </nav>
-    </div>
-
-    <div class="book-body">
-      <div class="body-inner">
-        <div class="book-header" role="navigation">
-          <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Risk Analysis in the Earth Sciences</a>
-          </h1>
-        </div>
-
-        <div class="page-wrapper" tabindex="-1" role="main">
-          <div class="page-inner">
-
-            <section class="normal" id="section-">
-<div id="julia-syntax" class="section level1">
-<h1><span class="header-section-number">Chapter 2</span> Learning the basics of Julia</h1>
+<a href="plotting-time-series-data.html"><span class="toc-section-number">3</span> Plotting Time Series Data</a>
+<a href="normal-distributions-and-the-galton-board.html"><span class="toc-section-number">4</span> Normal distributions and the Galton board</a>
+<a href="markov-chain-monte-carlo.html"><span class="toc-section-number">5</span> Markov Chain Monte Carlo</a>
+<a href="references.html">References</a>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body><div id="julia-syntax" class="section level1">
+<h1>
+<span class="header-section-number">Chapter 2</span> Learning the basics of Julia</h1>
 <p>This chapter was written by Vivek Srikrishnan and Patrick J. Applegate.</p>
 <div id="learning-objectives" class="section level3 unnumbered">
-<h3>Learning objectives</h3>
+<h3>Learning objectives<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('learning-objectives')" onmouseout="reset_tooltip('learning-objectives-tooltip')"><span class="tooltiptext" id="learning-objectives-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
+</h3>
 <p>After completing this chapter, you should be able to
 * install <a href="https://julialang.org">Julia</a>
 * write basic Julia commands with appropriate syntax
@@ -232,67 +196,156 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 + searching the Web
 + asking questions in a way that increases your chance of receiving a helpful response</p>
 </div>
+<div id="introduction" class="section level2">
+<h2>
+<span class="header-section-number">2.1</span> Introduction<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('introduction')" onmouseout="reset_tooltip('introduction-tooltip')"><span class="tooltiptext" id="introduction-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
+</h2>
+<p>The computing environment and programming language <a href="http://julialang.org">Julia</a> is a powerful tool for risk analysis. This chapter will guide you through installing Julia and using a text editor or development environment (such as <a href="https://code.visualstudio.com/">Visual Studio Code</a> or <a href="https://atom.io/">Atom</a>) to write and edit Julia scripts. You will also learn the basics of using Julia, including how to manage, install, and load packages. Finally, you’ll become familiar with different ways of getting help when you encounter problems with your Julia code.</p>
 </div>
-            </section>
+<div id="getting-started" class="section level2">
+<h2>
+<span class="header-section-number">2.2</span> Getting Started<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('getting-started')" onmouseout="reset_tooltip('getting-started-tooltip')"><span class="tooltiptext" id="getting-started-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
+</h2>
+<div id="why-julia" class="section level3">
+<h3>
+<span class="header-section-number">2.2.1</span> Why Julia?<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('why-julia')" onmouseout="reset_tooltip('why-julia-tooltip')"><span class="tooltiptext" id="why-julia-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
+</h3>
+<p>Julia is a powerful emerging programming language. Julia code is relatively readable while still executing quickly. While initially the Julia community was relatively limited, this has changed in recent years, and there is a wide ecosystem of packages which provide additional functionality to the base Julia release.</p>
+</div>
+<div id="installing-julia" class="section level3">
+<h3>
+<span class="header-section-number">2.2.2</span> Installing Julia<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('installing-julia')" onmouseout="reset_tooltip('installing-julia-tooltip')"><span class="tooltiptext" id="installing-julia-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
+</h3>
+<p><strong>To install Julia</strong>, navigate to <a href="https://julialang.org/" class="uri">https://julialang.org/</a> and look for the link that says, “Download” near the top of the page. Click on this link and follow the instructions for installing the current stable release version which is appropriate for your computing environment. This textbook is currently built using Julia v.1.6.4.</p>
+<p>By default, Julia provides a command-line interface for running commands and executing scripts, as well as the interactive <a href="https://docs.julialang.org/en/v1/stdlib/REPL/">“REPL”</a> (read-eval-print-loop). The REPL is started by calling <code>julia</code> with no arguments or by double-clicking the Julia executable icon, while calling <code>julia &lt;scriptname.jl&gt;</code> will execute <code>scriptname.jl</code>. We recommend that you install and use a text editor or integrated development environment (IDE) for opening and editing Julia scripts, which can then be executed at the command line. One popular IDE is <a href="https://code.visualstudio.com/">Visual Studio Code</a>, which has a powerful <a href="https://code.visualstudio.com/docs/languages/julia">Julia extension</a> which includes autocompletion, syntax monitoring, an integrated REPL, a plot pane, and other features. <a href="https://atom.io/">Atom</a> is another popular text editor which can be extended using <a href="https://junolab.org/">Juno</a> for advanced Julia features (though Juno is currently depreciated in favor of the VS Code Julia extension). However, if you currently use a particular IDE or editor for coding, it will work well for Julia programming!</p>
+</div>
+<div id="why-write-scripts" class="section level3">
+<h3>
+<span class="header-section-number">2.2.3</span> Why write scripts?<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('why-write-scripts')" onmouseout="reset_tooltip('why-write-scripts-tooltip')"><span class="tooltiptext" id="why-write-scripts-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
+</h3>
+<p>It’s possible to do quite a bit in Julia just by issuing commands one-at-a-time in the REPL. However, real scientific analyses should be <em>reproducible</em>; that is, there should be a list of steps that anyone can follow to get the same results as the person who originally did the analysis. Saving these steps as a script allows others to execute your code easily and helps ensure consistent results.</p>
+</div>
+<div id="package-and-environment-management" class="section level3">
+<h3>
+<span class="header-section-number">2.2.4</span> Package and environment management<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('package-and-environment-management')" onmouseout="reset_tooltip('package-and-environment-management-tooltip')"><span class="tooltiptext" id="package-and-environment-management-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
+</h3>
+<p>Another important component of reproducibility is ensuring that others are using the same packages and package <em>versions</em> as you did, as updates could result in different output or different commands. Julia has a powerful package management system, <a href="https://docs.julialang.org/en/v1/stdlib/Pkg/"><code>Pkg</code></a>. In the REPL, this interface can be accessed by entering <code>]</code> at the <code>julia&gt;</code> prompt. In a script, we will directly interact with the <code>Pkg</code> package, as we will see over the course of this book.</p>
+</div>
+<div id="getting-help" class="section level3">
+<h3>
+<span class="header-section-number">2.2.5</span> Getting help<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('getting-help')" onmouseout="reset_tooltip('getting-help-tooltip')"><span class="tooltiptext" id="getting-help-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
+</h3>
+<p>What should you do if you don’t understand what a Julia command does or how to achieve a particular coding goal? If you have a specific command that you’d like more information on, you can type <code>?functionname</code> at a code prompt or in the REPL to get help. Your first external resource should be the <a href="https://docs.julialang.org/en/v1/">Julia documentation</a> or the documentation for the particular package you’re drawing from. If you can’t find the solution in the documentation (or don’t know where to start), a web search can often be useful, as there is an active Julia community which answers questions at the <a href="https://discourse.julialang.org/">Julia discourse</a> and <a href="https://stackoverflow.com/">Stack Overflow</a>.</p>
+</div>
+<div id="when-the-documentation-and-searching-the-internet-dont-help" class="section level3">
+<h3>
+<span class="header-section-number">2.2.6</span> When the documentation and searching the Internet don’t help<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('when-the-documentation-and-searching-the-internet-dont-help')" onmouseout="reset_tooltip('when-the-documentation-and-searching-the-internet-dont-help-tooltip')"><span class="tooltiptext" id="when-the-documentation-and-searching-the-internet-dont-help-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
+</h3>
+<p>When you encounter problems in writing R code that you can’t solve by looking at the documentation or searching the Internet, you’ll want to ask someone who knows more about Julia than you do. When you do, you should try to ask your questions in a way that maximizes your chances of getting the help you need.</p>
+<div class="center">
+<div class="info">
+<p>Before asking any questions, you should use the resources available to you, as mentioned above: search the documentation and the Web. In particular, if you get an error message, try pasting it into Google.</p>
+</div>
+</div>
+<p>If you still require assistance, your question should say clearly</p>
+<ol style="list-style-type: decimal">
+<li>what you are trying to do (the goal of your program)</li>
+<li>what your program does that addresses the problem</li>
+<li>what you were expecting to have happen when you ran your program</li>
+<li>what actually happened (did you get an error message? if so, what did it say?)</li>
+<li>what you did to try and solve your problem before asking your question</li>
+</ol>
+<p>For an example of a well-written question, have a look at <a href="http://stackoverflow.com/questions/15962111/error-using-apply-function-in-r-on-tutorial-example">this post</a> on <a href="http://www.stackoverflow.com">Stack Overflow</a>. Note that the original poster (user tjnel) addressed all of the five points above in his/her question; he/she</p>
+<ul>
+<li>says explicitly that he/she is trying to reproduce the results from a tutorial (question #1, above),</li>
+<li>gives the code that is being used, allowing others to fully understand the problem (#2)</li>
+<li>provides the expected output from running the code in the tutorial (#3),</li>
+<li>shows the error message that he/she obtained when running the tutorial code (#4),</li>
+<li>shows that he/she tried to reproduce a different part of the tutorial exercise before asking a question (#5).</li>
+</ul>
+<p>For other ideas about asking good questions, have a look at <a href="http://www.stackoverflow.com">Stack Overflow</a>’s article on “<a href="http://stackoverflow.com/help/how-to-ask">How do I ask a good question?</a>”, Jon Skeet’s blog post on “<a href="https://codeblog.jonskeet.uk/2010/08/29/writing-the-perfect-question/">Writing the Perfect Question</a>”, and Eric S. Raymond’s classic “<a href="http://www.catb.org/esr/faqs/smart-questions.html">How to Ask Questions the Smart Way</a>”.</p>
+</div>
+</div>
+<div id="julia-syntax-1" class="section level2">
+<h2>
+<span class="header-section-number">2.3</span> Julia Syntax<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('julia-syntax-1')" onmouseout="reset_tooltip('julia-syntax-1-tooltip')"><span class="tooltiptext" id="julia-syntax-1-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
+</h2>
+<p>Now we will introduce some basic Julia syntax. There are several good introductions to Julia; we recommend the introductory material for the open-source MIT course <a href="https://computationalthinking.mit.edu/Spring21/">Introduction to Computational Thinking</a>.</p>
+<div id="comments" class="section level3">
+<h3>
+<span class="header-section-number">2.3.1</span> Comments<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('comments')" onmouseout="reset_tooltip('comments-tooltip')"><span class="tooltiptext" id="comments-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
+</h3>
+<p>Comments hide statements from the interpreter or compiler. It’s a good idea to liberally comment your code so readers (including yourself!) know why your code is structured and written the way it is.</p>
+<p>Single-line comments in Julia are preceded with a <code>#</code>. Multi-line comments are preceded with <code>#=</code> and ended with <code>=#</code></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb1-1"><a href="julia-syntax.html#cb1-1"></a><span class="co"># This is a single-line comment. Everything after the "#"</span></span>
+<span id="cb1-2"><a href="julia-syntax.html#cb1-2"></a><span class="co">#   is not evaluated.</span></span>
+<span id="cb1-3"><a href="julia-syntax.html#cb1-3"></a></span>
+<span id="cb1-4"><a href="julia-syntax.html#cb1-4"></a><span class="co">#=</span></span>
+<span id="cb1-5"><a href="julia-syntax.html#cb1-5"></a>This is a multi-line comment.</span>
+<span id="cb1-6"><a href="julia-syntax.html#cb1-6"></a></span>
+<span id="cb1-7"><a href="julia-syntax.html#cb1-7"></a>We might want to really organize our thoughts on what a </span>
+<span id="cb1-8"><a href="julia-syntax.html#cb1-8"></a><span class="kw">function</span> is doing <span class="kw">in</span> this space. We can take as much room </span>
+<span id="cb1-9"><a href="julia-syntax.html#cb1-9"></a>as we want, with as many paragraphs.</span>
+<span id="cb1-10"><a href="julia-syntax.html#cb1-10"></a>=<span class="co">#</span></span>
+<span id="cb1-11"><a href="julia-syntax.html#cb1-11"></a></span>
+<span id="cb1-12"><a href="julia-syntax.html#cb1-12"></a><span class="co"># now that we've exited the multi-line comment, </span></span>
+<span id="cb1-13"><a href="julia-syntax.html#cb1-13"></a><span class="co">#subsequent expressions are evaluated</span></span>
+<span id="cb1-14"><a href="julia-syntax.html#cb1-14"></a></span>
+<span id="cb1-15"><a href="julia-syntax.html#cb1-15"></a><span class="fl">3</span>+<span class="fl">5</span> </span></code></pre></div>
+<pre class="code-out"><code>8</code></pre>
+</div>
+<div id="variables" class="section level3">
+<h3>
+<span class="header-section-number">2.3.2</span> Variables<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('variables')" onmouseout="reset_tooltip('variables-tooltip')"><span class="tooltiptext" id="variables-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
+</h3>
+<p>Variables are names which correspond to some type of object. These names are bound to objects (and hence their values) using the <code>=</code> operator.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb3-1"><a href="julia-syntax.html#cb3-1"></a>x=<span class="fl">5</span></span></code></pre></div>
+<pre class="code-out"><code>5</code></pre>
+<p>Variables can be manipulated with standard arithmetic operators.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb5-1"><a href="julia-syntax.html#cb5-1"></a>x+<span class="fl">4</span></span></code></pre></div>
+<pre class="code-out"><code>9</code></pre>
+</div>
+<div id="data-types" class="section level3">
+<h3>
+<span class="header-section-number">2.3.3</span> Data Types<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('data-types')" onmouseout="reset_tooltip('data-types-tooltip')"><span class="tooltiptext" id="data-types-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
+</h3>
+<p>Each datum (importantly, <em>not</em> the variable which is bound to it) has a <a href="https://docs.julialang.org/en/v1/manual/types/">data type</a>.</p>
+<div class="center">
+<div class="info">
+<p>Strictly speaking, a variable points to a particular memory address, which holds the information associated with some datum or data. These pieces of memory can be used to store different data as the variable is overwritten. This can be restricted to varying degrees depending on the programming language. In a <em>statically typed</em> language like C, the compiler needs to allocate memory based on the data type, and so once a variable is initialized with a given type, this type cannot be changed, even if the data itself can be. In a <em>dynamically typed</em> language such as Python, the types associated with variables can be changed, which may mean the variable needs to be assigned to a different piece of memory. This is one reason why compiled (and usually statically-typed) languages are often faster than interpreted (and usually dynamically-typed) languages.</p>
+</div>
+</div>
+<p>Julia is a dynamically-typed language, which means that you do not need to specify the type of a variable when you define it, and you can change types mid-program. While Julia is dynamically-typed, you can specify the type of a variable when it is declared by using double-colons (<code>::</code>) in the form <code>variable::type</code>. This can increase speed, but perhaps just as importantly, can make it easier to identify type errors when debugging. In general, there will be no need for the tasks in this book to worry about any data types other than <code>Int64</code> (integers), <code>Float64</code> (real numbers), <code>Bool</code> (Booleans), and <code>String</code> (strings). Julia types are similar to C types, in that they require not only the <em>type</em> of data (Int, Float, String, etc), but also the precision (which is related to the amount of memory allocated to the variable). Issues with precision won’t be a big deal in this book, though they matter when you’re concerned about performance vs. decimal accuracy of code.</p>
+<p>You can identify the type of a variable or expression with the <code>typeof()</code> function.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb7-1"><a href="julia-syntax.html#cb7-1"></a>typeof(<span class="st">"This is a string"</span>)</span></code></pre></div>
+<pre class="code-out"><code>String</code></pre>
+<div class="sourceCode" id="cb9"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb9-1"><a href="julia-syntax.html#cb9-1"></a>typeof(x)</span></code></pre></div>
+<pre class="code-out"><code>Int64</code></pre>
+<p>To specify that a numeric value should be a <code>Float64</code> instead of an <code>Int64</code> (which might be needed for some functions which expect <code>Float64</code> inputs), add a decimal (<em>e.g.</em> <code>9.</code> instead of <code>9</code>).</p>
+</div>
+</div>
+<div id="data-structures" class="section level2">
+<h2>
+<span class="header-section-number">2.4</span> Data Structures<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('data-structures')" onmouseout="reset_tooltip('data-structures-tooltip')"><span class="tooltiptext" id="data-structures-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
+</h2>
+<p>Julia has several native data structures (that is, data structures that don’t require additional packages to implement).</p>
 
-          </div>
-        </div>
-      </div>
-<a href="uncertainty-vs.-risk.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="introduction-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
-    </div>
-  </div>
-<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
-<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
-<script>
-gitbook.require(["gitbook"], function(gitbook) {
-gitbook.start({
-"sharing": {
-"github": true,
-"facebook": false,
-"twitter": true,
-"linkedin": false,
-"weibo": false,
-"instapaper": false,
-"vk": false,
-"whatsapp": false,
-"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
-},
-"fontsettings": {
-"theme": "white",
-"family": "sans",
-"size": 2
-},
-"edit": {
-"link": null,
-"text": null
-},
-"history": {
-"link": null,
-"text": null
-},
-"view": {
-"link": null,
-"text": null
-},
-"download": ["raes.pdf", "raes.epub"],
-"search": {
-"engine": "fuse",
-"options": null
-},
-"toc": {
-"collapse": "none"
-}
-});
-});
-</script>
+</div>
+</div></body></html>
+
+<p style="text-align: center;">
+<a href="what-is-climate-risk.html"><button class="btn btn-default">Previous</button></a>
+<a href="plotting-time-series-data.html"><button class="btn btn-default">Next</button></a>
+</p>
+<p class="build-date">Page built: 
+2021-12-15
+ using 
+R version 4.1.2 (2021-11-01)
+</p>
+</div>
+</div>
+
+
 
 </body>
-
 </html>
