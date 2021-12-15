@@ -23,6 +23,14 @@ p {
     font-size: 1.1rem;
 }
 
+.sidenote {
+    padding-bottom: 1.25em;
+}
+
+.margin-toggle{
+    text-decoration: underline;
+}
+
 li {
     font-size: 0.875em;
     line-height: 1em;

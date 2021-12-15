@@ -5,12 +5,12 @@
 <meta charset="utf-8" />
 <meta name="generator" content="pandoc" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta property="og:title" content="Chapter 2 Learning the basics of Julia | Risk Analysis in the Earth Sciences" />
+<meta property="og:title" content="Chapter 2 Learning the basics of Julia | Climate Risk Analysis" />
 <meta property="og:type" content="book" />
 
 <meta property="og:image" content="/images/cover_with_alexander.png" />
 
-<meta name="github-repo" content="vsrikrish/RAES" />
+<meta name="github-repo" content="vsrikrish/CRA-book" />
 
 <meta name="author" content="Vivek Srikrishnan" />
 <meta name="author" content="Klaus Keller" />
@@ -24,9 +24,9 @@ MathJax.Hub.Config({
 </script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
 
-<meta name="description" content="Chapter 2 Learning the basics of Julia | Risk Analysis in the Earth Sciences">
+<meta name="description" content="Chapter 2 Learning the basics of Julia | Climate Risk Analysis">
 
-<title>Chapter 2 Learning the basics of Julia | Risk Analysis in the Earth Sciences</title>
+<title>Chapter 2 Learning the basics of Julia | Climate Risk Analysis</title>
 
 <link href="libs/tufte-css-2015.12.29/tufte.css" rel="stylesheet" />
 <link href="libs/tufte-css-2015.12.29/envisioned.css" rel="stylesheet" />
@@ -150,7 +150,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <div class="col-sm-12">
 <div id="TOC">
 <ul class="navbar">
-<li class="msmb"><p class="title">Risk Analysis in the Earth Sciences<p><p class="author">Vivek Srikrishnan, Klaus Keller</p>
+<li class="msmb"><p class="title">Climate Risk Analysis<p><p class="author">Vivek Srikrishnan, Klaus Keller</p>
 <li class="dropdown" style="float:right">
 <a href="javascript:void(0)" class="dropbtn">&#x25BE; Chapters</a>
 <div class="dropdown-content">
@@ -292,7 +292,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-13"><a href="julia-syntax.html#cb1-13"></a><span class="co">#subsequent expressions are evaluated</span></span>
 <span id="cb1-14"><a href="julia-syntax.html#cb1-14"></a></span>
 <span id="cb1-15"><a href="julia-syntax.html#cb1-15"></a><span class="fl">3</span>+<span class="fl">5</span> </span></code></pre></div>
-<pre class="code-out"><code>8</code></pre>
+<pre class="code-out"><code>## 8</code></pre>
 </div>
 <div id="variables" class="section level3">
 <h3>
@@ -300,10 +300,10 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </h3>
 <p>Variables are names which correspond to some type of object. These names are bound to objects (and hence their values) using the <code>=</code> operator.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb3-1"><a href="julia-syntax.html#cb3-1"></a>x=<span class="fl">5</span></span></code></pre></div>
-<pre class="code-out"><code>5</code></pre>
+<pre class="code-out"><code>## 5</code></pre>
 <p>Variables can be manipulated with standard arithmetic operators.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb5-1"><a href="julia-syntax.html#cb5-1"></a>x+<span class="fl">4</span></span></code></pre></div>
-<pre class="code-out"><code>9</code></pre>
+<pre class="code-out"><code>## 9</code></pre>
 </div>
 <div id="data-types" class="section level3">
 <h3>
@@ -318,9 +318,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>Julia is a dynamically-typed language, which means that you do not need to specify the type of a variable when you define it, and you can change types mid-program. While Julia is dynamically-typed, you can specify the type of a variable when it is declared by using double-colons (<code>::</code>) in the form <code>variable::type</code>. This can increase speed, but perhaps just as importantly, can make it easier to identify type errors when debugging. In general, there will be no need for the tasks in this book to worry about any data types other than <code>Int64</code> (integers), <code>Float64</code> (real numbers), <code>Bool</code> (Booleans), and <code>String</code> (strings). Julia types are similar to C types, in that they require not only the <em>type</em> of data (Int, Float, String, etc), but also the precision (which is related to the amount of memory allocated to the variable). Issues with precision won’t be a big deal in this book, though they matter when you’re concerned about performance vs. decimal accuracy of code.</p>
 <p>You can identify the type of a variable or expression with the <code>typeof()</code> function.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb7-1"><a href="julia-syntax.html#cb7-1"></a>typeof(<span class="st">"This is a string"</span>)</span></code></pre></div>
-<pre class="code-out"><code>String</code></pre>
+<pre class="code-out"><code>## String</code></pre>
 <div class="sourceCode" id="cb9"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb9-1"><a href="julia-syntax.html#cb9-1"></a>typeof(x)</span></code></pre></div>
-<pre class="code-out"><code>Int64</code></pre>
+<pre class="code-out"><code>## Int64</code></pre>
 <p>To specify that a numeric value should be a <code>Float64</code> instead of an <code>Int64</code> (which might be needed for some functions which expect <code>Float64</code> inputs), add a decimal (<em>e.g.</em> <code>9.</code> instead of <code>9</code>).</p>
 </div>
 </div>
