@@ -21,36 +21,38 @@ This work was supported by the National Science Foundation through the Network f
 ## Topics Included
 
 * Introduction
-  + Julia Basics (Vivek Srikrishnan and James Doss-Gollin)
-  + Climate Change and Risk (Vivek Srikrishnan and Klaus Keller)
+  + What Is Climate Risk? (Klaus Keller and Vivek Srikrishnan)
+  + Why is Uncertainty Important? (Vivek Srikrishnan, James Doss-Gollin, and Klaus Keller)
   + Types of Uncertainty (Vivek Srikrishnan and Klaus Keller)
-  + Why Is Uncertainty Important? (Vivek Srikrishnan and Klaus Keller)
-* Probability and Monte Carlo Simulation
-  + What is Probability? (Vivek Srikrishnan and Klaus Keller)
-  + *Is My Data Normally-Distributed?* (Vivek Srikrishnan and Patrick L. Applegate)
-  + *Probability Distributions and Random Sampling* (Vivek Srikrishnan and Patrick L. Applegate)
-  + Fat-Tailed Distributions and Risk (Ben S. Lee, James Doss-Gollin, Vivek Srikrishnan, and Klaus Keller)
-  + Introduction to Monte Carlo Simulation (Vivek Srikrishnan)
-* Uncertainty Quantification: Methods and Applications
-  + When Is Uncertainty Quantification Appropriate? (Vivek Srikrishnan and Klaus Keller)
-  + *Coin-flipping and the Bootstrap* (Vivek Srikrishnan, Patrick L. Applegate, and Klaus Keller)
-  + *Fitting a Polynomial Model for Sea-Level Rise* (Vivek Srikrishnan, Patrick L. Applegate, and Ryan L. Sriver)
+  + What Are Approaches to Risk Analysis? (Vivek Srikrishnan and Klaus Keller) 
   + The Role of Prior Distributions (Vivek Srikrishnan, Ben S. Lee, and James Doss-Gollin)
-  + *Bayesian Inference and Markov Chain Monte Carlo Basics* (Kelsey L. Ruckert, Tony E. Wong, Ben S. Lee, Yawen Guan, and Murali Haran)
-  + *Calibrating Models with Markov Chain Monte Carlo* (Kelsey L. Ruckert, Tony E. Wong, Yawen Guan, Murali Haran, and Patrick L. Applegate)
-  + *Applying Markov Chain Monte Carlo to Sea-Level Rise Data* (Kelsey L. Ruckert, Tony E. Wong, Yawen Guan, and Murali Haran)
-  + Storm Surge Extremes and Model Selection (Tony E. Wong, James Doss-Gollin, and Vivek Srikrishnan)
+* Software Tools
+  + Julia Basics (Vivek Srikrishnan and James Doss-Gollin)
+  + Tools for Risk Analysis in Julia (Vivek Srikrishnan and James Doss-Gollin)
+* Case Study 1: Coastal Flood Risk
+  + Climate Change and Coastal Flood Risk
+  + Framing the Problem
+  + Modeling Sea-Level Rise
+    - Specifying a Likelihood Function (Vivek Srikrishnan, Kelsey L. Ruckert, and Klaus Keller)
+    - Frequentist Method: The Bootstrap (Vivek Srikrishnan, Patrick L. Applegate, and Klaus Keller)
+    - Bayesian Method: Markov Chain Monte Carlo  (Kelsey L. Ruckert, Tony E. Wong, Ben S. Lee, Yawen Guan, Vivek Srikrishnan, and Murali Haran)
+  + Characterizing Tidal Extremes
+    - Fat-Tailed Distributions and Risk (Ben S. Lee, James Doss-Gollin, Vivek Srikrishnan, and Klaus Keller)
+    - Storm Surge Extremes and Model Selection (Tony E. Wong, James Doss-Gollin, and Vivek Srikrishnan)
+  + The Impact of Risk Analysis on Seawall Height (Vivek Srikrishnan and Klaus Keller)
+  + The Levee Effect: Socioeconomic Scenarios and Risk (Vivek Srikrishnan and Klaus Keller)
+* Case Study 2: Climate-System Uncertainty
+  + A Simple Climate Model (Vivek Srikrishnan, Ryan L. Sriver, and Klaus Keller)
   + Emulation and Surrogate Modeling (Ben S. Lee, Vivek Srikrishnan, and Klaus Keller)
   + Applying Emulation to Climate Modeling (Vivek Srikrishnan, Ben S. Lee, Tony E. Wong, and Klaus Keller)
-  + Parallel Methods and Sequential Monte Carlo (Ben S. Lee, Vivek Srikrishnan, and Tony E. Wong)
-* Sensitivity Analysis
-  + What is Sensitivity Analysis? (Vivek Srikrishnan and Tony E. Wong)
-  + *Simple Sensitivity Analyses For A Simple Sea-Level Rise Model* (Tony E. Wong, Kelsey Ruckert, Vivek Srikrishnan, and Klaus Keller)
-  + Global Sensitivity Analyses (Tony E. Wong and Vivek Srikrishnan)
-  + Closing The Loop: Using Sensitivity Analyses to Inform Uncertainty Quantification (Vivek Srikrishnan, Tony E. Wong, and Klaus Keller)
+* Case Study 3: What Drives Baseline CO_2 Emissions?
+  + A Simple Mechanistic Model of CO_2 Emissions (Vivek Srikrishnan and Klaus Keller)
+  + Sensitivity Analysis of Future CO_2 Emissions (Tony E. Wong, Vivek Srikrishnan, and Klaus Keller)
+    - Simple Sensitivity Analyses (Tony E. Wong, Kelsey Ruckert, Vivek Srikrishnan, and Klaus Keller)
+    - Global Sensitivity Analyses (Tony E. Wong, Kelsey Ruckert, Vivek Srikrishnan, and Klaus Keller)
+* Case Study 4: Forest Fire Risk
+  + Spatial Modeling (Ben S. Lee, James Doss-Gollin, Vivek Srikrishnan, and Klaus Keller)
+  + Selecting a Variogram (Ben S. Lee, James Doss-Gollin, Vivek Srikrishnan, and Klaus Keller)
+* Case Study 5: The Impact of Hydrologic Variability on Energy Systems[^1]
 
-## Compiling This Book
-
-This book is compiled into `.html`, `.pdf`, and `.epub` versions using [`Bookdown`](https://bookdown.org/). The Julia code interface is provided with the [`JuliaCall`](https://hwborchers.github.io/) R package.
-
-To compile the book yourself (**add more on this**).
+[^1]: This would be good to develop to introduce machine learning and energy applications. I could ask Scott Steinschneider, Lindsay Anderson, and Vivienne Liu (Lindsay's Ph.D student) to be co-authors? We'd be building off they're work.
