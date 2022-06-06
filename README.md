@@ -55,4 +55,4 @@ This work was supported by the National Science Foundation through the Network f
   + Selecting a Variogram (Ben S. Lee, James Doss-Gollin, Vivek Srikrishnan, and Klaus Keller)
 * Case Study 5: The Impact of Hydrologic Variability on Energy Systems[^1]
 
-[^1]: This would be good to develop to introduce machine learning and energy applications. I could ask Scott Steinschneider, Lindsay Anderson, and Vivienne Liu (Lindsay's Ph.D student) to be co-authors? We'd be building off they're work.
+[^1]: This would be good to develop to introduce machine learning and energy applications. I could ask Scott Steinschneider, Lindsay Anderson, and Vivienne Liu (Lindsay's Ph.D student) to be co-authors? We'd be building off their work.
