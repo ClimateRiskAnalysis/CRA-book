@@ -491,7 +491,7 @@ title="Print to PDF"
 <div class="math notranslate nohighlight">
 \[H_\text{quad}(t) = a + b*(t - t_0) + c*(t - t_0)^2,\]</div>
 <p>does allow for this acceleration.</p>
-<p>However, both of these models assume that time is the key variable explaining changes in sea levels from one year to another. In <a class="reference internal" href="intro_to_flood_risk.html#sec-flood-intro"><span class="std std-ref">Introduction to Coastal Flood Risk</span></a>, we discussed the relationship between CO_2 concentrations, atmospheric temperature, and sea levels. <span id="id1">Rahmstorf [<a class="reference internal" href="#id52" title="Stefan Rahmstorf. A Semi-Empirical Approach to Projecting Future Sea-Level Rise. Science, 315(5810):368–370, January 2007. doi:10/djt4n9.">2007</a>]</span> proposed the following semi-empirical model relating sea-level rise (SLR) to changes in global mean temperatures:</p>
+<p>However, both of these models assume that time is the key variable explaining changes in sea levels from one year to another. In <a class="reference internal" href="intro_to_flood_risk.html#sec-flood-intro"><span class="std std-ref">Introduction to Coastal Flood Risk</span></a>, we discussed the relationship between CO_2 concentrations, atmospheric temperature, and sea levels. <span id="id1">Rahmstorf [<a class="reference internal" href="#id53" title="Stefan Rahmstorf. A Semi-Empirical Approach to Projecting Future Sea-Level Rise. Science, 315(5810):368–370, January 2007. doi:10/djt4n9.">2007</a>]</span> proposed the following semi-empirical model relating sea-level rise (SLR) to changes in global mean temperatures:</p>
 <div class="math notranslate nohighlight">
 \[\Delta H_\text{emp}/\Delta t = \alpha \left(T(t) - T_{\text{eq}}\right),\]</div>
 <p>or</p>
@@ -504,7 +504,7 @@ title="Print to PDF"
 <p>To fit the three models described in <span class="xref myst"></span>, we need to load historical SLR data (for all three models) and global mean temperature (GMT) data (for <span class="math notranslate nohighlight">\(H_\text{emp}\)</span>). We have provided two data sets in <code class="docutils literal notranslate"><span class="pre">contents/flood/data</span></code>.</p>
 <section id="slr-data">
 <h3>SLR Data<a class="headerlink" href="#slr-data" title="Permalink to this headline">#</a></h3>
-<p>The SLR dataset was taken from Australia’s <a class="reference external" href="https://research.csiro.au/slrwavescoast/sea-level/measurements-and-data/sea-level-data/">Commonwealth Scientific and Industrial Research Organization (CSIRO)</a> and described in {cite:t}[Church2011-bj]. This reconstruction of global mean sea levels spans 1880–2013. The data files, <code class="docutils literal notranslate"><span class="pre">CSIRO_Recons_gmsl_yr_2015.txt</span></code>, has three columns:</p>
+<p>The SLR dataset was taken from Australia’s <a class="reference external" href="https://research.csiro.au/slrwavescoast/sea-level/measurements-and-data/sea-level-data/">Commonwealth Scientific and Industrial Research Organization (CSIRO)</a> and described in <span id="id2">Church and White [<a class="reference internal" href="#id5" title="John A. Church and Neil J. White. Sea-level rise from the late 19th to the early 21st century. Surveys in Geophysics, 32(4-5):585–602, 2011. doi:10.1007/s10712-011-9119-1.">2011</a>]</span>. This reconstruction of global mean sea levels spans 1880–2013. The data files, <code class="docutils literal notranslate"><span class="pre">CSIRO_Recons_gmsl_yr_2015.txt</span></code>, has three columns:</p>
 <ol class="simple">
 <li><p>Time in years (the fractions correspond to months);</p></li>
 <li><p>Global mean sea-level in <span class="math notranslate nohighlight">\(mm\)</span>;</p></li>
@@ -575,9 +575,12 @@ It is also tab-delimited, and there are no header rows or any rows to skip.</p><
 </section>
 <section id="references">
 <h2>References<a class="headerlink" href="#references" title="Permalink to this headline">#</a></h2>
-<div class="docutils container" id="id2">
+<div class="docutils container" id="id3">
 <dl class="citation">
-<dt class="label" id="id52"><span class="brackets"><a class="fn-backref" href="#id1">Rah07</a></span></dt>
+<dt class="label" id="id5"><span class="brackets"><a class="fn-backref" href="#id2">CW11</a></span></dt>
+<dd><p>John A. Church and Neil J. White. Sea-level rise from the late 19th to the early 21st century. <em>Surveys in Geophysics</em>, 32(4-5):585–602, 2011. <a class="reference external" href="https://doi.org/10.1007/s10712-011-9119-1">doi:10.1007/s10712-011-9119-1</a>.</p>
+</dd>
+<dt class="label" id="id53"><span class="brackets"><a class="fn-backref" href="#id1">Rah07</a></span></dt>
 <dd><p>Stefan Rahmstorf. A Semi-Empirical Approach to Projecting Future Sea-Level Rise. <em>Science</em>, 315(5810):368–370, January 2007. <a class="reference external" href="https://doi.org/10/djt4n9">doi:10/djt4n9</a>.</p>
 </dd>
 </dl>
