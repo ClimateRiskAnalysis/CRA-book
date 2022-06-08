@@ -21,7 +21,7 @@ jobs:
     - name: Set up Julia 1.6
       uses: julia-actions/setup-julia@v1
       with:
-        version: 1.6.0-0
+        version: ^1.6.0-0
     - name: Install dependencies
       run: |
         pip install jupyter-book>=0.7.0b
