@@ -24,6 +24,7 @@ parse:
 
 execute:
   timeout: -1
+  execute_notebooks: cache
 
 # Repository Settings
 repository:
