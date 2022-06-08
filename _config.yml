@@ -1,0 +1,51 @@
+title: An Introduction to Climate Risk Analysis
+author: Vivek Srikrishnan and Klaus Keller
+copyright: "2022"
+only_build_toc_files: true
+bibtex_bibfiles:
+  - bibliography/references.bib
+
+parse:
+  myst_enable_extensions:  # default extensions to enable in the myst parser. See https://myst-parser.readthedocs.io/en/latest/using/syntax-optional.html
+    - amsmath
+    - colon_fence
+    # - deflist
+    - dollarmath
+    # - html_admonition
+    # - html_image
+    - linkify
+    # - replacements
+    - smartquotes
+    - substitution
+    - tasklist
+  myst_url_schemes: [mailto, http, https] # URI schemes that will be recognised as external URLs in Markdown links
+  myst_dmath_double_inline: true  # Allow display math ($$) within an inline context
+  myst_heading_anchors: 3
+
+execute:
+  timeout: -1
+
+# Repository Settings
+repository:
+  url: https://github.com/vsrikrish/CRA-book
+  branch: main
+  
+# HTML settings
+html:
+  use_issues_button         : true
+  use_edit_page_button      : true
+  home_page_in_navbar       : true  
+  use_multitoc_numbering    : true
+  use_repository_button     : true
+  google_analytics_id       : ""
+  favicon                   : ""
+
+# Launch Button Settings
+launch_buttons:
+  colab_url: "https://colab.research.google.com"
+
+# Sphinx Settings
+sphinx:
+  config:
+    language: en
+    bibtex_reference_style: author_year

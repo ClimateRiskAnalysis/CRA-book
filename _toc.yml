@@ -1,0 +1,14 @@
+format: jb-book
+root: index
+parts:
+  - caption: About This Book
+    numbered: false
+    chapters:
+    - file: acknowledgements
+    - file: LICENSE
+
+  - caption: Coastal Flood Risk
+    chapters:
+    - file: contents/flood/intro_to_flood_risk 
+    - file: contents/flood/modeling_slr
+    - file: contents/flood/slr_model
