@@ -27,11 +27,7 @@ jobs:
         pip install jupyter-book>=0.7.0b
     - name: Install IJulia
       run: |
-        julia -e 'import Pkg; Pkg.activate("."); Pkg.add("IJulia"); Pkg.build("IJulia")'
-    # Build the book
-    - name: Build the book
-      run: |
-        jupyter-book build .
+        julia -e 'import Pkg; Pkg.activate("."); Pkg.add("IJulia"); Pkg.build("IJulia"); using IJulia; run(`jupyter-book build .`)'
     # Push the book's HTML to github-pages
     - name: GitHub Pages action
       uses: peaceiris/actions-gh-pages@v3.5.9
