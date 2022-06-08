@@ -21,10 +21,13 @@ jobs:
     - name: Set up Julia 1.6
       uses: julia-actions/setup-julia@v1
       with:
-        version: ^1.6.0-0
-    - name: Install dependencies
+        version: ^1.6.3-0
+    - name: Install jupyter book
       run: |
         pip install jupyter-book>=0.7.0b
+    - name: Install IJulia
+      run: |
+        julia -e 'import Pkg; Pkg.activate("."); Pkg.add("IJulia")'
     # Build the book
     - name: Build the book
       run: |
