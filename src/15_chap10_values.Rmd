@@ -1,9 +1,0 @@
----
-header-includes: \usepackage{gensymb}
-output:
-  pdf_document: default
-  html_document: default
-  fig_caption: yes
----
-
-# Chapter #10: Values and risk analysis (Casey Helgeson)
