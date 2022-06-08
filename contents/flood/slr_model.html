@@ -1,0 +1,1195 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Selecting A Sea Level Model &#8212; An Introduction to Climate Risk Analysis</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="prev" title="Modeling Sea Level Rise" href="modeling_slr.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">An Introduction to Climate Risk Analysis</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../index.html">
+                    Climate Risk Analysis
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  About This Book
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../acknowledgements.html">
+   Acknowledgements
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../LICENSE.html">
+   License for This Book
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Coastal Flood Risk
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="intro_to_flood_risk.html">
+   Introduction to Coastal Flood Risk
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="modeling_slr.html">
+   Modeling Sea Level Rise
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Selecting A Sea Level Model
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/vsrikrish/CRA-book/main?urlpath=tree/contents/flood/slr_model.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://colab.research.google.com/github/vsrikrish/CRA-book/blob/main/contents/flood/slr_model.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Colab"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../../_static/images/logo_colab.png">
+  </span>
+<span class="headerbtn__text-container">Colab</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/vsrikrish/CRA-book"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/vsrikrish/CRA-book/issues/new?title=Issue%20on%20page%20%2Fcontents/flood/slr_model.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/vsrikrish/CRA-book/edit/main/contents/flood/slr_model.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Edit this page"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="headerbtn__text-container">suggest edit</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../../_sources/contents/flood/slr_model.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#candidate-models">
+   Candidate Models
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#loading-and-plotting-the-data">
+   Loading and Plotting The Data
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#slr-data">
+     SLR Data
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#global-mean-temperature">
+     Global Mean Temperature
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#references">
+   References
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Selecting A Sea Level Model</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#candidate-models">
+   Candidate Models
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#loading-and-plotting-the-data">
+   Loading and Plotting The Data
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#slr-data">
+     SLR Data
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#global-mean-temperature">
+     Global Mean Temperature
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#references">
+   References
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="selecting-a-sea-level-model">
+<h1>Selecting A Sea Level Model<a class="headerlink" href="#selecting-a-sea-level-model" title="Permalink to this headline">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">import</span><span class="w"> </span><span class="n">Pkg</span><span class="w"></span>
+<span class="n">Pkg</span><span class="o">.</span><span class="n">activate</span><span class="p">(</span><span class="s">&quot;.&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="n">Pkg</span><span class="o">.</span><span class="n">instantiate</span><span class="p">();</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">  Activating</span> environment at `~/work/CRA-book/CRA-book/contents/flood/Project.toml`
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> Adapt ──────────────────────── v3.3.3
+<span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> Libffi_jll ─────────────────── v3.2.2+1
+<span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> Opus_jll ───────────────────── v1.3.2+0
+<span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> StatsAPI ───────────────────── v1.4.0
+<span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> Compat ─────────────────────── v4.1.0
+<span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> RelocatableFolders ─────────── v0.1.3
+<span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> StructArrays ───────────────── v0.6.8
+<span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> Plots ──────────────────────── v1.29.1
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> XML2_jll ───────────────────── v2.9.14+0
+<span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> GLFW_jll ───────────────────── v3.3.6+0
+<span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> XSLT_jll ───────────────────── v1.1.34+0
+<span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> Xorg_xcb_util_keysyms_jll ──── v0.4.0+1
+<span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> InverseFunctions ───────────── v0.1.6
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> ColorTypes ─────────────────── v0.11.3
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> SpecialFunctions ───────────── v2.1.6
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> Wayland_jll ────────────────── v1.19.0+0
+<span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> Libiconv_jll ───────────────── v1.16.1+1
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> Xorg_xkeyboard_config_jll ──── v2.27.0+4
+<span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> PlotUtils ──────────────────── v1.2.0
+<span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> Xorg_xkbcomp_jll ───────────── v1.4.2+4
+<span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> Scratch ────────────────────── v1.1.0
+<span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> DocStringExtensions ────────── v0.8.6
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> Glib_jll ───────────────────── v2.68.3+2
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> LZO_jll ────────────────────── v2.10.1+0
+<span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> PCRE_jll ───────────────────── v8.44.0+0
+<span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> FFMPEG_jll ─────────────────── v4.4.0+0
+<span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> OpenSSL_jll ────────────────── v1.1.14+0
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> Tables ─────────────────────── v1.7.0
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> Xorg_libxcb_jll ────────────── v1.13.0+3
+<span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> RecipesPipeline ────────────── v0.5.2
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> Xorg_libXext_jll ───────────── v1.3.4+4
+<span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> Xorg_xcb_util_jll ──────────── v0.4.0+1
+<span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> Wayland_protocols_jll ──────── v1.25.0+0
+<span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> Libgpg_error_jll ───────────── v1.42.0+0
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> FriBidi_jll ────────────────── v1.0.10+0
+<span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> IniFile ────────────────────── v0.5.1
+<span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> DataStructures ─────────────── v0.18.13
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> LaTeXStrings ───────────────── v1.3.0
+<span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> Xorg_libXinerama_jll ───────── v1.1.4+4
+<span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> Xorg_libXi_jll ─────────────── v1.7.10+4
+<span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> Libuuid_jll ────────────────── v2.36.0+0
+<span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> Fontconfig_jll ─────────────── v2.13.93+0
+<span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> Libglvnd_jll ───────────────── v1.3.0+3
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> ChainRulesCore ─────────────── v1.15.0
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> Qt5Base_jll ────────────────── v5.15.3+1
+<span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> Zstd_jll ───────────────────── v1.5.2+0
+<span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> TensorCore ─────────────────── v0.1.1
+<span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> ColorSchemes ───────────────── v3.18.0
+<span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> LogExpFunctions ────────────── v0.3.15
+<span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> GeometryBasics ─────────────── v0.4.2
+<span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> Colors ─────────────────────── v0.12.8
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> libass_jll ─────────────────── v0.15.1+0
+<span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> Libgcrypt_jll ──────────────── v1.8.7+0
+<span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> Bzip2_jll ──────────────────── v1.0.8+0
+<span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> Gettext_jll ────────────────── v0.21.0+0
+<span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> UnicodeFun ─────────────────── v0.4.1
+<span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> IrrationalConstants ────────── v0.1.1
+<span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> ColorVectorSpace ───────────── v0.9.9
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> Xorg_libXau_jll ────────────── v1.0.9+4
+<span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> Xorg_libXcursor_jll ────────── v1.2.0+4
+<span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> xkbcommon_jll ──────────────── v0.9.1+5
+<span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> Xorg_xcb_util_renderutil_jll ─ v0.3.9+1
+<span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> NaNMath ────────────────────── v1.0.0
+<span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> HarfBuzz_jll ───────────────── v2.8.1+1
+<span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> Requires ───────────────────── v1.3.0
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> Xorg_libXdmcp_jll ──────────── v1.1.3+4
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> Measures ───────────────────── v0.3.1
+<span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> Xorg_libX11_jll ────────────── v1.6.9+4
+<span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> RecipesBase ────────────────── v1.2.1
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> Latexify ───────────────────── v0.15.15
+<span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> FreeType2_jll ──────────────── v2.10.4+0
+<span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> StatsBase ──────────────────── v0.33.16
+<span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> Contour ────────────────────── v0.5.7
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> FFMPEG ─────────────────────── v0.4.1
+<span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> LAME_jll ───────────────────── v3.100.1+0
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> DataValueInterfaces ────────── v1.0.0
+<span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> Libtiff_jll ────────────────── v4.4.0+0
+<span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> IteratorInterfaceExtensions ── v1.0.0
+<span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> Xorg_libXfixes_jll ─────────── v5.0.3+4
+<span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> Xorg_xcb_util_image_jll ────── v0.4.0+1
+<span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> Pixman_jll ─────────────────── v0.40.1+0
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> PlotThemes ─────────────────── v3.0.0
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> libfdk_aac_jll ─────────────── v2.0.2+0
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> Graphite2_jll ──────────────── v1.3.14+0
+<span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> Xorg_libXrandr_jll ─────────── v1.5.2+4
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> Xorg_xtrans_jll ────────────── v1.4.0+3
+<span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> x264_jll ───────────────────── v2021.5.5+0
+<span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> LERC_jll ───────────────────── v3.0.0+1
+<span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> Xorg_libpthread_stubs_jll ──── v0.1.0+3
+<span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> GR ─────────────────────────── v0.64.4
+<span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> Unzip ──────────────────────── v0.1.2
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> EarCut_jll ─────────────────── v2.2.3+0
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> ChangesOfVariables ─────────── v0.1.3
+<span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> GR_jll ─────────────────────── v0.64.4+0
+<span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> Showoff ────────────────────── v1.0.3
+<span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> Xorg_libXrender_jll ────────── v0.9.10+4
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> TableTraits ────────────────── v1.0.1
+<span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> OrderedCollections ─────────── v1.4.1
+<span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> IterTools ──────────────────── v1.4.0
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> HTTP ───────────────────────── v0.9.17
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> Xorg_libxkbfile_jll ────────── v1.1.0+4
+<span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> Xorg_xcb_util_wm_jll ───────── v0.4.1+1
+<span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> Expat_jll ──────────────────── v2.4.8+0
+<span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> Reexport ───────────────────── v1.2.2
+<span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> MacroTools ─────────────────── v0.5.9
+<span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> URIs ───────────────────────── v1.3.0
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> libpng_jll ─────────────────── v1.6.38+0
+<span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> Cairo_jll ──────────────────── v1.16.1+1
+<span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> x265_jll ───────────────────── v3.5.0+0
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> Missings ───────────────────── v1.0.2
+<span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> Formatting ─────────────────── v0.4.2
+<span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> Grisu ──────────────────────── v1.0.2
+<span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> SortingAlgorithms ──────────── v1.0.1
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> libvorbis_jll ──────────────── v1.3.7+1
+<span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> StaticArrays ───────────────── v1.4.6
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> OpenSpecFun_jll ────────────── v0.5.5+0
+<span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> Libmount_jll ───────────────── v2.35.0+0
+<span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> Ogg_jll ────────────────────── v1.3.5+1
+<span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> JpegTurbo_jll ──────────────── v2.1.2+0
+<span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> FixedPointNumbers ──────────── v0.8.4
+<span class=" -Color -Color-Bold -Color-Bold-Green">   Installed</span> DataAPI ────────────────────── v1.10.0
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">    Building</span> GR → `~/.julia/scratchspaces/44cfe95a-1eb2-52ea-b672-e2afdf69b78f/c98aea696662d09e215ef7cda5296024a9646c75/build.log`
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">Precompiling</span> project...
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>NaNMath
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>URIs
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>DocStringExtensions
+<span class=" -Color -Color-Green">  ✓ </span>OrderedCollections
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>StatsAPI
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Formatting
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>DataValueInterfaces
+<span class=" -Color -Color-Green">  ✓ </span>IteratorInterfaceExtensions
+<span class=" -Color -Color-Green">  ✓ </span>CompilerSupportLibraries_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Adapt
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>OpenLibm_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Compat
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>IniFile
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>DataAPI
+<span class=" -Color -Color-Green">  ✓ </span>Measures
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Reexport
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>MacroTools
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Requires
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>TensorCore
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Unzip
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>FixedPointNumbers
+<span class=" -Color -Color-Green">  ✓ </span>IterTools
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>IrrationalConstants
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Scratch
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>RecipesBase
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>UnicodeFun
+<span class=" -Color -Color-Green">  ✓ </span>LaTeXStrings
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Grisu
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>x265_jll
+<span class=" -Color -Color-Green">  ✓ </span>Libgpg_error_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>InverseFunctions
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Xorg_xtrans_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>OpenSSL_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>JpegTurbo_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Ogg_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Graphite2_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>PCRE_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Libffi_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>LAME_jll
+<span class=" -Color -Color-Green">  ✓ </span>Opus_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Xorg_libXau_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>StaticArrays
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>FriBidi_jll
+<span class=" -Color -Color-Green">  ✓ </span>Pixman_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Xorg_libpthread_stubs_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>x264_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Wayland_protocols_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Libmount_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Bzip2_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>libfdk_aac_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Xorg_libXdmcp_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Expat_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>libpng_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Zstd_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Libuuid_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Libiconv_jll
+<span class=" -Color -Color-Green">  ✓ </span>EarCut_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>TableTraits
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>LERC_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>LZO_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>OpenSpecFun_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Missings
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>ChainRulesCore
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>RelocatableFolders
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>DataStructures
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Showoff
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>HTTP
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Libgcrypt_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>libvorbis_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Latexify
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>FreeType2_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>XML2_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Contour
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Tables
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Libtiff_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>ChangesOfVariables
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>SortingAlgorithms
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Wayland_jll
+<span class=" -Color -Color-Green">  ✓ </span>Fontconfig_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>XSLT_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Gettext_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Xorg_libxcb_jll
+<span class=" -Color -Color-Green">  ✓ </span>StructArrays
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>LogExpFunctions
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Xorg_xcb_util_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Glib_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Xorg_libX11_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>StatsBase
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Xorg_xcb_util_wm_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>ColorTypes
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Xorg_xcb_util_renderutil_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Xorg_xcb_util_keysyms_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Xorg_xcb_util_image_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Xorg_libXrender_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Xorg_libXext_jll
+<span class=" -Color -Color-Green">  ✓ </span>SpecialFunctions
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Xorg_libxkbfile_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Xorg_libXfixes_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Libglvnd_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Xorg_libXrandr_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Xorg_libXinerama_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>GeometryBasics
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Cairo_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Xorg_xkbcomp_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Xorg_libXcursor_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Xorg_libXi_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Xorg_xkeyboard_config_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>HarfBuzz_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Colors
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>GLFW_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>xkbcommon_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>ColorVectorSpace
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>libass_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Qt5Base_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>FFMPEG_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>FFMPEG
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>GR_jll
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>ColorSchemes
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>GR
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>PlotUtils
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>RecipesPipeline
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>PlotThemes
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">  ✓ </span>Plots
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  123 dependencies successfully precompiled in 138 seconds (15 already precompiled)
+</pre></div>
+</div>
+</div>
+</div>
+<section id="candidate-models">
+<h2>Candidate Models<a class="headerlink" href="#candidate-models" title="Permalink to this headline">#</a></h2>
+<p>A key consideration in any modeling exercise is the mathematical representation of the modeled process. This choice can allow or prohibit certain relationships between variables, or may result in too many or too few parameters to appropriately capture dynamics. For example, a simple linear model in time,</p>
+<div class="math notranslate nohighlight">
+\[H_\text{lin}(t) = a + b*(t - t_0),\]</div>
+<p>where <span class="math notranslate nohighlight">\(H\)</span> is global sea level in <span class="math notranslate nohighlight">\(m\)</span>, <span class="math notranslate nohighlight">\(t\)</span> is time in years and <span class="math notranslate nohighlight">\(t_0\)</span> is a baseline year, does not allow for accelerated sea-level rise. A quadratic model in time,</p>
+<div class="math notranslate nohighlight">
+\[H_\text{quad}(t) = a + b*(t - t_0) + c*(t - t_0)^2,\]</div>
+<p>does allow for this acceleration.</p>
+<p>However, both of these models assume that time is the key variable explaining changes in sea levels from one year to another. In <a class="reference internal" href="intro_to_flood_risk.html#sec-flood-intro"><span class="std std-ref">Introduction to Coastal Flood Risk</span></a>, we discussed the relationship between CO_2 concentrations, atmospheric temperature, and sea levels. <span id="id1">Rahmstorf [<a class="reference internal" href="#id52" title="Stefan Rahmstorf. A Semi-Empirical Approach to Projecting Future Sea-Level Rise. Science, 315(5810):368–370, January 2007. doi:10/djt4n9.">2007</a>]</span> proposed the following semi-empirical model relating sea-level rise (SLR) to changes in global mean temperatures:</p>
+<div class="math notranslate nohighlight">
+\[\Delta H_\text{emp}/\Delta t = \alpha \left(T(t) - T_{\text{eq}}\right),\]</div>
+<p>or</p>
+<div class="math notranslate nohighlight">
+\[H_\text{emp}(t) - H_0 = \alpha \left(T(t) - T_{\text{eq}}\right),\]</div>
+<p>where <span class="math notranslate nohighlight">\(\alpha\)</span> is the sensitivity of SLR to temperature changes, and <span class="math notranslate nohighlight">\(T_\text{eq}\)</span> is the temperature when <span class="math notranslate nohighlight">\(H(t) = H_0\)</span>. In the next section, we will look at how we can calibrate these models to sea-level data and analyze their dynamics.</p>
+</section>
+<section id="loading-and-plotting-the-data">
+<h2>Loading and Plotting The Data<a class="headerlink" href="#loading-and-plotting-the-data" title="Permalink to this headline">#</a></h2>
+<p>To fit the three models described in <span class="xref myst"></span>, we need to load historical SLR data (for all three models) and global mean temperature (GMT) data (for <span class="math notranslate nohighlight">\(H_\text{emp}\)</span>). We have provided two data sets in <code class="docutils literal notranslate"><span class="pre">contents/flood/data</span></code>.</p>
+<section id="slr-data">
+<h3>SLR Data<a class="headerlink" href="#slr-data" title="Permalink to this headline">#</a></h3>
+<p>The SLR dataset was taken from Australia’s <a class="reference external" href="https://research.csiro.au/slrwavescoast/sea-level/measurements-and-data/sea-level-data/">Commonwealth Scientific and Industrial Research Organization (CSIRO)</a> and described in {cite:t}[Church2011-bj]. This reconstruction of global mean sea levels spans 1880–2013. The data files, <code class="docutils literal notranslate"><span class="pre">CSIRO_Recons_gmsl_yr_2015.txt</span></code>, has three columns:</p>
+<ol class="simple">
+<li><p>Time in years (the fractions correspond to months);</p></li>
+<li><p>Global mean sea-level in <span class="math notranslate nohighlight">\(mm\)</span>;</p></li>
+<li><p>Standard deviation of the observational error in <span class="math notranslate nohighlight">\(mm\)</span>.
+It is also tab-delimited, and there are no header rows or any rows to skip.</p></li>
+</ol>
+<p>In Julia, we can read in this file using the <a class="reference external" href="https://docs.julialang.org/en/v1/stdlib/DelimitedFiles/"><code class="docutils literal notranslate"><span class="pre">DelimitedFiles</span></code> package</a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># load packages</span><span class="w"></span>
+<span class="k">using</span><span class="w"> </span><span class="n">DelimitedFiles</span><span class="w"></span>
+
+<span class="c"># read data</span><span class="w"></span>
+<span class="n">slr_data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">readdlm</span><span class="p">(</span><span class="s">&quot;data/CSIRO_Recons_gmsl_yr_2015.txt&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">header</span><span class="o">=</span><span class="nb">false</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>134×3 Matrix{Float64}:
+ 1880.5  -158.7  24.2
+ 1881.5  -153.1  24.2
+ 1882.5  -169.9  23.0
+ 1883.5  -164.6  22.8
+ 1884.5  -143.7  22.2
+ 1885.5  -145.2  21.9
+ 1886.5  -147.6  20.8
+ 1887.5  -153.2  20.8
+ 1888.5  -151.1  20.8
+ 1889.5  -149.5  20.8
+ 1890.5  -147.5  20.7
+ 1891.5  -149.2  20.7
+ 1892.5  -146.0  20.7
+    ⋮            
+ 2002.5    28.4   6.8
+ 2003.5    37.6   6.9
+ 2004.5    37.2   6.9
+ 2005.5    37.3   6.8
+ 2006.5    41.6   6.8
+ 2007.5    43.5   7.1
+ 2008.5    52.2   6.8
+ 2009.5    58.0   6.9
+ 2010.5    65.7   7.1
+ 2011.5    67.3   7.5
+ 2012.5    76.1   8.3
+ 2013.5    67.7   8.9
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now let’s plot the reconstructed data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">Plots</span><span class="w"></span>
+
+<span class="c"># plot reconstructed anomalies as black points</span><span class="w"></span>
+<span class="n">scatter</span><span class="p">(</span><span class="n">slr_data</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">],</span><span class="w"> </span><span class="n">slr_data</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">],</span><span class="w"> </span><span class="n">grid</span><span class="o">=</span><span class="ss">:false</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="o">=</span><span class="s">&quot;black&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">markersize</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="n">xlabel</span><span class="o">=</span><span class="s">&quot;Year&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ylabel</span><span class="o">=</span><span class="s">&quot;Sea-Level Anomaly (mm)&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">legend</span><span class="o">=</span><span class="ss">:topleft</span><span class="p">,</span><span class="w"> </span><span class="n">label</span><span class="o">=</span><span class="s">&quot;Reconstructed annual mean&quot;</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/slr_model_6_0.svg" src="../../_images/slr_model_6_0.svg" /></div>
+</div>
+</section>
+<section id="global-mean-temperature">
+<h3>Global Mean Temperature<a class="headerlink" href="#global-mean-temperature" title="Permalink to this headline">#</a></h3>
+<p>The GMT dataset was obtained from the <a class="reference external" href="https://www.metoffice.gov.uk/hadobs/hadcrut4/data/current/download.html">HadCRUT4 data website</a></p>
+</section>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">#</a></h2>
+<div class="docutils container" id="id2">
+<dl class="citation">
+<dt class="label" id="id52"><span class="brackets"><a class="fn-backref" href="#id1">Rah07</a></span></dt>
+<dd><p>Stefan Rahmstorf. A Semi-Empirical Approach to Projecting Future Sea-Level Rise. <em>Science</em>, 315(5810):368–370, January 2007. <a class="reference external" href="https://doi.org/10/djt4n9">doi:10/djt4n9</a>.</p>
+</dd>
+</dl>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "julia-1.6"
+        },
+        kernelOptions: {
+            kernelName: "julia-1.6",
+            path: "./contents/flood"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'julia-1.6'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="modeling_slr.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Modeling Sea Level Rise</p>
+        </div>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Vivek Srikrishnan and Klaus Keller<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

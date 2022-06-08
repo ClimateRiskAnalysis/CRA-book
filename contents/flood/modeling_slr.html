@@ -6,53 +6,54 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Climate Risk Analysis &#8212; An Introduction to Climate Risk Analysis</title>
+    <title>Modeling Sea Level Rise &#8212; An Introduction to Climate Risk Analysis</title>
     
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+  <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
 
     
   <link rel="stylesheet"
-    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
   <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
   <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
     
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
 
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/clipboard.min.js"></script>
-    <script src="_static/copybutton.js"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="_static/togglebutton.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="_static/design-tabs.js"></script>
+    <script src="../../_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
 const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
-    <script async="async" src="_static/sphinx-thebe.js"></script>
-    <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Acknowledgements" href="acknowledgements.html" />
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Selecting A Sea Level Model" href="slr_model.html" />
+    <link rel="prev" title="Introduction to Coastal Flood Risk" href="intro_to_flood_risk.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en">
     
@@ -87,22 +88,22 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="bd-sidebar noprint" id="site-navigation">
     <div class="bd-sidebar__content">
         <div class="bd-sidebar__top"><div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="#">
+    <a class="navbar-brand text-wrap" href="../../index.html">
       
       
       
       <h1 class="site-logo" id="site-title">An Introduction to Climate Risk Analysis</h1>
       
     </a>
-</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
   <i class="icon fas fa-search"></i>
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
-            <li class="toctree-l1 current active">
-                <a class="reference internal" href="#">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../index.html">
                     Climate Risk Analysis
                 </a>
             </li>
@@ -114,12 +115,12 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="acknowledgements.html">
+  <a class="reference internal" href="../../acknowledgements.html">
    Acknowledgements
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="LICENSE.html">
+  <a class="reference internal" href="../../LICENSE.html">
    License for This Book
   </a>
  </li>
@@ -129,19 +130,19 @@ const thebe_selector_output = ".output, .cell_output"
   Coastal Flood Risk
  </span>
 </p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="contents/flood/intro_to_flood_risk.html">
+  <a class="reference internal" href="intro_to_flood_risk.html">
    Introduction to Coastal Flood Risk
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="contents/flood/modeling_slr.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    Modeling Sea Level Rise
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="contents/flood/slr_model.html">
+  <a class="reference internal" href="slr_model.html">
    Selecting A Sea Level Model
   </a>
  </li>
@@ -235,7 +236,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/vsrikrish/CRA-book/issues/new?title=Issue%20on%20page%20%2Findex.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/vsrikrish/CRA-book/issues/new?title=Issue%20on%20page%20%2Fcontents/flood/modeling_slr.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -252,7 +253,7 @@ title="Open an issue"
       </li>
       
       <li>
-        <a href="https://github.com/vsrikrish/CRA-book/edit/main/index.md"
+        <a href="https://github.com/vsrikrish/CRA-book/edit/main/contents/flood/modeling_slr.md"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -280,7 +281,7 @@ title="Edit this page"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="_sources/index.md"
+        <a href="../../_sources/contents/flood/modeling_slr.md"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -340,18 +341,8 @@ title="Print to PDF"
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#introduction">
-   Introduction
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#scope">
-   Scope
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#learning-objectives">
-   Learning Objectives
+  <a class="reference internal nav-link" href="#references">
+   References
   </a>
  </li>
 </ul>
@@ -363,7 +354,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Climate Risk Analysis</h1>
+                <h1>Modeling Sea Level Rise</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -374,18 +365,8 @@ title="Print to PDF"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#introduction">
-   Introduction
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#scope">
-   Scope
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#learning-objectives">
-   Learning Objectives
+  <a class="reference internal nav-link" href="#references">
+   References
   </a>
  </li>
 </ul>
@@ -398,34 +379,25 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="climate-risk-analysis">
-<h1>Climate Risk Analysis<a class="headerlink" href="#climate-risk-analysis" title="Permalink to this headline">#</a></h1>
-<section id="introduction">
-<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">#</a></h2>
-<p>Greenhouse gas emissions have caused considerable changes in climate, including increased surface air temperatures and rising sea levels.  These changes affect both the Earth and human systems in numerous ways, creating new risks and increasing previously existing ones. This book provides an introduction to some of the concepts and approaches used to quantify and analyze climate risks to help support decision-making for risk management.</p>
-<p>This book originated as <a class="reference external" href="https://www.scrim.psu.edu/resources/raes/">Risk Analysis in the Earth Sciences</a> and an associated Risk Analysis course at Penn State. <em>Risk Analysis in the Earth Sciences</em> has also been used in courses at the University of Illinois at Urbana-Champaign, CU Boulder, and RIT. This updated version expands on the original book by presenting a series of tutorials in the <a class="reference external" href="https://julialang.org/">Julia programming language</a> that teach some of the Earth science and statistical concepts needed for assessing climate-related risks.  These activities are intended for upper-level undergraduates, graduate students, and professionals in other areas who wish to gain insight into academic climate risk analysis.</p>
-</section>
-<section id="scope">
-<h2>Scope<a class="headerlink" href="#scope" title="Permalink to this headline">#</a></h2>
-<p>Modern statistical and computational methods are essential for analyzing the complex and dynamic risks from climate change. Given the power of these tools, it is also important for practitioners to understand how to determine when a particular approach is appropriate for a given problem and to ensure that their conclusions reflect the choices made in modeling and analysis. This book is intended to introduce these skills in the context of particular applications, which serve as case studies.</p>
-<p>The code examples in this book are provided in Julia, which is a powerful, open-source language for scientific computing and data analysis. Julia was designed to strike a balance between readability and speed, and has steadily gained popularity in the broader scientific and statistical communities.</p>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Completing the chapters in this textbook will not teach you to perform publication-quality or consulting-grade
-risk analyses. This textbook is intended primarily for educational use, and the material presented
-here should only be applied to “real” problems after additional training. The authors and editors of this
-textbook specifically disclaim any liability for damages associated with the use of the material presented in
-this textbook.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="modeling-sea-level-rise">
+<span id="sec-model-slr"></span><h1>Modeling Sea Level Rise<a class="headerlink" href="#modeling-sea-level-rise" title="Permalink to this headline">#</a></h1>
+<p>We often have to make inferences about system behaviors using limited data. This problem can be especially acute in climate science, where observational records of temperature and sea level rise (for example) go back a few hundred years at most.  Given these limited data, how can we make inferences about the past and future of the climate system, while accurately representing our uncertainties?</p>
+<p>In this section, we will develop and calibrate a model of global sea-level rise. In <span class="xref myst"></span>, we will discuss several choices for a model structure. In <span class="xref myst"></span>, we will propose several statistical models to represent deviations between our chosen model and historical observations, also called <em>residuals</em> or <em>discrepancies</em>.</p>
+<aside class="margin sidebar">
+<p class="sidebar-title">Modeling Residuals</p>
+<p>The statistical model used for residuals plays an important role in sound parameter inferences and projections <span id="id1">[<a class="reference internal" href="#id44" title="Jenný Brynjarsdóttir and Anthony O'Hagan. Learning about physical parameters: the importance of model discrepancy. Inverse Problems, 30(11):114007, November 2014. doi:10.1088/0266-5611/30/11/114007.">Brynjarsdóttir and O'Hagan, 2014</a>]</span>.</p>
+</aside>
+<p>Finally, we will learn about and apply frequentist and Bayesian approaches to parameter inferences in <span class="xref myst"></span> and <span class="xref myst"></span>, respectively.</p>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">#</a></h2>
+<div class="docutils container" id="id2">
+<dl class="citation">
+<dt class="label" id="id44"><span class="brackets"><a class="fn-backref" href="#id1">BrynjarsdottirOHagan14</a></span></dt>
+<dd><p>Jenný Brynjarsdóttir and Anthony O'Hagan. Learning about physical parameters: the importance of model discrepancy. <em>Inverse Problems</em>, 30(11):114007, November 2014. <a class="reference external" href="https://doi.org/10.1088/0266-5611/30/11/114007">doi:10.1088/0266-5611/30/11/114007</a>.</p>
+</dd>
+</dl>
 </div>
 </section>
-<section id="learning-objectives">
-<h2>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Permalink to this headline">#</a></h2>
-<p>After completing the material in this book, students should be able to:</p>
-</section>
-<div class="toctree-wrapper compound">
-</div>
-<div class="toctree-wrapper compound">
-</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -441,7 +413,7 @@ this textbook.</p>
         },
         kernelOptions: {
             kernelName: "python3",
-            path: "./."
+            path: "./contents/flood"
         },
         predefinedOutput: true
     }
@@ -455,10 +427,17 @@ this textbook.</p>
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='right-next' id="next-link" href="acknowledgements.html" title="next page">
+    <a class='left-prev' id="prev-link" href="intro_to_flood_risk.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Introduction to Coastal Flood Risk</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="slr_model.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Acknowledgements</p>
+        <p class="prev-next-title">Selecting A Sea Level Model</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
@@ -483,7 +462,7 @@ this textbook.</p>
     </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
 
 
   </body>
