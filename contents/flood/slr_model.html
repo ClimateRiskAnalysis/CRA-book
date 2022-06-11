@@ -399,16 +399,26 @@ title="Print to PDF"
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#slr-data">
-     SLR Data
+    <a class="reference internal nav-link" href="#reading-data-files">
+     Reading Data Files
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#global-mean-temperature">
-     Global Mean Temperature
+    <a class="reference internal nav-link" href="#merging-the-data">
+     Merging The Data
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#plotting-the-data">
+     Plotting The Data
     </a>
    </li>
   </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#fitting-the-models-to-the-data">
+   Fitting the Models to the Data
+  </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#references">
@@ -445,16 +455,26 @@ title="Print to PDF"
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#slr-data">
-     SLR Data
+    <a class="reference internal nav-link" href="#reading-data-files">
+     Reading Data Files
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#global-mean-temperature">
-     Global Mean Temperature
+    <a class="reference internal nav-link" href="#merging-the-data">
+     Merging The Data
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#plotting-the-data">
+     Plotting The Data
     </a>
    </li>
   </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#fitting-the-models-to-the-data">
+   Fitting the Models to the Data
+  </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#references">
@@ -491,96 +511,284 @@ title="Print to PDF"
 <div class="math notranslate nohighlight">
 \[H_\text{quad}(t) = a + b*(t - t_0) + c*(t - t_0)^2,\]</div>
 <p>does allow for this acceleration.</p>
-<p>However, both of these models assume that time is the key variable explaining changes in sea levels from one year to another. In <a class="reference internal" href="intro_to_flood_risk.html#sec-flood-intro"><span class="std std-ref">Introduction to Coastal Flood Risk</span></a>, we discussed the relationship between CO_2 concentrations, atmospheric temperature, and sea levels. <span id="id1">Rahmstorf [<a class="reference internal" href="#id53" title="Stefan Rahmstorf. A Semi-Empirical Approach to Projecting Future Sea-Level Rise. Science, 315(5810):368–370, January 2007. doi:10/djt4n9.">2007</a>]</span> proposed the following semi-empirical model relating sea-level rise (SLR) to changes in global mean temperatures:</p>
+<p>However, both of these models assume that time is the key variable explaining changes in sea levels from one year to another. In <a class="reference external" href="#introduction-to-coastal-flood-risk"></a>, we discussed the relationship between CO_2 concentrations, atmospheric temperature, and sea levels. <span id="id1">Rahmstorf [<a class="reference internal" href="#id55" title="Stefan Rahmstorf. A Semi-Empirical Approach to Projecting Future Sea-Level Rise. Science, 315(5810):368–370, January 2007. doi:10/djt4n9.">2007</a>]</span> proposed the following semi-empirical model relating sea-level rise (SLR) to changes in global mean temperatures:</p>
 <div class="math notranslate nohighlight">
 \[\Delta H_\text{emp}/\Delta t = \alpha \left(T(t) - T_{\text{eq}}\right),\]</div>
-<p>or</p>
-<div class="math notranslate nohighlight">
-\[H_\text{emp}(t) - H_0 = \alpha \left(T(t) - T_{\text{eq}}\right),\]</div>
-<p>where <span class="math notranslate nohighlight">\(\alpha\)</span> is the sensitivity of SLR to temperature changes, and <span class="math notranslate nohighlight">\(T_\text{eq}\)</span> is the temperature when <span class="math notranslate nohighlight">\(H(t) = H_0\)</span>. In the next section, we will look at how we can calibrate these models to sea-level data and analyze their dynamics.</p>
+<p>where <span class="math notranslate nohighlight">\(\alpha\)</span> is the sensitivity of SLR to temperature changes, and <span class="math notranslate nohighlight">\(T_\text{eq}\)</span> is the temperature when <span class="math notranslate nohighlight">\(H(t) = H_0\)</span>, an initial value. In the next section, we will look at how we can calibrate these models to sea-level data and analyze their dynamics.</p>
 </section>
 <section id="loading-and-plotting-the-data">
 <h2>Loading and Plotting The Data<a class="headerlink" href="#loading-and-plotting-the-data" title="Permalink to this headline">#</a></h2>
-<p>To fit the three models described in <span class="xref myst"></span>, we need to load historical SLR data (for all three models) and global mean temperature (GMT) data (for <span class="math notranslate nohighlight">\(H_\text{emp}\)</span>). We have provided two data sets in <code class="docutils literal notranslate"><span class="pre">contents/flood/data</span></code>.</p>
-<section id="slr-data">
-<h3>SLR Data<a class="headerlink" href="#slr-data" title="Permalink to this headline">#</a></h3>
-<p>The SLR dataset was taken from Australia’s <a class="reference external" href="https://research.csiro.au/slrwavescoast/sea-level/measurements-and-data/sea-level-data/">Commonwealth Scientific and Industrial Research Organization (CSIRO)</a> and described in <span id="id2">Church and White [<a class="reference internal" href="#id5" title="John A. Church and Neil J. White. Sea-level rise from the late 19th to the early 21st century. Surveys in Geophysics, 32(4-5):585–602, 2011. doi:10.1007/s10712-011-9119-1.">2011</a>]</span>. This reconstruction of global mean sea levels spans 1880–2013. The data files, <code class="docutils literal notranslate"><span class="pre">CSIRO_Recons_gmsl_yr_2015.txt</span></code>, has three columns:</p>
+<p>To fit the three models described in <a class="reference external" href="#candidate-models"></a>, we need to load historical SLR data (for all three models) and global mean temperature (GMT) data (for <span class="math notranslate nohighlight">\(H_\text{emp}\)</span>). We have provided two data sets in <code class="docutils literal notranslate"><span class="pre">contents/flood/data</span></code>.</p>
+<section id="reading-data-files">
+<h3>Reading Data Files<a class="headerlink" href="#reading-data-files" title="Permalink to this headline">#</a></h3>
+<p>The SLR data file, <code class="docutils literal notranslate"><span class="pre">CSIRO_Recons_gmsl_yr_2015.csv</span></code>,</p>
+<aside class="margin sidebar">
+<p class="sidebar-title">SLR Data Information</p>
+<p>The SLR dataset was taken from Australia’s <a class="reference external" href="https://research.csiro.au/slrwavescoast/sea-level/measurements-and-data/sea-level-data/">Commonwealth Scientific and Industrial Research Organization (CSIRO)</a> and described in <span id="id2">Church and White [<a class="reference internal" href="#id6" title="John A. Church and Neil J. White. Sea-level rise from the late 19th to the early 21st century. Surveys in Geophysics, 32(4-5):585–602, 2011. doi:10.1007/s10712-011-9119-1.">2011</a>]</span>. This reconstruction of global mean sea levels spans 1880–2013.</p>
+</aside>
+<p>has three columns:</p>
 <ol class="simple">
 <li><p>Time in years (the fractions correspond to months);</p></li>
-<li><p>Global mean sea-level in <span class="math notranslate nohighlight">\(mm\)</span>;</p></li>
-<li><p>Standard deviation of the observational error in <span class="math notranslate nohighlight">\(mm\)</span>.
-It is also tab-delimited, and there are no header rows or any rows to skip.</p></li>
+<li><p>Global mean sea-level in <span class="math notranslate nohighlight">\(mm\)</span> (relative to the 1961-1990 mean);</p></li>
+<li><p>Standard deviation of the observational error in <span class="math notranslate nohighlight">\(mm\)</span>.</p></li>
 </ol>
-<p>In Julia, we can read in this file using the <a class="reference external" href="https://docs.julialang.org/en/v1/stdlib/DelimitedFiles/"><code class="docutils literal notranslate"><span class="pre">DelimitedFiles</span></code> package</a>.</p>
+<p>The GMT data has a similar structure: a header and comma-delimited.</p>
+<aside class="margin sidebar">
+<p class="sidebar-title">GMT Data Information</p>
+<p>The GMT data was obtained from the <a class="reference external" href="https://www.metoffice.gov.uk/hadobs/hadcrut5/">HadCRUT5 website</a> <span id="id3">[<a class="reference internal" href="#id17" title="C. P. Morice, J. J. Kennedy, N. A. Rayner, J. P. Winn, E. Hogan, R. E. Killick, R. J. H. Dunn, T. J. Osborn, P. D. Jones, and I. R. Simpson. An Updated Assessment of Near-Surface Temperature Change From 1850: The HadCRUT5 Data Set. Journal of Geophysical Research: Atmospheres, 2021. doi:10.1029/2019JD032361.">Morice <em>et al.</em>, 2021</a>]</span>.</p>
+</aside>
+<p>This file, <code class="docutils literal notranslate"><span class="pre">HadCRUT.5.0.1.0.analysis.summary_series.global.annual.csv</span></code>, also has four columns, along with a header:</p>
+<ol class="simple">
+<li><p>Time in years;</p></li>
+<li><p>Annual mean temperature anomaly (relative to the 1961-1990 mean);</p></li>
+<li><p>The lower end of the 95% confidence interval;</p></li>
+<li><p>The upper end of the 95% confidence interval.</p></li>
+</ol>
+<p>In Julia, we can read in these files using the <a class="reference external" href="https://docs.julialang.org/en/v1/stdlib/DelimitedFiles/"><code class="docutils literal notranslate"><span class="pre">DelimitedFiles</span></code> package</a>. The <code class="docutils literal notranslate"><span class="pre">DelimitedFiles.readdlm</span></code> function takes in a filename, and can also take in optional parameters like a delimiter and an output type. We can also convert the output of <code class="docutils literal notranslate"><span class="pre">DelimitedFiles.readdlm</span></code> to a <a class="reference external" href="https://dataframes.juliadata.org/stable/"><code class="docutils literal notranslate"><span class="pre">DataFrame</span></code></a>. Since we want to read multiple files, let’s write a function which takes in filename corresponding to a CSV file with a header and returns a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># load packages</span><span class="w"></span>
+<span class="k">using</span><span class="w"> </span><span class="n">DataFrames</span><span class="w"></span>
 <span class="k">using</span><span class="w"> </span><span class="n">DelimitedFiles</span><span class="w"></span>
 
-<span class="c"># read data</span><span class="w"></span>
-<span class="n">slr_data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">readdlm</span><span class="p">(</span><span class="s">&quot;data/CSIRO_Recons_gmsl_yr_2015.txt&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">header</span><span class="o">=</span><span class="nb">false</span><span class="p">)</span><span class="w"></span>
+<span class="k">function</span><span class="w"> </span><span class="n">read_csv</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">dat</span><span class="p">,</span><span class="w"> </span><span class="n">head</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">readdlm</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;,&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">header</span><span class="o">=</span><span class="nb">true</span><span class="p">)</span><span class="w"> </span><span class="c"># read in the data and header</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">DataFrame</span><span class="p">(</span><span class="n">dat</span><span class="p">,</span><span class="w"> </span><span class="n">vec</span><span class="p">(</span><span class="n">head</span><span class="p">))</span><span class="w"> </span><span class="c"># return the DataFrame</span><span class="w"></span>
+<span class="k">end</span><span class="w"></span>
+
+<span class="c"># read data; first read in the data and the header, then convert to a DataFrame</span><span class="w"></span>
+<span class="n">slr_data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">read_csv</span><span class="p">(</span><span class="s">&quot;data/CSIRO_Recons_gmsl_yr_2015.csv&quot;</span><span class="p">)</span><span class="w"></span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>134×3 Matrix{Float64}:
- 1880.5  -158.7  24.2
- 1881.5  -153.1  24.2
- 1882.5  -169.9  23.0
- 1883.5  -164.6  22.8
- 1884.5  -143.7  22.2
- 1885.5  -145.2  21.9
- 1886.5  -147.6  20.8
- 1887.5  -153.2  20.8
- 1888.5  -151.1  20.8
- 1889.5  -149.5  20.8
- 1890.5  -147.5  20.7
- 1891.5  -149.2  20.7
- 1892.5  -146.0  20.7
-    ⋮            
- 2002.5    28.4   6.8
- 2003.5    37.6   6.9
- 2004.5    37.2   6.9
- 2005.5    37.3   6.8
- 2006.5    41.6   6.8
- 2007.5    43.5   7.1
- 2008.5    52.2   6.8
- 2009.5    58.0   6.9
- 2010.5    65.7   7.1
- 2011.5    67.3   7.5
- 2012.5    76.1   8.3
- 2013.5    67.7   8.9
+<div class="output text_html"><div class="data-frame"><p>134 rows × 3 columns</p><table class="data-frame"><thead><tr><th></th><th>Time</th><th>GMSL (mm)</th><th>GMSL uncertainty (mm)</th></tr><tr><th></th><th title="Float64">Float64</th><th title="Float64">Float64</th><th title="Float64">Float64</th></tr></thead><tbody><tr><th>1</th><td>1880.5</td><td>-158.7</td><td>24.2</td></tr><tr><th>2</th><td>1881.5</td><td>-153.1</td><td>24.2</td></tr><tr><th>3</th><td>1882.5</td><td>-169.9</td><td>23.0</td></tr><tr><th>4</th><td>1883.5</td><td>-164.6</td><td>22.8</td></tr><tr><th>5</th><td>1884.5</td><td>-143.7</td><td>22.2</td></tr><tr><th>6</th><td>1885.5</td><td>-145.2</td><td>21.9</td></tr><tr><th>7</th><td>1886.5</td><td>-147.6</td><td>20.8</td></tr><tr><th>8</th><td>1887.5</td><td>-153.2</td><td>20.8</td></tr><tr><th>9</th><td>1888.5</td><td>-151.1</td><td>20.8</td></tr><tr><th>10</th><td>1889.5</td><td>-149.5</td><td>20.8</td></tr><tr><th>11</th><td>1890.5</td><td>-147.5</td><td>20.7</td></tr><tr><th>12</th><td>1891.5</td><td>-149.2</td><td>20.7</td></tr><tr><th>13</th><td>1892.5</td><td>-146.0</td><td>20.7</td></tr><tr><th>14</th><td>1893.5</td><td>-141.3</td><td>20.3</td></tr><tr><th>15</th><td>1894.5</td><td>-151.0</td><td>21.6</td></tr><tr><th>16</th><td>1895.5</td><td>-139.2</td><td>21.6</td></tr><tr><th>17</th><td>1896.5</td><td>-146.8</td><td>21.2</td></tr><tr><th>18</th><td>1897.5</td><td>-141.6</td><td>20.8</td></tr><tr><th>19</th><td>1898.5</td><td>-132.2</td><td>19.7</td></tr><tr><th>20</th><td>1899.5</td><td>-124.7</td><td>19.4</td></tr><tr><th>21</th><td>1900.5</td><td>-130.1</td><td>18.3</td></tr><tr><th>22</th><td>1901.5</td><td>-130.5</td><td>17.6</td></tr><tr><th>23</th><td>1902.5</td><td>-125.9</td><td>17.3</td></tr><tr><th>24</th><td>1903.5</td><td>-117.9</td><td>17.0</td></tr><tr><th>25</th><td>1904.5</td><td>-128.2</td><td>16.9</td></tr><tr><th>26</th><td>1905.5</td><td>-133.7</td><td>15.4</td></tr><tr><th>27</th><td>1906.5</td><td>-126.9</td><td>14.7</td></tr><tr><th>28</th><td>1907.5</td><td>-128.3</td><td>14.9</td></tr><tr><th>29</th><td>1908.5</td><td>-130.8</td><td>14.5</td></tr><tr><th>30</th><td>1909.5</td><td>-126.3</td><td>14.6</td></tr><tr><th>&vellip;</th><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td></tr></tbody></table></div></div></div>
+</div>
+<p>Similarly, we’ll use <code class="docutils literal notranslate"><span class="pre">read_csv</span></code> to read in the GMT data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">gmt_data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">read_csv</span><span class="p">(</span><span class="s">&quot;data/HadCRUT.5.0.1.0.analysis.summary_series.global.annual.csv&quot;</span><span class="p">)</span><span class="w"></span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div class="data-frame"><p>173 rows × 4 columns</p><table class="data-frame"><thead><tr><th></th><th>Time</th><th>Anomaly (deg C)</th><th>Lower confidence limit (2.5%)</th><th>Upper confidence limit (97.5%)</th></tr><tr><th></th><th title="Float64">Float64</th><th title="Float64">Float64</th><th title="Float64">Float64</th><th title="Float64">Float64</th></tr></thead><tbody><tr><th>1</th><td>1850.0</td><td>-0.417659</td><td>-0.589203</td><td>-0.246115</td></tr><tr><th>2</th><td>1851.0</td><td>-0.23335</td><td>-0.411868</td><td>-0.0548317</td></tr><tr><th>3</th><td>1852.0</td><td>-0.229399</td><td>-0.409382</td><td>-0.0494157</td></tr><tr><th>4</th><td>1853.0</td><td>-0.270354</td><td>-0.430009</td><td>-0.1107</td></tr><tr><th>5</th><td>1854.0</td><td>-0.29163</td><td>-0.432824</td><td>-0.150436</td></tr><tr><th>6</th><td>1855.0</td><td>-0.296951</td><td>-0.439358</td><td>-0.154545</td></tr><tr><th>7</th><td>1856.0</td><td>-0.320354</td><td>-0.468093</td><td>-0.172614</td></tr><tr><th>8</th><td>1857.0</td><td>-0.46723</td><td>-0.616322</td><td>-0.318138</td></tr><tr><th>9</th><td>1858.0</td><td>-0.388766</td><td>-0.536886</td><td>-0.240645</td></tr><tr><th>10</th><td>1859.0</td><td>-0.281195</td><td>-0.42385</td><td>-0.138541</td></tr><tr><th>11</th><td>1860.0</td><td>-0.390165</td><td>-0.538977</td><td>-0.241354</td></tr><tr><th>12</th><td>1861.0</td><td>-0.429277</td><td>-0.59723</td><td>-0.261324</td></tr><tr><th>13</th><td>1862.0</td><td>-0.536398</td><td>-0.70371</td><td>-0.369086</td></tr><tr><th>14</th><td>1863.0</td><td>-0.344343</td><td>-0.534165</td><td>-0.154522</td></tr><tr><th>15</th><td>1864.0</td><td>-0.465437</td><td>-0.648097</td><td>-0.282776</td></tr><tr><th>16</th><td>1865.0</td><td>-0.332588</td><td>-0.524653</td><td>-0.140523</td></tr><tr><th>17</th><td>1866.0</td><td>-0.341261</td><td>-0.521838</td><td>-0.160683</td></tr><tr><th>18</th><td>1867.0</td><td>-0.356963</td><td>-0.553062</td><td>-0.160865</td></tr><tr><th>19</th><td>1868.0</td><td>-0.351961</td><td>-0.529658</td><td>-0.174263</td></tr><tr><th>20</th><td>1869.0</td><td>-0.31657</td><td>-0.476423</td><td>-0.156718</td></tr><tr><th>21</th><td>1870.0</td><td>-0.327891</td><td>-0.468673</td><td>-0.187108</td></tr><tr><th>22</th><td>1871.0</td><td>-0.368581</td><td>-0.514149</td><td>-0.223012</td></tr><tr><th>23</th><td>1872.0</td><td>-0.328042</td><td>-0.463083</td><td>-0.193001</td></tr><tr><th>24</th><td>1873.0</td><td>-0.341332</td><td>-0.47254</td><td>-0.210125</td></tr><tr><th>25</th><td>1874.0</td><td>-0.373251</td><td>-0.507143</td><td>-0.23936</td></tr><tr><th>26</th><td>1875.0</td><td>-0.375626</td><td>-0.514041</td><td>-0.237211</td></tr><tr><th>27</th><td>1876.0</td><td>-0.42411</td><td>-0.562871</td><td>-0.285349</td></tr><tr><th>28</th><td>1877.0</td><td>-0.101109</td><td>-0.22982</td><td>0.0276023</td></tr><tr><th>29</th><td>1878.0</td><td>-0.0113152</td><td>-0.131213</td><td>0.108582</td></tr><tr><th>30</th><td>1879.0</td><td>-0.303634</td><td>-0.434064</td><td>-0.173204</td></tr><tr><th>&vellip;</th><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td></tr></tbody></table></div></div></div>
 </div>
-<p>Now let’s plot the reconstructed data.</p>
+</section>
+<section id="merging-the-data">
+<h3>Merging The Data<a class="headerlink" href="#merging-the-data" title="Permalink to this headline">#</a></h3>
+<p>Now let’s merge (or <a class="reference external" href="https://dataframes.juliadata.org/stable/man/joins/">“join”</a>) the two DataFrames on common years. Then we can plot the two data series.</p>
+<aside class="margin sidebar">
+<p class="sidebar-title">Database-style joins</p>
+<p>Database-style joins allow a flexible way to merge two DataFrames (and other tabular data structures) on a common column (the “key”). There are several different styles of joins:</p>
+<ul class="simple">
+<li><p><em>Inner joins</em> only return rows with key values which occur in all of the merged databases;</p></li>
+<li><p><em>Outer joins</em> returns all rows with key values which occur in any merged database;</p></li>
+<li><p><em>Left joins</em> return rows with key values occurring in the first (left) database;</p></li>
+<li><p><em>Right joins</em> return rows with key values occurring in the second (right) database.</p></li>
+</ul>
+<p>The <a class="reference external" href="https://dataframes.juliadata.org/stable/man/joins/"><code class="docutils literal notranslate"><span class="pre">DataFrames</span></code> documentation</a> provides information on these, as well as some other, more specialized, joins.</p>
+</aside>
+<p>There are many types of joins. Our goal is to focus on the SLR data, so let’s use an “left join” (which includes all entries from the first listed <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> and entries from the second <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> which correspond to matching key values). First, we need to correct the “Time” column in <code class="docutils literal notranslate"><span class="pre">slr_data</span></code>, as those values end with a non-zero decimal.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">slr_data</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="w"> </span><span class="ss">:Time</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">slr_data</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="w"> </span><span class="ss">:Time</span><span class="p">]</span><span class="w"> </span><span class="o">.-</span><span class="w"> </span><span class="mf">0.5</span><span class="p">;</span><span class="w"> </span><span class="c"># remove 0.5 from Times</span><span class="w"></span>
+<span class="n">all_data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">leftjoin</span><span class="p">(</span><span class="n">slr_data</span><span class="p">,</span><span class="w"> </span><span class="n">gmt_data</span><span class="p">,</span><span class="w"> </span><span class="n">on</span><span class="o">=</span><span class="s">&quot;Time&quot;</span><span class="p">)</span><span class="w"> </span><span class="c"># outer join the data frames on Time</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div class="data-frame"><p>134 rows × 6 columns (omitted printing of 1 columns)</p><table class="data-frame"><thead><tr><th></th><th>Time</th><th>GMSL (mm)</th><th>GMSL uncertainty (mm)</th><th>Anomaly (deg C)</th><th>Lower confidence limit (2.5%)</th></tr><tr><th></th><th title="Float64">Float64</th><th title="Float64">Float64</th><th title="Float64">Float64</th><th title="Union{Missing, Float64}">Float64?</th><th title="Union{Missing, Float64}">Float64?</th></tr></thead><tbody><tr><th>1</th><td>1880.0</td><td>-158.7</td><td>24.2</td><td>-0.315832</td><td>-0.440151</td></tr><tr><th>2</th><td>1881.0</td><td>-153.1</td><td>24.2</td><td>-0.232246</td><td>-0.357935</td></tr><tr><th>3</th><td>1882.0</td><td>-169.9</td><td>23.0</td><td>-0.29553</td><td>-0.42015</td></tr><tr><th>4</th><td>1883.0</td><td>-164.6</td><td>22.8</td><td>-0.346474</td><td>-0.460818</td></tr><tr><th>5</th><td>1884.0</td><td>-143.7</td><td>22.2</td><td>-0.49232</td><td>-0.602669</td></tr><tr><th>6</th><td>1885.0</td><td>-145.2</td><td>21.9</td><td>-0.471124</td><td>-0.583068</td></tr><tr><th>7</th><td>1886.0</td><td>-147.6</td><td>20.8</td><td>-0.420904</td><td>-0.522538</td></tr><tr><th>8</th><td>1887.0</td><td>-153.2</td><td>20.8</td><td>-0.498786</td><td>-0.61656</td></tr><tr><th>9</th><td>1888.0</td><td>-151.1</td><td>20.8</td><td>-0.379379</td><td>-0.493324</td></tr><tr><th>10</th><td>1889.0</td><td>-149.5</td><td>20.8</td><td>-0.249896</td><td>-0.372221</td></tr><tr><th>11</th><td>1890.0</td><td>-147.5</td><td>20.7</td><td>-0.506858</td><td>-0.632409</td></tr><tr><th>12</th><td>1891.0</td><td>-149.2</td><td>20.7</td><td>-0.401315</td><td>-0.53737</td></tr><tr><th>13</th><td>1892.0</td><td>-146.0</td><td>20.7</td><td>-0.507559</td><td>-0.644329</td></tr><tr><th>14</th><td>1893.0</td><td>-141.3</td><td>20.3</td><td>-0.494619</td><td>-0.631531</td></tr><tr><th>15</th><td>1894.0</td><td>-151.0</td><td>21.6</td><td>-0.483764</td><td>-0.625568</td></tr><tr><th>16</th><td>1895.0</td><td>-139.2</td><td>21.6</td><td>-0.448752</td><td>-0.582021</td></tr><tr><th>17</th><td>1896.0</td><td>-146.8</td><td>21.2</td><td>-0.284007</td><td>-0.417401</td></tr><tr><th>18</th><td>1897.0</td><td>-141.6</td><td>20.8</td><td>-0.2598</td><td>-0.398524</td></tr><tr><th>19</th><td>1898.0</td><td>-132.2</td><td>19.7</td><td>-0.485792</td><td>-0.617649</td></tr><tr><th>20</th><td>1899.0</td><td>-124.7</td><td>19.4</td><td>-0.355434</td><td>-0.486397</td></tr><tr><th>21</th><td>1900.0</td><td>-130.1</td><td>18.3</td><td>-0.234479</td><td>-0.366968</td></tr><tr><th>22</th><td>1901.0</td><td>-130.5</td><td>17.6</td><td>-0.293429</td><td>-0.429674</td></tr><tr><th>23</th><td>1902.0</td><td>-125.9</td><td>17.3</td><td>-0.438984</td><td>-0.575428</td></tr><tr><th>24</th><td>1903.0</td><td>-117.9</td><td>17.0</td><td>-0.533326</td><td>-0.660819</td></tr><tr><th>25</th><td>1904.0</td><td>-128.2</td><td>16.9</td><td>-0.597561</td><td>-0.728832</td></tr><tr><th>26</th><td>1905.0</td><td>-133.7</td><td>15.4</td><td>-0.407751</td><td>-0.535029</td></tr><tr><th>27</th><td>1906.0</td><td>-126.9</td><td>14.7</td><td>-0.319139</td><td>-0.450524</td></tr><tr><th>28</th><td>1907.0</td><td>-128.3</td><td>14.9</td><td>-0.504158</td><td>-0.626282</td></tr><tr><th>29</th><td>1908.0</td><td>-130.8</td><td>14.5</td><td>-0.513871</td><td>-0.63748</td></tr><tr><th>30</th><td>1909.0</td><td>-126.3</td><td>14.6</td><td>-0.535765</td><td>-0.65263</td></tr><tr><th>&vellip;</th><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td></tr></tbody></table></div></div></div>
+</div>
+</section>
+<section id="plotting-the-data">
+<h3>Plotting The Data<a class="headerlink" href="#plotting-the-data" title="Permalink to this headline">#</a></h3>
+<p>Now we can plot the observations. Since we merged the DataFrame, we can pass two of the columns to <code class="docutils literal notranslate"><span class="pre">Plots.plot</span></code> and a layout, and it will automatically plot them as subplots (though we do have to convert the y-values to a <code class="docutils literal notranslate"><span class="pre">Matrix</span></code>).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">Plots</span><span class="w"></span>
 
 <span class="c"># plot reconstructed anomalies as black points</span><span class="w"></span>
-<span class="n">scatter</span><span class="p">(</span><span class="n">slr_data</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">],</span><span class="w"> </span><span class="n">slr_data</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">],</span><span class="w"> </span><span class="n">grid</span><span class="o">=</span><span class="ss">:false</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="o">=</span><span class="s">&quot;black&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">markersize</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="n">xlabel</span><span class="o">=</span><span class="s">&quot;Year&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ylabel</span><span class="o">=</span><span class="s">&quot;Sea-Level Anomaly (mm)&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">legend</span><span class="o">=</span><span class="ss">:topleft</span><span class="p">,</span><span class="w"> </span><span class="n">label</span><span class="o">=</span><span class="s">&quot;Reconstructed annual mean&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="n">scatter</span><span class="p">(</span><span class="n">all_data</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">],</span><span class="w"> </span><span class="kt">Matrix</span><span class="p">(</span><span class="n">all_data</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">]]),</span><span class="w"> </span><span class="n">grid</span><span class="o">=</span><span class="ss">:false</span><span class="p">,</span><span class="w"> </span><span class="n">markersize</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="n">xlabel</span><span class="o">=</span><span class="s">&quot;Year&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">legend</span><span class="o">=</span><span class="ss">:none</span><span class="p">,</span><span class="w"> </span><span class="n">layout</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span><span class="w"> </span><span class="n">plot_title</span><span class="o">=</span><span class="s">&quot;Anomaly Relative to 1961-1990 Mean&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ylabel</span><span class="o">=</span><span class="p">[</span><span class="s">&quot;mm&quot;</span><span class="w"> </span><span class="s">&quot;°C&quot;</span><span class="p">],</span><span class="w"> </span><span class="n">title</span><span class="o">=</span><span class="p">[</span><span class="s">&quot;Global Mean Sea Level&quot;</span><span class="w"> </span><span class="s">&quot;Global Mean Temperature&quot;</span><span class="p">])</span><span class="w"></span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/slr_model_6_0.svg" src="../../_images/slr_model_6_0.svg" /></div>
+<img alt="../../_images/slr_model_10_0.svg" src="../../_images/slr_model_10_0.svg" /></div>
 </div>
 </section>
-<section id="global-mean-temperature">
-<h3>Global Mean Temperature<a class="headerlink" href="#global-mean-temperature" title="Permalink to this headline">#</a></h3>
-<p>The GMT dataset was obtained from the <a class="reference external" href="https://www.metoffice.gov.uk/hadobs/hadcrut4/data/current/download.html">HadCRUT4 data website</a></p>
 </section>
+<section id="fitting-the-models-to-the-data">
+<h2>Fitting the Models to the Data<a class="headerlink" href="#fitting-the-models-to-the-data" title="Permalink to this headline">#</a></h2>
+<p>Now we can write functions to predict the SLR using the three models defined in <a class="reference external" href="#candidate-models"></a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># H_lin</span><span class="w"></span>
+<span class="k">function</span><span class="w"> </span><span class="n">H_lin</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">slr_predict</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">.+</span><span class="w"> </span><span class="p">(</span><span class="n">b</span><span class="w"> </span><span class="o">.*</span><span class="w"> </span><span class="p">(</span><span class="n">t</span><span class="w"> </span><span class="o">.-</span><span class="w"> </span><span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">slr_predict</span><span class="w"></span>
+<span class="k">end</span><span class="w"></span>
+
+<span class="c"># H_quad</span><span class="w"></span>
+<span class="k">function</span><span class="w"> </span><span class="n">H_quad</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">c</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">slr_predict</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">.+</span><span class="w"> </span><span class="p">(</span><span class="n">b</span><span class="w"> </span><span class="o">.*</span><span class="w"> </span><span class="p">(</span><span class="n">t</span><span class="w"> </span><span class="o">.-</span><span class="w"> </span><span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">c</span><span class="w"> </span><span class="o">.*</span><span class="w"> </span><span class="p">(</span><span class="n">t</span><span class="w"> </span><span class="o">.-</span><span class="w"> </span><span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">.^</span><span class="mi">2</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">slr_predict</span><span class="w"></span>
+<span class="k">end</span><span class="w"></span>
+
+<span class="c"># H_emp</span><span class="w"></span>
+<span class="k">function</span><span class="w"> </span><span class="n">H_emp</span><span class="p">(</span><span class="n">temp</span><span class="p">,</span><span class="w"> </span><span class="n">α</span><span class="p">,</span><span class="w"> </span><span class="n">T₀</span><span class="p">,</span><span class="w"> </span><span class="n">H₀</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">temp_effect</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">α</span><span class="w"> </span><span class="o">.*</span><span class="w"> </span><span class="p">(</span><span class="n">temp</span><span class="w"> </span><span class="o">.-</span><span class="w"> </span><span class="n">T₀</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">slr_predict</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cumsum</span><span class="p">(</span><span class="n">temp_effect</span><span class="p">)</span><span class="w"> </span><span class="o">.+</span><span class="w"> </span><span class="n">H₀</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">slr_predict</span><span class="w"></span>
+<span class="k">end</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>H_emp (generic function with 1 method)
+</pre></div>
+</div>
+</div>
+</div>
+<p>To find parameter values for the models, we will minimize the root-mean-square-error (RMSE):</p>
+<div class="math notranslate nohighlight">
+\[\text{RMSE} = \sqrt{\sum_{t=1}^T\left(\text{pred}_t - \text{obs}_t\right)^2},\]</div>
+<p>where <span class="math notranslate nohighlight">\(t\)</span> is the time index, <span class="math notranslate nohighlight">\(\text{pred}_t\)</span> is the model prediction, and <span class="math notranslate nohighlight">\(\text{obs}_t\)</span> is the data value.</p>
+<p>We can find parameter values which minimize the RMSE using <a class="reference external" href="https://julianlsolvers.github.io/Optim.jl/stable/">Optim.jl</a>. The <code class="docutils literal notranslate"><span class="pre">Optim.optimize</span></code> function minimizes a function value using one of several numerical solvers. <code class="docutils literal notranslate"><span class="pre">Optim.optimize</span></code> wants its input function to accept a vector of proposed parameter values, so we need to construct a wrapper function which accepts a parameter vector and passes the relevant values to the target function, before calculating the RMSE.</p>
+<p>Even though we have three different functions to optimize, we can take advantage of how we defined those functions — they all take in an auxiliary vector (time <code class="docutils literal notranslate"><span class="pre">t</span></code> for <code class="docutils literal notranslate"><span class="pre">H_lin</span></code> and <code class="docutils literal notranslate"><span class="pre">H_quad</span></code> and temperature <code class="docutils literal notranslate"><span class="pre">temp</span></code> for <code class="docutils literal notranslate"><span class="pre">H_emp</span></code>) followed by unknown parameter values.</p>
+<aside class="margin sidebar">
+<p class="sidebar-title">Using “splat” to unpack argument vectors</p>
+<p>If all of our <code class="docutils literal notranslate"><span class="pre">H</span></code> functions had the same number of uncertain parameters, we could hard-code the unpacking of a parameter vector <code class="docutils literal notranslate"><span class="pre">v</span></code> by referencing <code class="docutils literal notranslate"><span class="pre">v[1]</span></code>, <code class="docutils literal notranslate"><span class="pre">v[2]</span></code>, etc. However, we want to optimize <code class="docutils literal notranslate"><span class="pre">H_lin</span></code> with respect to two parameters, and the others with respect to three, so we can’t manually unpack the parameter vectors in this fashion without writing a lot of additional code, which would reduce readability and increase the chance for bugs. Fortunately, Julia has a “splat” operator (<code class="docutils literal notranslate"><span class="pre">...</span></code>), which is used to automatically unpack vectors. For example, if <code class="docutils literal notranslate"><span class="pre">v</span></code> has three elements, <code class="docutils literal notranslate"><span class="pre">fn(v...)</span></code> is the same as <code class="docutils literal notranslate"><span class="pre">fn(v[1],</span> <span class="pre">v[2],</span> <span class="pre">v[3])</span></code>, except that the splat is more flexible and doesn’t require additional assumptions about the length of <code class="docutils literal notranslate"><span class="pre">v</span></code>.</p>
+</aside>
+<p>As these functions all have a common structure to their arguments, we can pass that auxiliary vector, then use the splat operator to unpack the parameter vector, and the length of the parameter vector doesn’t matter! We do this in the <code class="docutils literal notranslate"><span class="pre">rmse</span></code> function defined below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">Optim</span><span class="w"></span>
+<span class="k">using</span><span class="w"> </span><span class="n">Statistics</span><span class="w"> </span><span class="c"># need to load Statistics for a mean function</span><span class="w"></span>
+
+<span class="c"># define a function for the root-mean-squared error</span><span class="w"></span>
+<span class="c"># in this function, we&#39;re using the known structure of our three functions,</span><span class="w"></span>
+<span class="c"># which accept an input data vector followed by several scalar parameters</span><span class="w"></span>
+<span class="c"># This input data is passed as the &quot;aux&quot; parameter</span><span class="w"></span>
+<span class="c"># all of the variable parameters are passed in as a single parameter vector for optimize()</span><span class="w"></span>
+<span class="k">function</span><span class="w"> </span><span class="n">rmse</span><span class="p">(</span><span class="n">fn</span><span class="p">,</span><span class="w"> </span><span class="n">params</span><span class="p">,</span><span class="w"> </span><span class="n">aux</span><span class="p">,</span><span class="w"> </span><span class="n">obs</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">predict</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fn</span><span class="p">(</span><span class="n">aux</span><span class="p">,</span><span class="w"> </span><span class="n">params</span><span class="o">...</span><span class="p">)</span><span class="w"> </span><span class="c"># here we use the splat operator to unpack arguments</span><span class="w"></span>
+<span class="w">    </span><span class="n">rmse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sqrt</span><span class="p">(</span><span class="n">mean</span><span class="p">((</span><span class="n">predict</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">obs</span><span class="p">)</span><span class="o">.^</span><span class="mi">2</span><span class="p">))</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">rmse</span><span class="w"></span>
+<span class="k">end</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>rmse (generic function with 1 method)
+</pre></div>
+</div>
+</div>
+</div>
+<p>The only thing left to do is to call <code class="docutils literal notranslate"><span class="pre">Optim.optimize</span></code> on RMSE with varying functions <code class="docutils literal notranslate"><span class="pre">fn</span></code> corresponding to our three SLR models. We can deal with the constant values for each call (<code class="docutils literal notranslate"><span class="pre">fn</span></code>, <code class="docutils literal notranslate"><span class="pre">aux</span></code>, and <code class="docutils literal notranslate"><span class="pre">obs</span></code>) by using anonymous functions to map the parameter vector proposed in a given solver iteration to an <code class="docutils literal notranslate"><span class="pre">rmse</span></code> call:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># optimize each of the SLR models</span><span class="w"></span>
+
+<span class="k">function</span><span class="w"> </span><span class="n">minimize_rmse</span><span class="p">(</span><span class="n">fn</span><span class="p">,</span><span class="w"> </span><span class="n">aux</span><span class="p">,</span><span class="w"> </span><span class="n">obs</span><span class="p">,</span><span class="w"> </span><span class="n">init_params</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">optimize_out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">optimize</span><span class="p">(</span><span class="n">params</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">rmse</span><span class="p">(</span><span class="n">fn</span><span class="p">,</span><span class="w"> </span><span class="n">params</span><span class="p">,</span><span class="w"> </span><span class="n">aux</span><span class="p">,</span><span class="w"> </span><span class="n">obs</span><span class="p">),</span><span class="w"> </span><span class="n">init_params</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">params_optim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Optim</span><span class="o">.</span><span class="n">minimizer</span><span class="p">(</span><span class="n">optimize_out</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">params_optim</span><span class="w"></span>
+<span class="k">end</span><span class="w"></span>
+
+<span class="c"># H_lin</span><span class="w"></span>
+<span class="c"># this has two uncertain parameters (a, b), so we use a 2d initial vector [0, 1]</span><span class="w"></span>
+<span class="c"># we use a decimal after each initial value to make Julia interpret them as Floats, rather than Ints</span><span class="w"></span>
+<span class="n">params_lin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">minimize_rmse</span><span class="p">(</span><span class="n">H_lin</span><span class="p">,</span><span class="w"> </span><span class="n">all_data</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">],</span><span class="w"> </span><span class="n">all_data</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="mf">0.</span><span class="p">,</span><span class="w"> </span><span class="mf">1.</span><span class="p">])</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2-element Vector{Float64}:
+ -172.2866794430187
+    1.5970719045709219
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># H_quad</span><span class="w"></span>
+<span class="c"># this has three uncertain parameters (a, b, c), so we use a 3d initial vector [0, 1, 0]</span><span class="w"></span>
+<span class="n">params_quad</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">minimize_rmse</span><span class="p">(</span><span class="n">H_quad</span><span class="p">,</span><span class="w"> </span><span class="n">all_data</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">],</span><span class="w"> </span><span class="n">all_data</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="mf">0.</span><span class="p">,</span><span class="w"> </span><span class="mf">1.</span><span class="p">,</span><span class="w"> </span><span class="mf">0.</span><span class="p">])</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3-element Vector{Float64}:
+ -153.94760089306058
+    0.7634947234485565
+    0.006267398158364036
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># H_emp</span><span class="w"></span>
+<span class="c"># unlike the other two models, we pass in temperatures as the auxiliary</span><span class="w"></span>
+<span class="c"># this has three uncertain parameters (α, H₀, T₀), so we use a 3d initial vector [1, 0, 0]</span><span class="w"></span>
+<span class="n">params_emp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">minimize_rmse</span><span class="p">(</span><span class="n">H_emp</span><span class="p">,</span><span class="w"> </span><span class="n">all_data</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">],</span><span class="w"> </span><span class="n">all_data</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="mf">1.</span><span class="p">,</span><span class="w"> </span><span class="mf">0.</span><span class="p">,</span><span class="w"> </span><span class="mf">0.</span><span class="p">])</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3-element Vector{Float64}:
+    1.8636596824562823
+   -0.9711430993147957
+ -157.33666238607228
+</pre></div>
+</div>
+</div>
+</div>
+<p>Finally, let’s plot the SLR hindcasts from all three fitted models to see how they perform.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">plot</span><span class="p">(</span><span class="n">all_data</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">],</span><span class="w"> </span><span class="n">H_lin</span><span class="p">(</span><span class="n">all_data</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">],</span><span class="w"> </span><span class="n">params_lin</span><span class="o">...</span><span class="p">),</span><span class="w"> </span><span class="n">color</span><span class="o">=</span><span class="s">&quot;#66c2a5&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="n">label</span><span class="o">=</span><span class="s">&quot;H_lin&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">legend</span><span class="o">=</span><span class="ss">:topleft</span><span class="p">,</span><span class="w"> </span><span class="n">grid</span><span class="o">=</span><span class="nb">false</span><span class="p">,</span><span class="w"> </span><span class="n">xaxis</span><span class="o">=</span><span class="s">&quot;Year&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">yaxis</span><span class="o">=</span><span class="s">&quot;Sea Level Anomaly (mm)&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">title</span><span class="o">=</span><span class="s">&quot;Global Mean Sea Level Anomaly Model Predictions&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="n">plot!</span><span class="p">(</span><span class="n">all_data</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">],</span><span class="w"> </span><span class="n">H_quad</span><span class="p">(</span><span class="n">all_data</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">],</span><span class="w"> </span><span class="n">params_quad</span><span class="o">...</span><span class="p">),</span><span class="w"> </span><span class="n">color</span><span class="o">=</span><span class="s">&quot;#fc8d62&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="n">label</span><span class="o">=</span><span class="s">&quot;H_quad&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="n">plot!</span><span class="p">(</span><span class="n">all_data</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">],</span><span class="w"> </span><span class="n">H_emp</span><span class="p">(</span><span class="n">all_data</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">],</span><span class="w"> </span><span class="n">params_emp</span><span class="o">...</span><span class="p">),</span><span class="w"> </span><span class="n">color</span><span class="o">=</span><span class="s">&quot;#8da0cb&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="n">label</span><span class="o">=</span><span class="s">&quot;H_emp&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="n">scatter!</span><span class="p">(</span><span class="n">all_data</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">],</span><span class="w"> </span><span class="n">all_data</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">],</span><span class="w"> </span><span class="n">color</span><span class="o">=</span><span class="s">&quot;black&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span><span class="w"> </span><span class="n">label</span><span class="o">=</span><span class="s">&quot;Reconstructed Data&quot;</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/slr_model_20_0.svg" src="../../_images/slr_model_20_0.svg" /></div>
+</div>
+<p>We can see that the linear model <span class="math notranslate nohighlight">\(H_\text{lin}\)</span> (green) fails to pick up the data trend at the start and end of the period (including the acceleration at the end of the data set, which makes sense), but the quadratic and semi-empirical models <span class="math notranslate nohighlight">\(H_\text{quad}\)</span> (red) and <span class="math notranslate nohighlight">\(H_\text{emp}\)</span> (purple) both have pretty similar outputs. Comparing the RMSEs of the two models:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">rmse</span><span class="p">(</span><span class="n">H_quad</span><span class="p">,</span><span class="w"> </span><span class="n">params_quad</span><span class="p">,</span><span class="w"> </span><span class="n">all_data</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">],</span><span class="w"> </span><span class="n">all_data</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">]),</span><span class="w"> </span><span class="n">rmse</span><span class="p">(</span><span class="n">H_emp</span><span class="p">,</span><span class="w"> </span><span class="n">params_emp</span><span class="p">,</span><span class="w"> </span><span class="n">all_data</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">],</span><span class="w"> </span><span class="n">all_data</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">]))</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(6.637214473133741, 5.911184790905463)
+</pre></div>
+</div>
+</div>
+</div>
+<aside class="margin sidebar">
+<p class="sidebar-title">Choosing <span class="math notranslate nohighlight">\(H_\text{quad}\)</span> vs. <span class="math notranslate nohighlight">\(H_\text{emp}\)</span></p>
+<p>Since both of these models perform similarly, the choice between the two depends on what question you are asking. If you were primarily interested in inferring the historical temporal trend, <span class="math notranslate nohighlight">\(H_\text{quad}\)</span> might be more useful, since it makes the time-dependence explicit, while <span class="math notranslate nohighlight">\(H_\text{emp}\)</span> focuses on the dependence on GMT, which would be more useful for making projections given the causal link between warming and SLR.</p>
+</aside>
+<p>The RMSE is slightly lower for <span class="math notranslate nohighlight">\(H_\text{emp}\)</span>, but we want to be careful to not over-interpret small differences. Visually, the main difference is that <span class="math notranslate nohighlight">\(H_\text{emp}\)</span> shows more of an increase in the last few years, which matches what appears to be an acceleration in the data. As a result, for the rest of this section, we will use <span class="math notranslate nohighlight">\(H_\text{emp}\)</span> for our SLR modeling, but you could justify using <span class="math notranslate nohighlight">\(H_\text{quad}\)</span>.</p>
 </section>
 <section id="references">
 <h2>References<a class="headerlink" href="#references" title="Permalink to this headline">#</a></h2>
-<div class="docutils container" id="id3">
+<div class="docutils container" id="id4">
 <dl class="citation">
-<dt class="label" id="id5"><span class="brackets"><a class="fn-backref" href="#id2">CW11</a></span></dt>
+<dt class="label" id="id6"><span class="brackets"><a class="fn-backref" href="#id2">CW11</a></span></dt>
 <dd><p>John A. Church and Neil J. White. Sea-level rise from the late 19th to the early 21st century. <em>Surveys in Geophysics</em>, 32(4-5):585–602, 2011. <a class="reference external" href="https://doi.org/10.1007/s10712-011-9119-1">doi:10.1007/s10712-011-9119-1</a>.</p>
 </dd>
-<dt class="label" id="id53"><span class="brackets"><a class="fn-backref" href="#id1">Rah07</a></span></dt>
+<dt class="label" id="id17"><span class="brackets"><a class="fn-backref" href="#id3">MKR+21</a></span></dt>
+<dd><p>C. P. Morice, J. J. Kennedy, N. A. Rayner, J. P. Winn, E. Hogan, R. E. Killick, R. J. H. Dunn, T. J. Osborn, P. D. Jones, and I. R. Simpson. An Updated Assessment of Near-Surface Temperature Change From 1850: The HadCRUT5 Data Set. <em>Journal of Geophysical Research: Atmospheres</em>, 2021. <a class="reference external" href="https://doi.org/10.1029/2019JD032361">doi:10.1029/2019JD032361</a>.</p>
+</dd>
+<dt class="label" id="id55"><span class="brackets"><a class="fn-backref" href="#id1">Rah07</a></span></dt>
 <dd><p>Stefan Rahmstorf. A Semi-Empirical Approach to Projecting Future Sea-Level Rise. <em>Science</em>, 315(5810):368–370, January 2007. <a class="reference external" href="https://doi.org/10/djt4n9">doi:10/djt4n9</a>.</p>
 </dd>
 </dl>
