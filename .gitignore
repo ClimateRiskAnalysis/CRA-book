@@ -144,3 +144,12 @@ dmypy.json
 
 # old files
 *.Rmd
+_bookdown_files/
+fonts/
+images/
+latex/
+src/
+data/
+
+# build artifacts
+_book/
