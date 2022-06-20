@@ -7,8 +7,3 @@ In this section, we will develop and calibrate a model of global sea-level rise.
 The statistical model used for residuals plays an important role in sound parameter inferences and projections {cite:p}`brynjarsdottirLearningPhysicalParameters2014`. 
 ```
 Finally, we will learn about and apply frequentist and Bayesian approaches to parameter inferences in [](sec:slr-bootstrap) and [](sec:slr-mcmc), respectively.
-
-## References
-```{bibliography}
-:filter: docname in docnames
-```
