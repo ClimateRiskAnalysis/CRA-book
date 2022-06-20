@@ -10,8 +10,13 @@ parts:
   - caption: Coastal Flood Risk
     numbered: true
     chapters:
-    - file: contents/flood/intro_to_flood_risk 
-    - file: contents/flood/modeling_slr
+    - file: flood/intro_to_flood_risk 
+    - file: flood/modeling_slr
       sections:
-      - file: contents/flood/slr_model
-      - file: contents/flood/slr_likelihood
+      - file: flood/slr_model
+      - file: flood/slr_likelihood
+
+  - caption: Other
+    numbered: false
+    chapters:
+      - file: references.md

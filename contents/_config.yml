@@ -29,6 +29,7 @@ execute:
 # Repository Settings
 repository:
   url: https://github.com/vsrikrish/CRA-book
+  path_to_book: contents
   branch: main
   
 # HTML settings
