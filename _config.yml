@@ -4,6 +4,7 @@ copyright: "2022"
 only_build_toc_files: true
 bibtex_bibfiles:
   - bibliography/references.bib
+exclude_patterns: [.gitignore, .github/*, .git/*]
 
 parse:
   myst_enable_extensions:  # default extensions to enable in the myst parser. See https://myst-parser.readthedocs.io/en/latest/using/syntax-optional.html
