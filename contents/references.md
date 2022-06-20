@@ -1,5 +1,9 @@
-(references)=
-# References
+```{eval-rst}
+.. only:: html 
 
-```{bibliography} bibliography/references.bib
+Bibliography
+============
+```
+
+```{bibliography}
 ```

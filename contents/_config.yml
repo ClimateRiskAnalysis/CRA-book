@@ -45,9 +45,8 @@ html:
 # Latex settings
 latex: 
   latex_engine: xelatex
-  latex_toplevel_sectioning: part
-  latex_show_pagerefs: true
-  latex_show_urls: footnote
+  latex_documents:
+    targetname: intro_cra.tex
 
 # Launch Button Settings
 launch_buttons:
@@ -58,3 +57,6 @@ sphinx:
   config:
     language: en
     bibtex_reference_style: author_year
+    latex_toplevel_sectioning: part
+    latex_show_pagerefs: true
+    latex_show_urls: footnote
