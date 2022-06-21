@@ -19,10 +19,11 @@ The book is published using [JupyterBook](https://jupyterbook.org/en/stable/intr
 
 The book is composed of several parts, each of which correspond to a particular case study. Each part should be self-contained, as the goal of the book is to be modular based on the learning objectives of a particular class or tutorial. Links to other sections are ok when necessary. Each section should include [its own package environment][#environments].
 
-### Dividing Content Into Pages
+### Narrative and Notebook Pages
 
 * Pages can be narrative pages or notebook pages (also see [File Formatting](#file-formatting)). Narrative pages introduce sections, transition between topics within a section, or introduce concepts that do not have accompanying code. 
 * Each page should be associated with certain learning objectives. In general, "active" learning objectives can be associated with notebooks, while "passive" learning objectives . List these at the top of the page in a Markdown list (using [good learning objective constructions](https://www.aamc.org/system/files?file=2019-07/learning-objectives.pdf)). For pages which introduce parts, list the higher-level learning objectives for the overall part.
+* Feel free to split "chapters" (within parts) into multiple pages using the [`sections` keyword in `_toc.yml`](https://jupyterbook.org/en/stable/structure/toc.html#use-parts-to-organize-chapters).
 * If a page could be used as a coding tutorial, use the notebook format so students and other readers can interact with the notebook file. 
 * Narrative pages can include demo code chunks, but these will not be executed and there will not be a downloadable notebook, so these should be used sparingly. 
 * JupyterBook compiles notebooks independently of each other, so each notebook should be self-contained. If output from one notebook is intended to be used as input into another (for example, MCMC output for later simulations), you can save the relevant output and import it into another notebook, but ideally these would be combined into a single page.
@@ -30,6 +31,7 @@ The book is composed of several parts, each of which correspond to a particular 
 
 ### Section Names
 
+* Use standard Markdown section headers within each page (`#` for the page title, `##` for the main within-page sections, `###` for subsections, etc). These will get knitted together appropriately by JupyterBook within the broader book structure.
 * Section names will automatically create anchors, which can be cross-referenced, e.g. `## Section` can be referenced later in a link using `[](#section).
 * Automatic anchor generation can create issues if the same names are used across pages. Try to avoid this within your part(s), and we will make sure these are unique across the entire book in the final editing pass.
 * Err on the side of using more subsections rather than fewer; these will appear in a table of contents.
@@ -41,6 +43,10 @@ Add references in BibTeX to `contents/bibliography/references.bib`. They will ge
 ## Repository Organization
 
 The book contents are stored within `contents/`.
+
+### File Names
+
+Make filenames informative about the topic (so they might mirror the overall page title).
 
 ### File Formatting
 
