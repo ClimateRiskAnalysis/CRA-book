@@ -168,6 +168,10 @@ Begin by showing how the code works in one example, and then how and why to cons
 
 ## Text
 
+### Admonitions
+
+* Use admonitions as you see fit. There are plenty of styles that work by default, including notes, warnings, and so on.
+
 ### Margin Notes
 
 * Use margin notes instead of sidebars, as sidebars can screw up spacing if they overlap with code blocks.
