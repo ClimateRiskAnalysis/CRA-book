@@ -30,7 +30,12 @@ The book is composed of several parts, each of which correspond to a particular 
 ### Section Names
 
 * Use standard Markdown section headers within each page (`#` for the page title, `##` for the main within-page sections, `###` for subsections, etc). These will get knitted together appropriately by JupyterBook within the broader book structure.
-* Section names will automatically create anchors, which can be cross-referenced, e.g. `## Section` can be referenced later in a link using `[](#section).
+* Section names will automatically create anchors, which can be cross-referenced, e.g. `## Section` can be referenced later in a link using `[](#section). If you want to create your own label (which can often be less unwieldy), use
+```{markdown}
+(sec:your-label)=
+## Section
+```
+and then cross-reference with `[](sec:your-label)`. The use of the `sec:` prefix makes it clear that this label is for a section header, and similar labels can then be used for figures, etc.
 * Automatic anchor generation can create issues if the same names are used across pages. Try to avoid this within your part(s), and we will make sure these are unique across the entire book in the final editing pass.
 * Err on the side of using more subsections rather than fewer; these will appear in a table of contents.
 
