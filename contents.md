@@ -12,7 +12,7 @@ This is a table of the book parts (corresponding to climate risk case studies) a
 | [Risk Analysis in Julia](#risk-analysis-in-julia) | Vivek Srikrishnan | James Doss-Gollin |
 | [Coastal Flood Risk](#coastal-flood-risk) | Vivek Srikrishnan | Tony Wong, Ben Lee |
 | [Estimating Climate Sensitivity](#estimating-climate-sensitivity) | Vivek Srikrishnan | Klaus Keller |
-| [Drivers of the Social Cost of Carbon](#drivers-of-the-social-cost-of-carbon) | Frank Errickson | Tony Wong, Vivek Srikrishnan |
+| [The Social Cost of Carbon](#the-social-cost-of-carbon) | Frank Errickson | Tony Wong, Vivek Srikrishnan |
 | [Agricultural Risk Analysis](#agricultural-risk-analysis) | David Lafferty | Ryan Sriver |
 | [Forest Fire Occurrence](#forest-fire-occurrence) | James Doss-Gollin | Ben Lee |
 
@@ -21,7 +21,6 @@ This is a table of the book parts (corresponding to climate risk case studies) a
 
 Topics we could include if we can identify good learning objectives:
 
-* social cost of CO_2/CH_4 (sensitivity analysis?)
 * levee effect (ABM/equity?)
 * energy-system risk (multisector risk, machine learning?)
 
@@ -105,7 +104,7 @@ Introduce climate system uncertainties and emulation.
 
 #### Contents
 
-1. How Sensitive is the Climate to CO_2 Emissions?
+1. How Sensitive is the Climate to CO_2_ Emissions?
 2. Challenges in Estimating Climate Sensitivity
 3. Emulating Complex Models
 4. Calibrating a Climate Emulator
@@ -118,6 +117,27 @@ At the end of this part, readers will be able to:
 2. Explain how different parts of the climate system compensate in response to warming.
 3. Demonstrate how emulation addresses the trade-off between model complexity and the ability to quantify uncertainties.
 4. Evaluate different approaches to emulation based on problem characteristics.
+
+### The Social Cost of Carbon
+
+#### Goals
+
+Derive and explain the social cost of greenhouse gases, discuss the importance of discount factors, and demonstrate sensitivity analysis.
+
+#### Contents
+
+1. What is the Social Cost of a Greenhouse Gas?
+2. Introduction to Discounting
+3. What Uncertainties Influence the Social Cost of CO_2_?
+
+#### Learning Objectives
+
+At the end of this part, readers will be able to:
+
+1. Explain the concept of the social cost of greenhouse gases;
+2. Discuss the influence of discount rates on the net present value of monetary flows;
+3. Use integrated assessment models to estimate the social cost of CO_2_;
+4. Analyze sensitivities of a modeled quantity to relevant uncertainties.
 
 ### Agricultural Risk Analysis
 
