@@ -4,7 +4,7 @@
 
 Edited by Vivek Srikrishnan and Klaus Keller
 
-Contributions by James Doss-Gollin, David Lafferty, Ben Seiyon Lee, Tony Wong
+Contributions by Sitara Baboolal, James Doss-Gollin, Frank Errickson, David Lafferty, Ben Seiyon Lee, Ryan Sriver, and Tony Wong.
 
 ## Preamble
 
