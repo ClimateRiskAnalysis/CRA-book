@@ -44,18 +44,17 @@ format:
   pdf:
     documentclass: scrreprt
     links-as-notes: true
-    mainfont: IBMPlexSans
+    mainfont: IBM Plex Sans
     mainfontoptions:
-      - Path=/fonts/
+      - Path=fonts/
       - Extension=.ttf
       - UprightFont=*-Regular
       - ItalicFont=*-Italic
       - BoldFont=*-Bold
-    monofont: IBMPlexMono
+    monofont: IBM Plex Mono
     monofontoptions:
-      - Path=/fonts/
+      - Path=fonts/
       - Extension=.ttf
-      - UprightFont=*-Regular
 
 crossref:
   chapters: true
