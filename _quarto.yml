@@ -45,17 +45,15 @@ format:
     documentclass: scrreprt
     links-as-notes: true
     fontfamily: plex
-    mainfont: IBMPlexSans
+    mainfont: IBMPlexSans-Regular.ttf
     mainfontoptions:
       - Path=fonts/
-      - Extension=.ttf
-      - UprightFont=*-Regular
-      - ItalicFont=*-Italic
-      - BoldFont=*-Bold
-    monofont: IBMPlexMono
+      - UprightFont=IBMPlexSans-Regular.ttf
+      - ItalicFont=IBMPlexSans-Italic.ttf
+      - BoldFont=IBMPlexSans-Bold.ttf
+    monofont: IBMPlexMono-Light.ttf
     monofontoptions:
       - Path=fonts/
-      - Extension=.ttf
 
 crossref:
   chapters: true
