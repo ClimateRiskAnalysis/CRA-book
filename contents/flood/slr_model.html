@@ -472,7 +472,7 @@ div.csl-indent {
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>slr_data[<span class="op">:</span>, <span class="op">:</span><span class="dt">Time</span>] <span class="op">=</span> slr_data[<span class="op">:</span>, <span class="op">:</span><span class="dt">Time</span>] <span class="op">.-</span> <span class="fl">0.5</span>; <span class="co"># remove 0.5 from Times</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>all_data <span class="op">=</span> <span class="fu">leftjoin</span>(slr_data, gmt_data, on<span class="op">=</span><span class="st">"Time"</span>); <span class="co"># outer join the data frames on Tim</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">first</span>(all_data, <span class="fl">6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display column-page" data-execution_count="29">
+<div class="cell-output cell-output-display column-page-right-inset" data-execution_count="29">
 <div class="data-frame"><p>6 rows × 6 columns (omitted printing of 1 columns)</p>
 <table class="data-frame table table-sm table-striped">
 <thead>
