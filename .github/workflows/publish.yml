@@ -25,6 +25,11 @@ jobs:
       - name: Install TeX
         run: quarto install tinytex
 
+      - name: Install librsvg
+        run: |
+          sudo apt-get update
+          sudo apt-get install librsvg2-bin
+
       - name: Render and Publish
         uses: quarto-dev/quarto-actions/publish@v2
         with:
