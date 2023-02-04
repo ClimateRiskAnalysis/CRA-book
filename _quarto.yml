@@ -41,6 +41,7 @@ format:
       dark: [flatly, stylesheets/theme-dark.scss]
     citations-hover: true
     footnotes-hover: false
+    default-image-extension: svg
   pdf:
     documentclass: scrbook
     links-as-notes: true
@@ -58,6 +59,7 @@ format:
       - UprightFont=*-Regular
       - ItalicFont=*-Italic
       - BoldFont=*-Bold
+    default-image-extension: pdf
 
 crossref:
   chapters: true
