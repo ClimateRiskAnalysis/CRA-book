@@ -77,6 +77,12 @@ format:
       - marginparsep=0.1in
     listings: true
     include-in-header:
+      text: |
+        \usepackage{makeidx}
+        \makeindex
+    include-after-body: 
+      text: |
+        \printindex
 
   epub: 
     creator: "Vivek Srikrishnan"
