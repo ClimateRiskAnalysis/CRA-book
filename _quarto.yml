@@ -44,17 +44,20 @@ format:
   pdf:
     documentclass: scrbook
     links-as-notes: true
-    mainfont: IBM Plex Sans
+    mainfont: IBMPlexSans
     mainfontoptions:
       - Path=fonts/
       - Extension=.ttf
       - UprightFont=*-Regular
       - ItalicFont=*-Italic
       - BoldFont=*-Bold
-    monofont: IBM Plex Mono
+    monofont: IBMPlexMono
     monofontoptions:
       - Path=fonts/
       - Extension=.ttf
+      - UprightFont=*-Regular
+      - ItalicFont=*-Italic
+      - BoldFont=*-Bold
 
 crossref:
   chapters: true
