@@ -14,7 +14,7 @@ book:
   repo-actions: [edit, issue]
   reader-mode: true
   output-file: "raes"
-  downloads: [pdf, epub, docx]
+  downloads: [pdf, epub]
 
   chapters:
     - part: "About This Book"
@@ -45,7 +45,7 @@ format:
     reference-location: margin
     cap-location: margin
   pdf:
-    documentclass: scrbook
+    documentclass: tufte-book
     links-as-notes: true
     mainfont: IBMPlexSans
     mainfontoptions:
@@ -61,7 +61,12 @@ format:
       - UprightFont=*-Regular
       - ItalicFont=*-Italic
       - BoldFont=*-Bold
-    default-image-extension: tex
+    default-image-extension: pdf
+  epub: 
+    creator: "Vivek Srikrishnan"
+    epub-fonts: 
+      - fonts/IBMPlexSans-*.ttf
+      - fonts/IBMPlexMono-*.ttf
 
 crossref:
   chapters: true
