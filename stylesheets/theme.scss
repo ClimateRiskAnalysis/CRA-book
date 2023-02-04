@@ -8,3 +8,10 @@ $font-family-monospace: "IBM Plex Mono", monospace;
 
 /*-- scss:rules --*/
 
+#title-block-header {
+    margin-block-end: 0;
+}
+
+.quarto-title-banner {
+    margin-bottom: 0;
+}

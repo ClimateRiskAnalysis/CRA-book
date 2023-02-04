@@ -31,7 +31,10 @@ $input-bg: #242424;
 
 /*-- scss:rules --*/
 
-@font-face {
-    font-family: JuliaMono-Light;
-    src: url("https://cdn.jsdelivr.net/gh/cormullion/juliamono/webfonts/JuliaMono-Light.woff2");
+#title-block-header {
+    margin-block-end: 0;
+}
+
+.quarto-title-banner {
+    margin-bottom: 0;
 }
