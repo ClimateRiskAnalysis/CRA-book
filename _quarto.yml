@@ -44,15 +44,8 @@ format:
   pdf:
     documentclass: scrreprt
     links-as-notes: true
-    mainfont: IBMPlexSans-Regular.ttf
-    mainfontoptions:
-      - Path=fonts/
-      - UprightFont=IBMPlexSans-Regular.ttf
-      - ItalicFont=IBMPlexSans-Italic.ttf
-      - BoldFont=IBMPlexSans-Bold.ttf
-    monofont: IBMPlexMono-Light.ttf
-    monofontoptions:
-      - Path=fonts/
+    mainfont: IBMPlexSans
+    monofont: IBMPlexMono
 
 crossref:
   chapters: true
