@@ -42,7 +42,7 @@ format:
     citations-hover: true
     footnotes-hover: false
   pdf:
-    documentclass: scrreprt
+    documentclass: scrbook
     links-as-notes: true
     mainfont: IBM Plex Sans
     mainfontoptions:
