@@ -65,7 +65,6 @@ format:
       - ItalicFont=*-Italic
       - BoldFont=*-Bold
     default-image-extension: pdf
-    listings: true
     reference-location: margin
     reference-links: true
   epub: 
