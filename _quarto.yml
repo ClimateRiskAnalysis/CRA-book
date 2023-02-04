@@ -77,10 +77,6 @@ format:
       - marginparsep=0.1in
     listings: true
     include-in-header:
-      - text: |
-          \usepackage{float}
-          \usepackage{julia-mono-listings}
-          \lstset{language=Julia, style=julia}
 
   epub: 
     creator: "Vivek Srikrishnan"
