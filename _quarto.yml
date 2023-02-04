@@ -32,6 +32,8 @@ book:
     style: "docked"
     collapse-level: 1
 
+
+
 bibliography: bibliography/references.bib
 
 format:
@@ -75,7 +77,11 @@ format:
       - marginparsep=0.1in
     listings: true
     include-in-header:
-      - text: \usepackage{float}
+      - text: |
+          \usepackage{float}
+          \usepackage{julia-mono-listings}
+          \lstset{language=Julia, style=julia}
+
   epub: 
     creator: "Vivek Srikrishnan"
     epub-fonts: 
