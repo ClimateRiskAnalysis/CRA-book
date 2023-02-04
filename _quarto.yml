@@ -44,8 +44,11 @@ format:
     default-image-extension: svg
     reference-location: margin
     cap-location: margin
+    title-block-banner: true
+    code-overflow: wrap
+    code-copy: true
   pdf:
-    documentclass: scrreport
+    documentclass: report
     links-as-notes: true
     mainfont: IBMPlexSans
     mainfontoptions:
@@ -62,6 +65,9 @@ format:
       - ItalicFont=*-Italic
       - BoldFont=*-Bold
     default-image-extension: pdf
+    listings: true
+    reference-location: margin
+    reference-links: true
   epub: 
     creator: "Vivek Srikrishnan"
     epub-fonts: 
@@ -72,9 +78,6 @@ crossref:
   chapters: true
 number-sections: true
 number-depth: 2
-title-block-banner: true
-code-overflow: wrap
-code-copy: true
 execute:
   freeze: auto
   eval: true
