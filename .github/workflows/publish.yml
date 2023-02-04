@@ -16,14 +16,14 @@ jobs:
 
       - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@v2
+        with:
+          tinytex: true
+          version: 1.3
 
       - name: Install Julia
         uses: julia-actions/setup-julia@v1
         with:
           version: 1.8
-
-      - name: Install TeX
-        run: quarto install tinytex
 
       - name: Install librsvg
         run: |
