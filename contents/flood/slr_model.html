@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="quarto-1.2.335" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+
+
+<title>An Introduction to Climate Risk Analysis – 2  Selecting A Sea Level Model</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<!-- htmldependencies:E3FAD763 -->
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" 
+        data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" 
+        aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation"
+        onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }"
+  >
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"></h1>
+      <button type="button" 
+        class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="/">
+      An Introduction to Climate Risk Analysis
+      </a> 
+        <div class="sidebar-tools-main tools-wide">
+    <a href="https://github.com/vsrikrish/CRA-book" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
+    <a href="" title="Download" id="sidebar-tool-dropdown-0" class="sidebar-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-download"></i></a>
+    <ul class="dropdown-menu" aria-labelledby="sidebar-tool-dropdown-0">
+        <li>
+          <a class="dropdown-item sidebar-tools-main-item" href="/raes.pdf">
+            <i class="bi bi-bi-file-pdf pe-1"></i>
+          Download PDF
+          </a>
+        </li>
+        <li>
+          <a class="dropdown-item sidebar-tools-main-item" href="/raes.epub">
+            <i class="bi bi-bi-journal pe-1"></i>
+          Download ePub
+          </a>
+        </li>
+    </ul>
+  <a href="" class="quarto-color-scheme-toggle sidebar-tool" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <a href="" class="quarto-reader-toggle sidebar-tool" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">About This Book</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/index.html" class="sidebar-item-text sidebar-link">Introduction</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/acknowledgements.html" class="sidebar-item-text sidebar-link">Acknowledgements</a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="/contents/flood/intro.html" class="sidebar-item-text sidebar-link">Introduction to Coastal Flood Risk</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/contents/flood/modeling_slr.html" class="sidebar-item-text sidebar-link"><span class='chapter-number'>1</span>  <span class='chapter-title'>Modeling Sea Level Rise</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/contents/flood/slr_model.html" class="sidebar-item-text sidebar-link active"><span class='chapter-number'>2</span>  <span class='chapter-title'>Selecting A Sea Level Model</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/contents/flood/slr_likelihood.html" class="sidebar-item-text sidebar-link"><span class='chapter-number'>3</span>  <span class='chapter-title'>Choosing A Likelihood Function</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/references.html" class="sidebar-item-text sidebar-link">References</a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <div id="quarto-toc-target"></div>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default">
+  <div class="quarto-title-banner">
+    <div class="quarto-title column-body">
+      <h1 class="title"><span id="sec-slr-model" class="quarto-section-identifier"><span class="chapter-number">2</span>  <span class="chapter-title">Selecting A Sea Level Model</span></span></h1>
+                      </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      
+    
+      
+    </div>
+    
+  
+  </header>
+<nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#candidate-models" id="toc-candidate-models"><span class="toc-section-number">2.1</span> <span class="header-section-number">2.1</span> Candidate Models</a></li>
+  <li><a href="#loading-and-plotting-the-data" id="toc-loading-and-plotting-the-data"><span class="toc-section-number">2.2</span> <span class="header-section-number">2.2</span> Loading and Plotting The Data</a>
+  <ul>
+  <li><a href="#reading-data-files" id="toc-reading-data-files">Reading Data Files</a></li>
+  <li><a href="#merging-the-data" id="toc-merging-the-data">Merging The Data</a></li>
+  <li><a href="#plotting-the-data" id="toc-plotting-the-data">Plotting The Data</a></li>
+  </ul></li>
+  <li><a href="#fitting-the-models-to-the-data" id="toc-fitting-the-models-to-the-data"><span class="toc-section-number">2.3</span> <span class="header-section-number">2.3</span> Fitting the Models to the Data</a></li>
+  <li><a href="#plotting-the-fitted-models" id="toc-plotting-the-fitted-models"><span class="toc-section-number">2.4</span> <span class="header-section-number">2.4</span> Plotting the Fitted Models</a></li>
+  <li><a href="#selecting-a-model" id="toc-selecting-a-model"><span class="toc-section-number">2.5</span> <span class="header-section-number">2.5</span> Selecting a Model</a></li>
+  </ul>
+</nav>
+<section id="candidate-models" class="level2" data-number="2.1">
+<h2 data-number="2.1"><span class="header-section-number">2.1</span> Candidate Models</h2>
+<p>A key consideration in any modeling exercise is the mathematical representation of the modeled process. This choice can allow or prohibit certain relationships between variables, or may result in too many or too few parameters to appropriately capture dynamics. For example, a simple linear model in time, <span class="math display">\[H_\text{lin}(t) = a + b*(t - t_0),\]</span> where <span class="math inline">\(H\)</span> is global sea level in <span class="math inline">\(m\)</span>, <span class="math inline">\(t\)</span> is time in years and <span class="math inline">\(t_0\)</span> is a baseline year, does not allow for accelerated sea-level rise. A quadratic model in time, <span class="math display">\[H_\text{quad}(t) = a + b*(t - t_0) + c*(t - t_0)^2,\]</span> does allow for this acceleration.</p>
+<p>However, both of these models assume that time is the key variable explaining changes in sea levels from one year to another. In <a href="#introduction-to-coastal-flood-risk"></a>, we discussed the relationship between CO_2 concentrations, atmospheric temperature, and sea levels. <span class="citation" data-cites="rahmstorfSemiEmpiricalApproachProjecting2007">Rahmstorf (<a href="#ref-rahmstorfSemiEmpiricalApproachProjecting2007" role="doc-biblioref">2007</a>)</span> proposed the following semi-empirical model relating sea-level rise (SLR) to changes in global mean temperatures: <span class="math display">\[\Delta H_\text{emp}(t) = \alpha \left(T(t) - T_{\text{eq}}\right),\]</span> where <span class="math inline">\(\alpha\)</span> is the sensitivity of SLR to temperature changes, and <span class="math inline">\(T_\text{eq}\)</span> is the temperature when sea level is at equilibrium, that is, <span class="math inline">\(H_\text{emph}(t) = H_\text{emp}(t-1)\)</span> when <span class="math inline">\(T(t) = T_\text{eq}\)</span>. In the next section, we will look at how we can find best-fit parameter values for these models to sea-level data and analyze the dynamics of these fitted models.</p>
+</section>
+<section id="loading-and-plotting-the-data" class="level2" data-number="2.2">
+<h2 data-number="2.2"><span class="header-section-number">2.2</span> Loading and Plotting The Data</h2>
+<p>To fit the three models described in <a href="#candidate-models"></a>, we need to load historical SLR data (for all three models) and global mean temperature (GMT) data (for <span class="math inline">\(H_\text{emp}\)</span>). We have provided two data sets in <code>contents/flood/data</code>.</p>
+<section id="reading-data-files" class="level3">
+<h3>Reading Data Files</h3>
+<p>The SLR data file, <code>CSIRO_Recons_gmsl_yr_2015.csv</code><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> has three columns: 1. Time in years (the fractions correspond to months); 2. Global mean sea-level in <span class="math inline">\(mm\)</span> (relative to the 1961-1990 mean); 3. Standard deviation of the observational error in <span class="math inline">\(mm\)</span>.</p>
+<p>The GMT data<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> has a similar structure: a header and comma-delimited. This file, <code>HadCRUT.5.0.1.0.analysis.summary_series.global.annual.csv</code>, also has four columns, along with a header: 1. Time in years; 2. Annual mean temperature anomaly (relative to the 1961-1990 mean); 3. The lower end of the 95% confidence interval; 4. The upper end of the 95% confidence interval.</p>
+<p>In Julia, we can read in these files using the <a href="https://docs.julialang.org/en/v1/stdlib/DelimitedFiles/"><code>DelimitedFiles</code> package</a>. The <code>DelimitedFiles.readdlm</code> function takes in a filename, and can also take in optional parameters like a delimiter and an output type. We can also convert the output of <code>DelimitedFiles.readdlm</code> to a <a href="https://dataframes.juliadata.org/stable/"><code>DataFrame</code></a>.</p>
+<div class="cell" data-execution_count="32">
+<div class="sourceCode" id="cb1"><pre class="sourceCode julia cell-code"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load packages</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">DataFrames</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">DelimitedFiles</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>dat, head <span class="op">=</span> <span class="fu">readdlm</span>(<span class="st">&quot;data/CSIRO_Recons_gmsl_yr_2015.csv&quot;</span>, <span class="ch">&#39;,&#39;</span>, header<span class="op">=</span><span class="cn">true</span>);</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># use the header vector for the DataFrame column names </span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>slr_data <span class="op">=</span> <span class="fu">DataFrame</span>(dat, <span class="fu">vec</span>(head));</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">first</span>(slr_data, <span class="fl">6</span>)</span></code></pre></div>
+<div class="cell-output cell-output-display margin-caption" data-execution_count="32">
+
+<div class="data-frame"><p>6 rows × 3 columns</p><table class="data-frame"><thead><tr><th></th><th>Time</th><th>GMSL (mm)</th><th>GMSL uncertainty (mm)</th></tr><tr><th></th><th title="Float64">Float64</th><th title="Float64">Float64</th><th title="Float64">Float64</th></tr></thead><tbody><tr><th>1</th><td>1880.5</td><td>-158.7</td><td>24.2</td></tr><tr><th>2</th><td>1881.5</td><td>-153.1</td><td>24.2</td></tr><tr><th>3</th><td>1882.5</td><td>-169.9</td><td>23.0</td></tr><tr><th>4</th><td>1883.5</td><td>-164.6</td><td>22.8</td></tr><tr><th>5</th><td>1884.5</td><td>-143.7</td><td>22.2</td></tr><tr><th>6</th><td>1885.5</td><td>-145.2</td><td>21.9</td></tr></tbody></table></div>
+</div>
+</div>
+<p>Since we want to read multiple files with the same structure, let’s write a function which takes in filename corresponding to a CSV file with a header and returns a <code>DataFrame</code>.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> In this case, this is overkill, because we only have one more file we want to read in, but if we had many files, writing a single function would clean up the code and facilitate debugging.</p>
+<div class="cell">
+<div class="sourceCode" id="cb2"><pre class="sourceCode julia cell-code"><code class="sourceCode julia"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">read_csv</span>(fname)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    dat, head <span class="op">=</span> <span class="fu">readdlm</span>(fname, <span class="ch">&#39;,&#39;</span>, header<span class="op">=</span><span class="cn">true</span>) <span class="co"># read in the data and header</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="fu">DataFrame</span>(dat, <span class="fu">vec</span>(head)) <span class="co"># return the DataFrame</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div>
+<div class="cell-output cell-output-display margin-caption" data-execution_count="5">
+<pre><code>read_csv (generic function with 1 method)</code></pre>
+</div>
+</div>
+<p>Now we’ll use <code>read_csv</code> to read in the GMT data.</p>
+<div class="cell" data-execution_count="28">
+<div class="sourceCode" id="cb4"><pre class="sourceCode julia cell-code"><code class="sourceCode julia"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>gmt_file <span class="op">=</span> <span class="st">&quot;data/HadCRUT.5.0.1.0.analysis.summary_series.global.annual.csv&quot;</span>;</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>gmt_data <span class="op">=</span> <span class="fu">read_csv</span>(gmt_file);</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">first</span>(gmt_data, <span class="fl">6</span>)</span></code></pre></div>
+<div class="cell-output cell-output-display margin-caption" data-execution_count="28">
+
+<div class="data-frame"><p>6 rows × 4 columns</p><table class="data-frame"><thead><tr><th></th><th>Time</th><th>Anomaly (deg C)</th><th>Lower confidence limit (2.5%)</th><th>Upper confidence limit (97.5%)</th></tr><tr><th></th><th title="Float64">Float64</th><th title="Float64">Float64</th><th title="Float64">Float64</th><th title="Float64">Float64</th></tr></thead><tbody><tr><th>1</th><td>1850.0</td><td>-0.417659</td><td>-0.589203</td><td>-0.246115</td></tr><tr><th>2</th><td>1851.0</td><td>-0.23335</td><td>-0.411868</td><td>-0.0548317</td></tr><tr><th>3</th><td>1852.0</td><td>-0.229399</td><td>-0.409382</td><td>-0.0494157</td></tr><tr><th>4</th><td>1853.0</td><td>-0.270354</td><td>-0.430009</td><td>-0.1107</td></tr><tr><th>5</th><td>1854.0</td><td>-0.29163</td><td>-0.432824</td><td>-0.150436</td></tr><tr><th>6</th><td>1855.0</td><td>-0.296951</td><td>-0.439358</td><td>-0.154545</td></tr></tbody></table></div>
+</div>
+</div>
+</section>
+<section id="merging-the-data" class="level3">
+<h3>Merging The Data</h3>
+<p>Now let’s merge (or <a href="https://dataframes.juliadata.org/stable/man/joins/">“join”</a>) the two DataFrames on common years. The <a href="https://dataframes.juliadata.org/stable/man/joins/"><code>DataFrames</code> documentation</a> provides information on these, as well as some other, more specialized, joins.] Then we can plot the two data series.</p>
+<div class="column-margin">
+<p>Database-style joins allow a flexible way to merge two DataFrames (and other tabular data structures) on a common column (the “key”). There are several different styles of joins: * <em>Inner joins</em> only return rows with key values which occur in all of the merged databases; * <em>Outer joins</em> returns all rows with key values which occur in any merged database; * <em>Left joins</em> return rows with key values occurring in the first (left) database; * <em>Right joins</em> return rows with key values occurring in the second (right) database.</p>
+</div>
+<p>There are many types of joins. Our goal is to focus on the SLR data, so let’s use an “left join” (which includes all entries from the first listed <code>DataFrame</code> and entries from the second <code>DataFrame</code> which correspond to matching key values). First, we need to correct the “Time” column in <code>slr_data</code>, as those values end with a non-zero decimal.</p>
+<div class="cell" data-execution_count="29">
+<div class="sourceCode" id="cb5"><pre class="sourceCode julia cell-code"><code class="sourceCode julia"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>slr_data[<span class="op">:</span>, <span class="op">:</span><span class="dt">Time</span>] <span class="op">=</span> slr_data[<span class="op">:</span>, <span class="op">:</span><span class="dt">Time</span>] <span class="op">.-</span> <span class="fl">0.5</span>; <span class="co"># remove 0.5 from Times</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>all_data <span class="op">=</span> <span class="fu">leftjoin</span>(slr_data, gmt_data, on<span class="op">=</span><span class="st">&quot;Time&quot;</span>); <span class="co"># outer join the data frames on Tim</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">first</span>(all_data, <span class="fl">6</span>)</span></code></pre></div>
+<div class="cell-output cell-output-display column-page-right-inset margin-caption" data-execution_count="29">
+
+<div class="data-frame"><p>6 rows × 6 columns (omitted printing of 1 columns)</p><table class="data-frame"><thead><tr><th></th><th>Time</th><th>GMSL (mm)</th><th>GMSL uncertainty (mm)</th><th>Anomaly (deg C)</th><th>Lower confidence limit (2.5%)</th></tr><tr><th></th><th title="Float64">Float64</th><th title="Float64">Float64</th><th title="Float64">Float64</th><th title="Union{Missing, Float64}">Float64?</th><th title="Union{Missing, Float64}">Float64?</th></tr></thead><tbody><tr><th>1</th><td>1879.0</td><td>-158.7</td><td>24.2</td><td>-0.303634</td><td>-0.434064</td></tr><tr><th>2</th><td>1880.0</td><td>-153.1</td><td>24.2</td><td>-0.315832</td><td>-0.440151</td></tr><tr><th>3</th><td>1881.0</td><td>-169.9</td><td>23.0</td><td>-0.232246</td><td>-0.357935</td></tr><tr><th>4</th><td>1882.0</td><td>-164.6</td><td>22.8</td><td>-0.29553</td><td>-0.42015</td></tr><tr><th>5</th><td>1883.0</td><td>-143.7</td><td>22.2</td><td>-0.346474</td><td>-0.460818</td></tr><tr><th>6</th><td>1884.0</td><td>-145.2</td><td>21.9</td><td>-0.49232</td><td>-0.602669</td></tr></tbody></table></div>
+</div>
+</div>
+</section>
+<section id="plotting-the-data" class="level3">
+<h3>Plotting The Data</h3>
+<p>Now we can plot the observations. Since we merged the DataFrame, we can pass two of the columns to <code>Plots.plot</code> and a layout, and it will automatically plot them as subplots (though we do have to convert the y-values to a <code>Matrix</code>).</p>
+<div class="cell">
+<div class="sourceCode" id="cb6"><pre class="sourceCode julia cell-code"><code class="sourceCode julia"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Plots</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># plot reconstructed anomalies as points</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="fu">scatter</span>(all_data[<span class="op">:</span>, <span class="fl">1</span>], <span class="fu">Matrix</span>(all_data[<span class="op">:</span>, [<span class="fl">2</span>, <span class="fl">4</span>]]), grid<span class="op">=:</span><span class="cn">false</span>, markersize<span class="op">=</span><span class="fl">3</span>, xlabel<span class="op">=</span><span class="st">&quot;Year&quot;</span>, legend<span class="op">=:</span>none, layout<span class="op">=</span>(<span class="fl">2</span>,<span class="fl">1</span>), ylabel<span class="op">=</span>[<span class="st">&quot;mm&quot;</span> <span class="st">&quot;°C&quot;</span>], title<span class="op">=</span>[<span class="st">&quot;Global Mean Sea Level&quot;</span> <span class="st">&quot;Global Mean Temperature&quot;</span>])</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="9">
+<div id="fig-plot-data" class="quarto-figure quarto-figure-center margin-caption">
+<figure>
+<p><img src="slr_model_files/figure-html/fig-plot-data-output-1.svg" class="margin-caption img-fluid" /></p>
+<p><figcaption>Figure 2.1: Plotted anomalies relative to 1961-1990 mean.</figcaption></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="fitting-the-models-to-the-data" class="level2" data-number="2.3">
+<h2 data-number="2.3"><span class="header-section-number">2.3</span> Fitting the Models to the Data</h2>
+<p>Now we can write functions to predict the SLR using the three <a href="#candidate-models">candidate models</a>.</p>
+<div class="cell" data-execution_count="11">
+<div class="sourceCode" id="cb7"><pre class="sourceCode julia cell-code"><code class="sourceCode julia"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># H_lin</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">H_lin</span>(a, b, t)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    slr_predict <span class="op">=</span> a <span class="op">.+</span> (b <span class="op">.*</span> (t <span class="op">.-</span> t[<span class="fl">1</span>]))</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> slr_predict</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co"># H_quad</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">H_quad</span>(a, b, c, t)</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    slr_predict <span class="op">=</span> a <span class="op">.+</span> (b <span class="op">.*</span> (t <span class="op">.-</span> t[<span class="fl">1</span>])) <span class="op">+</span> (c <span class="op">.*</span> (t <span class="op">.-</span> t[<span class="fl">1</span>])<span class="op">.^</span><span class="fl">2</span>)</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> slr_predict</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="co"># H_emp</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">H_emp</span>(α, T₀, H₀, temp)</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>    temp_effect <span class="op">=</span> α <span class="op">.*</span> (temp <span class="op">.-</span> T₀)</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>    slr_predict <span class="op">=</span> <span class="fu">cumsum</span>(temp_effect) <span class="op">.+</span> H₀</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> slr_predict</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div>
+</div>
+<p>Let’s also pull out the vectors of data that we will need to make our code more readable (and therefore easier to debug).</p>
+<div class="cell" data-execution_count="12">
+<div class="sourceCode" id="cb8"><pre class="sourceCode julia cell-code"><code class="sourceCode julia"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>years <span class="op">=</span> all_data[<span class="op">:</span>, <span class="fl">1</span>];</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>sealevels <span class="op">=</span> all_data[<span class="op">:</span>, <span class="fl">2</span>];</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>temps <span class="op">=</span> all_data[<span class="op">:</span>, <span class="fl">4</span>];</span></code></pre></div>
+</div>
+<p>To find parameter values for the models, we will minimize the root-mean-square-error (RMSE): <span class="math display">\[\text{RMSE} = \sqrt{\sum_{t=1}^T\left(\text{pred}_t - \text{obs}_t\right)^2},\]</span> where <span class="math inline">\(t\)</span> is the time index, <span class="math inline">\(\text{pred}_t\)</span> is the model prediction, and <span class="math inline">\(\text{obs}_t\)</span> is the data value.</p>
+<p>We can find parameter values which minimize the RMSE using <a href="https://julianlsolvers.github.io/Optim.jl/stable/#">Optim.jl</a>. The <code>Optim.optimize</code> function minimizes a function value using one of several numerical solvers. <code>Optim.optimize</code> wants its input function to accept a vector of proposed parameter values and return an output which is to be minimized. This means that we need to construct a function which accepts a parameter vector and passes the relevant values to the target function, before calculating the RMSE. This “wrapper” function is what we will want to pass to <code>Optim.optimize</code>.</p>
+<p>We can do this using the following code. First, let’s define a function for the RMSE.</p>
+<div class="cell" data-execution_count="13">
+<div class="sourceCode" id="cb9"><pre class="sourceCode julia cell-code"><code class="sourceCode julia"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># the mean function is in the Statistics package, not built in</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Statistics </span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co"># y are the data, ŷ are the model predictions</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="fu">rmse</span>(y, ŷ) <span class="op">=</span> <span class="fu">sqrt</span>(<span class="fu">mean</span>((y <span class="op">-</span> ŷ)<span class="op">.^</span><span class="fl">2</span>))</span></code></pre></div>
+<div class="cell-output cell-output-display margin-caption" data-execution_count="13">
+<pre><code>rmse (generic function with 1 method)</code></pre>
+</div>
+</div>
+<p>Next, we want to write our wrapper function. The function should accept a vector of parameters and the data, unpack the parameter vector and evaluate the function at those parameters, and then return the RMSE. The “tricky” part is unpacking the parameter vector. There are two approaches to this that we could take. The first is to unpack the vector manually, for example,</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>a, b <span class="op">=</span> v</span></code></pre></div>
+<p>assigns <code>a = v[1]</code> and <code>b = v[2]</code>.</p>
+<p>The second is more versatile, but less readable: we can use the <a href="https://docs.julialang.org/en/v1/base/base/#...">“splat” operator <code>...</code></a>.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> This operator unpacks the elements of the vector which it acts on within a function call, so <code>f(v...)</code> gets interpreted as <code>f(v[1], v[2])</code>. This type of call can be combined with other arguments, as in:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">f</span>(a, b, c)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>   <span class="cf">return</span> a <span class="op">+</span> b <span class="op">+</span> c</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>v <span class="op">=</span> [<span class="fl">1.0</span>, <span class="fl">2.0</span>]</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> <span class="fl">3.0</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="fu">f</span>(v<span class="op">...</span>, c)  <span class="co"># =&gt; f(1.0, 2.0, 3.0)</span></span></code></pre></div>
+<p>The last consideration is that each of <code>H_lin</code>, <code>H_quad</code>, and <code>H_emp</code> accepts an auxiliary data vector after the parameters: the time vector <code>t</code> for the first two, and temperatures <code>temp</code> for <code>H_emp</code>. This similarity means that we can write a single wrapper and pass the name of the function, the parameter vector, the auxiliary data, and the sea level data.</p>
+<div class="cell" data-execution_count="14">
+<div class="sourceCode" id="cb13"><pre class="sourceCode julia cell-code"><code class="sourceCode julia"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Optim</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">minimize_rmse</span>(fn, params, aux, dat)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># we can call the passed function</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    predict <span class="op">=</span> <span class="fu">fn</span>(params<span class="op">...</span>, aux)</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="fu">rmse</span>(dat, predict)</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div>
+<div class="cell-output cell-output-display margin-caption" data-execution_count="14">
+<pre><code>minimize_rmse (generic function with 1 method)</code></pre>
+</div>
+</div>
+<p>The only thing left to do is to call <code>Optim.optimize</code> on <code>minimize_rmse</code> with varying functions <code>fn</code> corresponding to our three SLR models. We can deal with the constant values for each call (<code>fn</code>, <code>aux</code>, and <code>dat</code>) by using anonymous functions to map the parameter vector proposed in a given solver iteration.</p>
+<div class="cell" data-execution_count="35">
+<div class="sourceCode" id="cb15"><pre class="sourceCode julia cell-code"><code class="sourceCode julia"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co"># H_lin</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co"># this has two uncertain parameters (a, b), so we use a 2d initial vector [0.0, 1.0]</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>result_lin <span class="op">=</span> <span class="fu">optimize</span>(params <span class="op">-&gt;</span> <span class="fu">minimize_rmse</span>(H_lin, params, years, sealevels), [<span class="fl">0.0</span>, <span class="fl">1.0</span>]);</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>params_lin <span class="op">=</span> Optim.<span class="fu">minimizer</span>(result_lin);</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="pp">@show</span> params_lin;</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>params_lin = [-172.2866794430187, 1.5970719045709219]</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="36">
+<div class="sourceCode" id="cb17"><pre class="sourceCode julia cell-code"><code class="sourceCode julia"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># H_quad</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co"># this has three uncertain parameters (a, b, c), so we use a 3d initial vector [0.0, 1.0, 0.0]</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>result_quad <span class="op">=</span> <span class="fu">optimize</span>(params <span class="op">-&gt;</span> <span class="fu">minimize_rmse</span>(H_quad, params, years, sealevels), [<span class="fl">0.0</span>, <span class="fl">1.0</span>, <span class="fl">0.0</span>]);</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>params_quad <span class="op">=</span> Optim.<span class="fu">minimizer</span>(result_quad);</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="pp">@show</span> params_quad;</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>params_quad = [-153.94760089306058, 0.7634947234485565, 0.006267398158364036]</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="37">
+<div class="sourceCode" id="cb19"><pre class="sourceCode julia cell-code"><code class="sourceCode julia"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># H_emp</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="co"># unlike the other two models, we pass in temperatures as the auxiliary</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co"># this has three uncertain parameters (α, H₀, T₀), so we use a 3d initial vector [1, 0, 0]</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>result_emp <span class="op">=</span> <span class="fu">optimize</span>(params <span class="op">-&gt;</span> <span class="fu">minimize_rmse</span>(H_emp, params, temps, sealevels), [<span class="fl">1.0</span>, <span class="fl">0.0</span>, <span class="fl">0.0</span>]);</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>params_emp <span class="op">=</span> Optim.<span class="fu">minimizer</span>(result_emp);</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="pp">@show</span> params_emp;</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>params_emp = [1.8636596824562823, -0.9711430993147957, -157.33666238607228]</code></pre>
+</div>
+</div>
+</section>
+<section id="plotting-the-fitted-models" class="level2" data-number="2.4">
+<h2 data-number="2.4"><span class="header-section-number">2.4</span> Plotting the Fitted Models</h2>
+<p>Finally, let’s plot the SLR hindcasts from all three fitted models to see how they perform.</p>
+<div class="cell" data-execution_count="18">
+<div class="sourceCode" id="cb21"><pre class="sourceCode julia cell-code"><code class="sourceCode julia"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>hindcast_lin <span class="op">=</span> <span class="fu">H_lin</span>(params_lin<span class="op">...</span>, years);</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>hindcast_quad <span class="op">=</span> <span class="fu">H_quad</span>(params_quad<span class="op">...</span>, years);</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>hindcast_emp <span class="op">=</span> <span class="fu">H_emp</span>(params_emp<span class="op">...</span>, temps);</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="fu">scatter</span>(years, sealevels, color<span class="op">=</span><span class="st">&quot;black&quot;</span>, alpha<span class="op">=</span><span class="fl">0.7</span>, label<span class="op">=</span><span class="st">&quot;Reconstructed Data&quot;</span>, legend<span class="op">=:</span>topleft, grid<span class="op">=</span><span class="cn">false</span>, xaxis<span class="op">=</span><span class="st">&quot;Year&quot;</span>, yaxis<span class="op">=</span><span class="st">&quot;Sea Level Anomaly (mm)&quot;</span>, title<span class="op">=</span><span class="st">&quot;Global Mean Sea Level Anomaly Model Predictions&quot;</span>)</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot!</span>(years, hindcast_lin, color<span class="op">=</span><span class="st">&quot;#66c2a5&quot;</span>, linewidth<span class="op">=</span><span class="fl">3</span>, label<span class="op">=</span><span class="st">&quot;H_lin&quot;</span>)</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot!</span>(years, hindcast_quad, color<span class="op">=</span><span class="st">&quot;#fc8d62&quot;</span>, linewidth<span class="op">=</span><span class="fl">3</span>, label<span class="op">=</span><span class="st">&quot;H_quad&quot;</span>)</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a><span class="fu">plot!</span>(years, hindcast_emp, color<span class="op">=</span><span class="st">&quot;#8da0cb&quot;</span>, linewidth<span class="op">=</span><span class="fl">3</span>, label<span class="op">=</span><span class="st">&quot;H_emp&quot;</span>)</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="18">
+<div id="fig-slr-model-fits" class="quarto-figure quarto-figure-center margin-caption">
+<figure>
+<p><img src="slr_model_files/figure-html/fig-slr-model-fits-output-1.svg" class="margin-caption img-fluid" /></p>
+<p><figcaption>Figure 2.2: Outputs of the three fitted sea-level rise models vs. the reconstructed data. The reconstructed data are black dots, while the model fits are the colored lines.</figcaption></p>
+</figure>
+</div>
+</div>
+</div>
+<p>We can see from <a href="#fig-slr-model-fits">Figure <span class="quarto-unresolved-ref">fig-slr-model-fits</span></a> that the linear model <span class="math inline">\(H_\text{lin}\)</span> (green) fails to pick up the data trend at the start and end of the period (including the acceleration at the end of the data set, which makes sense), but the quadratic and semi-empirical models <span class="math inline">\(H_\text{quad}\)</span> (red) and <span class="math inline">\(H_\text{emp}\)</span> (purple) both have pretty similar outputs.</p>
+</section>
+<section id="selecting-a-model" class="level2" data-number="2.5">
+<h2 data-number="2.5"><span class="header-section-number">2.5</span> Selecting a Model</h2>
+<p>Comparing the RMSEs of the two models (which we can get from our optimization results using <code>Optim.minimum</code>):</p>
+<div class="cell" data-execution_count="22">
+<div class="sourceCode" id="cb22"><pre class="sourceCode julia cell-code"><code class="sourceCode julia"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>quadratic_rmse <span class="op">=</span> Optim.<span class="fu">minimum</span>(result_quad)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>empirical_rmse <span class="op">=</span> Optim.<span class="fu">minimum</span>(result_emp)</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="pp">@show</span> quadratic_rmse;</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="pp">@show</span> empirical_rmse;</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>quadratic_rmse = 6.637214473133741
+empirical_rmse = 5.911184790905463</code></pre>
+</div>
+</div>
+<p>Since both of these models perform similarly, the choice between the two depends on what question you are asking. If you were primarily interested in inferring the historical temporal trend, <span class="math inline">\(H_\text{quad}\)</span> might be more useful, since it makes the time-dependence explicit, while <span class="math inline">\(H_\text{emp}\)</span> focuses on the dependence on GMT, which would be more useful for making projections given the causal link between warming and SLR.</p>
+<p>The RMSE is slightly lower for <span class="math inline">\(H_\text{emp}\)</span>, but we want to be careful to not over-interpret small differences. Visually, the main difference is that <span class="math inline">\(H_\text{emp}\)</span> shows more of an increase in the last few years, which matches what appears to be an acceleration in the data. As a result, for the rest of this section, we will use <span class="math inline">\(H_\text{emp}\)</span> for our SLR modeling, but you could justify using <span class="math inline">\(H_\text{quad}\)</span>.</p>
+<div id="quarto-navigation-envelope" class="hidden">
+<p><span class="hidden" data-render-id="quarto-int-sidebar-title">An Introduction to Climate Risk Analysis</span> <span class="hidden" data-render-id="quarto-int-navbar-title">An Introduction to Climate Risk Analysis</span> <span class="hidden" data-render-id="quarto-int-next"><span class="chapter-number">3</span>  <span class="chapter-title">Choosing A Likelihood Function</span></span> <span class="hidden" data-render-id="quarto-int-prev"><span class="chapter-number">1</span>  <span class="chapter-title">Modeling Sea Level Rise</span></span> <span class="hidden" data-render-id="quarto-int-sidebar:quarto-sidebar-section-1">About This Book</span> <span class="hidden" data-render-id="quarto-int-sidebar:/index.html">Introduction</span> <span class="hidden" data-render-id="quarto-int-sidebar:/acknowledgements.html">Acknowledgements</span> <span class="hidden" data-render-id="quarto-int-sidebar:quarto-sidebar-section-2">Introduction to Coastal Flood Risk</span> <span class="hidden" data-render-id="quarto-int-sidebar:/contents/flood/modeling_slr.html"><span class="chapter-number">1</span>  <span class="chapter-title">Modeling Sea Level Rise</span></span> <span class="hidden" data-render-id="quarto-int-sidebar:/contents/flood/slr_model.html"><span class="chapter-number">2</span>  <span class="chapter-title">Selecting A Sea Level Model</span></span> <span class="hidden" data-render-id="quarto-int-sidebar:/contents/flood/slr_likelihood.html"><span class="chapter-number">3</span>  <span class="chapter-title">Choosing A Likelihood Function</span></span> <span class="hidden" data-render-id="quarto-int-sidebar:/references.html">References</span></p>
+</div>
+<div id="quarto-meta-markdown" class="hidden">
+<p><span class="hidden" data-render-id="quarto-metatitle">An Introduction to Climate Risk Analysis - <span id="sec-slr-model" class="quarto-section-identifier"><span class="chapter-number">2</span>  <span class="chapter-title">Selecting A Sea Level Model</span></span></span> <span class="hidden" data-render-id="quarto-twittercardtitle">An Introduction to Climate Risk Analysis - <span id="sec-slr-model" class="quarto-section-identifier"><span class="chapter-number">2</span>  <span class="chapter-title">Selecting A Sea Level Model</span></span></span> <span class="hidden" data-render-id="quarto-ogcardtitle">An Introduction to Climate Risk Analysis - <span id="sec-slr-model" class="quarto-section-identifier"><span class="chapter-number">2</span>  <span class="chapter-title">Selecting A Sea Level Model</span></span></span> <span class="hidden" data-render-id="quarto-metasitename">An Introduction to Climate Risk Analysis</span></p>
+</div>
+<div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="doc-bibliography">
+<div id="ref-moriceUpdatedAssessmentSurface2021" class="csl-entry" role="doc-biblioentry">
+Morice, C. P., Kennedy, J. J., Rayner, N. A., Winn, J. P., Hogan, E., Killick, R. E., et al. (2021). An <span>Updated Assessment</span> of <span>Near</span>-<span>Surface Temperature Change From</span> 1850: <span>The HadCRUT5 Data Set</span>. <em>Journal of Geophysical Research: Atmospheres</em>, <em>126</em>(3). <a href="https://doi.org/10.1029/2019JD032361">https://doi.org/10.1029/2019JD032361</a>
+</div>
+<div id="ref-rahmstorfSemiEmpiricalApproachProjecting2007" class="csl-entry" role="doc-biblioentry">
+Rahmstorf, S. (2007). A <span>Semi</span>-<span>Empirical Approach</span> to <span>Projecting Future Sea</span>-<span>Level Rise</span>. <em>Science</em>, <em>315</em>(5810), 368–370. <a href="https://doi.org/djt4n9">https://doi.org/djt4n9</a>
+</div>
+</div>
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr />
+<ol>
+<li id="fn1"><p>The SLR dataset was taken from Australia’s <a href="https://research.csiro.au/slrwavescoast/sea-level/measurements-and-data/sea-level-data/">Commonwealth Scientific and Industrial Research Organization (CSIRO)</a> and described in [@<code>churchSealevelRiseLate2011</code>]. This reconstruction of global mean sea levels spans 1880–2013.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>GMT data was obtained from the <a href="https://www.metoffice.gov.uk/hadobs/hadcrut5/">HadCRUT5 website</a> <span class="citation" data-cites="moriceUpdatedAssessmentSurface2021">(<a href="#ref-moriceUpdatedAssessmentSurface2021" role="doc-biblioref">Morice et al., 2021</a>)</span>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>If we had noticed that our files had different structures (headers, initial lines to skip, etc.), we can either write a more complex function which allows us to change these settings, or the <code>readdlm</code> calls might be sufficiently different that this wouldn’t be clearer or easier to debug.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>The tradeoff between the two approaches is that the use of the splat operator is more versatile, as we don’t need to know how many elements are in the vector ahead of time or their names, while manually unpacking the vectors is more readable. A good practice would be to manually unpack vectors into named variables when working with a specific function. However, in this case, we want to minimize the RMSE of three functions, and we’d have to write a different wrapper for each one given the varying number of parameters.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+
+</main> <!-- /main -->
+<script id = "quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a  href="/contents/flood/modeling_slr.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class='chapter-number'>1</span>  <span class='chapter-title'>Modeling Sea Level Rise</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a  href="/contents/flood/slr_likelihood.html" class="pagination-link">
+        <span class="nav-page-text"><span class='chapter-number'>3</span>  <span class='chapter-title'>Choosing A Likelihood Function</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+</body>
+
+</html>
