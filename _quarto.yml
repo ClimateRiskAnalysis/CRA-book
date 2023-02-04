@@ -65,7 +65,7 @@ format:
       - ItalicFont=*-Italic
       - BoldFont=*-Bold
     default-image-extension: pdf
-    reference-location: margin
+    cap-location: margin
     reference-links: true
   epub: 
     creator: "Vivek Srikrishnan"
