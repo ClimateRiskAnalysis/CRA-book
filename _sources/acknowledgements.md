@@ -1,5 +1,0 @@
-# Acknowledgements
-
-This work was partially supported by the National Science Foundation through the Network for Sustainable Climate Risk Management (SCRiM) under NSF cooperative agreement GEO-1240507.  Any opinions, findings, and conclusions or recommendations expressed in this material are those of the author(s) and do not necessarily reflect the views of the National Science Foundation.  Other support was provided by the [Center for Climate Risk Management](http://www.clima.psu.edu/index.php) and the [Rock Ethics Institute](http://rockethics.psu.edu).
-
-Most of these exercises were originally developed as part of a course titled [Risk Analysis in the Earth Sciences](http://bulletins.psu.edu/undergrad/courses/G/GEOSC/450/200910SP), developed and taught by Klaus Keller in the [Department of Geosciences](http://www.geosc.psu.edu) at the [Pennsylvania State University](http://www.psu.edu).  The exercises discussed in this lab manual were co-developed by a large group (see the individual chapters).
