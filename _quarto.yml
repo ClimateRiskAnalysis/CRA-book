@@ -48,8 +48,8 @@ format:
     mainfontoptions:
       - Path=fonts/
       - Extension=.ttf
-      - UprightFont=*-Regular,
-      - ItalicFont=*-Italic,
+      - UprightFont=*-Regular
+      - ItalicFont=*-Italic
       - BoldFont=*-Bold
     monofont: IBMPlexMono
     monofontoptions:
