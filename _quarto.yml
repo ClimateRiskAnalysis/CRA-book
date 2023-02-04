@@ -75,7 +75,6 @@ format:
       - top=1in
       - bottom=1.5in
       - marginparsep=0.1in
-    listings: true
     include-in-header:
       text: |
         \usepackage{makeidx}
