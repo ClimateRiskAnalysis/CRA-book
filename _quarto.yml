@@ -50,14 +50,14 @@ format:
   pdf:
     documentclass: report
     links-as-notes: true
-    mainfont: IBMPlexSans
+    mainfont: Inter
     mainfontoptions:
       - Path=fonts/
       - Extension=.ttf
       - UprightFont=*-Regular
       - ItalicFont=*-Italic
       - BoldFont=*-Bold
-    monofont: IBMPlexMono
+    monofont: JetBrainsMono
     monofontoptions:
       - Path=fonts/
       - Extension=.ttf
@@ -77,8 +77,9 @@ format:
   epub: 
     creator: "Vivek Srikrishnan"
     epub-fonts: 
-      - fonts/IBMPlexSans-*.ttf
-      - fonts/IBMPlexMono-*.ttf
+      - fonts/Bitter-*.ttf
+      - fonts/Inter-*.ttf
+      - fonts/JetBrainsMono-*.ttf
     reference-location: margin
     cap-location: margin
 
