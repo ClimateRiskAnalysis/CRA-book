@@ -1,4 +1,4 @@
-# Acknowledgements
+# Acknowledgements {.unnumbered}
 
 This work was partially supported by the National Science Foundation through the Network for Sustainable Climate Risk Management (SCRiM) under NSF cooperative agreement GEO-1240507.  Any opinions, findings, and conclusions or recommendations expressed in this material are those of the author(s) and do not necessarily reflect the views of the National Science Foundation.  Other support was provided by the [Center for Climate Risk Management](http://www.clima.psu.edu/index.php) and the [Rock Ethics Institute](http://rockethics.psu.edu).
 

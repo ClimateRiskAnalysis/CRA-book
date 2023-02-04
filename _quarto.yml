@@ -1,0 +1,64 @@
+project:
+  type: book
+  output-dir: docs
+
+book:
+  title: "An Introduction to Climate Risk Analysis"
+  editor: "Vivek Srikrishnan and Klaus Keller"
+  date: "2/3/2023"
+  edition: "3rd"
+  date-format: "YYYY"
+  cover-image: images/cover_with_alexander.png
+  page-navigation: true
+  repo-url: https://github.com/vsrikrish/CRA-book
+  repo-actions: [edit, issue]
+  reader-mode: true
+  output-file: "raes"
+  downloads: [pdf, epub, docx]
+
+  chapters:
+    - part: "About This Book"
+      chapters:
+        - index.qmd
+        - acknowledgements.qmd
+    - part: contents/flood/intro.qmd
+      chapters:
+        - contents/flood/modeling_slr.qmd
+        - contents/flood/slr_model.ipynb
+        - contents/flood/slr_likelihood.ipynb
+    - references.qmd
+
+  sidebar:
+    style: "docked"
+    collapse-level: 1
+
+bibliography: bibliography/references.bib
+
+format:
+  html:
+    theme: 
+      light: [flatly, stylesheets/theme.scss]
+      dark: [flatly, stylesheets/theme-dark.scss]
+    citations-hover: true
+    footnotes-hover: false
+  pdf:
+    documentclass: scrreprt
+    links-as-notes: true
+
+crossref:
+  chapters: true
+reference-location: margin
+cap-location: margin
+number-sections: true
+number-depth: 2
+title-block-banner: true
+code-overflow: wrap
+code-copy: true
+execute:
+  freeze: auto
+  eval: true
+citation-location: document
+highlight-style: github
+csl: bibliography/american-geophysical-union.csl
+mainfont: "IBM Plex Sans"
+monofont: "IBM Plex Mono"

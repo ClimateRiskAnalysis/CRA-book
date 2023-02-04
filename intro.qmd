@@ -1,0 +1,21 @@
+# Climate Risk Analysis 
+
+## Introduction
+
+Greenhouse gas emissions have caused considerable changes in climate, including increased surface air temperatures and rising sea levels. These changes affect both the Earth and human systems in numerous ways, creating new risks and increasing previously existing ones. This book provides an introduction to some of the concepts and approaches used to quantify and analyze climate risks to help support decision-making for risk management.
+
+This book originated as [Risk Analysis in the Earth Sciences](https://www.scrim.psu.edu/resources/raes/) and an associated Risk Analysis course at Penn State. *Risk Analysis in the Earth Sciences* has also been used in courses at the University of Illinois at Urbana-Champaign, CU Boulder, and RIT. This updated version expands on the original book by presenting a series of tutorials in the [Julia programming language](https://julialang.org/) that teach some of the Earth science and statistical concepts needed for assessing climate-related risks. These activities are intended for upper-level undergraduates, graduate students, and professionals in other areas who wish to gain insight into academic climate risk analysis.
+
+## Scope
+
+Modern statistical and computational methods are essential for analyzing the complex and dynamic risks from climate change. Given the power of these tools, it is also important for practitioners to understand how to determine when a particular approach is appropriate for a given problem and to ensure that their conclusions reflect the choices made in modeling and analysis. This book is intended to introduce these skills in the context of particular applications, which serve as case studies.
+
+The code examples in this book are provided in Julia, which is a powerful, open-source language for scientific computing and data analysis. Julia was designed to strike a balance between readability and speed, and has steadily gained popularity in the broader scientific and statistical communities.
+
+::: {.callout-warning}
+Completing the chapters in this textbook will not teach you to perform publication-quality or consulting-grade risk analyses. This textbook is intended primarily for educational use, and the material presented here should only be applied to "real" problems after additional training. The authors and editors of this textbook specifically disclaim any liability for damages associated with the use of the material presented in this textbook.
+:::
+
+## Learning Objectives
+
+After completing the material in this book, students should be able to:
