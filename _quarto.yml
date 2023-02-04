@@ -44,7 +44,6 @@ format:
   pdf:
     documentclass: scrreprt
     links-as-notes: true
-    fontfamily: plex
     mainfont: IBMPlexSans-Regular.ttf
     mainfontoptions:
       - Path=fonts/
