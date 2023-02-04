@@ -59,7 +59,7 @@ format:
       - UprightFont=*-Regular
       - ItalicFont=*-Italic
       - BoldFont=*-Bold
-    default-image-extension: pdf
+    default-image-extension: tex
 
 crossref:
   chapters: true
