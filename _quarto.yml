@@ -44,6 +44,17 @@ format:
   pdf:
     documentclass: scrreprt
     links-as-notes: true
+    mainfont: IBMPlexSans
+    mainfontoptions:
+      - Path=fonts/
+      - Extension=.ttf
+      - UprightFont=*-Regular,
+      - ItalicFont=*-Italic,
+      - BoldFont=*-Bold
+    monofont: IBMPlexSans
+    monofontoptions:
+      - Path=fonts/
+      - Extension=.ttf
 
 crossref:
   chapters: true
@@ -60,5 +71,3 @@ execute:
 citation-location: document
 highlight-style: github
 csl: bibliography/american-geophysical-union.csl
-mainfont: "IBMPlexSans"
-monofont: "IBMPlexMono"
