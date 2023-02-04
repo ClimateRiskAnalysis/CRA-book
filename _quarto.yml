@@ -60,5 +60,5 @@ execute:
 citation-location: document
 highlight-style: github
 csl: bibliography/american-geophysical-union.csl
-mainfont: "IBM Plex Sans"
-monofont: "IBM Plex Mono"
+mainfont: "IBMPlexSans"
+monofont: "IBMPlexMono"
