@@ -73,6 +73,7 @@ format:
       - top=1in
       - bottom=1.5in
       - marginparsep=0.1in
+    listings: true
   epub: 
     creator: "Vivek Srikrishnan"
     epub-fonts: 
