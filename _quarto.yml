@@ -74,6 +74,8 @@ format:
       - bottom=1.5in
       - marginparsep=0.1in
     listings: true
+    include-in-header:
+      - text: \usepackage{float}
   epub: 
     creator: "Vivek Srikrishnan"
     epub-fonts: 
