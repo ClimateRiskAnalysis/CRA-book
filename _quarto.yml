@@ -45,7 +45,17 @@ format:
     documentclass: scrreprt
     links-as-notes: true
     mainfont: IBMPlexSans
+    mainfontoptions:
+      - Path=/fonts/
+      - Extension=.ttf
+      - UprightFont=*-Regular
+      - ItalicFont=*-Italic
+      - BoldFont=*-Bold
     monofont: IBMPlexMono
+    monofontoptions:
+      - Path=/fonts/
+      - Extension=.ttf
+      - UprightFont=*-Regular
 
 crossref:
   chapters: true
