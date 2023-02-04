@@ -1,65 +1,10 @@
 /*-- scss:defaults --*/
 
-@font-face {
-    font-family: "InterVar";
-    font-weight: 100 900;
-    font-display: swap;
-    font-style: normal;
-    src: url("../fonts/Inter.var.woff2") format("woff2-variations"),
-         url("../fonts/Inter.var.woff2") format("woff2"),
-         url("../fonts/Inter.var.ttf") format("truetype");
-    src: url("../fonts/Inter.var.woff2?v=3.19") format("woff2") tech("variations");
-  }
-  @font-face {
-    font-family: "InterVar";
-    font-weight: 100 900;
-    font-display: swap;
-    font-style: italic;
-    src: url("../fonts/Inter-Italic.var.woff2") format("woff2-variations"),
-         url("../fonts/Inter-Italic.var.woff2") format("woff2"),
-         url("../fonts/Inter-Italic.var.ttf") format("truetype");  
-    src: url("../fonts/Inter-Italic.var.woff2") format("woff2") tech("variations");
-  }
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300&display=swap');
 
-@font-face {
-    font-family: "Bitter";
-    font-style: normal;
-    src: url("../fonts/Bitter-Regular.ttf") format("truetype");
-}
-
-@font-face {
-    font-family: "Bitter";
-    font-style: bold;
-    src: url("../fonts/Bitter-Bold.ttf") format("truetype");
-}
-
-@font-face {
-    font-family: "JetBrains Mono";
-    font-style: normal;
-    src: url("../fonts/JetBrainsMono-Regular.woff2") format("woff2"),
-         url("../fonts/JetBrainsMono-Regular.ttf") format("truetype");
-}
-
-@font-face {
-    font-family: "JetBrains Mono";
-    font-style: italic;
-    src: url("../fonts/JetBrainsMono-Italic.woff2") format("woff2"),
-         url("../fonts/JetBrainsMono-Italic.ttf") format("truetype");
-}
-
-@font-face {
-    font-family: "JetBrains Mono";
-    font-style: bold;
-    src: url("../fonts/JetBrainsMono-Bold.woff2") format("woff2"),
-         url("../fonts/JetBrainsMono-Bold.ttf") format("truetype");
-}
-
-$font-family-sans: "Inter", sans-serif;
-$font-family-monospace: "JetBrains Mono", monospace;
-$font-family-serif: "Bitter", serif;
-$font-family-base: "Inter", sans-serif;
+$font-family-base: "IBM Plex Sans", sans-serif;
+$font-family-monospace: "IBM Plex Mono", monospace;
 
 /*-- scss:rules --*/
 
-h1, h2, h3, h4, h5, h6 {font-family:serif;}
-p {font-family: sans;}
