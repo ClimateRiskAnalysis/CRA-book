@@ -4,29 +4,28 @@ This file provides an overview of the [envisioned book contents](#book-structure
 
 ## Book Structure
 
-This is a table of the book parts (corresponding to climate risk case studies) and author assignments. Links go to sections specifying a high-level overview and learning objectives for that part. Authors should feel free to expand or modify as need be.
+This is a table of the book parts (corresponding to climate risk case studies) and author assignments. Links go to sections specifying a high-level overview and learning objectives for that part. Authors should feel free to expand or modify as need be. The list of other authors is in no particular order.
 
 | Part Title | Primary Author | Other Author(s) |
 |    :--:    |      :--:      |       :--:      |
-| [Introduction](#introduction) | Vivek Srikrishnan | Klaus Keller |
+| [Introduction to Climate Risk](#introduction-to-climate-risk) | Klaus Keller | Vivek Srikrishnan |
 | [Risk Analysis in Julia](#risk-analysis-in-julia) | Vivek Srikrishnan | James Doss-Gollin |
-| [Coastal Flood Risk](#coastal-flood-risk) | Vivek Srikrishnan | Tony Wong, Ben Lee |
-| [Estimating Climate Sensitivity](#estimating-climate-sensitivity) | Vivek Srikrishnan | Klaus Keller |
-| [The Social Cost of Carbon](#the-social-cost-of-carbon) | Frank Errickson | Tony Wong, Vivek Srikrishnan |
-| [Agricultural Risk Analysis](#agricultural-risk-analysis) | David Lafferty | Ryan Sriver |
-| [Forest Fire Occurrence](#forest-fire-occurrence) | James Doss-Gollin | Ben Lee |
+| [Exploratory Modeling](#exploratory-modeling) | James Doss-Gollin | Vivek Srikrishnan, Klaus Keller, Tony Wong |
+| [Uncertainty Quantification](#uncertainty-quantification) | Vivek Srikrishnan | Klaus Keller, James Doss-Gollin, Tony Wong, Ben Lee |
+| [Extreme Value Analysis](#extreme-value-analysis) | Vivek Srikrishnan | Tony Wong, James Doss-Gollin, Klaus Keller, Ben Lee
+| [Uncertainty and Decision-Making](#uncertainty-and-decision-making) | Vivek Srikrishnan | Tony Wong, Klaus Keller, James Doss-Gollin |
+| [Deep Uncertainty](#deep-uncertainty) | Vivek Srikrishnan | James Doss-Gollin, Klaus Keller |
+| [Other Considerations](#other-considerations) | James Doss-Gollin | Klaus Keller, Vivek Srikrishnan, Tony Wong, Casey Helgeson (?) |
 
 
 ## Other Potential Topics
 
 Topics we could include if we can identify good learning objectives:
 
-* levee effect (ABM/equity?)
-* energy-system risk (multisector risk, machine learning?)
 
 ## Part Contents and Objectives
 
-### Introduction
+### Introduction to Climate Risk
 
 #### Goal
 
@@ -35,8 +34,11 @@ Introduce the concepts of climate change, uncertainty, and risk.
 #### Contents
 
 1. Introduction to climate risk
-2. What is uncertainty?
-3. Why does uncertainty matter?
+2. Overview of climate risk management
+3. Levee Heightening As A Paradigmatic Problem
+4. What is uncertainty?
+5. Why does uncertainty matter?
+
 
 #### Learning Objectives
 
@@ -68,117 +70,114 @@ At the end of this part, readers will be able to:
 3. Make basic plots in Julia;
 4. Identify, install, and load packages relevant to risk analysis tasks.
 
-### Coastal Flood Risk
-
-This chapter is based loosely off [Oddo et al (2020)](https://onlinelibrary.wiley.com/doi/10.1111/risa.12888), [Ruckert et al (2017)](http://link.springer.com/10.1007/s10584-016-1858-z), and [Wong et al (2018)](https://iopscience.iop.org/article/10.1088/1748-9326/aacb3d).
+### Exploratory Modeling
 
 #### Goals
 
-Show students how to calibrate (simple) mechanistic and statistical models, as well as introduce model selection, in the context of sea-level rise and storm surge.
+Demonstrate the purpose and some approaches to exploratory modeling and uncertainty characterization, including scenario analysis and sensitivity analysis.
 
 #### Contents
 
-1. The Role of Climate Change
-2. Modeling and Calibrating Sea-Level Rise Models
-3. Statistical Models for Tidal Extremes
-4. Impact of Uncertainty on Seawall Height
+1. What is Exploratory Modeling?
+2. The Use (and Misuse) of Scenarios
+3. Sensitivity Analysis
 
 #### Objectives
 
 At the end of this part, readers will be able to:
 
-1. Explain the causal impact of climate change on rising sea levels;
-2. Choose a likelihood function based on residual structure analysis;
-3. Use the bootstrap and Markov chain Monte Carlo to calibrate a simple sea-level rise model;
-4. Fit an extreme-value distribution to tide gauge data;
-5. Evaluate competing model structures using model selection criteria;
-6. Explain how uncertainty can impact decision-making.
+1. Articulate the purposes of exploratory modeling;
+2. Identify appropriate uses and conclusions from scenario analyses;
+3. Apply sensitivity analyses for factor ranking and fixing.
 
-### Estimating Climate Sensitivity
-
-This chapter is based on either [Olson et al (2011)](https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2011JD016620) or [Urban & Keller (2009)](https://www.tandfonline.com/doi/abs/10.1111/j.1600-0870.2010.00471.x), depending on what type of emulation we want to use (GP or mechanistic).
+### Uncertainty Quantification
 
 #### Goals
 
-Introduce climate system uncertainties and emulation.
+Introduce methods and goals for uncertainty quantification.
 
 #### Contents
 
-1. How Sensitive is the Climate to CO_2_ Emissions?
-2. Challenges in Estimating Climate Sensitivity
-3. Emulating Complex Models
-4. Calibrating a Climate Emulator
+1. Why Quantify Uncertainties?
+2. Parametric vs. Non-Parametric Statistics
+3. Model Residuals and Discrepancies
+4. Monte Carlo Simulation
+5. The Bootstrap
+6. Markov Chain Monte Carlo
+7. Emulation of Complex Models
 
 #### Learning Objectives
 
 At the end of this part, readers will be able to:
 
-1. Define the concept of climate sensitivity;
-2. Explain how different parts of the climate system compensate in response to warming.
-3. Demonstrate how emulation addresses the trade-off between model complexity and the ability to quantify uncertainties.
-4. Evaluate different approaches to emulation based on problem characteristics.
+1. Define uncertainty quantification;
+2. Distinguish between the methods and assumptions for parametric, semi-parametric, and non-parametric approaches to statistics;
+3. Conduct Monte Carlo simulation and compute Monte Carlo standard errors;
+4. Quantify model uncertainties with the bootstrap and Markov chain Monte Carlo;
+5. Demonstrate how emulation addresses the trade-off between model complexity and the ability to quantify uncertainties.
+6. Evaluate different approaches to emulation based on problem characteristics.
 
-### The Social Cost of Carbon
+### Extreme Value Analysis
 
 #### Goals
 
-Derive and explain the social cost of greenhouse gases, discuss the importance of discount factors, and demonstrate sensitivity analysis.
+Discuss approaches to analyzing extreme values, quantifying uncertainty, and representing nonstationarity.
 
 #### Contents
 
-1. What is the Social Cost of a Greenhouse Gas?
-2. Introduction to Discounting
-3. What Uncertainties Influence the Social Cost of CO_2_?
+1. Introduction to Extremes and Return Levels
+2. Block Maxima
+3. Peaks Over Thresholds
+4. Non-Stationarity and Model Selection
 
 #### Learning Objectives
 
 At the end of this part, readers will be able to:
 
-1. Explain the concept of the social cost of greenhouse gases;
-2. Discuss the influence of discount rates on the net present value of monetary flows;
-3. Use integrated assessment models to estimate the social cost of CO_2_;
-4. Analyze sensitivities of a modeled quantity to relevant uncertainties.
+1. Distinguish between block maxima and peaks-over-threshold approaches to extreme value analysis;
+2. Apply statistical methods to quantify uncertainty in extremes and return levels;
+3. Select model structures using appropriate statistical methods.
 
-### Agricultural Risk Analysis
-
-This section might build off [Schlenker and Roberts (2009)](https://www.pnas.org/doi/full/10.1073/pnas.0906865106) and [Lafferty et al (2021)](https://www.nature.com/articles/s43247-021-00266-9).
+### Uncertainty and Decision-Making
 
 #### Goals
 
-Demonstrate how to analyze risk given multiple climate scenarios and introduce how downscaling contributes uncertainty.
+Introduce approaches to decision-making under uncertainty and illustrate the influence of uncertainty on decisions.
 
 #### Contents
 
-1. Global Climate Model Ensembles
-2. Approaches to Downscaling Climate Model Output
-3. How Downscaling Impacts Uncertainty
-4. Climate Impacts on Agricultural Yields
-5. Using Downscaled Climate Products to Analyze Risk
+1. Approaches to Decision-Making
+2. Risk and Utility
+3. Decision-Making Under Uncertainty
+3. Impact of Quantified Uncertainties on Decisions
 
 #### Learning Objectives
 
 At the end of this part, readers will be able to:
 
-1. Explain why downscaling global climate model output is necessary for regional risk analyses;
-2. Apply methods for statistical and dynamic downscaling (*maybe?*);
-3. Discuss how downscaling can increase projection uncertainty;
-4. Evaluate risks across an ensemble of climate projections.
+1. Apply simple optimization methods for decision-making;
+2. Articulate the implications of utility functions and risk-aversion in decision-making under uncertainty;
+3. Quantify the value of including uncertainty in decision-making and risk management.
 
-### Forest Fire Occurrence
 
-I don't have a good sense of where to start in terms of data or papers. I'm open to swapping this out for something else illustrating spatial analyses.
+### Deep Uncertainty
 
 #### Goals
 
-Introduce spatial models and demonstrate how to make relevant choices (variograms, etc).
+Define deep uncertainty and discuss the challenges deep uncertainties raise for UQ and decision-making.
 
 #### Contents
 
-Going to leave this up to the authors, since the topic might change.
+1. Introduction to Deep Uncertainty
+2. Aversion to Deep Uncertainty
+3. Methods for Characterizing Deep Uncertainty
+4. Approaches to Decision-Making Under Deep Uncertainty
 
 #### Learning Objectives
 
 At the end of this part, readers will be able to:
 
-1. Explain how climate change intensifies forest fire risk.
-2. Implement spatial emulators to model forest fire occurrence probabilities.
+1. Distinguish between deep and well-characterized uncertainties;
+2. Articulate how deep uncertainty manifests in climate risk management;
+3. Use climate scenarios to characterize deep uncertainty;
+4. Define and apply approaches to robustness under deep uncertainty.
