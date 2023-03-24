@@ -21,11 +21,9 @@ book:
       chapters:
         - index.qmd
         - acknowledgements.qmd
-    - part: contents/flood/intro.qmd
+    - part: contents/uq/intro.qmd
       chapters:
-        - contents/flood/modeling_slr.qmd
-        - contents/flood/slr_model.ipynb
-        - contents/flood/slr_likelihood.ipynb
+        - contents/uq/mcmc.qmd
     - references.qmd
 
   sidebar:

@@ -1,0 +1,11 @@
+# Calibrating a Sea-Level Rise Model with Markov Chain Monte Carlo
+
+This is a placeholder for now to demo getting figures from a notebook.
+
+Here is the data:
+
+{{< embed notebooks/mcmc.ipynb#fig-mcmc-data >}}
+
+And here is the visualization of the MCMC samples:
+
+{{< embed notebooks/mcmc.ipynb#fig-mcmc-traceplot >}}
