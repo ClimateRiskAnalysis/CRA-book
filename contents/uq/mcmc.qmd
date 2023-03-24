@@ -1,3 +1,10 @@
+---
+notebook-links: global
+notebook-view: 
+    - notebook: notebooks/mcmc/mcmc.ipynb
+      title: "Markov Chain Monte Carlo"
+---
+
 # Calibrating a Sea-Level Rise Model with Markov Chain Monte Carlo
 
 This is a placeholder for now to demo getting figures from a notebook.
