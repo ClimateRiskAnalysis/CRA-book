@@ -1,6 +1,5 @@
 project:
   type: book
-  output-dir: docs
 
 book:
   title: "An Introduction to Climate Risk Analysis"
@@ -13,8 +12,6 @@ book:
   repo-url: https://github.com/vsrikrish/CRA-book
   repo-actions: [edit, issue]
   reader-mode: true
-  output-file: "raes"
-  downloads: [pdf, epub]
 
   chapters:
     - part: "About This Book"
@@ -24,12 +21,13 @@ book:
     - part: contents/uq/intro.qmd
       chapters:
         - contents/uq/mcmc.qmd
+    - part: contents/extremes/intro.qmd
+        - contents/uq/extreme_models.qmd
     - references.qmd
 
   sidebar:
     style: "docked"
     collapse-level: 1
-
 
 
 bibliography: bibliography/references.bib
@@ -40,54 +38,16 @@ format:
       light: [flatly, stylesheets/theme.scss]
       dark: [flatly, stylesheets/theme-dark.scss]
     citations-hover: true
-    footnotes-hover: false
+    footnotes-hover: true
     default-image-extension: svg
     reference-location: margin
-    cap-location: margin
+    cap-location: bottom
     title-block-banner: true
     code-overflow: wrap
     code-copy: true
-  pdf:
-    documentclass: report
-    links-as-notes: true
-    mainfont: IBMPlexSans
-    mainfontoptions:
-      - Path=fonts/
-      - Extension=.ttf
-      - UprightFont=*-Regular
-      - ItalicFont=*-Italic
-      - BoldFont=*-Bold
-    monofont: IBMPlexMono
-    monofontoptions:
-      - Path=fonts/
-      - Extension=.ttf
-      - UprightFont=*-Regular
-      - ItalicFont=*-Italic
-      - BoldFont=*-Bold
-    default-image-extension: pdf
-    cap-location: margin
-    reference-links: true
-    geometry:
-      - left=1in
-      - right=2in
-      - top=1in
-      - bottom=1.5in
-      - marginparsep=0.1in
-    include-in-header:
-      text: |
-        \usepackage{makeidx}
-        \makeindex
-    include-after-body: 
-      text: |
-        \printindex
-
-  epub: 
-    creator: "Vivek Srikrishnan"
-    epub-fonts: 
-      - fonts/IBMPlexSans-*.ttf
-      - fonts/IBMPlexMono-*.ttf
-    reference-location: margin
-    cap-location: margin
+    html-math-method: 
+      method: mathjax
+      url: "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"
 
 
 crossref:
@@ -95,8 +55,8 @@ crossref:
 number-sections: true
 number-depth: 2
 execute:
-  freeze: auto
   eval: true
+  freeze: false
 citation-location: document
 highlight-style: github
 csl: bibliography/american-geophysical-union.csl

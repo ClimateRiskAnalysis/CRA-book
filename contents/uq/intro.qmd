@@ -1,2 +1,16 @@
 # Uncertainty Quantification
 
+## Overview
+
+This chapter will introduce methods and goals for uncertainty quantification.
+
+## Learning Objectives
+
+At the end of this part, readers will be able to:
+
+1. Define uncertainty quantification;
+2. Distinguish between the methods and assumptions for parametric, semi-parametric, and non-parametric approaches to statistics;
+3. Conduct Monte Carlo simulation and compute Monte Carlo standard errors;
+4. Quantify model uncertainties with the bootstrap and Markov chain Monte Carlo;
+5. Demonstrate how emulation addresses the trade-off between model complexity and the ability to quantify uncertainties.
+6. Evaluate different approaches to emulation based on problem characteristics.

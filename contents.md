@@ -99,12 +99,11 @@ Introduce methods and goals for uncertainty quantification.
 #### Contents
 
 1. Why Quantify Uncertainties?
-2. Parametric vs. Non-Parametric Statistics
-3. Model Residuals and Discrepancies
-4. Monte Carlo Simulation
-5. The Bootstrap
-6. Markov Chain Monte Carlo
-7. Emulation of Complex Models
+2. Model Residuals and Discrepancies
+3. Monte Carlo Simulation
+4. The Bootstrap
+5. Markov Chain Monte Carlo
+6. Emulation of Complex Models
 
 #### Learning Objectives
 

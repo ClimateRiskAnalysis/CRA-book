@@ -1,0 +1,13 @@
+# Extreme Value Analysis
+
+## Overview
+
+In this section, we will discuss approaches to analyzing extreme values, quantifying uncertainty, and representing nonstationarity.
+
+## Learning Objectives
+
+At the end of this part, readers will be able to:
+
+1. Distinguish between block maxima and peaks-over-threshold approaches to extreme value analysis;
+2. Apply statistical methods to quantify uncertainty in extremes and return levels;
+3. Select model structures using appropriate statistical methods.

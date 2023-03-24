@@ -1,5 +1,8 @@
 ---
 notebook-links: global
+notebook-view:
+    - notebook: mcmc-slr.ipynb
+      title: "Calibrating a Sea-Level Model with MCMC"
 ---
 
 # Calibrating a Sea-Level Rise Model with Markov Chain Monte Carlo
@@ -8,8 +11,13 @@ This is a placeholder for now to demo getting figures from a notebook.
 
 Here is the data:
 
-{{< embed notebooks/mcmc/mcmc.ipynb#fig-mcmc-data >}}
+{{< embed mcmc-slr.ipynb#fig-mcmc-data >}}
 
 And here is the visualization of the MCMC samples:
 
-{{< embed notebooks/mcmc/mcmc.ipynb#fig-mcmc-traceplot >}}
+{{< embed mcmc-slr.ipynb#fig-mcmc-traceplot >}}
+
+## References
+
+::: {#refs}
+:::

@@ -1,0 +1,23 @@
+---
+notebook-links: global
+notebook-view:
+    - notebook: extreme-surge-mcmc.ipynb
+      title: "Modeling Storm Tide Extremes"
+---
+
+# Modeling Storm Tide Extremes
+
+This is a placeholder for now to demo getting figures from a notebook.
+
+Here are the GEV 100- and 500-year return levels:
+
+{{< embed extreme-surge-mcmc-slr.ipynb#fig-gev-rl >}}
+
+And here is the same for PP-GP:
+
+{{< embed extreme-surge-mcmc-slr.ipynb#fig-gpd-rl >}}
+
+## References
+
+::: {#refs}
+:::
