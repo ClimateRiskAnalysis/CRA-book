@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+    <meta charset="utf-8">
+    <meta name="generator" content="quarto-1.3.290">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+    <title>An Introduction to Climate Risk Analysis - Calibrating a Sea-Level Rise Model With Markov Chain Monte Carlo</title>    <style>
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      div.columns{display: flex; gap: min(4vw, 1.5em);}
+      div.column{flex: auto; overflow-x: auto;}
+      div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+      ul.task-list{list-style: none;}
+      ul.task-list li input[type="checkbox"] {
+        width: 0.8em;
+        margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+        vertical-align: middle;
+      }
+      /* CSS for syntax highlighting */
+      pre > code.sourceCode { white-space: pre; position: relative; }
+      pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+      pre > code.sourceCode > span:empty { height: 1.2em; }
+      .sourceCode { overflow: visible; }
+      code.sourceCode > span { color: inherit; text-decoration: inherit; }
+      div.sourceCode { margin: 1em 0; }
+      pre.sourceCode { margin: 0; }
+      @media screen {
+      div.sourceCode { overflow: auto; }
+      }
+      @media print {
+      pre > code.sourceCode { white-space: pre-wrap; }
+      pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+      }
+      pre.numberSource code
+        { counter-reset: source-line 0; }
+      pre.numberSource code > span
+        { position: relative; left: -4em; counter-increment: source-line; }
+      pre.numberSource code > span > a:first-child::before
+        { content: counter(source-line);
+          position: relative; left: -1em; text-align: right; vertical-align: baseline;
+          border: none; display: inline-block;
+          -webkit-touch-callout: none; -webkit-user-select: none;
+          -khtml-user-select: none; -moz-user-select: none;
+          -ms-user-select: none; user-select: none;
+          padding: 0 4px; width: 4em;
+        }
+      pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+      div.sourceCode
+        {   }
+      @media screen {
+      pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+      }
+      /* CSS for citations */
+      div.csl-bib-body { }
+      div.csl-entry {
+        clear: both;
+      }
+      .hanging-indent div.csl-entry {
+        margin-left:2em;
+        text-indent:-2em;
+      }
+      div.csl-left-margin {
+        min-width:2em;
+        float:left;
+      }
+      div.csl-right-inline {
+        margin-left:2em;
+        padding-left:1em;
+      }
+      div.csl-indent {
+        margin-left: 2em;
+      }    </style>
+    <style>
+      .quarto-embed-header {
+        height: 3em;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: solid 1px;
+      }
+      .quarto-embed-header h6 {
+        font-size: 1em;
+        padding-top: 0.6em;
+        margin-left: 1em;
+        margin-right: 1em;
+        font-weight: 300;
+      }
+      .quarto-embed-header a.quarto-download-embed {
+        font-size: 0.7em;
+        margin-top: 1em;
+        margin-bottom: 1em;
+        margin-left: 1em;
+        margin-right: 1em;
+      }
+    </style>
+    
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+     <script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" type="text/javascript"></script> 
+      </head>
+  <body class="quarto-notebook fullcontent">
+    <div class="quarto-embed-header">
+      <h6><i class="bi bi-journal-code"></i> Calibrating a Sea-Level Model with MCMC</h6>
+      <a href="../../contents/uq/mcmc-slr.ipynb" class="btn btn-primary quarto-download-embed" download="mcmc-slr.ipynb">Download Notebook</a>
+    </div>
+     <div id="quarto-search-results"></div>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Calibrating a Sea-Level Rise Model With Markov Chain Monte Carlo</h1>
+                      </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content quarto-banner-title-block page-columns page-full" id="quarto-document-content">      
+   <p>The following code loads the environment and makes sure all needed packages are installed. This should be at the start of most Julia scripts.</p>
+<div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [2]:</pre></div><div class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> <span class="bu">Pkg</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">Pkg</span>.<span class="fu">activate</span>(<span class="pp">@__DIR__</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="bu">Pkg</span>.<span class="fu">instantiate</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>  Activating project at `~/Teaching/CRA-book/contents/uq`</code></pre>
+</div>
+</div></div>
+<div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [3]:</pre></div><div class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Random</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">CSVFiles </span><span class="co"># load CSV data</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">DataFrames </span><span class="co"># data storage and presentation</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Plots </span><span class="co"># plotting library</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">default</span>(fmt <span class="op">=</span> <span class="op">:</span>png)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">StatsPlots </span><span class="co"># statistical plotting</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Distributions </span><span class="co"># statistical distribution interface</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">PDMats </span><span class="co"># positive-definite matrices</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Turing </span><span class="co"># probabilistic programming and MCMC</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Optim </span><span class="co"># optimization library</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div>
+<div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [4]:</pre></div><div class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="bu">Random</span>.<span class="fu">seed!</span>(<span class="fl">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="4">
+<pre><code>TaskLocalRNG()</code></pre>
+</div>
+</div></div>
+<section id="load-data" class="level2 page-columns page-full">
+<h2 data-anchor-id="load-data">Load Data</h2>
+<p>First, we’ll load the data we will use for calibration. The sea-level data was obtained from Australia’s <a href="https://research.csiro.au/slrwavescoast/sea-level/measurements-and-data/sea-level-data/">Commonwealth Scientific and Industrial Research Organization (CSIRO)</a> and is described in <span class="citation" data-cites="churchSealevelRiseLate2011">(<a href="#ref-churchSealevelRiseLate2011" role="doc-biblioref">Church &amp; White, 2011</a>)</span>. This reconstruction of global mean sea levels spans 1880–2019. has three columns: 1. Time in years (the fractions correspond to months); 2. Global mean sea-level in <span class="math inline">\(mm\)</span> (relative to the 1961-1990 mean); 3. Standard deviation of the observational error in <span class="math inline">\(mm\)</span>.</p>
+<p>The GMT data was obtained from the <a href="https://www.metoffice.gov.uk/hadobs/hadcrut5/">HadCRUT5 website</a> <span class="citation" data-cites="moriceUpdatedAssessmentSurface2021">(<a href="#ref-moriceUpdatedAssessmentSurface2021" role="doc-biblioref">Morice et al., 2021</a>)</span>. It has a similar structure: a header and comma-delimited. This file also has four columns, along with a header: 1. Time in years; 2. Annual mean temperature anomaly (relative to the 1961-1990 mean); 3. The lower end of the 95% confidence interval; 4. The upper end of the 95% confidence interval.</p>
+<div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [17]:</pre></div><div class="cell" data-tbl-align="left" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load data files</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>slr_fname <span class="op">=</span> <span class="st">"https://hpc.csiro.au/users/326141/Sea_Level_data/gmsl_files/CSIRO_Recons_gmsl_yr_2019.csv"</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>slr_data <span class="op">=</span> <span class="fu">DataFrame</span>(<span class="fu">load</span>(slr_fname))</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>gmt_fname <span class="op">=</span> <span class="st">"https://www.metoffice.gov.uk/hadobs/hadcrut5/data/current/analysis/diagnostics/"</span> <span class="op">*</span> <span class="st">"HadCRUT.5.0.1.0.analysis.summary_series.global.annual.csv"</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>gmt_data <span class="op">=</span> <span class="fu">DataFrame</span>(<span class="fu">load</span>(gmt_fname))</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>slr_data[<span class="op">:</span>, <span class="op">:</span><span class="dt">Time</span>] <span class="op">=</span> slr_data[<span class="op">:</span>, <span class="op">:</span><span class="dt">Time</span>] <span class="op">.-</span> <span class="fl">0.5</span>; <span class="co"># remove 0.5 from Times</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>dat <span class="op">=</span> <span class="fu">leftjoin</span>(slr_data, gmt_data, on<span class="op">=</span><span class="st">"Time"</span>) <span class="co"># join data frames on time</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="fu">select!</span>(dat, [<span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">4</span>])  <span class="co"># drop columns we don't need</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="fu">rename!</span>(dat, <span class="st">"Time"</span> <span class="op">=&gt;</span> <span class="st">"year"</span>, <span class="st">"GMSL (mm)"</span> <span class="op">=&gt;</span> <span class="st">"gmsl"</span>, <span class="st">"Anomaly (deg C)"</span> <span class="op">=&gt;</span> <span class="st">"temp"</span>)</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="fu">first</span>(dat, <span class="fl">6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="17">
+<div><div style="float: left;"><span>6×3 DataFrame</span></div><div style="clear: both;"></div></div><div class="data-frame" style="overflow-x: scroll;">
+<div id="tbl-slr-data">
+<table class="data-frame table table-sm table-striped small" data-quarto-postprocess="true">
+<caption>Table&nbsp;1: First few rows of the merged GMSL and GMT dataframe.</caption>
+<thead>
+<tr class="header header">
+<th class="rowNumber" data-quarto-table-cell-role="th" style="text-align: right; font-weight: bold;">Row</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">year</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">gmsl</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">temp</th>
+</tr>
+<tr class="odd subheader headerLastRow">
+<th class="rowNumber" data-quarto-table-cell-role="th" style="text-align: right; font-weight: bold;"></th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="Float64">Float64</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="Float64">Float64</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="Union{Missing, Float64}">Float64?</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td class="rowNumber" style="text-align: right; font-weight: bold;">1</td>
+<td style="text-align: right;">1880.0</td>
+<td style="text-align: right;">-30.3</td>
+<td style="text-align: right;">-0.315832</td>
+</tr>
+<tr class="even">
+<td class="rowNumber" style="text-align: right; font-weight: bold;">2</td>
+<td style="text-align: right;">1881.0</td>
+<td style="text-align: right;">-24.7</td>
+<td style="text-align: right;">-0.232246</td>
+</tr>
+<tr class="odd">
+<td class="rowNumber" style="text-align: right; font-weight: bold;">3</td>
+<td style="text-align: right;">1882.0</td>
+<td style="text-align: right;">-41.5</td>
+<td style="text-align: right;">-0.29553</td>
+</tr>
+<tr class="even">
+<td class="rowNumber" style="text-align: right; font-weight: bold;">4</td>
+<td style="text-align: right;">1883.0</td>
+<td style="text-align: right;">-36.2</td>
+<td style="text-align: right;">-0.346474</td>
+</tr>
+<tr class="odd">
+<td class="rowNumber" style="text-align: right; font-weight: bold;">5</td>
+<td style="text-align: right;">1884.0</td>
+<td style="text-align: right;">-15.3</td>
+<td style="text-align: right;">-0.49232</td>
+</tr>
+<tr class="even">
+<td class="rowNumber" style="text-align: right; font-weight: bold;">6</td>
+<td style="text-align: right;">1885.0</td>
+<td style="text-align: right;">-16.8</td>
+<td style="text-align: right;">-0.471124</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div></div>
+<p>Next, let’s plot the data series.</p>
+<div class="page-columns page-full">
+
+<div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [6]:</pre></div><div><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>p1 <span class="op">=</span> <span class="pp">@df</span> dat <span class="fu">scatter</span>(<span class="op">:</span>year, <span class="op">:</span>temp, ylabel<span class="op">=</span><span class="st">"°C"</span>, label<span class="op">=</span><span class="st">"Global Mean Temperature"</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">display</span>(p1)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>p2 <span class="op">=</span> <span class="pp">@df</span> dat <span class="fu">scatter</span>(<span class="op">:</span>year, <span class="op">:</span>gmsl, ylabel<span class="op">=</span><span class="st">"mm"</span>, label<span class="op">=</span><span class="st">"Global Mean Sea Level"</span>)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">display</span>(p2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div><div id="fig-mcmc-data" class="cell quarto-layout-panel" data-execution_count="6">
+<figure class="figure">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 50.0%;justify-content: center;">
+<div id="fig-mcmc-data-1" class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="mcmc-slr_files/figure-html/fig-mcmc-data-output-1.png" class="quarto-discovered-preview-image figure-img" alt="Global mean temperature anomaly" data-ref-parent="fig-mcmc-data"></p>
+<p></p><figcaption class="figure-caption">(a) Global mean temperature anomaly data from <a href="https://www.metoffice.gov.uk/hadobs/hadcrut5/">HadCRUT5</a> from 1880–2019.</figcaption><p></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 50.0%;justify-content: center;">
+<div id="fig-mcmc-data-2" class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="mcmc-slr_files/figure-html/fig-mcmc-data-output-2.png" alt="Global mean sea-level anomaly" data-ref-parent="fig-mcmc-data" class="figure-img"></p>
+<p></p><figcaption class="figure-caption">(b) Global mean sea-level anomaly reconstruction from <a href="https://research.csiro.au/slrwavescoast/sea-level/measurements-and-data/sea-level-data/">CSIRO</a> from 1880–2019.</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p></p><figcaption class="figure-caption">Figure&nbsp;1: Data used for sea-level model calibration.</figcaption><p></p>
+</figure>
+</div></div></div>
+</div>
+<p>In this notebook, we will use Markov chain Monte Carlo to calibrate the <span class="citation" data-cites="rahmstorfSemiEmpiricalApproachProjecting2007">Rahmstorf (<a href="#ref-rahmstorfSemiEmpiricalApproachProjecting2007" role="doc-biblioref">2007</a>)</span> semi-empirical sea-level rise model: <span class="math display">\[\frac{dH(t)}{dt} = \alpha (T(t) - T_0),\]</span> where <span class="math inline">\(H(t)\)</span> is global mean sea-level anomaly (in mm), <span class="math inline">\(T(t)\)</span> is the global mean surface temperature (in <span class="math inline">\(^\circ\)</span> C), <span class="math inline">\(T_0\)</span> is the temperature (in <span class="math inline">\(^\circ\)</span> C) when sea-level rise is in equilibrium, and <span class="math inline">\(\alpha\)</span> is the sea-level rise sensitivity to warming. Discretizing this equation with an annual time step yields <span class="math display">\[H(t+1) = H(t) + \alpha (T(t) - T_0).\]</span></p>
+<p>A key question is what parameter values for this model are consistent with the data. In some cases, this question is interesting to help us understand the dynamics of the system. More generally, if we can express this consistency in the form of probability distributions, we can then use Monte Carlo sampling to propagate this parametric uncertainty through the model to obtain hindcasts and projections.</p>
+</section>
+<section id="setting-up-the-model" class="level2 page-columns page-full">
+<h2 data-anchor-id="setting-up-the-model">Setting up the Model</h2>
+<p>First, we need a function which represents the <span class="citation" data-cites="rahmstorfSemiEmpiricalApproachProjecting2007">Rahmstorf (<a href="#ref-rahmstorfSemiEmpiricalApproachProjecting2007" role="doc-biblioref">2007</a>)</span> model. This requires three parameters: - <span class="math inline">\(\alpha\)</span>; - <span class="math inline">\(T_0\)</span>; - <span class="math inline">\(H_0\)</span> (the initial sea-level anomaly).</p>
+<p>We also need to pass in the temperature data. The resulting function is below.</p>
+<div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [7]:</pre></div><div class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">rahmstorf_model</span>(α, T₀, H₀, temp_data)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    temp_effect <span class="op">=</span> α <span class="op">.*</span> (temp_data <span class="op">.-</span> T₀)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    slr_predict <span class="op">=</span> <span class="fu">cumsum</span>(temp_effect) <span class="op">.+</span> H₀</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> slr_predict</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="7">
+<pre><code>rahmstorf_model (generic function with 1 method)</code></pre>
+</div>
+</div></div>
+<p>Next, let’s specify the statistical model. Denote the residuals as <span class="math display">\[R(\mathbf{x}, t)=y_t - F(\mathbf{x}, t),\]</span> where <span class="math inline">\(y_t\)</span> is the data at time <span class="math inline">\(t\)</span> and <span class="math inline">\(F(\mathbf{x}, t)\)</span> is the model output at time <span class="math inline">\(t\)</span> with parameters <span class="math inline">\(\mathbf{x} = (\alpha, T_0, H_0)\)</span>.</p>
+<p>We will assume <span class="math inline">\(R(\mathbf{x}, t)\)</span> is an AR(1) process, <em>i.e.</em> <span class="math display">\[\begin{gather*}
+R(\mathbf{x}, t) = \rho z(\mathbf{x}, t-1) + \omega_t, \quad \omega_t \sim \text{Normal}(0, \sigma^2)
+\end{gather*}
+\]</span></p>
+<p>The unconditional variance of an AR(1) process is <span class="math display">\[\text{Var}(z) = \frac{\sigma^2}{1-\rho^2},\]</span> so the likelihood for <span class="math inline">\(R\)</span> (abusing notation to suppress referencing the parameters) can be written as: <span class="math display">\[
+\begin{gather*}
+R_1 \sim \text{Normal}(0, \sigma/\sqrt{1-\rho^2}) \\
+R_t \sim \text{Normal}(\rho R_{t-1}, \sigma)
+\end{gather*}
+\]</span></p>
+<section id="selecting-priors" class="level3 page-columns page-full">
+<h3 data-anchor-id="selecting-priors">Selecting Priors</h3>
+<p>The last step before we can write our statistical model is to select priors. We will choose relatively uninformative priors for <span class="math inline">\(\alpha\)</span>, <span class="math inline">\(T_0\)</span>, and <span class="math inline">\(H_0\)</span>, using normal distributions. For the scale parameters <span class="math inline">\(\tau\)</span> and <span class="math inline">\(\sigma\)</span>, we will choose truncated normal distributions to ensure that they take only positive values. We will also use a uniform prior for <span class="math inline">\(\rho\)</span> over the interval <span class="math inline">\([-1, 1]\)</span>, as <span class="math inline">\(|\rho| &lt; 1\)</span>.</p>
+<div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [8]:</pre></div><div class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="pp">@model</span> <span class="kw">function</span> <span class="fu">slr_posterior</span>(sealevels, temps)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">## define priors</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    α <span class="op">~</span> <span class="fu">truncated</span>(<span class="fu">Normal</span>(<span class="fl">0</span>, <span class="fl">2</span>); lower<span class="op">=</span><span class="fl">0</span>)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    T₀ <span class="op">~</span> <span class="fu">Normal</span>(<span class="fl">0</span>, <span class="fl">5</span>)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    H₀ <span class="op">~</span> <span class="fu">Normal</span>(<span class="op">-</span><span class="fl">100</span>, <span class="fl">50</span>)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    ρ <span class="op">~</span> <span class="fu">Uniform</span>(<span class="op">-</span><span class="fl">1</span>, <span class="fl">1</span>)</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    σ <span class="op">~</span> <span class="fu">truncated</span>(<span class="fu">Normal</span>(<span class="fl">0</span>, <span class="fl">5</span>); lower<span class="op">=</span><span class="fl">0</span>)</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    <span class="co">## define likelihood</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># evaluate model</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    slr_predict <span class="op">=</span> <span class="fu">rahmstorf_model</span>(α, T₀, H₀, temps)</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># compute likelihood</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>    n <span class="op">=</span> <span class="fu">length</span>(temps)</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>    sealevels[<span class="fl">1</span>] <span class="op">~</span> <span class="fu">Normal</span>(slr_predict[<span class="fl">1</span>], σ <span class="op">/</span> <span class="fu">sqrt</span>(<span class="fl">1</span><span class="op">-</span>ρ<span class="op">^</span><span class="fl">2</span>)) <span class="co"># initial value</span></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>    <span class="co"># loop over subsequent values and add likelihood</span></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="op">=</span> <span class="fl">2</span><span class="op">:</span>n</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>        sealevels[i] <span class="op">~</span> <span class="fu">Normal</span>(ρ <span class="op">*</span> (sealevels[i<span class="op">-</span><span class="fl">1</span>] <span class="op">-</span> slr_predict[i<span class="op">-</span><span class="fl">1</span>]) <span class="op">+</span> slr_predict[i], σ)</span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">end</span></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="8">
+<pre><code>slr_posterior (generic function with 2 methods)</code></pre>
+</div>
+</div></div>
+</section>
+</section>
+<section id="sampling-from-the-posterior" class="level2 page-columns page-full">
+<h2 data-anchor-id="sampling-from-the-posterior">Sampling from the Posterior</h2>
+<p>To sample from the posterior, we use <code>Turing.sample()</code>. This requires setting the sampler; we will use the No U-Turn Sampler <span class="citation" data-cites="Hoffman2014-gv">(<a href="#ref-Hoffman2014-gv" role="doc-biblioref">Hoffman &amp; Gelman, 2014</a>)</span>, which is an adaptive Hamiltonian Monte Carlo sampler.</p>
+<p>We will also use multiple chains, which will let us look at certain convergence diagnostics.</p>
+<div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [9]:</pre></div><div class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> <span class="fu">slr_posterior</span>(dat[!, <span class="fl">2</span>], dat[!, <span class="fl">3</span>]) <span class="co"># load the data into the model object</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>n_per_chain <span class="op">=</span> <span class="fl">10000</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>n_chains <span class="op">=</span> <span class="fl">4</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>chain <span class="op">=</span>  <span class="fu">sample</span>(model, <span class="fu">NUTS</span>(), <span class="fu">MCMCThreads</span>(), n_per_chain, n_chains; drop_warmup<span class="op">=</span><span class="cn">true</span>) <span class="co"># drop chain warmup iterations</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>┌ Warning: Only a single thread available: MCMC chains are not sampled in parallel
+└ @ AbstractMCMC ~/.julia/packages/AbstractMCMC/F9Hbk/src/sample.jl:296
+┌ Info: Found initial step size
+└   ϵ = 0.00078125
+┌ Info: Found initial step size
+└   ϵ = 0.0015625
+┌ Info: Found initial step size
+└   ϵ = 0.00078125
+┌ Info: Found initial step size
+└   ϵ = 0.00625
+Sampling (1 threads): 100%|█████████████████████████████| Time: 0:00:58</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="9">
+<div class="ansi-escaped-output">
+<pre>Chains MCMC chain (10000×17×4 Array{Float64, 3}):
+Iterations        = 1001:1:11000
+Number of chains  = 4
+Samples per chain = 10000
+Wall duration     = 91.68 seconds
+Compute duration  = 89.01 seconds
+parameters        = α, T₀, H₀, ρ, σ
+internals         = lp, n_steps, is_accept, acceptance_rate, log_density, hamiltonian_energy, hamiltonian_energy_error, max_hamiltonian_energy_error, tree_depth, numerical_error, step_size, nom_step_size
+Summary Statistics
+ <span class="ansi-bold"> parameters </span> <span class="ansi-bold">     mean </span> <span class="ansi-bold">     std </span> <span class="ansi-bold"> naive_se </span> <span class="ansi-bold">    mcse </span> <span class="ansi-bold">        ess </span> <span class="ansi-bold">    rhat </span> ⋯
+ <span class="ansi-bright-black-fg">     Symbol </span> <span class="ansi-bright-black-fg">  Float64 </span> <span class="ansi-bright-black-fg"> Float64 </span> <span class="ansi-bright-black-fg">  Float64 </span> <span class="ansi-bright-black-fg"> Float64 </span> <span class="ansi-bright-black-fg">    Float64 </span> <span class="ansi-bright-black-fg"> Float64 </span> ⋯
+           α     2.0597    0.1876     0.0009    0.0017   12492.4117    1.0001  ⋯
+          T₀    -0.9073    0.0793     0.0004    0.0007   11165.8600    1.0001  ⋯
+          H₀   -28.3468    2.9007     0.0145    0.0237   14146.5801    1.0001  ⋯
+           ρ     0.5959    0.0757     0.0004    0.0006   16793.6076    1.0001  ⋯
+           σ     5.0955    0.3108     0.0016    0.0024   18364.8274    1.0001  ⋯
+<span class="ansi-cyan-fg">                                                                1 column omitted</span>
+Quantiles
+ <span class="ansi-bold"> parameters </span> <span class="ansi-bold">     2.5% </span> <span class="ansi-bold">    25.0% </span> <span class="ansi-bold">    50.0% </span> <span class="ansi-bold">    75.0% </span> <span class="ansi-bold">    97.5% </span>
+ <span class="ansi-bright-black-fg">     Symbol </span> <span class="ansi-bright-black-fg">  Float64 </span> <span class="ansi-bright-black-fg">  Float64 </span> <span class="ansi-bright-black-fg">  Float64 </span> <span class="ansi-bright-black-fg">  Float64 </span> <span class="ansi-bright-black-fg">  Float64 </span>
+           α     1.6858     1.9389     2.0605     2.1805     2.4314
+          T₀    -1.0842    -0.9516    -0.8996    -0.8543    -0.7739
+          H₀   -34.2098   -30.1642   -28.3117   -26.4715   -22.7275
+           ρ     0.4500     0.5446     0.5945     0.6461     0.7464
+           σ     4.5322     4.8809     5.0773     5.2948     5.7509
+</pre>
+</div>
+</div>
+</div></div>
+</section>
+<section id="diagnosing-convergence" class="level2 page-columns page-full">
+<h2 data-anchor-id="diagnosing-convergence">Diagnosing Convergence</h2>
+<p>The first step in diagnosing convergence is to look at the traceplots and marginal distributions of the chains. If multiple chains, which were initialized at various values, have the same distribution, that is evidence of convergence.</p>
+<div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [10]:</pre></div><div class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(chain)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="10">
+<div id="fig-mcmc-traceplot" class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="mcmc-slr_files/figure-html/fig-mcmc-traceplot-output-1.png" alt="MCMC sampler output" class="figure-img"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;2: Traceplots and marginal posterior distributions from the MCMC sampler. Each individual chain’s samples are shown in a different color.</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div></div>
+<p>We can also look at the Gelman-Rubin statistic <span class="math inline">\(\hat{R}\)</span>, which is based on comparing the variation between chains to the variation within a single chain. The closer <span class="math inline">\(\hat{R}\)</span> is to 1, the more evidence for convergence, as this suggests the between-chain variation is close to zero.</p>
+<div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [16]:</pre></div><div class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gelmandiag</span>(chain)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="gelmandiag" class="cell-output cell-output-display">
+<div class="ansi-escaped-output">
+<pre>Gelman, Rubin, and Brooks diagnostic
+ <span class="ansi-bold"> parameters </span> <span class="ansi-bold">    psrf </span> <span class="ansi-bold">  psrfci </span>
+ <span class="ansi-bright-black-fg">     Symbol </span> <span class="ansi-bright-black-fg"> Float64 </span> <span class="ansi-bright-black-fg"> Float64 </span>
+           α    1.0002    1.0006
+          T₀    1.0004    1.0008
+          H₀    1.0002    1.0005
+           ρ    1.0002    1.0004
+           σ    1.0002    1.0008
+</pre>
+</div>
+</div>
+</div></div>
+</section>
+<section id="visualizing-relationships-between-parameters" class="level2 page-columns page-full">
+<h2 data-anchor-id="visualizing-relationships-between-parameters">Visualizing Relationships Between Parameters</h2>
+<p>The previous plot let us look at the <em>marginal</em> posterior distributions, that is, the distribution for that parameter only. However, we are more commonly interested in the <em>joint</em> distribution, which accounts for correlations between the parameters. We can see these correlations with a cornerplot.</p>
+<div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [12]:</pre></div><div class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">corner</span>(chain)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="12">
+<div id="fig-mcmc-corner" class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="mcmc-slr_files/figure-html/fig-mcmc-corner-output-1.png" class="figure-img"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;3: Corner plot between the sampled parameters. The plots along the lower triangle show scatterplots between the corresponding two variables. In the margin are marginal density plots. If the scatterplots are colored blue, the two variables are positively correlated, and red shows a negative correlation.</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div></div>
+<p>We can see, for example, that <span class="math inline">\(\alpha\)</span>, <span class="math inline">\(T_0\)</span>, and <span class="math inline">\(H_0\)</span> are highly positively correlated with each other. This makes sense, as a larger value of <span class="math inline">\(\alpha\)</span> means that sea-level is more sensitive to temperature increases over <span class="math inline">\(T_0\)</span>. As a result, if <span class="math inline">\(T_0\)</span> is low and <span class="math inline">\(\alpha\)</span> is high, the resulting modeled sea level anomaly will be larger than the observations. Conversely, if <span class="math inline">\(T_0\)</span> is high and <span class="math inline">\(\alpha\)</span> is low, the model will under-predict the level of sea-level rise. Similar logic also explains why <span class="math inline">\(H_0\)</span> should be positively correlated with <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(T_0\)</span>.</p>
+</section>
+<section id="references" class="level2">
+<h2 data-anchor-id="references">References</h2>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="list">
+<div id="ref-churchSealevelRiseLate2011" class="csl-entry" role="listitem">
+Church, J. A., &amp; White, N. J. (2011). Sea-level rise from the late 19th to the early 21st century. <em>Surveys in Geophysics</em>, <em>32</em>(4-5), 585–602. <a href="https://doi.org/10.1007/s10712-011-9119-1">https://doi.org/10.1007/s10712-011-9119-1</a>
+</div>
+<div id="ref-Hoffman2014-gv" class="csl-entry" role="listitem">
+Hoffman, M. D., &amp; Gelman, A. (2014). The <span>No-U-Turn</span> sampler: Adaptively setting path lengths in hamiltonian monte carlo. <em>J. Mach. Learn. Res.</em>, <em>15</em>(47), 1593–1623.
+</div>
+<div id="ref-moriceUpdatedAssessmentSurface2021" class="csl-entry" role="listitem">
+Morice, C. P., Kennedy, J. J., Rayner, N. A., Winn, J. P., Hogan, E., Killick, R. E., et al. (2021). An <span>Updated Assessment</span> of <span>Near</span>-<span>Surface Temperature Change From</span> 1850: <span>The HadCRUT5 Data Set</span>. <em>Journal of Geophysical Research: Atmospheres</em>, <em>126</em>(3). <a href="https://doi.org/10.1029/2019JD032361">https://doi.org/10.1029/2019JD032361</a>
+</div>
+<div id="ref-rahmstorfSemiEmpiricalApproachProjecting2007" class="csl-entry" role="listitem">
+Rahmstorf, S. (2007). A <span>Semi</span>-<span>Empirical Approach</span> to <span>Projecting Future Sea</span>-<span>Level Rise</span>. <em>Science</em>, <em>315</em>(5810), 368–370. <a href="https://doi.org/djt4n9">https://doi.org/djt4n9</a>
+</div>
+</div>
+</section>
+     </main> <!-- /main -->  <script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>  </div> <!-- /content --> 
+  
+
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.dev/vsrikrish/CRA-book/blob/main/contents/uq/mcmc-slr.ipynb" class="toc-action">Edit this page</a></p><p><a href="https://github.com/vsrikrish/CRA-book/issues/new" class="toc-action">Report an issue</a></p></div></div></div></div></footer></body></html>
