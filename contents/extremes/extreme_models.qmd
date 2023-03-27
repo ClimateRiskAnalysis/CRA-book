@@ -11,11 +11,11 @@ This is a placeholder for now to demo getting figures from a notebook.
 
 Here are the GEV 100- and 500-year return levels:
 
-{{< embed extreme-surge-mcmc-slr.ipynb#fig-gev-rl >}}
+{{< embed extreme-surge-mcmc.ipynb#fig-gev-rl >}}
 
 And here is the same for PP-GP:
 
-{{< embed extreme-surge-mcmc-slr.ipynb#fig-gpd-rl >}}
+{{< embed extreme-surge-mcmc.ipynb#fig-gpd-rl >}}
 
 ## References
 

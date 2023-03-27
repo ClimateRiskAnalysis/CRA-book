@@ -22,7 +22,8 @@ book:
       chapters:
         - contents/uq/mcmc.qmd
     - part: contents/extremes/intro.qmd
-        - contents/uq/extreme_models.qmd
+      chapters:
+        - contents/extremes/extreme_models.qmd
     - references.qmd
 
   sidebar:
