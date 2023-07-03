@@ -4,7 +4,7 @@ This file provides an overview of the [envisioned book contents](#book-structure
 
 ## Book Structure
 
-This is a table of the book parts (corresponding to climate risk case studies) and author assignments. Links go to sections specifying a high-level overview and learning objectives for that part. Authors should feel free to expand or modify as need be. The list of other authors is in no particular order.
+This is a table of the book parts and author assignments. Links go to sections specifying a high-level overview and learning objectives for that part. Authors should feel free to expand or modify as need be. The list of other authors is in no particular order.
 
 | Section Title | Primary Author | Other Author(s) |
 |    :--:    |      :--:      |       :--:      |
