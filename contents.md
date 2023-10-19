@@ -8,7 +8,7 @@ This is a table of the book parts and author assignments. Links go to sections s
 
 
 | Section | Chapter Title | Primary Author | Other Author(s) |
-|   :--:  |       :--:    |      :--:      |       :--:      |
+|   :--:  |       :--    |      :--:     |       :--     |
 | 1 | [Introduction to Climate Risk Analysis](#introduction-to-climate-risk-analysis) | | |
 |   | [Climate Change Overview](#climate-change-overview) | | |
 |   | [Uncertainty, Probability, and Statistics](#uncertainty-probability-and-statistics) | | |
