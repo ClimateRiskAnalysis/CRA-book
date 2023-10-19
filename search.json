@@ -4,69 +4,105 @@
     "href": "index.html",
     "title": "An Introduction to Climate Risk Analysis",
     "section": "",
-    "text": "Introduction\nGreenhouse gas emissions have caused considerable changes in climate, including increased surface air temperatures and rising sea levels. These changes affect both the Earth and human systems in numerous ways, creating new risks and increasing previously existing ones. This book provides an introduction to some of the concepts and approaches used to quantify and analyze climate risks to help support decision-making for risk management.\nThis book originated as Risk Analysis in the Earth Sciences and an associated Risk Analysis course at Penn State. Risk Analysis in the Earth Sciences has also been used in courses at the University of Illinois at Urbana-Champaign, CU Boulder, and RIT. This updated version expands on the original book by presenting a series of tutorials in the Julia programming language that teach some of the Earth science and statistical concepts needed for assessing climate-related risks. These activities are intended for upper-level undergraduates, graduate students, and professionals in other areas who wish to gain insight into academic climate risk analysis."
+    "text": "Introduction\nGreenhouse gas emissions have caused considerable changes in climate, including increased surface air temperatures and rising sea levels. These changes affect both the Earth and human systems in numerous ways, creating new risks and increasing previously existing ones. This book provides an introduction to some of the concepts and approaches used to quantify and analyze climate risks to help support decision-making for risk management.\nThis book originated as Risk Analysis in the Earth Sciences and an associated Risk Analysis course at Penn State. Risk Analysis in the Earth Sciences has also been used in courses at the University of Illinois at Urbana-Champaign, CU Boulder, and RIT. This updated version expands on the original book by presenting a series of tutorials in the Julia programming language that teach some of the Earth science and statistical concepts needed for assessing climate-related risks. These activities are intended for upper-level undergraduates, graduate students, and professionals in other areas who wish to gain insight into academic climate risk analysis.",
+    "crumbs": [
+      "About This Book",
+      "Introduction"
+    ]
   },
   {
     "objectID": "index.html#book-scope",
     "href": "index.html#book-scope",
     "title": "An Introduction to Climate Risk Analysis",
     "section": "Book Scope",
-    "text": "Book Scope\nModern statistical and computational methods are essential for analyzing the complex and dynamic risks from climate change. Given the power of these tools, it is also important for practitioners to understand how to determine when a particular approach is appropriate for a given problem and to ensure that their conclusions reflect the choices made in modeling and analysis. This book is intended to introduce these skills in the context of particular applications, which serve as case studies.\nThe code examples in this book are provided in Julia, which is a powerful, open-source language for scientific computing and data analysis. Julia was designed to strike a balance between readability and speed, and has steadily gained popularity in the broader scientific and statistical communities.\n\n\n\n\n\n\nWarning\n\n\n\nCompleting the chapters in this textbook will not teach you to perform publication-quality or consulting-grade risk analyses. This textbook is intended primarily for educational use, and the material presented here should only be applied to “real” problems after additional training. The authors and editors of this textbook specifically disclaim any liability for damages associated with the use of the material presented in this textbook."
+    "text": "Book Scope\nModern statistical and computational methods are essential for analyzing the complex and dynamic risks from climate change. Given the power of these tools, it is also important for practitioners to understand how to determine when a particular approach is appropriate for a given problem and to ensure that their conclusions reflect the choices made in modeling and analysis. This book is intended to introduce these skills in the context of particular applications, which serve as case studies.\nThe code examples in this book are provided in Julia, which is a powerful, open-source language for scientific computing and data analysis. Julia was designed to strike a balance between readability and speed, and has steadily gained popularity in the broader scientific and statistical communities.\n\n\n\n\n\n\nWarning\n\n\n\nCompleting the chapters in this textbook will not teach you to perform publication-quality or consulting-grade risk analyses. This textbook is intended primarily for educational use, and the material presented here should only be applied to “real” problems after additional training. The authors and editors of this textbook specifically disclaim any liability for damages associated with the use of the material presented in this textbook.",
+    "crumbs": [
+      "About This Book",
+      "Introduction"
+    ]
   },
   {
     "objectID": "index.html#learning-objectives",
     "href": "index.html#learning-objectives",
     "title": "An Introduction to Climate Risk Analysis",
     "section": "Learning Objectives",
-    "text": "Learning Objectives\nAfter completing the material in this book, students should be able to:"
+    "text": "Learning Objectives\nAfter completing the material in this book, students should be able to:",
+    "crumbs": [
+      "About This Book",
+      "Introduction"
+    ]
   },
   {
     "objectID": "acknowledgements.html",
     "href": "acknowledgements.html",
     "title": "Acknowledgements",
     "section": "",
-    "text": "This work was partially supported by the National Science Foundation through the Network for Sustainable Climate Risk Management (SCRiM) under NSF cooperative agreement GEO-1240507. Any opinions, findings, and conclusions or recommendations expressed in this material are those of the author(s) and do not necessarily reflect the views of the National Science Foundation. Other support was provided by the Center for Climate Risk Management and the Rock Ethics Institute.\nMost of these exercises were originally developed as part of a course titled Risk Analysis in the Earth Sciences, developed and taught by Klaus Keller in the Department of Geosciences at the Pennsylvania State University. The exercises discussed in this lab manual were co-developed by a large group (see the individual chapters)."
+    "text": "This work was partially supported by the National Science Foundation through the Network for Sustainable Climate Risk Management (SCRiM) under NSF cooperative agreement GEO-1240507. Any opinions, findings, and conclusions or recommendations expressed in this material are those of the author(s) and do not necessarily reflect the views of the National Science Foundation. Other support was provided by the Center for Climate Risk Management and the Rock Ethics Institute.\nMost of these exercises were originally developed as part of a course titled Risk Analysis in the Earth Sciences, developed and taught by Klaus Keller in the Department of Geosciences at the Pennsylvania State University. The exercises discussed in this lab manual were co-developed by a large group (see the individual chapters).",
+    "crumbs": [
+      "About This Book",
+      "Acknowledgements"
+    ]
   },
   {
     "objectID": "contents/uq/intro.html#overview",
     "href": "contents/uq/intro.html#overview",
     "title": "Uncertainty Quantification",
     "section": "Overview",
-    "text": "Overview\nThis chapter will introduce methods and goals for uncertainty quantification."
+    "text": "Overview\nThis chapter will introduce methods and goals for uncertainty quantification.",
+    "crumbs": [
+      "Uncertainty Quantification"
+    ]
   },
   {
     "objectID": "contents/uq/intro.html#learning-objectives",
     "href": "contents/uq/intro.html#learning-objectives",
     "title": "Uncertainty Quantification",
     "section": "Learning Objectives",
-    "text": "Learning Objectives\nAt the end of this part, readers will be able to:\n\nDefine uncertainty quantification;\nDistinguish between the methods and assumptions for parametric, semi-parametric, and non-parametric approaches to statistics;\nConduct Monte Carlo simulation and compute Monte Carlo standard errors;\nQuantify model uncertainties with the bootstrap and Markov chain Monte Carlo;\nDemonstrate how emulation addresses the trade-off between model complexity and the ability to quantify uncertainties.\nEvaluate different approaches to emulation based on problem characteristics."
+    "text": "Learning Objectives\nAt the end of this part, readers will be able to:\n\nDefine uncertainty quantification;\nDistinguish between the methods and assumptions for parametric, semi-parametric, and non-parametric approaches to statistics;\nConduct Monte Carlo simulation and compute Monte Carlo standard errors;\nQuantify model uncertainties with the bootstrap and Markov chain Monte Carlo;\nDemonstrate how emulation addresses the trade-off between model complexity and the ability to quantify uncertainties.\nEvaluate different approaches to emulation based on problem characteristics.",
+    "crumbs": [
+      "Uncertainty Quantification"
+    ]
   },
   {
     "objectID": "contents/uq/mcmc.html#references",
     "href": "contents/uq/mcmc.html#references",
     "title": "1  Calibrating a Sea-Level Rise Model with Markov Chain Monte Carlo",
     "section": "1.1 References",
-    "text": "1.1 References"
+    "text": "1.1 References",
+    "crumbs": [
+      "Uncertainty Quantification",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Calibrating a Sea-Level Rise Model with Markov Chain Monte Carlo</span>"
+    ]
   },
   {
     "objectID": "contents/extremes/intro.html#overview",
     "href": "contents/extremes/intro.html#overview",
     "title": "Extreme Value Analysis",
     "section": "Overview",
-    "text": "Overview\nIn this section, we will discuss approaches to analyzing extreme values, quantifying uncertainty, and representing nonstationarity."
+    "text": "Overview\nIn this section, we will discuss approaches to analyzing extreme values, quantifying uncertainty, and representing nonstationarity.",
+    "crumbs": [
+      "Extreme Value Analysis"
+    ]
   },
   {
     "objectID": "contents/extremes/intro.html#learning-objectives",
     "href": "contents/extremes/intro.html#learning-objectives",
     "title": "Extreme Value Analysis",
     "section": "Learning Objectives",
-    "text": "Learning Objectives\nAt the end of this part, readers will be able to:\n\nDistinguish between block maxima and peaks-over-threshold approaches to extreme value analysis;\nApply statistical methods to quantify uncertainty in extremes and return levels;\nSelect model structures using appropriate statistical methods."
+    "text": "Learning Objectives\nAt the end of this part, readers will be able to:\n\nDistinguish between block maxima and peaks-over-threshold approaches to extreme value analysis;\nApply statistical methods to quantify uncertainty in extremes and return levels;\nSelect model structures using appropriate statistical methods.",
+    "crumbs": [
+      "Extreme Value Analysis"
+    ]
   },
   {
     "objectID": "contents/extremes/extreme_models.html#references",
     "href": "contents/extremes/extreme_models.html#references",
     "title": "2  Modeling Storm Tide Extremes",
     "section": "2.1 References",
-    "text": "2.1 References"
+    "text": "2.1 References",
+    "crumbs": [
+      "Extreme Value Analysis",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Modeling Storm Tide Extremes</span>"
+    ]
   }
 ]

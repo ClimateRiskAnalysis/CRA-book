@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.176">
+<meta name="generator" content="quarto-1.4.429">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -42,7 +42,7 @@ div.csl-indent {
 }</style>
 
 
-<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -68,12 +68,13 @@ div.csl-indent {
   "collapse-after": 3,
   "panel-placement": "start",
   "type": "textbox",
-  "limit": 20,
+  "limit": 50,
   "keyboard-shortcut": [
     "f",
     "/",
     "s"
   ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -88,7 +89,7 @@ div.csl-indent {
   }
 }</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+
 <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
 
@@ -136,7 +137,7 @@ div.csl-indent {
     <div class="sidebar-title mb-0 py-0">
       <a href="../../">An Introduction to Climate Risk Analysis</a> 
         <div class="sidebar-tools-main tools-wide">
-    <a href="https://github.com/vsrikrish/CRA-book" rel="" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="https://github.com/vsrikrish/CRA-book" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
   <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
   <div class="quarto-reader-toggle-btn">
@@ -228,7 +229,7 @@ div.csl-indent {
   <ul>
   <li><a href="#references" id="toc-references" class="nav-link active" data-scroll-target="#references"><span class="header-section-number">1.1</span> References</a></li>
   </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/vsrikrish/CRA-book/edit/main/contents/uq/mcmc.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/vsrikrish/CRA-book/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/vsrikrish/CRA-book/edit/main/contents/uq/mcmc.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/vsrikrish/CRA-book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content quarto-banner-title-block" id="quarto-document-content">
@@ -236,41 +237,58 @@ div.csl-indent {
 
 
 
+
 <p>This is a placeholder for now to demo getting figures from a notebook.</p>
 <p>Here is the data:</p>
-<div class="quarto-embed-nb-cell" data-notebook="mcmc-slr.ipynb" data-notebook-title="Calibrating a Sea-Level Rise Model With Markov Chain Monte Carlo" data-notebook-cellid="cell-fig-mcmc-data">
-<div id="fig-mcmc-data" class="cell quarto-layout-panel" data-execution_count="6">
-<figure class="figure">
+<div class="quarto-embed-nb-cell" data-notebook="/home/runner/work/CRA-book/CRA-book/contents/uq/mcmc-slr.ipynb" data-notebook-title="Calibrating a Sea-Level Rise Model With Markov Chain Monte Carlo" data-notebook-cellid="cell-fig-mcmc-data">
+<div id="fig-mcmc-data" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-mcmc-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 50.0%;justify-content: center;">
-<div id="fig-mcmc-data-1" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="mcmc_files/figure-html/fig-mcmc-data-output-1.png" class="img-fluid figure-img" alt="Global mean temperature anomaly" data-ref-parent="fig-mcmc-data"></p>
-<figcaption class="figure-caption">(a) Global mean temperature anomaly data from <a href="https://www.metoffice.gov.uk/hadobs/hadcrut5/">HadCRUT5</a> from 1880–2019.</figcaption>
+<div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-mcmc-data" style="flex-basis: 50.0%;justify-content: center;">
+<div id="fig-mcmc-data-1" class="quarto-figure quarto-figure-center anchored" alt="Global mean temperature anomaly">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-mcmc-data-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="mcmc_files/figure-html/fig-mcmc-data-output-1.png" class="img-fluid figure-img" data-ref-parent="fig-mcmc-data" alt="Global mean temperature anomaly">
+</div>
+<figcaption class="figure quarto-subfloat-caption quarto-subfloat-fig" id="fig-mcmc-data-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) Global mean temperature anomaly data from <a href="https://www.metoffice.gov.uk/hadobs/hadcrut5/">HadCRUT5</a> from 1880–2019.
+</figcaption>
 </figure>
 </div>
 </div>
-<div class="cell-output cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 50.0%;justify-content: center;">
-<div id="fig-mcmc-data-2" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="mcmc_files/figure-html/fig-mcmc-data-output-2.png" class="img-fluid figure-img" alt="Global mean sea-level anomaly" data-ref-parent="fig-mcmc-data"></p>
-<figcaption class="figure-caption">(b) Global mean sea-level anomaly reconstruction from <a href="https://research.csiro.au/slrwavescoast/sea-level/measurements-and-data/sea-level-data/">CSIRO</a> from 1880–2019.</figcaption>
+<div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-mcmc-data" style="flex-basis: 50.0%;justify-content: center;">
+<div id="fig-mcmc-data-2" class="quarto-figure quarto-figure-center anchored" alt="Global mean sea-level anomaly">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-mcmc-data-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="mcmc_files/figure-html/fig-mcmc-data-output-2.png" class="img-fluid figure-img" data-ref-parent="fig-mcmc-data" alt="Global mean sea-level anomaly">
+</div>
+<figcaption class="figure quarto-subfloat-caption quarto-subfloat-fig" id="fig-mcmc-data-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) Global mean sea-level anomaly reconstruction from <a href="https://research.csiro.au/slrwavescoast/sea-level/measurements-and-data/sea-level-data/">CSIRO</a> from 1880–2019.
+</figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p></p><figcaption class="figure-caption">Figure&nbsp;1.1: Data used for sea-level model calibration.</figcaption><p></p>
+</div>
+<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-mcmc-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1.1: Data used for sea-level model calibration.
+</figcaption>
 </figure>
 </div>
 </div>
 <p>And here is the visualization of the MCMC samples:</p>
-<div class="quarto-embed-nb-cell" data-notebook="mcmc-slr.ipynb" data-notebook-title="Calibrating a Sea-Level Rise Model With Markov Chain Monte Carlo" data-notebook-cellid="cell-fig-mcmc-traceplot">
+<div class="quarto-embed-nb-cell" data-notebook="/home/runner/work/CRA-book/CRA-book/contents/uq/mcmc-slr.ipynb" data-notebook-title="Calibrating a Sea-Level Rise Model With Markov Chain Monte Carlo" data-notebook-cellid="cell-fig-mcmc-traceplot">
 <div id="cell-fig-mcmc-traceplot" class="cell" data-execution_count="10">
 <div class="cell-output cell-output-display" data-execution_count="10">
-<div id="fig-mcmc-traceplot" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="mcmc_files/figure-html/fig-mcmc-traceplot-output-1.png" class="img-fluid figure-img" alt="MCMC sampler output"></p>
-<figcaption class="figure-caption">Figure&nbsp;1.2: Traceplots and marginal posterior distributions from the MCMC sampler. Each individual chain’s samples are shown in a different color.</figcaption>
+<div id="fig-mcmc-traceplot" class="quarto-figure quarto-figure-center anchored" alt="MCMC sampler output">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-mcmc-traceplot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="mcmc_files/figure-html/fig-mcmc-traceplot-output-1.png" class="img-fluid figure-img" alt="MCMC sampler output">
+</div>
+<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-mcmc-traceplot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1.2: Traceplots and marginal posterior distributions from the MCMC sampler. Each individual chain’s samples are shown in a different color.
+</figcaption>
 </figure>
 </div>
 </div>
@@ -548,18 +566,57 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
   const xrefs = window.document.querySelectorAll('a.quarto-xref');
   const processXRef = (id, note) => {
-    if (id.startsWith('sec-')) {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    const typesetMath = (el) => {
+      if (window.MathJax) {
+        // MathJax Typeset
+        window.MathJax.typeset([el]);
+      } else if (window.katex) {
+        // KaTeX Render
+        var mathElements = el.getElementsByClassName("math");
+        var macros = [];
+        for (var i = 0; i < mathElements.length; i++) {
+          var texText = mathElements[i].firstChild;
+          if (mathElements[i].tagName == "SPAN") {
+            window.katex.render(texText.data, mathElements[i], {
+              displayMode: mathElements[i].classList.contains('display'),
+              throwOnError: false,
+              macros: macros,
+              fleqn: false
+            });
+          }
+        }
+      }
+    }
+    if (id === null || id.startsWith('sec-')) {
       // Special case sections, only their first couple elements
       const container = document.createElement("div");
       if (note.children && note.children.length > 2) {
         for (let i = 0; i < 2; i++) {
           container.appendChild(note.children[i].cloneNode(true));
         }
+        typesetMath(container);
         return container.innerHTML
       } else {
+        typesetMath(note);
         return note.innerHTML;
       }
     } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      typesetMath(note);
       return note.innerHTML;
     }
   }
@@ -569,27 +626,56 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       instance.disable();
       let url = xref.getAttribute('href');
       let hash = undefined; 
-      try { hash = new URL(url).hash; } catch {}
-      const id = hash.replace(/^#\/?/, "");
-      const note = window.document.getElementById(id);
-      if (note !== null) {
-        try {
-          const html = processXRef(id, note);
-          instance.setContent(html);
-        } finally {
-          instance.enable();
-          instance.show();
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
         }
       } else {
-        // See if we can fetch this
-        fetch(url.split('#')[0])
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
         .then(res => res.text())
         .then(html => {
           const parser = new DOMParser();
           const htmlDoc = parser.parseFromString(html, "text/html");
-          const note = htmlDoc.getElementById(id);
+          const note = htmlDoc.querySelector('main.content');
           if (note !== null) {
-            const html = processXRef(id, note);
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
             instance.setContent(html);
           } 
         }).finally(() => {
@@ -667,6 +753,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -728,12 +840,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../contents/uq/intro.html" class="pagination-link">
+      <a href="../../contents/uq/intro.html" class="pagination-link  aria-label=" uncertainty="" quantification"="">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Uncertainty Quantification</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../contents/extremes/intro.html" class="pagination-link">
+      <a href="../../contents/extremes/intro.html" class="pagination-link" aria-label="Extreme Value Analysis">
         <span class="nav-page-text">Extreme Value Analysis</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
