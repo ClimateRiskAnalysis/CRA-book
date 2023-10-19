@@ -13,7 +13,7 @@ Err on the side of making code clear. There is a good chance that these material
 In that spirit, try to abide by the following principles:
 
 1. Assume this may be a **first** exposure to programming.
-2. Make code as compact as possible. Write functions when code will be reused, and make it explicit that this is the process. For example, if reading in multiple data files with similar structure, show and explain the initial sequence of commands on the first file, then show how to translate those lines into a function which can be used on the remaining files. This mimics the exploratory thought process.
+2. Make code as compact as possible while maintaining interpretability. Write functions when code will be reused, and make it explicit that this is the process. For example, if reading in multiple data files with similar structure, show and explain the initial sequence of commands on the first file, then show how to translate those lines into a function which can be used on the remaining files. This mimics the exploratory thought process.
 3. Keep code structure and notation **as close to the relevant math as possible**. For example, when implementing a GEV function, use `ξ` instead of `shape` as a variable name. Try to keep the code steps as close to the written-out math or algorithmic steps as possible, even if it's less optimized.
 4. Use well-maintained external libraries instead of implementing your own solutions.
 
