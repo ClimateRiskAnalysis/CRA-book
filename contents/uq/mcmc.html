@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.429">
+<meta name="generator" content="quarto-1.5.26">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>An Introduction to Climate Risk Analysis - 1&nbsp; Calibrating a Sea-Level Rise Model with Markov Chain Monte Carlo</title>
+<title>An Introduction to Climate Risk Analysis – 1&nbsp; Calibrating a Sea-Level Rise Model with Markov Chain Monte Carlo</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -83,6 +83,7 @@ div.csl-indent {
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
@@ -98,14 +99,14 @@ div.csl-indent {
 <body class="nav-sidebar docked">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
         <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../contents/uq/intro.html">Uncertainty Quantification</a></li><li class="breadcrumb-item"><a href="../../contents/uq/mcmc.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Calibrating a Sea-Level Rise Model with Markov Chain Monte Carlo</span></a></li></ol></nav>
-        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
@@ -114,9 +115,9 @@ div.csl-indent {
   </nav>
 </header>
 <!-- content -->
-<header id="title-block-header" class="quarto-title-block default page-columns page-full"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../contents/uq/intro.html">Uncertainty Quantification</a></li><li class="breadcrumb-item"><a href="../../contents/uq/mcmc.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Calibrating a Sea-Level Rise Model with Markov Chain Monte Carlo</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-body">
+    <div class="quarto-title column-body"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../contents/uq/intro.html">Uncertainty Quantification</a></li><li class="breadcrumb-item"><a href="../../contents/uq/mcmc.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Calibrating a Sea-Level Rise Model with Markov Chain Monte Carlo</span></a></li></ol></nav>
       <h1 class="title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Calibrating a Sea-Level Rise Model with Markov Chain Monte Carlo</span></h1>
                       </div>
   </div>
@@ -132,7 +133,7 @@ div.csl-indent {
   
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="../../">An Introduction to Climate Risk Analysis</a> 
@@ -220,7 +221,7 @@ div.csl-indent {
     </ul>
     </div>
 </nav>
-<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
@@ -244,26 +245,26 @@ div.csl-indent {
 <div id="fig-mcmc-data" class="quarto-layout-panel">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-mcmc-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-mcmc-data" style="flex-basis: 50.0%;justify-content: center;">
-<div id="fig-mcmc-data-1" class="quarto-figure quarto-figure-center anchored" alt="Global mean temperature anomaly">
+<div class="quarto-layout-row">
+<div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-mcmc-data" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-mcmc-data-1" class="quarto-figure quarto-figure-center quarto-float anchored" alt="Global mean temperature anomaly">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-mcmc-data-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="mcmc_files/figure-html/fig-mcmc-data-output-1.png" class="img-fluid figure-img" data-ref-parent="fig-mcmc-data" alt="Global mean temperature anomaly">
+<img src="mcmc_files/figure-html/mcmc-slr-fig-mcmc-data-output-1.png" class="img-fluid figure-img" data-ref-parent="fig-mcmc-data" alt="Global mean temperature anomaly">
 </div>
-<figcaption class="figure quarto-subfloat-caption quarto-subfloat-fig" id="fig-mcmc-data-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-mcmc-data-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (a) Global mean temperature anomaly data from <a href="https://www.metoffice.gov.uk/hadobs/hadcrut5/">HadCRUT5</a> from 1880–2019.
 </figcaption>
 </figure>
 </div>
 </div>
-<div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-mcmc-data" style="flex-basis: 50.0%;justify-content: center;">
-<div id="fig-mcmc-data-2" class="quarto-figure quarto-figure-center anchored" alt="Global mean sea-level anomaly">
+<div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-mcmc-data" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-mcmc-data-2" class="quarto-figure quarto-figure-center quarto-float anchored" alt="Global mean sea-level anomaly">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-mcmc-data-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="mcmc_files/figure-html/fig-mcmc-data-output-2.png" class="img-fluid figure-img" data-ref-parent="fig-mcmc-data" alt="Global mean sea-level anomaly">
+<img src="mcmc_files/figure-html/mcmc-slr-fig-mcmc-data-output-2.png" class="img-fluid figure-img" data-ref-parent="fig-mcmc-data" alt="Global mean sea-level anomaly">
 </div>
-<figcaption class="figure quarto-subfloat-caption quarto-subfloat-fig" id="fig-mcmc-data-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-mcmc-data-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (b) Global mean sea-level anomaly reconstruction from <a href="https://research.csiro.au/slrwavescoast/sea-level/measurements-and-data/sea-level-data/">CSIRO</a> from 1880–2019.
 </figcaption>
 </figure>
@@ -271,7 +272,7 @@ div.csl-indent {
 </div>
 </div>
 </div>
-<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-mcmc-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-mcmc-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;1.1: Data used for sea-level model calibration.
 </figcaption>
 </figure>
@@ -281,12 +282,12 @@ Figure&nbsp;1.1: Data used for sea-level model calibration.
 <div class="quarto-embed-nb-cell" data-notebook="/home/runner/work/CRA-book/CRA-book/contents/uq/mcmc-slr.ipynb" data-notebook-title="Calibrating a Sea-Level Rise Model With Markov Chain Monte Carlo" data-notebook-cellid="cell-fig-mcmc-traceplot">
 <div id="cell-fig-mcmc-traceplot" class="cell" data-execution_count="10">
 <div class="cell-output cell-output-display" data-execution_count="10">
-<div id="fig-mcmc-traceplot" class="quarto-figure quarto-figure-center anchored" alt="MCMC sampler output">
+<div id="fig-mcmc-traceplot" class="quarto-figure quarto-figure-center quarto-float anchored" alt="MCMC sampler output">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-mcmc-traceplot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="mcmc_files/figure-html/fig-mcmc-traceplot-output-1.png" class="img-fluid figure-img" alt="MCMC sampler output">
+<img src="mcmc_files/figure-html/mcmc-slr-fig-mcmc-traceplot-output-1.png" class="img-fluid figure-img" alt="MCMC sampler output">
 </div>
-<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-mcmc-traceplot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-mcmc-traceplot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;1.2: Traceplots and marginal posterior distributions from the MCMC sampler. Each individual chain’s samples are shown in a different color.
 </figcaption>
 </figure>
@@ -483,18 +484,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -526,7 +516,47 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
   function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
@@ -561,7 +591,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
     });
   }
   const xrefs = window.document.querySelectorAll('a.quarto-xref');
@@ -576,38 +610,28 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       }
     }
     stripColumnClz(note)
-    const typesetMath = (el) => {
-      if (window.MathJax) {
-        // MathJax Typeset
-        window.MathJax.typeset([el]);
-      } else if (window.katex) {
-        // KaTeX Render
-        var mathElements = el.getElementsByClassName("math");
-        var macros = [];
-        for (var i = 0; i < mathElements.length; i++) {
-          var texText = mathElements[i].firstChild;
-          if (mathElements[i].tagName == "SPAN") {
-            window.katex.render(texText.data, mathElements[i], {
-              displayMode: mathElements[i].classList.contains('display'),
-              throwOnError: false,
-              macros: macros,
-              fleqn: false
-            });
-          }
-        }
-      }
-    }
     if (id === null || id.startsWith('sec-')) {
       // Special case sections, only their first couple elements
       const container = document.createElement("div");
       if (note.children && note.children.length > 2) {
-        for (let i = 0; i < 2; i++) {
-          container.appendChild(note.children[i].cloneNode(true));
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
         }
-        typesetMath(container);
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
         return container.innerHTML
       } else {
-        typesetMath(note);
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
         return note.innerHTML;
       }
     } else {
@@ -616,8 +640,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (anchorLink) {
         anchorLink.remove();
       }
-      typesetMath(note);
-      return note.innerHTML;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
     }
   }
   for (var i=0; i<xrefs.length; i++) {
@@ -840,7 +871,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../contents/uq/intro.html" class="pagination-link  aria-label=" uncertainty="" quantification"="">
+      <a href="../../contents/uq/intro.html" class="pagination-link" aria-label="Uncertainty Quantification">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Uncertainty Quantification</span>
       </a>          
   </div>
@@ -855,4 +886,4 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-</body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/vsrikrish/CRA-book/edit/main/contents/uq/mcmc.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/vsrikrish/CRA-book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>

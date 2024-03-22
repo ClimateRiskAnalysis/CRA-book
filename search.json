@@ -44,10 +44,32 @@
     ]
   },
   {
-    "objectID": "contents/uq/intro.html#overview",
-    "href": "contents/uq/intro.html#overview",
+    "objectID": "contents/uq/mcmc.html",
+    "href": "contents/uq/mcmc.html",
+    "title": "1  Calibrating a Sea-Level Rise Model with Markov Chain Monte Carlo",
+    "section": "",
+    "text": "1.1 References",
+    "crumbs": [
+      "Uncertainty Quantification",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Calibrating a Sea-Level Rise Model with Markov Chain Monte Carlo</span>"
+    ]
+  },
+  {
+    "objectID": "contents/extremes/extreme_models.html",
+    "href": "contents/extremes/extreme_models.html",
+    "title": "2  Modeling Storm Tide Extremes",
+    "section": "",
+    "text": "2.1 References",
+    "crumbs": [
+      "Extreme Value Analysis",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Modeling Storm Tide Extremes</span>"
+    ]
+  },
+  {
+    "objectID": "contents/uq/intro.html",
+    "href": "contents/uq/intro.html",
     "title": "Uncertainty Quantification",
-    "section": "Overview",
+    "section": "",
     "text": "Overview\nThis chapter will introduce methods and goals for uncertainty quantification.",
     "crumbs": [
       "Uncertainty Quantification"
@@ -64,21 +86,10 @@
     ]
   },
   {
-    "objectID": "contents/uq/mcmc.html#references",
-    "href": "contents/uq/mcmc.html#references",
-    "title": "1  Calibrating a Sea-Level Rise Model with Markov Chain Monte Carlo",
-    "section": "1.1 References",
-    "text": "1.1 References",
-    "crumbs": [
-      "Uncertainty Quantification",
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Calibrating a Sea-Level Rise Model with Markov Chain Monte Carlo</span>"
-    ]
-  },
-  {
-    "objectID": "contents/extremes/intro.html#overview",
-    "href": "contents/extremes/intro.html#overview",
+    "objectID": "contents/extremes/intro.html",
+    "href": "contents/extremes/intro.html",
     "title": "Extreme Value Analysis",
-    "section": "Overview",
+    "section": "",
     "text": "Overview\nIn this section, we will discuss approaches to analyzing extreme values, quantifying uncertainty, and representing nonstationarity.",
     "crumbs": [
       "Extreme Value Analysis"
@@ -92,17 +103,6 @@
     "text": "Learning Objectives\nAt the end of this part, readers will be able to:\n\nDistinguish between block maxima and peaks-over-threshold approaches to extreme value analysis;\nApply statistical methods to quantify uncertainty in extremes and return levels;\nSelect model structures using appropriate statistical methods.",
     "crumbs": [
       "Extreme Value Analysis"
-    ]
-  },
-  {
-    "objectID": "contents/extremes/extreme_models.html#references",
-    "href": "contents/extremes/extreme_models.html#references",
-    "title": "2  Modeling Storm Tide Extremes",
-    "section": "2.1 References",
-    "text": "2.1 References",
-    "crumbs": [
-      "Extreme Value Analysis",
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Modeling Storm Tide Extremes</span>"
     ]
   }
 ]
