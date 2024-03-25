@@ -14,8 +14,7 @@ This is a table of the book parts and author assignments. Links go to sections s
 | 3 | [Nonstationary Storm Surge and Model Comparison](#nonstationary-storm-surge) | Wong | Srikrishnan, Doss-Gollin |
 | 4 | [Drought Persistence and Missing Data](#drought-persistence) | Srikrishnan | Doss-Gollin |
 | 5 | [Statistical Downscaling and Data Clustering](#statistical-downscaling) | Doss-Gollin | Lafferty, Sriver |
-| 6 | [Climate Projection Uncertainty](#climate-projection-uncertainty) | Lafferty | Sriver |
-| 7 | [Emulation of Complex Models](#emulation) | Lee | Srikrishnan |
+| 6 | [Using Local Climate Projections and Downscaling Uncertainty](#climate-projection-uncertainty) | Lafferty | Sriver |
 | A | [Appendices](#appendices) | | |
 
 ## Chapter Contents and Objectives
@@ -64,17 +63,10 @@ This is a table of the book parts and author assignments. Links go to sections s
 
 ### Climate Projection Uncertainty
 
-- What Creates Uncertainty in Climate Projections?
+- What Creates Uncertainty in Projections of Climate Impacts?
 - Variance Decomposition
 - Identifying Important Sources of Climate Projection Uncertainty
-
-## Emulation
-
-- Computational Complexity and Climate Impacts
-- Emulation of Complex Models
-- Gaussian Processes
-- Polynomial Chaos Expansions
-- Machine Learning As Emulation
+- Implications of Downscaling Uncertainty and Internal Variability
 
 ## Appendices
 
