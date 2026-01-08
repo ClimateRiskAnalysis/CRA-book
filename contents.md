@@ -2,73 +2,57 @@
 
 This file provides an overview of the [envisioned book contents](#book-structure), along with author assignments and [learning objectives](#part-contents-and-objectives).
 
+## Goal
+
+
+This book is intended to be an open source/open access textbook using urban flood risk as a lens to understand climate risk. While it can be used as an introduction to urban flood risk adaptation, our vision is that it can be part of courses on climate change and risk and environmental statistics.
+
+## Editors
+
+not in any particular order: V. Srikrishnan, A. Pollack, J. Doss-Gollin, K. Keller (if interested)
+
 ## Book Structure
 
 This is a table of the book parts and author assignments. Links go to sections specifying a high-level overview and learning objectives for that part. Authors should feel free to expand or modify as need be. The list of other authors is in no particular order.
 
 
-| Section | Chapter Title | Primary Author | Other Author(s) |
-|   :--:  |       :--    |      :--:     |       :--     |
-| 1 | [What Is Climate Risk?](#what-is-climate-risk)| Keller | Srikrishnan | 
-| 2 | [Projecting Sea Level Rise and Uncertainty Quantification](#projecting-sea-level-rise) | Srikrishnan | Wong |
-| 3 | [Nonstationary Storm Surge and Model Comparison](#nonstationary-storm-surge) | Wong | Srikrishnan, Doss-Gollin |
-| 4 | [Drought Persistence and Missing Data](#drought-persistence) | Srikrishnan | Doss-Gollin |
-| 5 | [Statistical Downscaling and Data Clustering](#statistical-downscaling) | Doss-Gollin | Lafferty, Sriver |
-| 6 | [Using Local Climate Projections and Downscaling Uncertainty](#climate-projection-uncertainty) | Lafferty | Sriver |
-| A | [Appendices](#appendices) | | |
+### Introduction and Motivation
 
-## Chapter Contents and Objectives
+1. Managing urban flood risk
+2. Considerations for urban decision-makers
+3. Intro to Case studies for this book
 
-### What Is Climate Risk?
+### Climate Uncertainty and Scenarios
 
-- Overview of Climate Change
-- Climate Change and Uncertainty
-- Climate Risk
+1. How climate change impacts flood hazards
+2. Projecting future climate changes
+3. Climate uncertainty: scenarios and deep uncertainty
+4. Extreme values and intensity-duration-frequency curves
+5. Sea-level rise and coastal flooding
+6. Compound hazards
+7. Downscaling climate projections
 
-### Projecting Sea Level Rise
+### From Hazard to Risk
 
-- Sea Level Rise and Climate Change
-- A Semi-Empirical Model for Sea-Level Rise
-- Model Calibration and Residuals
-- Sampling Distributions and (Semi-Parametric) Bootstrap
-- Model Discrepancy and the Parametric Bootstrap
-- Uncertainty Quantification and Markov chain Monte Carlo
+1. Introduction to urban hydrology
+2. Integrating drainage infrastructure
+3. Accounting for exposure and vulnerability
+4. Building structure uncertainty: the UNSAFE framework
+5. Depth-damage functions and uncertainty
+6. Insurance markets and risk financing
 
-### Nonstationary Storm Surge
+### Adaptation
 
-- Storm Tides and Tidal Extremes
-- Extreme Value Models
-- Why Might Storm Tides Be Nonstationary?
-- Nonstationary Extreme Models
-- Model Comparison as Hypothesis Testing
-- Information Criteria
-- Comparing Storm Surge Models
-- Model Combination with Stacking
+1. Stormwater management
+2. Levees
+3. Floodproofing homes
+4. Green infrastructure and nature-based solutions
+5. Ecosystem services
 
-### Drought Persistence
+### Case Studies
 
-- Atmospheric Regime Shifts and Drought
-- Modeling Regime Shifts With Latent Variables
-- Mixture and Hidden Markov Models
-- The Expectation-Maximation Algorithm
-- Bayesian Mixture Modeling
-- Simulating Regime Shifts
+1. Coastal flooding: island on a wedge (retreat/levees)
+2. Inland/precip-driven flooding (maybe drainage expansion)
+3. Home elevation
 
-### Statistical Downscaling
-
-- Why Downscale Climate Data?
-- Quantile Mapping
-- Spatial Pooling
-- K-Means Clustering
-
-### Climate Projection Uncertainty
-
-- What Creates Uncertainty in Projections of Climate Impacts?
-- Variance Decomposition
-- Identifying Important Sources of Climate Projection Uncertainty
-- Implications of Downscaling Uncertainty and Internal Variability
-
-## Appendices
-
-- Probability Basics
-- Bayes' Theorem and Bayesian Statistics
+### Conclusions and Future Directions
